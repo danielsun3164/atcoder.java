@@ -3,7 +3,6 @@ package abc019;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
@@ -20,7 +19,8 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void test_Case1() throws IOException {
-		try (ProblemDTestPrintStream myPs = new ProblemDTestPrintStream(out)) {
+		try (PipedOutputStream pos = new PipedOutputStream();
+				ProblemDTestPrintStream myPs = new ProblemDTestPrintStream(pos)) {
 			System.setOut(myPs);
 			in.input("5");
 			ProblemD.main(null);
@@ -35,8 +35,13 @@ class ProblemDTest extends TestBase {
 
 		int result;
 
-		public ProblemDTestPrintStream(OutputStream out) {
-			super(out);
+		private static PipedInputStream pis;
+		private static Scanner scanner;
+
+		public ProblemDTestPrintStream(PipedOutputStream pos) throws IOException {
+			super(pos);
+			pis = new PipedInputStream(pos);
+			scanner = new Scanner(pis);
 		}
 
 		/**
@@ -47,20 +52,23 @@ class ProblemDTest extends TestBase {
 		@Override
 		public void println(String x) {
 			super.println(x);
-			try (PipedOutputStream pos = new PipedOutputStream();
-					PipedInputStream pis = new PipedInputStream(pos);
-					Scanner scanner = new Scanner(pis)) {
+			String s = scanner.next();
+			if ("!".equals(s)) {
+				result = scanner.nextInt();
+			} else {
+				int a = scanner.nextInt() - 1;
+				int b = scanner.nextInt() - 1;
+				in.input(DATA[a][b]);
+			}
+			TestBase.out.reset();
+		}
 
-				TestBase.out.writeTo(pos);
-				String s = scanner.next();
-				if ("!".equals(s)) {
-					result = scanner.nextInt();
-				} else {
-					int a = scanner.nextInt() - 1;
-					int b = scanner.nextInt() - 1;
-					in.input(DATA[a][b]);
-				}
-				TestBase.out.reset();
+		@Override
+		public void close() {
+			super.close();
+			scanner.close();
+			try {
+				pis.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
