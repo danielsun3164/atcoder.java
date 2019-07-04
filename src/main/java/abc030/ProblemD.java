@@ -1,6 +1,7 @@
 package abc030;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -17,19 +18,19 @@ public class ProblemD {
 			BigInteger k = scanner.nextBigInteger();
 			int[] b = new int[n];
 			IntStream.range(0, n).forEach(i -> b[i] = scanner.nextInt() - 1);
-			// https://atcoder.jp/contests/abc030/submissions/4441487 を参考にcとtを計算
+			int[] count = new int[n];
+			Arrays.fill(count, -1);
+			count[a] = 0;
 			int c = 0, t = 0;
-			int i1 = a, i2 = a;
-			do {
-				i1 = b[i1];
-				i2 = b[b[i2]];
-				c++;
-			} while (i1 != i2);
-			int i3 = a;
-			while (i1 != i3) {
-				i1 = b[i1];
-				i3 = b[i3];
-				t++;
+			int now = a;
+			for (int i = 1; i <= n; i++) {
+				now = b[now];
+				if (count[now] >= 0) {
+					t = count[now];
+					c = i - count[now];
+				} else {
+					count[now] = i;
+				}
 			}
 			int newK = 0;
 			if (k.compareTo(BigInteger.valueOf(t)) <= 0) {
