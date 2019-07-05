@@ -15,6 +15,9 @@ public class ProblemD {
 	/** 個々の結果の配列 */
 	private static String[] results;
 
+	/** 長さの上限 */
+	private static final int N = 3;
+
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int k = scanner.nextInt();
@@ -26,7 +29,7 @@ public class ProblemD {
 				v[i] = scanner.next();
 				w[i] = scanner.next();
 			});
-			for (int i = 0; i < Math.pow(3, k); i++) {
+			for (int i = 0; i < Math.pow(N, k); i++) {
 				if (calcResults(i, k, v, w)) {
 					break;
 				}
@@ -42,7 +45,7 @@ public class ProblemD {
 	 * @param w 変換後の文字列の配列
 	 * @return 変換可能かどうか
 	 */
-	private static boolean calcResults(int n, int k, String[] v, String[] w) {
+	private static boolean calcResults(final int n, final int k, final String[] v, final String[] w) {
 		// 長さチェックが可能でない場合、可能でない
 		if (!checkLengths(n, k, v, w)) {
 			return false;
@@ -71,7 +74,7 @@ public class ProblemD {
 	 * @param w 変換後の文字列の配列
 	 * @return nの長さで変換可能かどうか
 	 */
-	private static boolean checkLengths(int n, int k, String[] v, String[] w) {
+	private static boolean checkLengths(final int n, final int k, final String[] v, final String[] w) {
 		calcLengths(n, k);
 		for (int i = 0; i < v.length; i++) {
 			String vi = v[i];
@@ -88,10 +91,10 @@ public class ProblemD {
 	 * @param n 結果の各要素の長さの元データ
 	 * @param k 結果の数
 	 */
-	private static void calcLengths(int n, int k) {
+	private static void calcLengths(int n, final int k) {
 		for (int i = 0; i < k; i++) {
-			lengths[i] = n % 3 + 1;
-			n /= 3;
+			lengths[i] = n % N + 1;
+			n /= N;
 		}
 	}
 }
