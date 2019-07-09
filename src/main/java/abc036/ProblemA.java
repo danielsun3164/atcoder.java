@@ -8,7 +8,7 @@ public class ProblemA {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int a = scanner.nextInt();
 			int b = scanner.nextInt();
-			System.out.println((b - 1) / a + 1);
+			System.out.println((b + a - 1) / a);
 		}
 	}
 }
