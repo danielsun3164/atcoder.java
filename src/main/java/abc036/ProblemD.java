@@ -24,24 +24,23 @@ public class ProblemD {
 				nodes[a].neighbors.add(nodes[b]);
 				nodes[b].neighbors.add(nodes[a]);
 			});
-			long[] count = dfs(nodes[0]);
-			System.out.println((count[0] + count[1]) % MOD);
+			dfs(nodes[0]);
+			System.out.println((nodes[0].white + nodes[0].black) % MOD);
 		}
 	}
 
 	/**
-	 * @param node
-	 * @return 黒に塗り方数、白の塗り方数 の配列
+	 * 指定されたノードを白く塗る方法の数と黒く塗る方法の数を計算する
+	 * 
+	 * @param node ノード
 	 */
-	private static long[] dfs(Node node) {
+	private static void dfs(Node node) {
 		node.visited = true;
-		long[] result = new long[] { 1L, 1L };
 		node.neighbors.stream().filter(n -> !n.visited).forEach(n -> {
-			long[] count = dfs(n);
-			result[0] = result[0] * ((count[0] + count[1]) % MOD) % MOD;
-			result[1] = result[1] * count[0] % MOD;
+			dfs(n);
+			node.white = node.white * ((n.white + n.black) % MOD) % MOD;
+			node.black = node.black * n.white % MOD;
 		});
-		return result;
 	}
 
 	/**
@@ -52,5 +51,9 @@ public class ProblemD {
 		List<Node> neighbors = new ArrayList<>();
 		/** 処理したかどうか */
 		boolean visited = false;
+		/** ノードを白く塗る方法の数 */
+		long white = 1L;
+		/** ノードを黒く塗る方法の数 */
+		long black = 1L;
 	}
 }
