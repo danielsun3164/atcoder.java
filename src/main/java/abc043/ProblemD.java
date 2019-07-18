@@ -2,6 +2,9 @@ package abc043;
 
 import java.util.Scanner;
 
+/**
+ * 解説通り実装したソースコード
+ */
 public class ProblemD {
 
 	public static void main(String[] args) {
