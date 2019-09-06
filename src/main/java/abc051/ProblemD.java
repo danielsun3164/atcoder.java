@@ -34,6 +34,7 @@ public class ProblemD {
 				for (int j = 0; j < n; j++) {
 					if (dist[j][path.from] + path.cost == dist[j][path.to]) {
 						shortest = true;
+						break;
 					}
 				}
 				if (shortest) {
