@@ -1,7 +1,5 @@
 package abc042;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import practice.TestBase;
@@ -16,7 +14,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws IOException {
+	void test_Case2() {
 		in.input("10 7 3 4");
 		ProblemD.main(null);
 		assertResultIs("3570");

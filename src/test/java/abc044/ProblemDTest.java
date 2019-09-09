@@ -16,14 +16,14 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws IOException {
+	void test_Case2() {
 		in.input("87654\n" + "138");
 		ProblemD.main(null);
 		assertResultIs("100");
 	}
 
 	@Test
-	void test_Case3() throws IOException {
+	void test_Case3() {
 		in.input("87654\n" + "45678");
 		ProblemD.main(null);
 		assertResultIs("-1");

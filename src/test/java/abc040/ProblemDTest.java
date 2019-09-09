@@ -1,7 +1,5 @@
 package abc040;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import practice.TestBase;
@@ -17,7 +15,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws IOException {
+	void test_Case2() {
 		in.input("4 5\n" + "1 2 2005\n" + "3 1 2001\n" + "3 4 2002\n" + "1 4 2004\n" + "4 2 2003\n" + "5\n" + "1 2003\n"
 				+ "2 2003\n" + "1 2001\n" + "3 2003\n" + "4 2004");
 		ProblemD.main(null);
