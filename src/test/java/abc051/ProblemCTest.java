@@ -17,6 +17,6 @@ class ProblemCTest extends TestBase {
 	void test_Case2() {
 		in.input("-2 -2 1 1");
 		ProblemC.main(null);
-		assertResultIs("UUURRRDDDLLLLUUUURRRRDRDDDDLLLLU");
+		assertResultIn("UUURRRDDDLLLLUUUURRRRDRDDDDLLLLU", "UURRURRDDDLLDLLULUUURRURRDDDLLDL");
 	}
 }

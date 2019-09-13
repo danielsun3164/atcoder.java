@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -54,6 +55,16 @@ public abstract class TestBase {
 	 */
 	protected void assertResultIs(String expected) {
 		assertEquals(expected + LF, out.toString());
+	}
+
+	/**
+	 * テストケースを実行した結果をチェック
+	 * 
+	 * @param expecteds 予定した結果
+	 */
+	protected void assertResultIn(String... expecteds) {
+		String actualResult = out.toString();
+		assertTrue(Arrays.stream(expecteds).filter(s -> (s + LF).equals(actualResult)).count() > 0);
 	}
 
 	/**
