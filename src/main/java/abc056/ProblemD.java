@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説どおりに作成したソースコード<br/>
- * https://atcoder.jp/contests/abc056/submissions/4757789 にも参照
+ * https://atcoder.jp/contests/abc056/submissions/4757789 と https://atcoder.jp/contests/abc056/submissions/3511073 にも参照
  */
 public class ProblemD {
 
