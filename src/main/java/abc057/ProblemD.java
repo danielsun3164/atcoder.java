@@ -20,6 +20,7 @@ public class ProblemD {
 			// m_C_nの配列を計算
 			long[][] c = calcC(n);
 			long[] v = new long[n];
+			// 入力数字のそれぞれの個数を計算するマップ
 			Map<Long, Integer> map = new HashMap<>();
 			IntStream.range(0, n).forEach(i -> {
 				v[i] = scanner.nextLong();
@@ -34,6 +35,7 @@ public class ProblemD {
 			} else {
 				long[] keys = map.keySet().stream().sorted((l1, l2) -> l2.compareTo(l1)).mapToLong(Long::longValue)
 						.toArray();
+				// map.get(i) はソートされたvにiが現れるまでの数字の個数（iより大きい数字の個数）
 				Map<Long, Integer> countMap = new HashMap<>();
 				int count = 0;
 				countMap.put(keys[0], count);
