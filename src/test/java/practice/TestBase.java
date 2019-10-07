@@ -95,6 +95,17 @@ public abstract class TestBase {
 		assertTrue(Math.abs(Double.parseDouble(out.toString()) - expected) < tolerance);
 	}
 
+	/**
+	 * テストケースを実行した結果をチェック
+	 * 
+	 * @param number    実行結果の数字形式の文字列
+	 * @param expected  予定した結果
+	 * @param tolerance 誤差範囲
+	 */
+	protected void assertNumberIsAbout(String number, double expected, double tolerance) {
+		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance);
+	}
+
 	protected static class StandardInputSnatcher extends InputStream {
 
 		private StringBuilder buffer = new StringBuilder();
