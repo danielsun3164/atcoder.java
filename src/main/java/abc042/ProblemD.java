@@ -23,8 +23,9 @@ public class ProblemD {
 			// 階乗^-1の配列
 			long[] reverseFrac = new long[h + w - 1];
 			reverseFrac[h + w - 2] = powMod(frac[h + w - 2], MOD - 2);
-			IntStream.range(1, reverseFrac.length).map(i -> reverseFrac.length - i - 1)
-					.forEach(i -> reverseFrac[i] = reverseFrac[i + 1] * (i + 1) % MOD);
+			for (int i = reverseFrac.length - 2; i >= 0; i--) {
+				reverseFrac[i] = reverseFrac[i + 1] * (i + 1) % MOD;
+			}
 			long answer = 0L;
 			for (int i = b; i < w; i++) {
 				answer += frac[h - a - 1 + i] * reverseFrac[h - a - 1] % MOD * reverseFrac[i] % MOD
