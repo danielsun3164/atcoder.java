@@ -36,8 +36,9 @@ public class ProblemD {
 			// 階乗^-1の配列
 			long[] reverseFrac = new long[n + 2];
 			reverseFrac[n + 1] = powMod(frac[n + 1], MOD - 2);
-			IntStream.range(1, reverseFrac.length).map(i -> reverseFrac.length - i - 1)
-					.forEach(i -> reverseFrac[i] = reverseFrac[i + 1] * (i + 1) % MOD);
+			for (int i = reverseFrac.length - 2; i >= 0; i--) {
+				reverseFrac[i] = reverseFrac[i + 1] * (i + 1) % MOD;
+			}
 			// n+1_C_k − l+n−r_C_k−1 を計算
 			IntStream.rangeClosed(1, n + 1)
 					.mapToLong(k -> calcMod(frac[n + 1] * reverseFrac[k] % MOD * reverseFrac[n + 1 - k] % MOD
