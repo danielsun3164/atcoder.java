@@ -15,7 +15,7 @@ import practice.TestBase;
 class ProblemATest extends TestBase {
 
 	@Test
-	void test_Case1() throws IOException {
+	void case1() throws IOException {
 		int n = 5;
 		in.input(n);
 		ProblemA.main(null);
@@ -30,7 +30,7 @@ class ProblemATest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws IOException {
+	void case2() throws IOException {
 		int n = 1;
 		in.input(n);
 		ProblemA.main(null);

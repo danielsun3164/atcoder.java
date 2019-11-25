@@ -7,28 +7,28 @@ import practice.TestBase;
 class ProblemEX12Test extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		in.input("1+1+1-1");
 		ProblemEX12.main(null);
 		assertResultIs("2");
 	}
 
 	@Test
-	void test_Case2() {
+	void case2() {
 		in.input("1-1-1-1-1-1");
 		ProblemEX12.main(null);
 		assertResultIs("-4");
 	}
 
 	@Test
-	void test_Case3() {
+	void case3() {
 		in.input("1");
 		ProblemEX12.main(null);
 		assertResultIs("1");
 	}
 
 	@Test
-	void test_Case4() {
+	void case4() {
 		in.input("1-1-1+1+1+1+1-1+1-1+1-1+1");
 		ProblemEX12.main(null);
 		assertResultIs("3");

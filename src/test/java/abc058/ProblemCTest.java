@@ -7,14 +7,14 @@ import practice.TestBase;
 class ProblemCTest extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		in.input("3\n" + "cbaa\n" + "daacc\n" + "acacac");
 		ProblemC.main(null);
 		assertResultIs("aac");
 	}
 
 	@Test
-	void test_Case2() {
+	void case2() {
 		in.input("3\n" + "a\n" + "aa\n" + "b");
 		ProblemC.main(null);
 		assertResultIs("");

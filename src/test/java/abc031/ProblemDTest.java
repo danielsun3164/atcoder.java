@@ -17,7 +17,7 @@ import practice.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void test_Case1() throws IOException {
+	void case1() throws IOException {
 		int k = 6;
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("356", "migoro");
@@ -43,7 +43,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws IOException {
+	void case2() throws IOException {
 		int k = 3;
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("12", "aaa");
@@ -69,7 +69,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case3() throws IOException {
+	void case3() throws IOException {
 		int k = 2;
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("12211", "abcaaaaabcabc");
@@ -94,7 +94,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case4() throws IOException {
+	void case4() throws IOException {
 		int k = 2;
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("12", "abcab");

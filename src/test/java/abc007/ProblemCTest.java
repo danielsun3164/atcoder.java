@@ -7,7 +7,7 @@ import practice.TestBase;
 class ProblemCTest extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		in.input("7 8\n" + "2 2\n" + "4 5\n" + "########\n" + "#......#\n" + "#.######\n" + "#..#...#\n" + "#..##..#\n"
 				+ "##.....#\n" + "########");
 		ProblemC.main(null);
@@ -15,14 +15,14 @@ class ProblemCTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() {
+	void case2() {
 		in.input("5 8\n" + "2 2\n" + "2 4\n" + "########\n" + "#.#....#\n" + "#.###..#\n" + "#......#\n" + "########");
 		ProblemC.main(null);
 		assertResultIs("10");
 	}
 
 	@Test
-	void test_Case3() {
+	void case3() {
 		in.input("50 50\n" + "2 2\n" + "49 49\n" + "##################################################\n"
 				+ "#................................................#\n"
 				+ "#................................................#\n"

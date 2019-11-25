@@ -18,7 +18,7 @@ import practice.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void test_Case1() throws IOException {
+	void case1() throws IOException {
 		try (PipedOutputStream pos = new PipedOutputStream();
 				ProblemDTestPrintStream myPs = new ProblemDTestPrintStream(pos)) {
 			System.setOut(myPs);

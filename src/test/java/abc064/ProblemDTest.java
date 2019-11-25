@@ -7,21 +7,21 @@ import practice.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		in.input("3\n" + "())");
 		ProblemD.main(null);
 		assertResultIs("(())");
 	}
 
 	@Test
-	void test_Case2() {
+	void case2() {
 		in.input("6\n" + ")))())");
 		ProblemD.main(null);
 		assertResultIs("(((()))())");
 	}
 
 	@Test
-	void test_Case3() {
+	void case3() {
 		in.input("8\n" + "))))((((");
 		ProblemD.main(null);
 		assertResultIs("(((())))(((())))");

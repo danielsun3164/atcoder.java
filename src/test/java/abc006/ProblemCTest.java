@@ -13,7 +13,7 @@ import practice.TestBase;
 class ProblemCTest extends TestBase {
 
 	@Test
-	void test_Case1() throws IOException {
+	void case1() throws IOException {
 		int n = 3;
 		int m = 9;
 		in.input(n + " " + m);
@@ -28,7 +28,7 @@ class ProblemCTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws IOException {
+	void case2() throws IOException {
 		int n = 7;
 		int m = 23;
 		in.input(n + " " + m);
@@ -43,7 +43,7 @@ class ProblemCTest extends TestBase {
 	}
 
 	@Test
-	void test_Case3() {
+	void case3() {
 		in.input("10 41");
 		ProblemC.main(null);
 		assertResultIs("-1 -1 -1");
