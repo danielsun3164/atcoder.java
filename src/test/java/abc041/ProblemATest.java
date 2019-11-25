@@ -7,28 +7,28 @@ import practice.TestBase;
 class ProblemATest extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		in.input("atcoder\n" + "3");
 		ProblemA.main(null);
 		assertResultIs("c");
 	}
 
 	@Test
-	void test_Case2() {
+	void case2() {
 		in.input("beginner\n" + "1");
 		ProblemA.main(null);
 		assertResultIs("b");
 	}
 
 	@Test
-	void test_Case3() {
+	void case3() {
 		in.input("contest\n" + "7");
 		ProblemA.main(null);
 		assertResultIs("t");
 	}
 
 	@Test
-	void test_Case4() {
+	void case4() {
 		in.input("z\n" + "1");
 		ProblemA.main(null);
 		assertResultIs("z");

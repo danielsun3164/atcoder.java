@@ -17,7 +17,7 @@ import practice.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void test_Case1() throws Exception {
+	void case1() throws Exception {
 		long value = 0L;
 		in.input(value);
 		ProblemD.main(null);
@@ -33,7 +33,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws Exception {
+	void case2() throws Exception {
 		long value = 1L;
 		in.input(value);
 		ProblemD.main(null);
@@ -49,7 +49,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case3() throws Exception {
+	void case3() throws Exception {
 		long value = 2L;
 		in.input(value);
 		ProblemD.main(null);
@@ -65,7 +65,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case4() throws Exception {
+	void case4() throws Exception {
 		long value = 3L;
 		in.input(value);
 		ProblemD.main(null);
@@ -81,7 +81,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case5() throws Exception {
+	void case5() throws Exception {
 		// long value = 1234567894848L;
 		long value = 12345L;
 		in.input(value);

@@ -9,35 +9,35 @@ class ProblemBTest extends TestBase {
 	private static double TORELANCE = 0.0001d;
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		in.input("15 0");
 		ProblemB.main(null);
 		assertResultIsAbout(90d, TORELANCE);
 	}
 
 	@Test
-	void test_Case2() {
+	void case2() {
 		in.input("3 17");
 		ProblemB.main(null);
 		assertResultIsAbout(3.5d, TORELANCE);
 	}
 
 	@Test
-	void test_Case3() {
+	void case3() {
 		in.input("0 0");
 		ProblemB.main(null);
 		assertResultIsAbout(0d, TORELANCE);
 	}
 
 	@Test
-	void test_Case4() {
+	void case4() {
 		in.input("6 0");
 		ProblemB.main(null);
 		assertResultIsAbout(180d, TORELANCE);
 	}
 
 	@Test
-	void test_Case5() {
+	void case5() {
 		in.input("23 59");
 		ProblemB.main(null);
 		assertResultIsAbout(5.5d, TORELANCE);

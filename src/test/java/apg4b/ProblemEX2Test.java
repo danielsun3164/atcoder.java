@@ -7,7 +7,7 @@ import practice.TestBase;
 class ProblemEX2Test extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		ProblemEX2.main(null);
 		assertResultIs("いつも2525" + LF + "AtCoderくん");
 	}

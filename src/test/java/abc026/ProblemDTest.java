@@ -13,7 +13,7 @@ import practice.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void test_Case1() throws IOException {
+	void case1() throws IOException {
 		int a = 1;
 		int b = 1;
 		int c = 1;
@@ -26,7 +26,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void test_Case2() throws IOException {
+	void case2() throws IOException {
 		int a = 53;
 		int b = 82;
 		int c = 49;

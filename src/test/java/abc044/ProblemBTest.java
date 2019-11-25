@@ -7,14 +7,14 @@ import practice.TestBase;
 class ProblemBTest extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		in.input("abaccaba");
 		ProblemB.main(null);
 		assertResultIs("Yes");
 	}
 
 	@Test
-	void test_Case2() {
+	void case2() {
 		in.input("hthth");
 		ProblemB.main(null);
 		assertResultIs("No");

@@ -7,7 +7,7 @@ import practice.TestBase;
 class ProblemEX7Test extends TestBase {
 
 	@Test
-	void test_Case1() {
+	void case1() {
 		ProblemEX7.main(null);
 		assertResultIs("AtCoder");
 	}
