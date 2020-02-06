@@ -24,6 +24,6 @@ class ProblemDTest extends TestBase {
 	void case3() {
 		in.input("11 8562174\n" + "25686522 17124348");
 		ProblemD.main(null);
-		assertResultIsAbout(0.018174648284912d, 0.000000001);
+		assertResultIsAbout(0.018174648284912d, 0.000000001d);
 	}
 }
