@@ -1,0 +1,29 @@
+package abc077;
+
+import org.junit.jupiter.api.Test;
+
+import practice.TestBase;
+
+class ProblemCTest extends TestBase {
+
+	@Test
+	void case1() {
+		in.input("2\n" + "1 5\n" + "2 4\n" + "3 6");
+		ProblemC.main(null);
+		assertResultIs("3");
+	}
+
+	@Test
+	void case2() {
+		in.input("3\n" + "1 1 1\n" + "2 2 2\n" + "3 3 3");
+		ProblemC.main(null);
+		assertResultIs("27");
+	}
+
+	@Test
+	void case3() {
+		in.input("6\n" + "3 14 159 2 6 53\n" + "58 9 79 323 84 6\n" + "2643 383 2 79 50 288");
+		ProblemC.main(null);
+		assertResultIs("87");
+	}
+}
