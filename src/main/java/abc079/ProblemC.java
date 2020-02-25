@@ -13,32 +13,13 @@ public class ProblemC {
 	public static void main(String[] args) throws ScriptException {
 		try (Scanner scanner = new Scanner(System.in)) {
 			char[] abcd = scanner.next().toCharArray();
-			for (int i = 0; i < pow(2, abcd.length) - 1; i++) {
+			for (int i = 0; i < (1 << abcd.length); i++) {
 				if (ok(abcd, i)) {
 					System.out.println(toFormula(abcd, i) + "=" + SEVEN);
 					return;
 				}
 			}
 		}
-	}
-
-	/**
-	 * nのmべき乗を返す
-	 * 
-	 * @param n
-	 * @param m
-	 * @return nのmべき乗
-	 */
-	private static int pow(int n, int m) {
-		int result = 1;
-		while (m > 0) {
-			if (1 == (m & 1)) {
-				result *= n;
-			}
-			n *= n;
-			m >>= 1;
-		}
-		return result;
 	}
 
 	/**
