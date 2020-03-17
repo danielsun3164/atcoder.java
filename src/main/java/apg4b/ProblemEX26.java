@@ -19,8 +19,6 @@ public class ProblemEX26 {
 	private static final Pattern INT_PATTERN = Pattern.compile("-?[0-9]+");
 	/** VECの正規表現 */
 	private static final Pattern VECTOR_PATTERN = Pattern.compile("\\[.*\\]");
-	/** 符号(+,-,=)の正規表現 */
-	// private static final Pattern SYMBOL_PATTERN = Pattern.compile("[-+=]");
 	/** 符号(+) */
 	private static final char ADD = '+';
 	/** 符号(-) */
@@ -33,7 +31,7 @@ public class ProblemEX26 {
 			int n = scanner.nextInt();
 			scanner.nextLine();
 			Map<String, Data> map = new HashMap<>();
-			for (int i = 0; i < n; i++) {
+			IntStream.range(0, n).forEach(i -> {
 				String command = scanner.next();
 				String string = scanner.nextLine().replace(";", "").trim();
 				if (PRINT_INT.equals(command)) {
@@ -45,7 +43,7 @@ public class ProblemEX26 {
 				} else if (DataType.VECTOR.code.equals(command)) {
 					evalVector(string, map);
 				}
-			}
+			});
 		}
 	}
 
