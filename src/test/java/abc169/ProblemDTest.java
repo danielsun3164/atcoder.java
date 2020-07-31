@@ -17,20 +17,20 @@ class ProblemDTest extends TestBase {
 	void case2() {
 		in.input("1");
 		ProblemD.main(null);
-		assertResultIn("0");
+		assertResultIs("0");
 	}
 
 	@Test
 	void case3() {
 		in.input("64");
 		ProblemD.main(null);
-		assertResultIn("3");
+		assertResultIs("3");
 	}
 
 	@Test
 	void case4() {
 		in.input("1000000007");
 		ProblemD.main(null);
-		assertResultIn("1");
+		assertResultIs("1");
 	}
 }

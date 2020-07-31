@@ -17,13 +17,13 @@ class ProblemDTest extends TestBase {
 	void case2() {
 		in.input("4\n" + "1 1 1 1\n" + "3\n" + "1 2\n" + "2 1\n" + "3 5");
 		ProblemD.main(null);
-		assertResultIn("8" + LF + "4" + LF + "4");
+		assertResultIs("8" + LF + "4" + LF + "4");
 	}
 
 	@Test
 	void case3() {
 		in.input("2\n" + "1 2\n" + "3\n" + "1 100\n" + "2 100\n" + "100 1000");
 		ProblemD.main(null);
-		assertResultIn("102" + LF + "200" + LF + "2000");
+		assertResultIs("102" + LF + "200" + LF + "2000");
 	}
 }
