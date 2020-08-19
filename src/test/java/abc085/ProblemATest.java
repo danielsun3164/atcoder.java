@@ -8,22 +8,16 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("2017/01/07");
-		ProblemA.main(null);
-		assertResultIs("2018/01/07");
+		check("2017/01/07", "2018/01/07");
 	}
 
 	@Test
 	void case2() {
-		in.input("2017/01/31");
-		ProblemA.main(null);
-		assertResultIs("2018/01/31");
+		check("2017/01/31", "2018/01/31");
 	}
 
 	@Test
 	void case3() {
-		in.input("2017/01/01");
-		ProblemA.main(null);
-		assertResultIs("2018/01/01");
+		check("2017/01/01", "2018/01/01");
 	}
 }

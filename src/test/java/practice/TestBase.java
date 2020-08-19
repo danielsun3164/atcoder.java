@@ -1,11 +1,14 @@
 package practice;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.AfterAll;
@@ -51,7 +54,7 @@ public abstract class TestBase {
 	/**
 	 * テストケースを実行した結果をチェック
 	 * 
-	 * @param expected 予定した結果
+	 * @param expected 予定される結果
 	 */
 	protected void assertResultIs(String expected) {
 		assertEquals(expected + LF, out.toString());
@@ -60,7 +63,7 @@ public abstract class TestBase {
 	/**
 	 * テストケースを実行した結果をチェック
 	 * 
-	 * @param expecteds 予定した結果
+	 * @param expecteds 予定される結果の一覧
 	 */
 	protected void assertResultIn(String... expecteds) {
 		String actualResult = out.toString();
@@ -70,7 +73,7 @@ public abstract class TestBase {
 	/**
 	 * テストケースを実行した結果をチェック
 	 * 
-	 * @param regexp 予定した結果の正規表現
+	 * @param regexp 予定される結果の正規表現
 	 */
 	protected void assertResultMatches(String regexp) {
 		assertTrue(out.toString().matches(regexp + LF));
@@ -79,7 +82,7 @@ public abstract class TestBase {
 	/**
 	 * テストケースを実行した結果をチェック
 	 * 
-	 * @param expected 予定した結果
+	 * @param expected 予定される結果
 	 */
 	protected void assertResultIs(double expected) {
 		assertEquals(expected, Double.parseDouble(out.toString()));
@@ -88,11 +91,87 @@ public abstract class TestBase {
 	/**
 	 * テストケースを実行した結果をチェック
 	 * 
-	 * @param expected  予定した結果
+	 * @param expected  予定される結果
 	 * @param tolerance 誤差範囲
 	 */
 	protected void assertResultIsAbout(double expected, double tolerance) {
 		assertTrue(Math.abs(Double.parseDouble(out.toString()) - expected) < tolerance);
+	}
+
+	/**
+	 * テスト対象のメソッドを実行
+	 */
+	protected void execute() {
+		try {
+			// テストクラス名から末尾の「Test」を取ったクラス名のクラスを取得し、mainメソッドを実行
+			Class<?> clazz = Class.forName(this.getClass().getName().replaceFirst("Test$", ""));
+			Method method = clazz.getDeclaredMethod("main", String[].class);
+			method.invoke(null, (Object) null);
+		} catch (ClassNotFoundException | SecurityException | IllegalArgumentException | NoSuchMethodException
+				| IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * テストを実施する
+	 * 
+	 * @param input    入力文字列
+	 * @param expected 予想される実行結果
+	 */
+	protected void check(String input, String expected) {
+		in.input(input);
+		execute();
+		assertResultIs(expected);
+	}
+
+	/**
+	 * テストを実施する
+	 * 
+	 * @param input    入力文字列
+	 * @param expected 予想される実行結果の一覧
+	 */
+	protected void checkResultIn(String input, String... expected) {
+		in.input(input);
+		execute();
+		assertResultIn(expected);
+	}
+
+	/**
+	 * テストを実施する
+	 * 
+	 * @param input     入力文字列
+	 * @param expected  予想される実行結果
+	 * @param tolerance 誤差範囲
+	 */
+	protected void checkResultIsAbout(String input, double expected, double tolerance) {
+		in.input(input);
+		execute();
+		assertResultIsAbout(expected, tolerance);
+	}
+
+	/**
+	 * テストを実施する
+	 * 
+	 * @param input          入力文字列
+	 * @param expectedRegexp 予想される実行結果の正規表現
+	 */
+	protected void checkResultMatches(String input, String expectedRegexp) {
+		in.input(input);
+		execute();
+		assertResultMatches(expectedRegexp);
+	}
+
+	/**
+	 * テストを実施する
+	 * 
+	 * @param input    入力文字列
+	 * @param expected 予想される実行結果
+	 */
+	protected void check(String input, double expected) {
+		in.input(input);
+		execute();
+		assertResultIs(expected);
 	}
 
 	/**
@@ -106,6 +185,9 @@ public abstract class TestBase {
 		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance);
 	}
 
+	/**
+	 * 標準入力を代替するクラス
+	 */
 	protected static class StandardInputSnatcher extends InputStream {
 
 		private StringBuilder buffer = new StringBuilder();

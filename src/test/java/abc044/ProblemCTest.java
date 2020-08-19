@@ -8,29 +8,21 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("4 8\n" + "7 9 8 9");
-		ProblemC.main(null);
-		assertResultIs("5");
+		check("4 8\n" + "7 9 8 9", "5");
 	}
 
 	@Test
 	void case2() {
-		in.input("3 8\n" + "6 6 9");
-		ProblemC.main(null);
-		assertResultIs("0");
+		check("3 8\n" + "6 6 9", "0");
 	}
 
 	@Test
 	void case3() {
-		in.input("8 5\n" + "3 6 2 8 7 6 5 9");
-		ProblemC.main(null);
-		assertResultIs("19");
+		check("8 5\n" + "3 6 2 8 7 6 5 9", "19");
 	}
 
 	@Test
 	void case4() {
-		in.input("33 3\n" + "3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3");
-		ProblemC.main(null);
-		assertResultIs("8589934591");
+		check("33 3\n" + "3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3", "8589934591");
 	}
 }

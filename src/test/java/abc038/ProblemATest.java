@@ -8,36 +8,26 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("ICEDT");
-		ProblemA.main(null);
-		assertResultIs("YES");
+		check("ICEDT", "YES");
 	}
 
 	@Test
 	void case2() {
-		in.input("MUGICHA");
-		ProblemA.main(null);
-		assertResultIs("NO");
+		check("MUGICHA", "NO");
 	}
 
 	@Test
 	void case3() {
-		in.input("OOLONGT");
-		ProblemA.main(null);
-		assertResultIs("YES");
+		check("OOLONGT", "YES");
 	}
 
 	@Test
 	void case4() {
-		in.input("T");
-		ProblemA.main(null);
-		assertResultIs("YES");
+		check("T", "YES");
 	}
 
 	@Test
 	void case5() {
-		in.input("TEA");
-		ProblemA.main(null);
-		assertResultIs("NO");
+		check("TEA", "NO");
 	}
 }

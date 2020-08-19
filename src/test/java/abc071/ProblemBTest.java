@@ -8,22 +8,16 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("atcoderregularcontest");
-		ProblemB.main(null);
-		assertResultIs("b");
+		check("atcoderregularcontest", "b");
 	}
 
 	@Test
 	void case2() {
-		in.input("abcdefghijklmnopqrstuvwxyz");
-		ProblemB.main(null);
-		assertResultIs("None");
+		check("abcdefghijklmnopqrstuvwxyz", "None");
 	}
 
 	@Test
 	void case3() {
-		in.input("fajsonlslfepbjtsaayxbymeskptcumtwrmkkinjxnnucagfrg");
-		ProblemB.main(null);
-		assertResultIs("d");
+		check("fajsonlslfepbjtsaayxbymeskptcumtwrmkkinjxnnucagfrg", "d");
 	}
 }

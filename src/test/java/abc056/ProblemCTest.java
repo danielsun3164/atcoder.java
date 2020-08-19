@@ -8,29 +8,21 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("6");
-		ProblemC.main(null);
-		assertResultIs("3");
+		check("6", "3");
 	}
 
 	@Test
 	void case2() {
-		in.input("2");
-		ProblemC.main(null);
-		assertResultIs("2");
+		check("2", "2");
 	}
 
 	@Test
 	void case3() {
-		in.input("11");
-		ProblemC.main(null);
-		assertResultIs("5");
+		check("11", "5");
 	}
 
 	@Test
 	void case4() {
-		in.input("10");
-		ProblemC.main(null);
-		assertResultIs("4");
+		check("10", "4");
 	}
 }

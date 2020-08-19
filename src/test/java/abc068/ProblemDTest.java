@@ -1,7 +1,8 @@
 package abc068;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Arrays;
@@ -18,72 +19,30 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() throws Exception {
-		long value = 0L;
-		in.input(value);
-		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
-			int n = scanner.nextInt();
-			long[] a = new long[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
-			assertEquals(value, calc(a));
-		}
+		check(0L);
 	}
 
 	@Test
 	void case2() throws Exception {
-		long value = 1L;
-		in.input(value);
-		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
-			int n = scanner.nextInt();
-			long[] a = new long[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
-			assertEquals(value, calc(a));
-		}
+		check(1L);
 	}
 
 	@Test
 	void case3() throws Exception {
-		long value = 2L;
-		in.input(value);
-		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
-			int n = scanner.nextInt();
-			long[] a = new long[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
-			assertEquals(value, calc(a));
-		}
+		check(2L);
 	}
 
 	@Test
 	void case4() throws Exception {
-		long value = 3L;
-		in.input(value);
-		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
-			int n = scanner.nextInt();
-			long[] a = new long[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
-			assertEquals(value, calc(a));
-		}
+		check(3L);
 	}
 
 	@Test
 	void case5() throws Exception {
-		// long value = 1234567894848L;
-		long value = 12345L;
+		check(12345L);
+	}
+
+	private void check(long value) throws IOException {
 		in.input(value);
 		ProblemD.main(null);
 		try (PipedOutputStream pos = new PipedOutputStream();

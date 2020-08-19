@@ -8,29 +8,21 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("3\n" + "abc");
-		ProblemB.main(null);
-		assertResultIs("1");
+		check("3\n" + "abc", "1");
 	}
 
 	@Test
 	void case2() {
-		in.input("6\n" + "abcabc");
-		ProblemB.main(null);
-		assertResultIs("-1");
+		check("6\n" + "abcabc", "-1");
 	}
 
 	@Test
 	void case3() {
-		in.input("7\n" + "atcoder");
-		ProblemB.main(null);
-		assertResultIs("-1");
+		check("7\n" + "atcoder", "-1");
 	}
 
 	@Test
 	void case4() {
-		in.input("19\n" + "bcabcabcabcabcabcab");
-		ProblemB.main(null);
-		assertResultIs("9");
+		check("19\n" + "bcabcabcabcabcabcab", "9");
 	}
 }

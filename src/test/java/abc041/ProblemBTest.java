@@ -8,29 +8,21 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("2 3 4");
-		ProblemB.main(null);
-		assertResultIs("24");
+		check("2 3 4", "24");
 	}
 
 	@Test
 	void case2() {
-		in.input("10000 1000 100");
-		ProblemB.main(null);
-		assertResultIs("1000000000");
+		check("10000 1000 100", "1000000000");
 	}
 
 	@Test
 	void case3() {
-		in.input("100000 1 100000");
-		ProblemB.main(null);
-		assertResultIs("999999937");
+		check("100000 1 100000", "999999937");
 	}
 
 	@Test
 	void case4() {
-		in.input("1000000000 1000000000 1000000000");
-		ProblemB.main(null);
-		assertResultIs("999999664");
+		check("1000000000 1000000000 1000000000", "999999664");
 	}
 }

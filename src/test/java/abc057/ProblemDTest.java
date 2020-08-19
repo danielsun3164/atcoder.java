@@ -1,6 +1,6 @@
 package abc057;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,8 @@ import practice.TestBase;
 
 class ProblemDTest extends TestBase {
 
-	private static final double TOLERANCE = 0.000001;
+	/** 誤差 */
+	private static final double TOLERANCE = 0.000001d;
 
 	@Test
 	void case1() {

@@ -8,22 +8,16 @@ class ProblemEX8Test extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("1\n" + "80\n" + "5");
-		ProblemEX8.main(null);
-		assertResultIs("400");
+		check("1\n" + "80\n" + "5", "400");
 	}
 
 	@Test
 	void case2() {
-		in.input("2\n" + "umai\n" + "150\n" + "3");
-		ProblemEX8.main(null);
-		assertResultIs("umai!" + LF + "450");
+		check("2\n" + "umai\n" + "150\n" + "3", "umai!" + LF + "450");
 	}
 
 	@Test
 	void case3() {
-		in.input("2\n" + "good!\n" + "30\n" + "8");
-		ProblemEX8.main(null);
-		assertResultIs("good!!" + LF + "240");
+		check("2\n" + "good!\n" + "30\n" + "8", "good!!" + LF + "240");
 	}
 }

@@ -8,24 +8,18 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("3 3\n" + ".#.\n" + "###\n" + ".#.");
-		ProblemC.main(null);
-		assertResultIs("Yes");
+		check("3 3\n" + ".#.\n" + "###\n" + ".#.", "Yes");
 	}
 
 	@Test
 	void case2() {
-		in.input("5 5\n" + "#.#.#\n" + ".#.#.\n" + "#.#.#\n" + ".#.#.\n" + "#.#.#");
-		ProblemC.main(null);
-		assertResultIs("No");
+		check("5 5\n" + "#.#.#\n" + ".#.#.\n" + "#.#.#\n" + ".#.#.\n" + "#.#.#", "No");
 	}
 
 	@Test
 	void case3() {
-		in.input("11 11\n" + "...#####...\n" + ".##.....##.\n" + "#..##.##..#\n" + "#..##.##..#\n" + "#.........#\n"
+		check("11 11\n" + "...#####...\n" + ".##.....##.\n" + "#..##.##..#\n" + "#..##.##..#\n" + "#.........#\n"
 				+ "#...###...#\n" + ".#########.\n" + ".#.#.#.#.#.\n" + "##.#.#.#.##\n" + "..##.#.##..\n"
-				+ ".##..#..##.");
-		ProblemC.main(null);
-		assertResultIs("Yes");
+				+ ".##..#..##.", "Yes");
 	}
 }

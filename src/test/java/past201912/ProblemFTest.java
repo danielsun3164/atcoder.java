@@ -8,22 +8,16 @@ class ProblemFTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("FisHDoGCaTAAAaAAbCAC");
-		ProblemF.main(null);
-		assertResultIs("AAAaAAbCACCaTDoGFisH");
+		check("FisHDoGCaTAAAaAAbCAC", "AAAaAAbCACCaTDoGFisH");
 	}
 
 	@Test
 	void case2() {
-		in.input("AAAAAjhfgaBCsahdfakGZsZGdEAA");
-		ProblemF.main(null);
-		assertResultIs("AAAAAAAjhfgaBCsahdfakGGdEZsZ");
+		check("AAAAAjhfgaBCsahdfakGZsZGdEAA", "AAAAAAAjhfgaBCsahdfakGGdEZsZ");
 	}
 
 	@Test
 	void case3() {
-		in.input("AAABAAAC");
-		ProblemF.main(null);
-		assertResultIs("AAAAABAC");
+		check("AAABAAAC", "AAAAABAC");
 	}
 }

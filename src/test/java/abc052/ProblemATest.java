@@ -8,15 +8,11 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("3 5 2 7");
-		ProblemA.main(null);
-		assertResultIs("15");
+		check("3 5 2 7", "15");
 	}
 
 	@Test
 	void case2() {
-		in.input("100 600 200 300");
-		ProblemA.main(null);
-		assertResultIs("60000");
+		check("100 600 200 300", "60000");
 	}
 }

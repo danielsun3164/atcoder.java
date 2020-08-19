@@ -8,29 +8,21 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("2 1");
-		ProblemD.main(null);
-		assertResultIs("Brown");
+		check("2 1", "Brown");
 	}
 
 	@Test
 	void case2() {
-		in.input("5 0");
-		ProblemD.main(null);
-		assertResultIs("Alice");
+		check("5 0", "Alice");
 	}
 
 	@Test
 	void case3() {
-		in.input("0 0");
-		ProblemD.main(null);
-		assertResultIs("Brown");
+		check("0 0", "Brown");
 	}
 
 	@Test
 	void case4() {
-		in.input("4 8");
-		ProblemD.main(null);
-		assertResultIs("Alice");
+		check("4 8", "Alice");
 	}
 }

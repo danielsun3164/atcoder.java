@@ -8,22 +8,16 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("a");
-		ProblemA.main(null);
-		assertResultIs("vowel");
+		check("a", "vowel");
 	}
 
 	@Test
 	void case2() {
-		in.input("z");
-		ProblemA.main(null);
-		assertResultIs("consonant");
+		check("z", "consonant");
 	}
 
 	@Test
 	void case3() {
-		in.input("s");
-		ProblemA.main(null);
-		assertResultIs("consonant");
+		check("s", "consonant");
 	}
 }

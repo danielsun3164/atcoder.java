@@ -8,15 +8,11 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("3\n" + "cbaa\n" + "daacc\n" + "acacac");
-		ProblemC.main(null);
-		assertResultIs("aac");
+		check("3\n" + "cbaa\n" + "daacc\n" + "acacac", "aac");
 	}
 
 	@Test
 	void case2() {
-		in.input("3\n" + "a\n" + "aa\n" + "b");
-		ProblemC.main(null);
-		assertResultIs("");
+		check("3\n" + "a\n" + "aa\n" + "b", "");
 	}
 }

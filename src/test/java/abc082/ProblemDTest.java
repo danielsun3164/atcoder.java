@@ -8,43 +8,31 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("FTFFTFFF\n" + "4 2");
-		ProblemD.main(null);
-		assertResultIs("Yes");
+		check("FTFFTFFF\n" + "4 2", "Yes");
 	}
 
 	@Test
 	void case2() {
-		in.input("FTFFTFFF\n" + "-2 -2");
-		ProblemD.main(null);
-		assertResultIs("Yes");
+		check("FTFFTFFF\n" + "-2 -2", "Yes");
 	}
 
 	@Test
 	void case3() {
-		in.input("FF\n" + "1 0");
-		ProblemD.main(null);
-		assertResultIs("No");
+		check("FF\n" + "1 0", "No");
 	}
 
 	@Test
 	void case4() {
-		in.input("TF\n" + "1 0");
-		ProblemD.main(null);
-		assertResultIs("No");
+		check("TF\n" + "1 0", "No");
 	}
 
 	@Test
 	void case5() {
-		in.input("FFTTFF\n" + "0 0");
-		ProblemD.main(null);
-		assertResultIs("Yes");
+		check("FFTTFF\n" + "0 0", "Yes");
 	}
 
 	@Test
 	void case6() {
-		in.input("TTTT\n" + "1 0");
-		ProblemD.main(null);
-		assertResultIs("No");
+		check("TTTT\n" + "1 0", "No");
 	}
 }

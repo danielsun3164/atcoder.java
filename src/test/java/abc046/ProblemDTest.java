@@ -8,15 +8,11 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("gpg");
-		ProblemD.main(null);
-		assertResultIs("0");
+		check("gpg", "0");
 	}
 
 	@Test
 	void case2() {
-		in.input("ggppgggpgg");
-		ProblemD.main(null);
-		assertResultIs("2");
+		check("ggppgggpgg", "2");
 	}
 }

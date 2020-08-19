@@ -8,29 +8,21 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("UL?\n" + "1");
-		ProblemB.main(null);
-		assertResultIs("3");
+		check("UL?\n" + "1", "3");
 	}
 
 	@Test
 	void case2() {
-		in.input("UD?\n" + "1");
-		ProblemB.main(null);
-		assertResultIs("1");
+		check("UD?\n" + "1", "1");
 	}
 
 	@Test
 	void case3() {
-		in.input("UUUU?DDR?LLLL\n" + "1");
-		ProblemB.main(null);
-		assertResultIs("7");
+		check("UUUU?DDR?LLLL\n" + "1", "7");
 	}
 
 	@Test
 	void case4() {
-		in.input("UULL?\n" + "2");
-		ProblemB.main(null);
-		assertResultIs("3");
+		check("UULL?\n" + "2", "3");
 	}
 }
