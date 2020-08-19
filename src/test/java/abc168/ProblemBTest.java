@@ -8,15 +8,11 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("7\n" + "nikoandsolstice");
-		ProblemB.main(null);
-		assertResultIs("nikoand...");
+		check("7\n" + "nikoandsolstice", "nikoand...");
 	}
 
 	@Test
 	void case2() {
-		in.input("40\n" + "ferelibenterhominesidquodvoluntcredunt");
-		ProblemB.main(null);
-		assertResultIs("ferelibenterhominesidquodvoluntcredunt");
+		check("40\n" + "ferelibenterhominesidquodvoluntcredunt", "ferelibenterhominesidquodvoluntcredunt");
 	}
 }

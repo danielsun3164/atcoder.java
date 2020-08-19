@@ -8,36 +8,26 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("2");
-		ProblemC.main(null);
-		assertResultIs("b");
+		check("2", "b");
 	}
 
 	@Test
 	void case2() {
-		in.input("27");
-		ProblemC.main(null);
-		assertResultIs("aa");
+		check("27", "aa");
 	}
 
 	@Test
 	void case3() {
-		in.input("123456789");
-		ProblemC.main(null);
-		assertResultIs("jjddja");
+		check("123456789", "jjddja");
 	}
 
 	@Test
 	void case4() {
-		in.input("1000000000000001");
-		ProblemC.main(null);
-		assertResultIs("gbdpxgrzxjm");
+		check("1000000000000001", "gbdpxgrzxjm");
 	}
 
 	@Test
 	void case5() {
-		in.input("26");
-		ProblemC.main(null);
-		assertResultIs("z");
+		check("26", "z");
 	}
 }

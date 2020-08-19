@@ -1,6 +1,6 @@
 package abc006;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -44,8 +44,6 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case3() {
-		in.input("10 41");
-		ProblemC.main(null);
-		assertResultIs("-1 -1 -1");
+		check("10 41", "-1 -1 -1");
 	}
 }

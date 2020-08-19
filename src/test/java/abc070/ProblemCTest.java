@@ -8,15 +8,11 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("2\n" + "2\n" + "3");
-		ProblemC.main(null);
-		assertResultIs("6");
+		check("2\n" + "2\n" + "3", "6");
 	}
 
 	@Test
 	void case2() {
-		in.input("5\n" + "2\n" + "5\n" + "10\n" + "1000000000000000000\n" + "1000000000000000000");
-		ProblemC.main(null);
-		assertResultIs("1000000000000000000");
+		check("5\n" + "2\n" + "5\n" + "10\n" + "1000000000000000000\n" + "1000000000000000000", "1000000000000000000");
 	}
 }

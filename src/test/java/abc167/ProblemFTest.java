@@ -8,29 +8,21 @@ class ProblemFTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("2\n" + ")\n" + "(()");
-		ProblemF.main(null);
-		assertResultIs("Yes");
+		check("2\n" + ")\n" + "(()", "Yes");
 	}
 
 	@Test
 	void case2() {
-		in.input("2\n" + ")(\n" + "()");
-		ProblemF.main(null);
-		assertResultIs("No");
+		check("2\n" + ")(\n" + "()", "No");
 	}
 
 	@Test
 	void case3() {
-		in.input("4\n" + "((()))\n" + "((((((\n" + "))))))\n" + "()()()");
-		ProblemF.main(null);
-		assertResultIs("Yes");
+		check("4\n" + "((()))\n" + "((((((\n" + "))))))\n" + "()()()", "Yes");
 	}
 
 	@Test
 	void case4() {
-		in.input("3\n" + "(((\n" + ")\n" + ")");
-		ProblemF.main(null);
-		assertResultIs("No");
+		check("3\n" + "(((\n" + ")\n" + ")", "No");
 	}
 }

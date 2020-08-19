@@ -8,29 +8,21 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("M+MM-M");
-		ProblemD.main(null);
-		assertResultIs("2");
+		check("M+MM-M", "2");
 	}
 
 	@Test
 	void case2() {
-		in.input("MMM+M");
-		ProblemD.main(null);
-		assertResultIs("1");
+		check("MMM+M", "1");
 	}
 
 	@Test
 	void case3() {
-		in.input("MMM+--MMM");
-		ProblemD.main(null);
-		assertResultIs("3");
+		check("MMM+--MMM", "3");
 	}
 
 	@Test
 	void case4() {
-		in.input("+");
-		ProblemD.main(null);
-		assertResultIs("0");
+		check("+", "0");
 	}
 }

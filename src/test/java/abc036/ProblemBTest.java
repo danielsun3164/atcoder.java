@@ -8,15 +8,11 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("4\n" + "ooxx\n" + "xoox\n" + "xxxx\n" + "xxxx");
-		ProblemB.main(null);
-		assertResultIs("xxxo" + LF + "xxoo" + LF + "xxox" + LF + "xxxx");
+		check("4\n" + "ooxx\n" + "xoox\n" + "xxxx\n" + "xxxx", "xxxo" + LF + "xxoo" + LF + "xxox" + LF + "xxxx");
 	}
 
 	@Test
 	void case2() {
-		in.input("4\n" + "ooxx\n" + "xxxx\n" + "xxxx\n" + "xxxx");
-		ProblemB.main(null);
-		assertResultIs("xxxo" + LF + "xxxo" + LF + "xxxx" + LF + "xxxx");
+		check("4\n" + "ooxx\n" + "xxxx\n" + "xxxx\n" + "xxxx", "xxxo" + LF + "xxxo" + LF + "xxxx" + LF + "xxxx");
 	}
 }

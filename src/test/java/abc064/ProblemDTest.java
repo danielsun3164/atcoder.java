@@ -8,22 +8,16 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("3\n" + "())");
-		ProblemD.main(null);
-		assertResultIs("(())");
+		check("3\n" + "())", "(())");
 	}
 
 	@Test
 	void case2() {
-		in.input("6\n" + ")))())");
-		ProblemD.main(null);
-		assertResultIs("(((()))())");
+		check("6\n" + ")))())", "(((()))())");
 	}
 
 	@Test
 	void case3() {
-		in.input("8\n" + "))))((((");
-		ProblemD.main(null);
-		assertResultIs("(((())))(((())))");
+		check("8\n" + "))))((((", "(((())))(((())))");
 	}
 }

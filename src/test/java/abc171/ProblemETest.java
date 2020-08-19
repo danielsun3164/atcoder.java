@@ -8,8 +8,6 @@ class ProblemETest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("4\n" + "20 11 9 24");
-		ProblemE.main(null);
-		assertResultIs("26 5 7 22");
+		check("4\n" + "20 11 9 24", "26 5 7 22");
 	}
 }

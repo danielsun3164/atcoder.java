@@ -8,16 +8,12 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("1");
-		ProblemC.main(null);
-		assertResultIs("a" + LF + "b" + LF + "c");
+		check("1", "a" + LF + "b" + LF + "c");
 	}
 
 	@Test
 	void case2() {
-		in.input("2");
-		ProblemC.main(null);
-		assertResultIs(
+		check("2",
 				"aa" + LF + "ab" + LF + "ac" + LF + "ba" + LF + "bb" + LF + "bc" + LF + "ca" + LF + "cb" + LF + "cc");
 	}
 }

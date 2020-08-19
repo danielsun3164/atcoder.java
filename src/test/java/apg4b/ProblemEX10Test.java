@@ -8,15 +8,11 @@ class ProblemEX10Test extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("5 9");
-		ProblemEX10.main(null);
-		assertResultIs("A:]]]]]" + LF + "B:]]]]]]]]]");
+		check("5 9", "A:]]]]]" + LF + "B:]]]]]]]]]");
 	}
 
 	@Test
 	void case2() {
-		in.input("0 20");
-		ProblemEX10.main(null);
-		assertResultIs("A:" + LF + "B:]]]]]]]]]]]]]]]]]]]]");
+		check("0 20", "A:" + LF + "B:]]]]]]]]]]]]]]]]]]]]");
 	}
 }

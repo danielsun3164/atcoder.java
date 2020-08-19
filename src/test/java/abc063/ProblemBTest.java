@@ -8,22 +8,16 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("uncopyrightable");
-		ProblemB.main(null);
-		assertResultIs("yes");
+		check("uncopyrightable", "yes");
 	}
 
 	@Test
 	void case2() {
-		in.input("different");
-		ProblemB.main(null);
-		assertResultIs("no");
+		check("different", "no");
 	}
 
 	@Test
 	void case3() {
-		in.input("no");
-		ProblemB.main(null);
-		assertResultIs("yes");
+		check("no", "yes");
 	}
 }

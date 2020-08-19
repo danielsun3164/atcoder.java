@@ -8,36 +8,26 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("3\n" + "1 10 100");
-		ProblemC.main(null);
-		assertResultIs("Yes");
+		check("3\n" + "1 10 100", "Yes");
 	}
 
 	@Test
 	void case2() {
-		in.input("4\n" + "1 2 3 4");
-		ProblemC.main(null);
-		assertResultIs("No");
+		check("4\n" + "1 2 3 4", "No");
 	}
 
 	@Test
 	void case3() {
-		in.input("3\n" + "1 4 1");
-		ProblemC.main(null);
-		assertResultIs("Yes");
+		check("3\n" + "1 4 1", "Yes");
 	}
 
 	@Test
 	void case4() {
-		in.input("2\n" + "1 1");
-		ProblemC.main(null);
-		assertResultIs("No");
+		check("2\n" + "1 1", "No");
 	}
 
 	@Test
 	void case5() {
-		in.input("6\n" + "2 7 1 8 2 8");
-		ProblemC.main(null);
-		assertResultIs("Yes");
+		check("6\n" + "2 7 1 8 2 8", "Yes");
 	}
 }

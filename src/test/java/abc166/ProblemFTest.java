@@ -21,6 +21,25 @@ class ProblemFTest extends TestBase {
 		check(2, 1, 3, 0, new String[] { "AB", "AC" });
 	}
 
+	@Test
+	void case2() {
+		in.input("3 1 0 0\n" + "AB\n" + "BC\n" + "AB");
+		ProblemF.main(null);
+		assertResultIs("No");
+	}
+
+	@Test
+	void case3() {
+		in.input("1 0 9 0\n" + "AC");
+		ProblemF.main(null);
+		assertResultIs("No");
+	}
+
+	@Test
+	void case4() throws Exception {
+		check(8, 6, 9, 1, new String[] { "AC", "BC", "AB", "BC", "AC", "BC", "AB", "AB" });
+	}
+
 	private void check(int n, int a, int b, int c, String[] s) throws IOException {
 		in.input(n + " " + a + " " + b + " " + c);
 		in.input(Arrays.stream(s).collect(Collectors.joining("\n")));
@@ -62,24 +81,5 @@ class ProblemFTest extends TestBase {
 				}
 			}
 		}
-	}
-
-	@Test
-	void case2() {
-		in.input("3 1 0 0\n" + "AB\n" + "BC\n" + "AB");
-		ProblemF.main(null);
-		assertResultIs("No");
-	}
-
-	@Test
-	void case3() {
-		in.input("1 0 9 0\n" + "AC");
-		ProblemF.main(null);
-		assertResultIs("No");
-	}
-
-	@Test
-	void case4() throws Exception {
-		check(8, 6, 9, 1, new String[] { "AC", "BC", "AB", "BC", "AC", "BC", "AB", "AB" });
 	}
 }

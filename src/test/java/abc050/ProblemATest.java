@@ -10,15 +10,11 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case1() throws ScriptException {
-		in.input("1 + 2");
-		ProblemA.main(null);
-		assertResultIs("3");
+		check("1 + 2", "3");
 	}
 
 	@Test
 	void case2() throws ScriptException {
-		in.input("5 - 7");
-		ProblemA.main(null);
-		assertResultIs("-2");
+		check("5 - 7", "-2");
 	}
 }

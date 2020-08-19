@@ -8,22 +8,16 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("ch@ku@ai\n" + "choku@@i");
-		ProblemB.main(null);
-		assertResultIs("You can win");
+		check("ch@ku@ai\n" + "choku@@i", "You can win");
 	}
 
 	@Test
 	void case2() {
-		in.input("aoki\n" + "@ok@");
-		ProblemB.main(null);
-		assertResultIs("You will lose");
+		check("aoki\n" + "@ok@", "You will lose");
 	}
 
 	@Test
 	void case3() {
-		in.input("arc\n" + "abc");
-		ProblemB.main(null);
-		assertResultIs("You will lose");
+		check("arc\n" + "abc", "You will lose");
 	}
 }

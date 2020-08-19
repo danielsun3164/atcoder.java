@@ -8,50 +8,36 @@ class ProblemEX6Test extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("1 + 2");
-		ProblemEX6.main(null);
-		assertResultIs("3");
+		check("1 + 2", "3");
 	}
 
 	@Test
 	void case2() {
-		in.input("5 - 3");
-		ProblemEX6.main(null);
-		assertResultIs("2");
+		check("5 - 3", "2");
 	}
 
 	@Test
 	void case3() {
-		in.input("10 * 20");
-		ProblemEX6.main(null);
-		assertResultIs("200");
+		check("10 * 20", "200");
 	}
 
 	@Test
 	void case4() {
-		in.input("10 / 3");
-		ProblemEX6.main(null);
-		assertResultIs("3");
+		check("10 / 3", "3");
 	}
 
 	@Test
 	void case5() {
-		in.input("100 / 0");
-		ProblemEX6.main(null);
-		assertResultIs("error");
+		check("100 / 0", "error");
 	}
 
 	@Test
 	void case6() {
-		in.input("25 ? 31");
-		ProblemEX6.main(null);
-		assertResultIs("error");
+		check("25 ? 31", "error");
 	}
 
 	@Test
 	void case7() {
-		in.input("0 + 0");
-		ProblemEX6.main(null);
-		assertResultIs("0");
+		check("0 + 0", "0");
 	}
 }

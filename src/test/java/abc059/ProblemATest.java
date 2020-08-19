@@ -8,29 +8,21 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case1() {
-		in.input("atcoder beginner contest");
-		ProblemA.main(null);
-		assertResultIs("ABC");
+		check("atcoder beginner contest", "ABC");
 	}
 
 	@Test
 	void case2() {
-		in.input("resident register number");
-		ProblemA.main(null);
-		assertResultIs("RRN");
+		check("resident register number", "RRN");
 	}
 
 	@Test
 	void case3() {
-		in.input("k nearest neighbor");
-		ProblemA.main(null);
-		assertResultIs("KNN");
+		check("k nearest neighbor", "KNN");
 	}
 
 	@Test
 	void case4() {
-		in.input("async layered coding");
-		ProblemA.main(null);
-		assertResultIs("ALC");
+		check("async layered coding", "ALC");
 	}
 }
