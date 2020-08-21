@@ -20,6 +20,5 @@ class ProblemDTest extends TestBase {
 	@Test
 	void case3() {
 		check("7\n" + "1 2 3 1000000000 4 5 6", "999999994");
-
 	}
 }
