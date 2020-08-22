@@ -64,5 +64,4 @@ public class ProblemA {
 	private static int procPerm(int[] perm) {
 		return IntStream.range(1, perm.length).map(i -> Math.abs(perm[i] - perm[i - 1])).sum();
 	}
-
 }
