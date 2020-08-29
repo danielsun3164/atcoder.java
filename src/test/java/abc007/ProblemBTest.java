@@ -31,6 +31,6 @@ class ProblemBTest extends TestBase {
 	private void check(String input) {
 		in.input(input);
 		ProblemB.main(null);
-		assertTrue(out.toString().compareTo(input) < 0);
+		assertTrue(out.toString().compareTo(input) < 0, "value is " + out.toString());
 	}
 }

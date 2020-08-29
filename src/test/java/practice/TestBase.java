@@ -67,7 +67,8 @@ public abstract class TestBase {
 	 */
 	protected void assertResultIn(String... expecteds) {
 		String actualResult = out.toString();
-		assertTrue(Arrays.stream(expecteds).filter(s -> (s + LF).equals(actualResult)).count() > 0);
+		assertTrue(Arrays.stream(expecteds).filter(s -> (s + LF).equals(actualResult)).count() > 0,
+				"result is " + actualResult);
 	}
 
 	/**
@@ -76,7 +77,7 @@ public abstract class TestBase {
 	 * @param regexp 予定される結果の正規表現
 	 */
 	protected void assertResultMatches(String regexp) {
-		assertTrue(out.toString().matches(regexp + LF));
+		assertTrue(out.toString().matches(regexp + LF), "result is " + out.toString());
 	}
 
 	/**
@@ -95,7 +96,7 @@ public abstract class TestBase {
 	 * @param tolerance 誤差範囲
 	 */
 	protected void assertResultIsAbout(double expected, double tolerance) {
-		assertTrue(Math.abs(Double.parseDouble(out.toString()) - expected) < tolerance);
+		assertTrue(Math.abs(Double.parseDouble(out.toString()) - expected) < tolerance, "number is " + out.toString());
 	}
 
 	/**
@@ -182,7 +183,7 @@ public abstract class TestBase {
 	 * @param tolerance 誤差範囲
 	 */
 	protected void assertNumberIsAbout(String number, double expected, double tolerance) {
-		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance);
+		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance, "number is " + number);
 	}
 
 	/**
