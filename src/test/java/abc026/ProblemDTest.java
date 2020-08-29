@@ -1,6 +1,6 @@
 package abc026;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -27,7 +27,8 @@ class ProblemDTest extends TestBase {
 		ProblemD.main(null);
 		try (ByteArrayInputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			double t = scanner.nextDouble();
-			assertTrue(Math.abs(a * t + b * Math.sin(c * t * Math.PI) - 100.0d) < 0.000001d);
+			assertTrue(Math.abs(a * t + b * Math.sin(c * t * Math.PI) - 100.0d) < 0.000001d,
+					"value is " + (a * t + b * Math.sin(c * t * Math.PI)));
 		}
 	}
 }
