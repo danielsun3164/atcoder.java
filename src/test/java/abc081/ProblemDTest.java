@@ -1,10 +1,9 @@
 package abc081;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -35,10 +34,8 @@ class ProblemDTest extends TestBase {
 		in.input(a.length);
 		in.input(Arrays.stream(a).mapToObj(i -> String.valueOf(i)).collect(Collectors.joining(" ")));
 		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
+				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt();
 			IntStream.range(0, n).forEach(i -> {
 				int x = scanner.nextInt() - 1;

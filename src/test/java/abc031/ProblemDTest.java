@@ -1,10 +1,9 @@
 package abc031;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -57,10 +56,8 @@ class ProblemDTest extends TestBase {
 		inputMap.entrySet().forEach(entry -> in.input(entry.getKey() + " " + entry.getValue()));
 		ProblemD.main(null);
 		Map<String, String> outputMap = new HashMap<>();
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
+				Scanner scanner = new Scanner(bais)) {
 			IntStream.rangeClosed(1, k).forEach(i -> outputMap.put(String.valueOf(i), scanner.nextLine()));
 		}
 		inputMap.entrySet().forEach(entry -> {

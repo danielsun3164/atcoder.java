@@ -1,10 +1,9 @@
 package abc085;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
@@ -36,15 +35,13 @@ class ProblemCTest extends TestBase {
 	private void check(int n, int y) throws IOException {
 		in.input(n + " " + y);
 		ProblemC.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
+				Scanner scanner = new Scanner(bais)) {
 			int a = scanner.nextInt();
 			int b = scanner.nextInt();
 			int c = scanner.nextInt();
-			assertTrue(n == (a + b + c));
-			assertTrue(y == (a * 10000 + b * 5000 + c * 1000));
+			assertEquals(n, a + b + c);
+			assertEquals(y, a * 10000 + b * 5000 + c * 1000);
 		}
 	}
 }

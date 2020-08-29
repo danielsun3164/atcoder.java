@@ -1,11 +1,10 @@
 package abc166;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -44,10 +43,8 @@ class ProblemFTest extends TestBase {
 		in.input(n + " " + a + " " + b + " " + c);
 		in.input(Arrays.stream(s).collect(Collectors.joining("\n")));
 		ProblemF.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
+				Scanner scanner = new Scanner(bais)) {
 			assertEquals("Yes", scanner.next());
 			for (int i = 0; i < n; i++) {
 				String r = scanner.next();
@@ -67,16 +64,16 @@ class ProblemFTest extends TestBase {
 				switch (s[i].replace(r, "")) {
 				case "A":
 					a--;
-					assertTrue(a >= 0);
+					assertTrue(a >= 0, "a is " + a);
 					break;
 				case "B":
 					b--;
-					assertTrue(b >= 0);
+					assertTrue(b >= 0, "b is " + b);
 					break;
 				case "C":
 				default:
 					c--;
-					assertTrue(c >= 0);
+					assertTrue(c >= 0, "c is " + c);
 					break;
 				}
 			}
