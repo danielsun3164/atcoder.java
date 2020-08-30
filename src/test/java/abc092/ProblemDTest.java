@@ -1,10 +1,9 @@
 package abc092;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -53,21 +52,8 @@ class ProblemDTest extends TestBase {
 	private void check(int a, int b) throws IOException {
 		in.input(a + " " + b);
 		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			// データ量が多いため、別スレッドで書き込みを実施
-			new Thread() {
-				@Override
-				public void run() {
-					super.run();
-					try {
-						out.writeTo(pos);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}.start();
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
+				Scanner scanner = new Scanner(bais)) {
 			int h = scanner.nextInt(), w = scanner.nextInt();
 			char[][] s = new char[h][];
 			IntStream.range(0, h).forEach(i -> s[i] = scanner.next().toCharArray());

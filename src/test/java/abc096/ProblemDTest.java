@@ -1,10 +1,9 @@
 package abc096;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -53,10 +52,8 @@ class ProblemDTest extends TestBase {
 	private void check(int n) throws IOException {
 		in.input(n);
 		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
+				Scanner scanner = new Scanner(bais)) {
 			int[] answers = new int[n];
 			IntStream.range(0, n).forEach(i -> answers[i] = scanner.nextInt());
 			IntStream.range(0x1F, 1 << n).filter(i -> Integer.bitCount(i) == ProblemD.N)

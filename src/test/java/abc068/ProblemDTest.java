@@ -2,9 +2,8 @@ package abc068;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -45,10 +44,8 @@ class ProblemDTest extends TestBase {
 	private void check(long value) throws IOException {
 		in.input(value);
 		ProblemD.main(null);
-		try (PipedOutputStream pos = new PipedOutputStream();
-				PipedInputStream pis = new PipedInputStream(pos);
-				Scanner scanner = new Scanner(pis)) {
-			out.writeTo(pos);
+		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
+				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt();
 			long[] a = new long[n];
 			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
