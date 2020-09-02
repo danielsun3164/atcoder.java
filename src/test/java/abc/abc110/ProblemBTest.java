@@ -8,7 +8,7 @@ class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {
-		check("3 2 10 20\n" + "8 15 13\n" + "16 22\n" + "", "No War");
+		check("3 2 10 20\n" + "8 15 13\n" + "16 22", "No War");
 	}
 
 	@Test
