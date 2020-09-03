@@ -7,16 +7,12 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt(), m = scanner.nextInt();
-			if (0 == (m % n)) {
-				System.out.println(m / n);
-			} else {
-				System.out.println(getResult(n, m));
-			}
+			System.out.println(getResult(n, m));
 		}
 	}
 
 	/**
-	 * m/n より小さい最大のmの約数を計算する
+	 * m/n 以下最大のmの約数を計算する
 	 * 
 	 * @param n
 	 * @param m
