@@ -22,6 +22,7 @@ public abstract class TestBase {
 
 	protected static StandardInputSnatcher in = new StandardInputSnatcher();
 	protected static ByteArrayOutputStream out = new ByteArrayOutputStream();
+	private static PrintStream mySystemOut;
 
 	/** システムの改行コード */
 	protected static String LF = System.lineSeparator();
@@ -32,7 +33,7 @@ public abstract class TestBase {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		System.setIn(in);
-		System.setOut(new PrintStream(out));
+		System.setOut(mySystemOut = new PrintStream(out));
 	}
 
 	/**
@@ -42,6 +43,7 @@ public abstract class TestBase {
 	static void tearDownAfterClass() throws Exception {
 		System.setOut(systemOut);
 		System.setIn(systemIn);
+		mySystemOut.close();
 		out.close();
 	}
 
