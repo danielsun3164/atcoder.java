@@ -10,11 +10,8 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
-			int p = scanner.nextInt();
-			int q = scanner.nextInt();
-			int r = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt(), p = scanner.nextInt(), q = scanner.nextInt(),
+					r = scanner.nextInt();
 			@SuppressWarnings("unchecked")
 			List<Boy>[] lists = new List[n];
 			IntStream.range(0, n).forEach(i -> lists[i] = new ArrayList<>());
@@ -34,7 +31,7 @@ public class ProblemD {
 	 */
 	private static int getMaxHappiness(int k, List<Boy>[] lists, int m, int q) {
 		int[] hapinesses = new int[m];
-		IntStream.range(0, m).forEach(i -> hapinesses[i] = 0);
+		Arrays.fill(hapinesses, 0);
 		IntStream.range(0, lists.length).filter(i -> 1 == ((k >> i) & 1))
 				.forEach(i -> lists[i].forEach(boy -> hapinesses[boy.boy] += boy.happiness));
 		return Arrays.stream(hapinesses).sorted().skip(m - q).sum();

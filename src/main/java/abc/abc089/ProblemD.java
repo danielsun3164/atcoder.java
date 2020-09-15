@@ -9,9 +9,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
-			int d = scanner.nextInt();
+			int h = scanner.nextInt(), w = scanner.nextInt(), d = scanner.nextInt();
 			Map<Integer, Point> map = new HashMap<>();
 			IntStream.range(0, h)
 					.forEach(i -> IntStream.range(0, w).forEach(j -> map.put(scanner.nextInt(), new Point(i, j))));
@@ -25,8 +23,7 @@ public class ProblemD {
 			});
 			int q = scanner.nextInt();
 			IntStream.range(0, q).forEach(i -> {
-				int l = scanner.nextInt();
-				int r = scanner.nextInt();
+				int l = scanner.nextInt(), r = scanner.nextInt();
 				System.out.println(result[r] - result[l]);
 			});
 		}

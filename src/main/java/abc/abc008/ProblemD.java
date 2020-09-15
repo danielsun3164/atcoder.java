@@ -7,15 +7,16 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemD {
 
 	private static Map<List<Integer>, Integer> map = new HashMap<>();
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int w = scanner.nextInt();
-			int h = scanner.nextInt();
-			int n = scanner.nextInt();
+			int w = scanner.nextInt(), h = scanner.nextInt(), n = scanner.nextInt();
 			// N個の座標値を入力する
 			Point[] points = new Point[n];
 			boolean[] canUsePoints = new boolean[n];
@@ -65,6 +66,9 @@ public class ProblemD {
 		return max;
 	}
 
+	/**
+	 * x,yを表すクラス
+	 */
 	private static class Point {
 		int x;
 		int y;

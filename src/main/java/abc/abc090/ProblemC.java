@@ -6,8 +6,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			long n = scanner.nextLong();
-			long m = scanner.nextLong();
+			long n = scanner.nextLong(), m = scanner.nextLong();
 			if (1L == n) {
 				if (1L == m) {
 					System.out.println(1);

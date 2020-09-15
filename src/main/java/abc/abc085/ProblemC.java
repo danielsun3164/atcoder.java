@@ -8,8 +8,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int y = scanner.nextInt();
+			int n = scanner.nextInt(), y = scanner.nextInt();
 			System.out.println(
 					Arrays.stream(getResult(n, y)).mapToObj(i -> String.valueOf(i)).collect(Collectors.joining(" ")));
 		}

@@ -6,13 +6,14 @@ import java.util.Scanner;
 
 public class ProblemC {
 
+	/** 風向の配列 */
 	private static final String[] DIRS = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW",
 			"W", "WNW", "NW", "NNW", "N" };
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int deg = scanner.nextInt();
-			String mdis = scanner.nextLine().trim();
+			String mdis = scanner.next();
 			BigDecimal sdis = new BigDecimal(mdis).divide(new BigDecimal(60), 1, RoundingMode.HALF_UP);
 			int index = (int) ((deg + 112.5) / 225.0);
 			String dir = DIRS[index];

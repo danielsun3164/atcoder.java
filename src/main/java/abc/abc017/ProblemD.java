@@ -9,22 +9,20 @@ import java.util.stream.IntStream;
  */
 public class ProblemD {
 
-	private static long MOD = 1_000_000_007L;
+	private static final long MOD = 1_000_000_007L;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
-			int[] f = new int[n];
-			IntStream.range(0, n).forEach(i -> f[i] = scanner.nextInt() - 1);
+			int n = scanner.nextInt(), m = scanner.nextInt();
+			int[] f = IntStream.range(0, n).map(i -> scanner.nextInt() - 1).toArray();
 			// 個々の味の数の配列
 			int[] taste = new int[m];
 			Arrays.fill(taste, 0);
 			// 結果の配列
 			long[] dp = new long[n + 1];
-			dp[0] = 1;
+			dp[0] = 1L;
 			int left = 0;
-			long sum = 1;
+			long sum = 1L;
 			for (int i = 0; i < n; i++) {
 				taste[f[i]]++;
 				while (taste[f[i]] > 1) {

@@ -9,9 +9,7 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
-			Arrays.sort(a);
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).sorted().toArray();
 			// 最大値を取得する
 			int max = a[n - 1];
 			// 最大値/2に一番近い値を取得する

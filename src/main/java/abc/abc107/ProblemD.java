@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  * 
  * https://atcoder.jp/contests/abc107/submissions/14509241 にも参考
  */

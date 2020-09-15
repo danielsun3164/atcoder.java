@@ -6,8 +6,7 @@ public class ProblemA {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int a = scanner.nextInt(), b = scanner.nextInt();
 			int reminder = a % b;
 			System.out.println((0 == reminder) ? 0 : b - reminder);
 		}

@@ -5,10 +5,11 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemC {
 
+	/** 使用される文字の一覧 */
 	private static final char[] BASES = new char[] { '3', '5', '7' };
 
 	public static void main(String[] args) {

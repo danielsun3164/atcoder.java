@@ -4,15 +4,14 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			if (isIncreasing(a)) {
 				System.out.println(0);
 				return;

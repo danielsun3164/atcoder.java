@@ -23,8 +23,7 @@ public class ProblemD別回答 {
 			IntStream.range(3, N).forEach(i -> count[i] = count[i - 1] + (is2017LikeNumber(i, primeList) ? 1 : 0));
 			int q = scanner.nextInt();
 			IntStream.range(0, q).map(i -> {
-				int l = scanner.nextInt();
-				int r = scanner.nextInt();
+				int l = scanner.nextInt(), r = scanner.nextInt();
 				return count[r] - count[l - 1];
 			}).forEach(System.out::println);
 		}

@@ -3,14 +3,12 @@ package abc.abc080;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import javax.script.ScriptException;
-
 public class ProblemC {
 
 	/** 時間帯の数 */
 	private static final Integer TIME = 10;
 
-	public static void main(String[] args) throws ScriptException {
+	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			scanner.nextLine();

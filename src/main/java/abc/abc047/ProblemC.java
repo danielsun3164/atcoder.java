@@ -6,7 +6,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] s = scanner.nextLine().toCharArray();
+			char[] s = scanner.next().toCharArray();
 			char pre = ' ';
 			int count = 0;
 			for (char c : s) {

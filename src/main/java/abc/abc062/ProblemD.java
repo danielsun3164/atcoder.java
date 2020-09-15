@@ -6,15 +6,14 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] a = new int[3 * n];
-			IntStream.range(0, 3 * n).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, 3 * n).map(i -> scanner.nextInt()).toArray();
 			// それぞれ前半と後半の計算結果
 			long[] result1 = new long[n + 1], result2 = new long[n + 1];
 			// 前半の計算用

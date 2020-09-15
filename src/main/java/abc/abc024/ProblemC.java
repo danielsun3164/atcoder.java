@@ -13,8 +13,7 @@ public class ProblemC {
 		try (Scanner scanner = new Scanner(System.in)) {
 			// n
 			scanner.nextInt();
-			int d = scanner.nextInt();
-			int k = scanner.nextInt();
+			int d = scanner.nextInt(), k = scanner.nextInt();
 			// 移動可能な町の一覧
 			int[][] lr = new int[d][2];
 			IntStream.range(0, d).forEach(i -> {

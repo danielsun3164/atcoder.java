@@ -7,12 +7,9 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
-			String[] a = new String[n];
-			String[] b = new String[m];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.next());
-			IntStream.range(0, m).forEach(i -> b[i] = scanner.next());
+			int n = scanner.nextInt(), m = scanner.nextInt();
+			String[] a = IntStream.range(0, n).mapToObj(i -> scanner.next()).toArray(String[]::new);
+			String[] b = IntStream.range(0, m).mapToObj(i -> scanner.next()).toArray(String[]::new);
 			boolean found = false;
 			main: for (int i = 0; i <= n - m; i++) {
 				for (int j = 0; j <= n - m; j++) {

@@ -18,7 +18,6 @@ public class ProblemE {
 			857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997 };
 
 	public static void main(String[] args) {
-
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			int[] a = new int[n];

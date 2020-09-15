@@ -13,6 +13,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
+			// n
 			scanner.nextInt();
 			char[] s = scanner.next().toCharArray();
 			// 現在までの閉じていない左括弧と右括弧の数

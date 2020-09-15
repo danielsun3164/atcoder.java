@@ -7,17 +7,11 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int txa = scanner.nextInt();
-			int tya = scanner.nextInt();
-			int txb = scanner.nextInt();
-			int tyb = scanner.nextInt();
-			int t = scanner.nextInt();
-			int v = scanner.nextInt();
+			int txa = scanner.nextInt(), tya = scanner.nextInt(), txb = scanner.nextInt(), tyb = scanner.nextInt();
+			int t = scanner.nextInt(), v = scanner.nextInt();
 			// 移動できる距離
-			int d = t * v;
-			int n = scanner.nextInt();
-			int[] x = new int[n];
-			int[] y = new int[n];
+			int d = t * v, n = scanner.nextInt();
+			int[] x = new int[n], y = new int[n];
 			IntStream.range(0, n).forEach(i -> {
 				x[i] = scanner.nextInt();
 				y[i] = scanner.nextInt();

@@ -8,11 +8,9 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
-			scanner.nextLine();
+			int n = scanner.nextInt(), k = scanner.nextInt();
 			// 入力文字列
-			char[] s = scanner.nextLine().toCharArray();
+			char[] s = scanner.next().toCharArray();
 			// 文字列をソートしたもの
 			char[] sortedS = s.clone();
 			Arrays.sort(sortedS);

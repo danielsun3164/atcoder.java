@@ -8,8 +8,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int q = scanner.nextInt();
+			int n = scanner.nextInt(), q = scanner.nextInt();
 			int[] a = new int[n];
 			Arrays.fill(a, 0);
 			IntStream.range(0, q).forEach(i -> {

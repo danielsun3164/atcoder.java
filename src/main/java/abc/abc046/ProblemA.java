@@ -7,12 +7,13 @@ import java.util.stream.IntStream;
 
 public class ProblemA {
 
-	private static final int NUM = 3;
+	/** 入力数字の数 */
+	private static final int N = 3;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			Set<Integer> set = new HashSet<>();
-			IntStream.range(0, NUM).forEach(i -> set.add(scanner.nextInt()));
+			IntStream.range(0, N).forEach(i -> set.add(scanner.nextInt()));
 			System.out.println(set.size());
 		}
 	}

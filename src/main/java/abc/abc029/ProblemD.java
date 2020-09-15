@@ -2,11 +2,14 @@ package abc.abc029;
 
 import java.util.Scanner;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			String s = scanner.nextLine();
-			System.out.println(getResult(s));
+			String n = scanner.next();
+			System.out.println(getResult(n));
 		}
 	}
 

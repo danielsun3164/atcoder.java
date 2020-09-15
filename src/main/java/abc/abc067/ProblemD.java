@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
@@ -20,8 +20,7 @@ public class ProblemD {
 			List<Path>[] pathLists = new List[n];
 			IntStream.range(0, n).forEach(i -> pathLists[i] = new ArrayList<>());
 			IntStream.range(0, n - 1).forEach(i -> {
-				int from = scanner.nextInt() - 1;
-				int to = scanner.nextInt() - 1;
+				int from = scanner.nextInt() - 1, to = scanner.nextInt() - 1;
 				pathLists[from].add(new Path(from, to, 1));
 				pathLists[to].add(new Path(to, from, 1));
 			});
@@ -94,7 +93,7 @@ public class ProblemD {
 
 		@Override
 		public int compareTo(Path path) {
-			return this.cost - path.cost;
+			return Integer.compare(cost, path.cost);
 		}
 	}
 }

@@ -12,8 +12,7 @@ public class ProblemC {
 			int n = scanner.nextInt();
 			long nowT = 1, nowA = 1;
 			for (int i = 0; i < n; i++) {
-				int t = scanner.nextInt();
-				int a = scanner.nextInt();
+				int t = scanner.nextInt(), a = scanner.nextInt();
 				long m = Math.max((nowT - 1 + t) / t, (nowA - 1 + a) / a);
 				nowT = m * t;
 				nowA = m * a;

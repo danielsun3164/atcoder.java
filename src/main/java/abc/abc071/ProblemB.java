@@ -15,7 +15,7 @@ public class ProblemB {
 			for (char a = 'a'; a <= 'z'; a++) {
 				set.add(a);
 			}
-			set.removeAll(scanner.nextLine().chars().distinct().collect(ArrayList<Character>::new,
+			set.removeAll(scanner.next().chars().distinct().collect(ArrayList<Character>::new,
 					(a, b) -> a.add((char) b), ArrayList<Character>::addAll));
 			Optional<Character> first = set.stream().sorted().findFirst();
 			System.out.println(first.isPresent() ? first.get() : "None");

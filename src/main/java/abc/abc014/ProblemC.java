@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemC {
 
 	private static final int N = 1_000_001 + 1;
@@ -12,10 +15,9 @@ public class ProblemC {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			int[] c = new int[N];
-			IntStream.range(0, N).forEach(i -> c[i] = 0);
+			Arrays.fill(c, 0);
 			IntStream.range(0, n).forEach(i -> {
-				int a = scanner.nextInt();
-				int b = scanner.nextInt();
+				int a = scanner.nextInt(), b = scanner.nextInt();
 				c[a]++;
 				c[b + 1]--;
 			});

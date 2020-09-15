@@ -4,19 +4,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int n = scanner.nextInt(), a = scanner.nextInt(), b = scanner.nextInt();
 			// m_C_nの配列を計算
 			long[][] c = calcC(n);
 			long[] v = new long[n];
@@ -65,12 +62,5 @@ public class ProblemD {
 			}
 		}));
 		return c;
-	}
-
-	@SuppressWarnings("unused")
-	private static void print(long[][] c) {
-		int n = c.length;
-		IntStream.range(0, n).mapToObj(i -> IntStream.rangeClosed(0, i).mapToObj(j -> String.valueOf(c[i][j]))
-				.collect(Collectors.joining(","))).forEach(System.out::println);
 	}
 }

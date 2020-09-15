@@ -11,10 +11,8 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int[] a = new int[N];
-			IntStream.range(0, N).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, N).map(i -> scanner.nextInt()).sorted().toArray();
 			int k = scanner.nextInt();
-			Arrays.sort(a);
 			a[N - 1] = a[N - 1] << k;
 			System.out.println(Arrays.stream(a).sum());
 		}

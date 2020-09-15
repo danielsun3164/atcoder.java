@@ -22,13 +22,12 @@ public class ProblemD {
 			int max = Math.max(n, k);
 			// N! mod P の配列を計算
 			factorial = new long[2 * max + 1];
-			factorial[0] = 1;
+			factorial[0] = 1L;
 			IntStream.rangeClosed(1, 2 * max).forEach(i -> factorial[i] = factorial[i - 1] * i % P);
 			// N! mod P 逆元の配列を計算
 			factinv = new long[2 * max + 1];
-			factinv[0] = 1;
 			factinv[2 * max] = pow(factorial[2 * max], P - 2);
-			for (int i = 2 * max - 1; i >= 1; i--) {
+			for (int i = 2 * max - 1; i >= 0; i--) {
 				factinv[i] = factinv[i + 1] * (i + 1) % P;
 			}
 			System.out.println(H(n, k));
@@ -59,15 +58,13 @@ public class ProblemD {
 	 * @return n^k mod P
 	 */
 	private static long pow(long n, long k) {
-		long result = (1 == (k & 1)) ? n : 1;
-		k >>= 1;
+		long result = 1L;
 		// nのk乗を計算
-		long temp = n;
 		while (k > 0) {
-			temp = temp * temp % P;
 			if (1 == (k & 1)) {
-				result = result * temp % P;
+				result = result * n % P;
 			}
+			n = n * n % P;
 			k >>= 1;
 		}
 		return result;

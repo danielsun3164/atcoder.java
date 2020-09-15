@@ -10,9 +10,8 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			long n = scanner.nextLong();
-			int sqrt = (int) Math.sqrt(n);
 			int answer = 0;
-			for (int i = 2; i <= sqrt; i++) {
+			for (int i = 2; i <= (int) Math.sqrt(n); i++) {
 				int count = 0;
 				while (0 == (n % i)) {
 					n /= i;

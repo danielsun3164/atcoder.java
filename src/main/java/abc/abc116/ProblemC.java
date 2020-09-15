@@ -10,8 +10,7 @@ public class ProblemC {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] h = new int[n];
-			IntStream.range(0, n).forEach(i -> h[i] = scanner.nextInt());
+			int[] h = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			System.out.println(getResult(h, 0, n - 1, 0));
 		}
 	}

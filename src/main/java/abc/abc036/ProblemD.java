@@ -6,7 +6,8 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説通りに実装したソースコード<br/>
+ * 解説通りに実装したソースコード
+ * 
  * https://atcoder.jp/contests/abc036/submissions/4293321 にも参考
  */
 public class ProblemD {

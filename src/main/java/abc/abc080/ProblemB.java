@@ -6,8 +6,8 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int x = scanner.nextInt();
-			System.out.println((0 == (x % f(x)) ? "Yes" : "No"));
+			int n = scanner.nextInt();
+			System.out.println((0 == (n % f(n)) ? "Yes" : "No"));
 		}
 	}
 

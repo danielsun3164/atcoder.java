@@ -10,13 +10,10 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int r = scanner.nextInt();
-			int c = scanner.nextInt();
-			int k = scanner.nextInt();
-			scanner.nextLine();
+			int r = scanner.nextInt(), c = scanner.nextInt(), k = scanner.nextInt();
 			boolean[][] s = new boolean[r][c];
 			IntStream.range(0, r).forEach(i -> {
-				char[] chars = scanner.nextLine().toCharArray();
+				char[] chars = scanner.next().toCharArray();
 				IntStream.range(0, c).forEach(j -> s[i][j] = (chars[j] == 'o'));
 			});
 			int[][][] count = calcCount(r, c, s);
@@ -34,7 +31,8 @@ public class ProblemC {
 	 * @param k
 	 * @return i,jのところでサイズがkを緑に塗られるかどうか
 	 */
-	private static boolean check(int[][][] count, int i, int j, int r, int c, int k) {
+	private static boolean check(final int[][][] count, final int i, final int j, final int r, final int c,
+			final int k) {
 		if ((i >= k - 1) && (j >= k - 1) && ((i + k - 1) < r) && ((j + k - 1) < c)) {
 			for (int l = 0; l < k; l++) {
 				if ((count[i][j - l][0] < k - l) || (count[i][j + l][0] < k - l) || (count[i][j - l][1] < k - l)
@@ -53,7 +51,7 @@ public class ProblemC {
 	 * @param s
 	 * @return 縦の連続する白のコマの数を計算。[][][0]は上のコマの数、[][][1]は下のコマの数
 	 */
-	private static int[][][] calcCount(int r, int c, boolean[][] s) {
+	private static int[][][] calcCount(final int r, final int c, final boolean[][] s) {
 		int[][][] count = new int[r][c][2];
 		IntStream.range(0, c).forEach(j -> {
 			int start = 0;

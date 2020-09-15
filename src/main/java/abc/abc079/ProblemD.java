@@ -10,8 +10,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
+			int h = scanner.nextInt(), w = scanner.nextInt();
 			int[][] c = new int[N][N];
 			IntStream.range(0, N).forEach(i -> IntStream.range(0, N).forEach(j -> c[i][j] = scanner.nextInt()));
 			int[][] a = new int[h][w];

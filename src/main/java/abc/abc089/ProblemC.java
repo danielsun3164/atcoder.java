@@ -1,8 +1,6 @@
 package abc.abc089;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -13,7 +11,7 @@ public class ProblemC {
 	/** 選ぶ人数 */
 	private static final int N = 3;
 	/** 対象となる頭文字 */
-	private static final Set<Character> MARCHS = new HashSet<>(Arrays.asList('M', 'A', 'R', 'C', 'H'));
+	private static final Set<Character> MARCHS = Set.of('M', 'A', 'R', 'C', 'H');
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

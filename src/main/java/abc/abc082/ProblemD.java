@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  * 
  * https://atcoder.jp/contests/abc082/submissions/7855589を参考にも作成
  */
@@ -17,16 +17,14 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			char[] s = scanner.next().toCharArray();
-			int x = scanner.nextInt();
-			int y = scanner.nextInt();
+			int x = scanner.nextInt(), y = scanner.nextInt();
 			int[][] step = new int[2][s.length / 2 + 1];
 			IntStream.range(0, 2).forEach(i -> Arrays.fill(step[i], 0));
 			// X軸ステップとY軸ステップ数の数
 			int[] number = new int[2];
 			number[0] = 0;
 			number[1] = 1;
-			int current = 0;
-			int count = 0;
+			int current = 0, count = 0;
 			for (char c : s) {
 				if (TRANSFER == c) {
 					step[current][number[current]] = count;

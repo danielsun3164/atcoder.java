@@ -5,10 +5,11 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに実装したソースコード
+ * 解説通りに実装したソースコード
  */
 public class ProblemI {
 
+	/** 大きい値 */
 	private static final long INF = Long.MAX_VALUE >> 1;
 
 	public static void main(String[] args) {

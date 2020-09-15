@@ -7,15 +7,15 @@ import java.util.Set;
 import java.util.stream.IntStream;
 
 /**
- * 解説通りに実装したソースコード<br/>
+ * 解説通りに実装したソースコード
+ * 
  * https://atcoder.jp/contests/abc041/submissions/1293286 にも参考
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			@SuppressWarnings("unchecked")
 			Set<Integer>[] edges = new Set[n];
 			IntStream.range(0, n).forEach(i -> edges[i] = new HashSet<>());

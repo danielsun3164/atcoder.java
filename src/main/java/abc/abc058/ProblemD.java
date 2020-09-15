@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
@@ -12,8 +12,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			long sumX = mod(IntStream.range(0, n).mapToLong(i -> mod((2 * i + 1 - n) * scanner.nextLong())).sum());
 			long sumY = mod(IntStream.range(0, m).mapToLong(i -> mod((2 * i + 1 - m) * scanner.nextLong())).sum());
 			System.out.println(mod(sumX * sumY));

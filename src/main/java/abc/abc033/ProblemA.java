@@ -9,7 +9,7 @@ public class ProblemA {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			Set<Character> set = new HashSet<>();
-			for (char c : scanner.nextLine().toCharArray()) {
+			for (char c : scanner.next().toCharArray()) {
 				set.add(c);
 			}
 			System.out.println((set.size() > 1) ? "DIFFERENT" : "SAME");

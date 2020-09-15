@@ -9,6 +9,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
+			// n
 			scanner.nextInt();
 			char[] s = scanner.next().toCharArray();
 			int max = 0, x = 0;

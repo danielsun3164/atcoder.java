@@ -9,9 +9,9 @@ public class ProblemC {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int d = scanner.nextInt(), g = scanner.nextInt();
-			Score[] s = new Score[d];
-			IntStream.range(0, d).forEach(i -> s[i] = new Score((i + 1) * 100, scanner.nextInt(), scanner.nextInt()));
-			Arrays.sort(s);
+			Score[] s = IntStream.range(0, d)
+					.mapToObj(i -> new Score((i + 1) * 100, scanner.nextInt(), scanner.nextInt())).sorted()
+					.toArray(Score[]::new);
 			System.out.println(IntStream.range(1, 1 << d).map(i -> getProblemNo(i, s, g)).min().getAsInt());
 		}
 	}

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりではない別回答
+ * 解説通りではない別回答
  */
 public class ProblemD別回答 {
 
@@ -14,14 +14,12 @@ public class ProblemD別回答 {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
-			scanner.nextLine();
+			int h = scanner.nextInt(), w = scanner.nextInt();
 			boolean[][] s = new boolean[h][w];
 			IntStream.range(0, h).forEach(i -> Arrays.fill(s[i], false));
 			int whiteCount = 0;
 			for (int i = 0; i < h; i++) {
-				char[] l = scanner.nextLine().toCharArray();
+				char[] l = scanner.next().toCharArray();
 				for (int j = 0; j < w; j++) {
 					s[i][j] = (l[j] == WHITE);
 					if (s[i][j]) {

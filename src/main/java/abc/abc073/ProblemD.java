@@ -18,9 +18,7 @@ public class ProblemD {
 			int[] r = new int[q];
 			IntStream.range(0, q).forEach(i -> r[i] = scanner.nextInt() - 1);
 			IntStream.range(0, m).forEach(i -> {
-				int a = scanner.nextInt() - 1;
-				int b = scanner.nextInt() - 1;
-				int c = scanner.nextInt();
+				int a = scanner.nextInt() - 1, b = scanner.nextInt() - 1, c = scanner.nextInt();
 				d[a][b] = d[b][a] = c;
 			});
 			warshallFloyd(d, n);

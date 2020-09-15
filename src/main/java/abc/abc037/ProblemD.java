@@ -17,8 +17,7 @@ public class ProblemD {
 	public static void main(String[] args) throws IOException {
 		try (InputStreamReader isr = new InputStreamReader(System.in); BufferedReader br = new BufferedReader(isr)) {
 			String[] strings = br.readLine().split(" ");
-			int h = Integer.parseInt(strings[0]);
-			int w = Integer.parseInt(strings[1]);
+			int h = Integer.parseInt(strings[0]), w = Integer.parseInt(strings[1]);
 			int[][] a = new int[h][w];
 			for (int i = 0; i < h; i++) {
 				String[] columns = br.readLine().split(" ");

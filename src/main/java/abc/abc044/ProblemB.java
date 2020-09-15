@@ -8,7 +8,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] w = scanner.nextLine().toCharArray();
+			char[] w = scanner.next().toCharArray();
 			Map<Character, Integer> map = new HashMap<>();
 			for (char c : w) {
 				map.put(c, map.getOrDefault(c, 0) + 1);

@@ -11,8 +11,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			long h = scanner.nextLong();
-			long w = scanner.nextLong();
+			long h = scanner.nextLong(), w = scanner.nextLong();
 			long[] s = new long[N];
 			System.out.println(Math.min(getResult(h, w, s, N), getResult(w, h, s, N)));
 		}

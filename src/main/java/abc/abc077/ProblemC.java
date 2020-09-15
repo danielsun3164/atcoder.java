@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに実装したソースコード
+ * 解説通りに実装したソースコード
  * 
  * lower_boundとupper_boundの実装は https://qiita.com/taskie/items/b4e45e2005aa38e90bcb に参考
  */

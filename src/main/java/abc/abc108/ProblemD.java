@@ -4,19 +4,17 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int l = scanner.nextInt();
-			int r = 0;
+			int l = scanner.nextInt(), r = 0;
 			while ((1 << (r + 1)) <= l) {
 				r++;
 			}
-			int n = r + 1;
-			int count = 2 * r;
+			int n = r + 1, count = 2 * r;
 			StringBuilder sb = new StringBuilder();
 			for (int i = r; i >= 1; i--) {
 				// System.out.println("l=" + l + ", r=" + r + ", i=" + i);

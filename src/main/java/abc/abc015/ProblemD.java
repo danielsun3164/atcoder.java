@@ -10,9 +10,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int w = scanner.nextInt();
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
+			int w = scanner.nextInt(), n = scanner.nextInt(), k = scanner.nextInt();
 			int[] widths = new int[n], importances = new int[n];
 			IntStream.range(0, n).forEach(i -> {
 				widths[i] = scanner.nextInt();

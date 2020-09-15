@@ -1,70 +1,81 @@
 package abc.abc007;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class ProblemC {
 
+	/** 空きマスを表す文字 */
+	private static final char EMPTY = '.';
+	/** 移動の際のX座標の差分の配列 */
+	private static final int[] XS = new int[] { -1, 1, 0, 0 };
+	/** 移動の際のY座標の差分の配列 */
+	private static final int[] YS = new int[] { 0, 0, -1, 1 };
+
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int R = scanner.nextInt();
-			int C = scanner.nextInt();
-			int sx = scanner.nextInt();
-			int sy = scanner.nextInt();
-			int gx = scanner.nextInt();
-			int gy = scanner.nextInt();
-			scanner.nextLine();
+			int R = scanner.nextInt(), C = scanner.nextInt();
+			int sx = scanner.nextInt() - 1, sy = scanner.nextInt() - 1;
+			int gx = scanner.nextInt() - 1, gy = scanner.nextInt() - 1;
 			boolean[][] c = new boolean[R][C];
 			IntStream.range(0, R).forEach(i -> {
-				String s = scanner.nextLine();
-				IntStream.range(0, C).forEach(j -> {
-					switch (s.charAt(j)) {
-					case '.':
-						c[i][j] = true;
-						break;
-					case '#':
-					default:
-						c[i][j] = false;
-						break;
-					}
-				});
+				char[] s = scanner.next().toCharArray();
+				IntStream.range(0, C).forEach(j -> c[i][j] = EMPTY == s[j]);
 			});
 			int[][] r = new int[R][C];
 			IntStream.range(0, R).forEach(i -> IntStream.range(0, C).forEach(j -> r[i][j] = Integer.MAX_VALUE));
-			r[sx - 1][sy - 1] = 0;
-			calcResult(r, c, sx - 1, sy - 1);
-			System.out.println(r[gx - 1][gy - 1]);
+			r[sx][sy] = 0;
+			calcResult(R, C, r, c, sx, sy);
+			System.out.println(r[gx][gy]);
 		}
 	}
 
 	/**
 	 * 計算結果の配列を記入
 	 * 
-	 * @param r 計算結果の配列
-	 * @param c 迷路のマスデータの配列
-	 * @param x マスのX座標
-	 * @param y マスのY座標
+	 * @param R  迷路の行数
+	 * @param C  迷路の列数
+	 * @param r  計算結果の配列
+	 * @param c  迷路のマスデータの配列
+	 * @param sx マスのX座標
+	 * @param sy マスのY座標
 	 */
-	private static void calcResult(int[][] r, boolean[][] c, int x, int y) {
-		// 上へ移動
-		if ((x > 0) && (c[x - 1][y]) && (r[x - 1][y] > r[x][y] + 1)) {
-			r[x - 1][y] = r[x][y] + 1;
-			calcResult(r, c, x - 1, y);
+	private static void calcResult(final int R, final int C, final int[][] r, final boolean[][] c, int sx, int sy) {
+		Queue<Data> queue = new PriorityQueue<>();
+		queue.add(new Data(sx, sy, r[sx][sy]));
+		while (!queue.isEmpty()) {
+			Data data = queue.poll();
+			int x = data.x, y = data.y;
+			if (data.r == r[x][y]) {
+				IntStream.range(0, XS.length).forEach(i -> {
+					int nx = x + XS[i], ny = y + YS[i];
+					if ((nx >= 0) && (nx < R) && (ny >= 0) && (ny < C) && (c[nx][ny]) && (r[nx][ny] > r[x][y] + 1)) {
+						r[nx][ny] = r[x][y] + 1;
+						queue.add(new Data(nx, ny, r[nx][ny]));
+					}
+				});
+			}
 		}
-		// 下へ移動
-		if ((x < r.length - 1) && (c[x + 1][y]) && (r[x + 1][y] > r[x][y] + 1)) {
-			r[x + 1][y] = r[x][y] + 1;
-			calcResult(r, c, x + 1, y);
+	}
+
+	/**
+	 * x,yとrを表すクラス
+	 */
+	private static class Data implements Comparable<Data> {
+		int x, y, r;
+
+		Data(int x, int y, int r) {
+			super();
+			this.x = x;
+			this.y = y;
+			this.r = r;
 		}
-		// 左へ移動
-		if ((y > 0) && (c[x][y - 1]) && (r[x][y - 1] > r[x][y] + 1)) {
-			r[x][y - 1] = r[x][y] + 1;
-			calcResult(r, c, x, y - 1);
-		}
-		// 右へ移動
-		if ((y < r[0].length - 1) && (c[x][y + 1]) && (r[x][y + 1] > r[x][y] + 1)) {
-			r[x][y + 1] = r[x][y] + 1;
-			calcResult(r, c, x, y + 1);
+
+		@Override
+		public int compareTo(Data data) {
+			return Integer.compare(r, data.r);
 		}
 	}
 }

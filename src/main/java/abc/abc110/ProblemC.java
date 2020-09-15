@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  * 
  * https://atcoder.jp/contests/abc110/submissions/15896552 にも参考
  */

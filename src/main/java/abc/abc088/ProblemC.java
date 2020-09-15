@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 public class ProblemC {
 
+	/** グリッドのサイズ */
 	private static final int N = 3;
 
 	public static void main(String[] args) {

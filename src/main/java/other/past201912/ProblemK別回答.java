@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
  * 
  * https://atcoder.jp/contests/past201912-open/submissions/14629223 を参考に作成
  */
-public class ProblemK2 {
+public class ProblemK別回答 {
 
 	/** 最大階層数 */
 	private static final int K = 20;

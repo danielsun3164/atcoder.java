@@ -6,9 +6,7 @@ public class ProblemA {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
-			int n = scanner.nextInt();
+			int a = scanner.nextInt(), b = scanner.nextInt(), n = scanner.nextInt();
 			int lcm = lcm(a, b);
 			System.out.println(((n - 1) / lcm + 1) * lcm);
 		}

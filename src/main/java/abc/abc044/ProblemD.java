@@ -9,8 +9,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			long n = scanner.nextLong();
-			long s = scanner.nextLong();
+			long n = scanner.nextLong(), s = scanner.nextLong();
 			if (n < s) {
 				// https://atcoder.jp/contests/abc044/submissions/4095161 参考に追加
 				System.out.println(-1);

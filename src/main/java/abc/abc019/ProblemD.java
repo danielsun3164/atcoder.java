@@ -17,9 +17,7 @@ public class ProblemD {
 
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int now = 1;
-			int maxNode = 1;
-			int r = 0;
+			int now = 1, maxNode = 1, r = 0;
 			for (int i = 2; i <= n; i++) {
 				System.out.println("? " + now + " " + i);
 				int distance = scanner.nextInt();

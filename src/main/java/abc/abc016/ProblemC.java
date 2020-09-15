@@ -9,14 +9,12 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			@SuppressWarnings("unchecked")
 			Set<Integer>[] friends = new Set[n];
 			IntStream.range(0, n).forEach(i -> friends[i] = new HashSet<>());
 			IntStream.range(0, m).forEach(i -> {
-				int a = scanner.nextInt() - 1;
-				int b = scanner.nextInt() - 1;
+				int a = scanner.nextInt() - 1, b = scanner.nextInt() - 1;
 				friends[a].add(b);
 				friends[b].add(a);
 			});

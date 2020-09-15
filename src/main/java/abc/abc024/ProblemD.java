@@ -12,9 +12,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			long a = scanner.nextInt();
-			long b = scanner.nextInt();
-			long c = scanner.nextInt();
+			long a = scanner.nextLong(), b = scanner.nextLong(), c = scanner.nextLong();
 			long inverse = modpow(getMod(getMod(getMod(b + c) * a) - getMod(b * c)), MOD - 2);
 			long r = getMod(getMod((b - a) * c) * inverse);
 			long k = getMod(getMod((c - a) * b) * inverse);

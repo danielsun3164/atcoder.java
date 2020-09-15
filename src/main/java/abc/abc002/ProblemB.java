@@ -6,7 +6,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			String w = scanner.nextLine();
+			String w = scanner.next();
 			System.out.println(w.replaceAll("[aiueo]", ""));
 		}
 	}

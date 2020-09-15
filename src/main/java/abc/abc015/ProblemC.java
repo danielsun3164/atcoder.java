@@ -7,8 +7,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
+			int n = scanner.nextInt(), k = scanner.nextInt();
 			int[][] t = new int[n][k];
 			IntStream.range(0, n).forEach(i -> IntStream.range(0, k).forEach(j -> t[i][j] = scanner.nextInt()));
 			if (getResult(0, t, 0)) {

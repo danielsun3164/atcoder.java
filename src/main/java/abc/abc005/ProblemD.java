@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemD {
 
 	public static void main(String[] args) {
@@ -12,8 +15,7 @@ public class ProblemD {
 			int[][] d = new int[n][n];
 			IntStream.range(0, n).forEach(i -> IntStream.range(0, n).forEach(j -> d[i][j] = scanner.nextInt()));
 			int q = scanner.nextInt();
-			int[] p = new int[q];
-			IntStream.range(0, q).forEach(i -> p[i] = scanner.nextInt());
+			int[] p = IntStream.range(0, q).map(i -> scanner.nextInt()).toArray();
 			int[] r = getResult(d);
 			Arrays.stream(p).map(i -> r[i]).forEach(System.out::println);
 		}
@@ -36,6 +38,8 @@ public class ProblemD {
 	}
 
 	/**
+	 * たこ焼き器の美味しさ合計値配列を計算する
+	 * 
 	 * @param d たこ焼き器の美味しさの配列
 	 * @return たこ焼き器の美味しさ合計値配列．[i][j]の項目は[i][j]から一番右下の場所までの長方形のエリアの美味しさの合計値
 	 */
@@ -59,10 +63,9 @@ public class ProblemD {
 	 * @param s   たこ焼き器の美味しさ合計値配列
 	 * @return たこ焼き器最大美味しさ
 	 */
-	private static int getResult(int max, int n, int[][] s) {
-		int result = IntStream.rangeClosed((max - 1) / n + 1, Math.min(max, n)).filter(i -> (0 == max % i))
+	private static int getResult(final int max, final int n, final int[][] s) {
+		return IntStream.rangeClosed((max - 1) / n + 1, Math.min(max, n)).filter(i -> (0 == max % i))
 				.map(i -> getResult(i, max / i, n, s)).max().orElse(0);
-		return result;
 	}
 
 	/**
@@ -72,10 +75,9 @@ public class ProblemD {
 	 * @param s たこ焼き器の美味しさ合計値配列
 	 * @return たこ焼き器最大美味しさ
 	 */
-	private static int getResult(int w, int h, int n, int[][] s) {
-		int result = IntStream.range(0, n - w + 1)
+	private static int getResult(final int w, final int h, final int n, final int[][] s) {
+		return IntStream.range(0, n - w + 1)
 				.map(i -> IntStream.range(0, n - h + 1).map(j -> sum(i, j, w, h, s)).max().getAsInt()).max().getAsInt();
-		return result;
 	}
 
 	/**
@@ -86,7 +88,7 @@ public class ProblemD {
 	 * @param s たこ焼き器の美味しさ合計値配列
 	 * @return たこ焼き器の指定された場所の合計美味しさ
 	 */
-	private static int sum(int x, int y, int w, int h, int[][] s) {
+	private static int sum(final int x, final int y, final int w, final int h, final int[][] s) {
 		return s[x][y] - s[x + w][y] - s[x][y + h] + s[x + w][y + h];
 	}
 }

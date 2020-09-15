@@ -27,8 +27,7 @@ public class ProblemK {
 					root = i;
 				}
 			}
-			Range[] ranges = new Range[n];
-			IntStream.range(0, n).forEach(i -> ranges[i] = new Range());
+			Range[] ranges = IntStream.range(0, n).mapToObj(i -> new Range()).toArray(Range[]::new);
 			dfs(subordinates, ranges, root, 0);
 			int q = scanner.nextInt();
 			IntStream.range(0, q).forEach(i -> {

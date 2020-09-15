@@ -12,10 +12,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int h = scanner.nextInt(), w = scanner.nextInt(), a = scanner.nextInt(), b = scanner.nextInt();
 			// 階乗の配列
 			long[] frac = new long[h + w - 1];
 			frac[0] = 1;

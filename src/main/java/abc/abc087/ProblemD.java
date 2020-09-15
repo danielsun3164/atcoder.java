@@ -4,21 +4,19 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード<br/>
+ * 解説通りに作成したソースコード
+ * 
  * https://atcoder.jp/contests/abc087/submissions/5890910 にも参考
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			UnionFind uf = new UnionFind(n);
 			boolean result = true;
 			for (int i = 0; i < m; i++) {
-				int l = scanner.nextInt() - 1;
-				int r = scanner.nextInt() - 1;
-				int d = scanner.nextInt();
+				int l = scanner.nextInt() - 1, r = scanner.nextInt() - 1, d = scanner.nextInt();
 				if (uf.same(l, r)) {
 					if (uf.diff(l, r) != d) {
 						result = false;

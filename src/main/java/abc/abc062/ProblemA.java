@@ -1,46 +1,17 @@
 package abc.abc062;
 
-import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.IntStream;
 
 public class ProblemA {
 
-	private static final int N = 3;
-
 	@SuppressWarnings("unchecked")
-	private static final Set<Integer>[] SETS = new Set[N];
-
-	static {
-		IntStream.range(0, N).forEach(i -> SETS[i] = new HashSet<>());
-	}
-
-	static {
-		SETS[0].add(1);
-		SETS[0].add(3);
-		SETS[0].add(5);
-		SETS[0].add(7);
-		SETS[0].add(8);
-		SETS[0].add(10);
-		SETS[0].add(12);
-	}
-
-	static {
-		SETS[1].add(4);
-		SETS[1].add(6);
-		SETS[1].add(9);
-		SETS[1].add(11);
-	}
-
-	static {
-		SETS[2].add(2);
-	}
+	private static final Set<Integer>[] SETS = new Set[] { Set.of(1, 3, 5, 7, 8, 10, 12), Set.of(4, 6, 9, 11),
+			Set.of(12) };
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int x = scanner.nextInt();
-			int y = scanner.nextInt();
+			int x = scanner.nextInt(), y = scanner.nextInt();
 			System.out.println((getSet(x) == getSet(y)) ? "Yes" : "No");
 		}
 	}

@@ -14,7 +14,7 @@ public class ProblemB {
 			for (int i = 0; i < d; i++) {
 				pow *= HUNDRED;
 			}
-			// 解説どおりの式で計算
+			// 解説通りの式で計算
 			System.out.println((n + (n - 1) / (HUNDRED - 1)) * pow);
 		}
 	}

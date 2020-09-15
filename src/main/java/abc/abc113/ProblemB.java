@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりの計算方法で実装
+ * 解説通りの計算方法で実装
  */
 public class ProblemB {
 
