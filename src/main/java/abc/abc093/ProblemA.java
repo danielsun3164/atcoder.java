@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 public class ProblemA {
 
+	/** 入力文字の種類 */
 	private static final int N = 3;
 
 	public static void main(String[] args) {

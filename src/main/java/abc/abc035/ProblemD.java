@@ -9,18 +9,16 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説通りに実装したソースコード<br/>
+ * 解説通りに実装したソースコード
+ * 
  * https://atcoder.jp/contests/abc035/submissions/2509685 にも参考
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
-			int t = scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
+			int n = scanner.nextInt(), m = scanner.nextInt(), t = scanner.nextInt();
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			@SuppressWarnings("unchecked")
 			List<Edge>[] goEdgeLists = new List[n], backEdgeLists = new List[n];
 			IntStream.range(0, n).forEach(i -> {

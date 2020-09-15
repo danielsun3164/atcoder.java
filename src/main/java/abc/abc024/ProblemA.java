@@ -6,12 +6,8 @@ public class ProblemA {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
-			int c = scanner.nextInt();
-			int k = scanner.nextInt();
-			int s = scanner.nextInt();
-			int t = scanner.nextInt();
+			int a = scanner.nextInt(), b = scanner.nextInt(), c = scanner.nextInt(), k = scanner.nextInt();
+			int s = scanner.nextInt(), t = scanner.nextInt();
 			if ((s + t) >= k) {
 				System.out.println((a - c) * s + (b - c) * t);
 			} else {

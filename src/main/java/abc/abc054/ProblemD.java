@@ -17,9 +17,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int ma = scanner.nextInt();
-			int mb = scanner.nextInt();
+			int n = scanner.nextInt(), ma = scanner.nextInt(), mb = scanner.nextInt();
 			int[] a = new int[n], b = new int[n], c = new int[n];
 			IntStream.range(0, n).forEach(i -> {
 				a[i] = scanner.nextInt();

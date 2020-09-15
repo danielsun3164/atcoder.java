@@ -6,8 +6,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt() % 12;
-			int m = scanner.nextInt();
+			int n = scanner.nextInt() % 12, m = scanner.nextInt();
 			// 分針が0時時点との角度
 			double mDegree = m * 6.0d;
 			// 時針が0時時点との角度

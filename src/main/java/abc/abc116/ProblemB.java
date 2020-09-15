@@ -10,8 +10,7 @@ public class ProblemB {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int s = scanner.nextInt();
 			Set<Integer> set = new HashSet<>();
-			int now = s, prev = -1;
-			int count = 1;
+			int now = s, prev = -1, count = 1;
 			while (!set.contains(now)) {
 				set.add(now);
 				prev = now;

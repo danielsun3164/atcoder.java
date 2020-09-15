@@ -9,8 +9,7 @@ public class ProblemB {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			int d = scanner.nextInt(), x = scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			System.out.println(x + IntStream.range(0, n).map(i -> (d - 1) / a[i] + 1).sum());
 		}
 	}

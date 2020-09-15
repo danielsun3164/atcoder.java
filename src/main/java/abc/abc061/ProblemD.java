@@ -8,8 +8,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			Path[] paths = new Path[m];
 			IntStream.range(0, m).forEach(
 					// 最長距離を計算するため、距離をマイナスにする

@@ -9,7 +9,7 @@ public class ProblemB {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			System.out.println(calcFractorialMod(n));
+			System.out.println(calcFactorialMod(n));
 		}
 	}
 
@@ -17,7 +17,7 @@ public class ProblemB {
 	 * @param n
 	 * @return nの階乗 mod MOD
 	 */
-	private static long calcFractorialMod(int n) {
+	private static long calcFactorialMod(int n) {
 		long result = 1L;
 		for (int i = 2; i <= n; i++) {
 			result = result * i % MOD;

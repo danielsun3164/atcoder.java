@@ -24,8 +24,7 @@ public class ProblemC {
 				KOMA: for (int j = 0; j < w; j++) {
 					if (s[i][j]) {
 						for (int k = 0; k < X.length; k++) {
-							int newX = i + X[k];
-							int newY = j + Y[k];
+							int newX = i + X[k], newY = j + Y[k];
 							if ((newX >= 0) && (newX < h) && (newY >= 0) && (newY < w)) {
 								if (s[newX][newY]) {
 									continue KOMA;

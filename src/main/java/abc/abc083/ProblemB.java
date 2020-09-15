@@ -7,9 +7,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int n = scanner.nextInt(), a = scanner.nextInt(), b = scanner.nextInt();
 			System.out.println(IntStream.rangeClosed(1, n).filter(i -> {
 				int digitSum = digitSum(i);
 				return (digitSum >= a) && (digitSum <= b);

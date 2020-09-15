@@ -13,11 +13,9 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int a = scanner.nextInt() - 1;
+			int n = scanner.nextInt(), a = scanner.nextInt() - 1;
 			BigInteger k = scanner.nextBigInteger();
-			int[] b = new int[n];
-			IntStream.range(0, n).forEach(i -> b[i] = scanner.nextInt() - 1);
+			int[] b = IntStream.range(0, n).map(i -> scanner.nextInt() - 1).toArray();
 			int[] count = new int[n];
 			Arrays.fill(count, -1);
 			count[a] = 0;
@@ -75,8 +73,6 @@ public class ProblemD {
 		if (null == a) {
 			return b;
 		}
-		int[] result = new int[a.length];
-		IntStream.range(0, a.length).forEach(i -> result[i] = a[b[i]]);
-		return result;
+		return IntStream.range(0, a.length).map(i -> a[b[i]]).toArray();
 	}
 }

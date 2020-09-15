@@ -20,8 +20,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
+			int h = scanner.nextInt(), w = scanner.nextInt();
 			char[][] s = new char[h][w];
 			IntStream.range(0, h).forEach(i -> s[i] = scanner.next().toCharArray());
 			char[][] result = reverse(s, h, w);

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
@@ -14,8 +14,7 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] a = new int[n + 1];
-			IntStream.range(0, n + 1).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, n + 1).map(i -> scanner.nextInt()).toArray();
 			// 各数字が配列aでのindexを格納する配列
 			int[] indexes = new int[n + 1];
 			Arrays.fill(indexes, -1);

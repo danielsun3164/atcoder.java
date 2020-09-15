@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 
 public class ProblemC {
 
+	/** 掛け算の文字列 */
 	private static final String MULTIPLY = " x ";
 
 	public static void main(String[] args) {

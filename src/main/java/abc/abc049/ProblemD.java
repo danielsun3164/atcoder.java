@@ -9,16 +9,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * 解説通り実装したソースコード<br/>
+ * 解説通り実装したソースコード
+ * 
  * http://baitop.hatenadiary.jp/entry/2018/06/26/224712 にも参考
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
-			int l = scanner.nextInt();
+			int n = scanner.nextInt(), k = scanner.nextInt(), l = scanner.nextInt();
 			UnionFindTree road = new UnionFindTree(n);
 			IntStream.range(0, k).forEach(i -> road.unite(scanner.nextInt() - 1, scanner.nextInt() - 1));
 			UnionFindTree railway = new UnionFindTree(n);

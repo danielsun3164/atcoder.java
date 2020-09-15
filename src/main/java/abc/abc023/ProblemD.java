@@ -11,8 +11,7 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] h = new int[n];
-			int[] s = new int[n];
+			int[] h = new int[n], s = new int[n];
 			IntStream.range(0, n).forEach(i -> {
 				h[i] = scanner.nextInt();
 				s[i] = scanner.nextInt();

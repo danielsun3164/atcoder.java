@@ -6,12 +6,12 @@ import java.util.stream.IntStream;
 
 public class ProblemD {
 
+	/** 最大値 */
 	private static final int BIG_NUMBER = 1_000_000_000;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			int[][] dist = new int[n][n];
 			IntStream.range(0, n).forEach(i -> Arrays.fill(dist[i], BIG_NUMBER));
 			IntStream.range(0, n).forEach(i -> dist[i][i] = 0);

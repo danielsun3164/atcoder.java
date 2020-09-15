@@ -7,7 +7,7 @@ import java.util.Stack;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  * 
  * https://atcoder.jp/contests/abc116/submissions/14852322 にも参考
  */

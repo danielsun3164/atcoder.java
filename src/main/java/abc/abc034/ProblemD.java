@@ -8,12 +8,12 @@ import java.util.stream.IntStream;
  */
 public class ProblemD {
 
+	/** 誤差 */
 	private static final double EPS = 1.0E-10;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
+			int n = scanner.nextInt(), k = scanner.nextInt();
 			long[] w = new long[n];
 			int[] p = new int[n];
 			IntStream.range(0, n).forEach(i -> {

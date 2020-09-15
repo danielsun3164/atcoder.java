@@ -19,6 +19,7 @@ public class ProblemD {
 		MAP.put('8', '7');
 	}
 
+	/** デフォルト文字 */
 	private static final char DEFAULT_CHAR = '7';
 
 	/** 禁止文字の変換マップ */
@@ -30,8 +31,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			long a = scanner.nextLong();
-			long b = scanner.nextLong();
+			long a = scanner.nextLong(), b = scanner.nextLong();
 			System.out.println(calcResult(b) - calcResult(a - 1));
 		}
 	}

@@ -14,8 +14,7 @@ public class ProblemC {
 			int n = scanner.nextInt();
 			char[][] s = new char[n][];
 			IntStream.range(0, n).forEach(i -> s[i] = scanner.next().toCharArray());
-			int[] result = new int[N];
-			int[] temp = new int[N];
+			int[] result = new int[N], temp = new int[N];
 			if (n > 0) {
 				calcResult(s[0], result, result);
 				IntStream.range(1, s.length).forEach(i -> calcResult(s[i], temp, result));

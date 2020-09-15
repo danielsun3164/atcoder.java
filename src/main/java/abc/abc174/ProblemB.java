@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 判定条件を解説どおりに実装
+ * 判定条件を解説通りに実装
  */
 public class ProblemB {
 

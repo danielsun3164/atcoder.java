@@ -5,17 +5,16 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード<br/>
+ * 解説通りに作成したソースコード
+ * 
  * https://atcoder.jp/contests/abc056/submissions/4757789 と https://atcoder.jp/contests/abc056/submissions/3511073 にも参照
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
+			int n = scanner.nextInt(), k = scanner.nextInt();
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			if (1 == n) {
 				System.out.println((k > a[0]) ? 1 : 0);
 				return;

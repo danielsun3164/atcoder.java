@@ -7,7 +7,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] s = scanner.nextLine().toCharArray();
+			char[] s = scanner.next().toCharArray();
 			int n = scanner.nextInt();
 			IntStream.range(0, n).forEach(i -> reverse(scanner.nextInt() - 1, scanner.nextInt() - 1, s));
 			System.out.println(s);

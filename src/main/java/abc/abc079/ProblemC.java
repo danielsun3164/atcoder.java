@@ -2,15 +2,12 @@ package abc.abc079;
 
 import java.util.Scanner;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
 public class ProblemC {
 
-	private static final Integer SEVEN = 7;
+	/** 7 */
+	private static final int SEVEN = 7;
 
-	public static void main(String[] args) throws ScriptException {
+	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			char[] abcd = scanner.next().toCharArray();
 			for (int i = 0; i < (1 << abcd.length); i++) {
@@ -29,9 +26,17 @@ public class ProblemC {
 	 * @param n    '+'か'-'を表す二進数
 	 * @return 結果が7かどうか
 	 */
-	private static boolean ok(char[] abcd, int n) throws ScriptException {
-		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-		return SEVEN.equals(engine.eval(toFormula(abcd, n)));
+	private static boolean ok(char[] abcd, int n) {
+		int result = abcd[0] - '0';
+		for (int i = 1; i < abcd.length; i++) {
+			if (1 == (n & 1)) {
+				result += abcd[i] - '0';
+			} else {
+				result -= abcd[i] - '0';
+			}
+			n >>= 1;
+		}
+		return SEVEN == result;
 	}
 
 	/**

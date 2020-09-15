@@ -2,19 +2,18 @@ package abc.abc003;
 
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ProblemB {
 
-	private static Set<Character> SET = Stream.of('a', 't', 'c', 'o', 'd', 'e', 'r', '@').collect(Collectors.toSet());
-
+	/** アットマークが置き換えられる文字のセット */
+	private static Set<Character> SET = Set.of('a', 't', 'c', 'o', 'd', 'e', 'r', '@');
+	/** アットマーク */
 	private static char AT_MARK = '@';
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char s[] = scanner.nextLine().toCharArray();
-			char t[] = scanner.nextLine().toCharArray();
+			char s[] = scanner.next().toCharArray();
+			char t[] = scanner.next().toCharArray();
 			boolean result = true;
 			if (s.length == t.length) {
 				for (int i = 0; i < s.length; i++)

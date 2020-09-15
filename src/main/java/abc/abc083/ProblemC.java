@@ -6,8 +6,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			long x = scanner.nextLong();
-			long y = scanner.nextLong();
+			long x = scanner.nextLong(), y = scanner.nextLong();
 			System.out.println(getDigits(y / x));
 		}
 	}

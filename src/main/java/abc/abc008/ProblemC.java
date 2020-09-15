@@ -9,8 +9,7 @@ public class ProblemC {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] c = new int[n];
-			IntStream.range(0, n).forEach(i -> c[i] = scanner.nextInt());
+			int[] c = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			System.out.println(Arrays.stream(c).map(ci -> getNumberOfYakusu(ci, c))
 					.mapToDouble(s -> (0 == (s % 2)) ? (s + 2.0) / (2.0 * s + 2.0) : 0.5).sum());
 		}

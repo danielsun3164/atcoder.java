@@ -20,8 +20,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int k = scanner.nextInt();
-			int n = scanner.nextInt();
+			int k = scanner.nextInt(), n = scanner.nextInt();
 			lengths = new int[k];
 			results = new String[k];
 			String[] v = new String[n], w = new String[n];

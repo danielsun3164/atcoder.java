@@ -7,9 +7,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int l = scanner.nextInt();
-			int h = scanner.nextInt();
-			int n = scanner.nextInt();
+			int l = scanner.nextInt(), h = scanner.nextInt(), n = scanner.nextInt();
 			IntStream.range(0, n).map(i -> {
 				int a = scanner.nextInt();
 				if (a < l) {

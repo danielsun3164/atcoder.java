@@ -5,10 +5,11 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
+	/** Nの最大値 */
 	private static final int N = 50;
 
 	public static void main(String[] args) {

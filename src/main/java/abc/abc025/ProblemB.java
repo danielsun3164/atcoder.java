@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class ProblemB {
 
+	/** 東を表す文字列 */
 	private static final String EAST = "East";
+	/** 西を表す文字列 */
 	private static final String WEST = "West";
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int n = scanner.nextInt(), a = scanner.nextInt(), b = scanner.nextInt();
 			int sum = 0;
 			for (int i = 0; i < n; i++) {
 				String s = scanner.next();

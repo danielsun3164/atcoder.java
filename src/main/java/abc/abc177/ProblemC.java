@@ -10,8 +10,7 @@ public class ProblemC {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			long[] a = new long[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
+			long[] a = IntStream.range(0, n).mapToLong(i -> scanner.nextLong()).toArray();
 			long[] sum = new long[n];
 			sum[0] = a[0];
 			IntStream.range(1, n).forEach(i -> sum[i] = (sum[i - 1] + a[i]) % MOD);

@@ -5,12 +5,13 @@ import java.util.regex.Pattern;
 
 public class ProblemA {
 
-	private static final Pattern pattern = Pattern.compile("(A)tCoder\\s([A-Z])[a-z]*\\s(C)ontest");
+	/** 置き換えるための正規表現 */
+	private static final Pattern PATTERN = Pattern.compile("(A)tCoder\\s([A-Z])[a-z]*\\s(C)ontest");
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			String s = scanner.nextLine();
-			System.out.println(pattern.matcher(s).replaceFirst("$1$2$3"));
+			System.out.println(PATTERN.matcher(s).replaceFirst("$1$2$3"));
 		}
 	}
 }

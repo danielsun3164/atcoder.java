@@ -11,10 +11,8 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int d = scanner.nextInt();
-			int x = Math.abs(scanner.nextInt());
-			int y = Math.abs(scanner.nextInt());
+			int n = scanner.nextInt(), d = scanner.nextInt();
+			int x = Math.abs(scanner.nextInt()), y = Math.abs(scanner.nextInt());
 			if ((0 == (x % d)) && (0 == (y % d))) {
 				int xd = x / d;
 				int yd = y / d;

@@ -3,7 +3,7 @@ package abc.abc108;
 import java.util.Scanner;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemB {
 

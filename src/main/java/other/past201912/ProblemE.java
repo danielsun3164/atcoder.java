@@ -18,8 +18,7 @@ public class ProblemE {
 			int n = scanner.nextInt(), q = scanner.nextInt();
 			boolean[][] follow = new boolean[n][n];
 			IntStream.range(0, q).forEach(i -> {
-				int s = scanner.nextInt();
-				int a = scanner.nextInt() - 1;
+				int s = scanner.nextInt(), a = scanner.nextInt() - 1;
 				if (FOLLOW == s) {
 					int b = scanner.nextInt() - 1;
 					follow[a][b] = true;

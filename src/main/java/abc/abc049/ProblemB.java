@@ -7,8 +7,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
+			int h = scanner.nextInt(), w = scanner.nextInt();
 			char[][] input = new char[h][];
 			IntStream.range(0, h).forEach(i -> input[i] = scanner.next().toCharArray());
 			char[][] output = new char[2 * h][w];

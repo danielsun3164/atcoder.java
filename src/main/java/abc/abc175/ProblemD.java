@@ -11,17 +11,15 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt(), k = scanner.nextInt();
-			int[] p = new int[n];
-			IntStream.range(0, n).forEach(i -> p[i] = scanner.nextInt() - 1);
-			long[] c = new long[n], scores = new long[n + 1];
-			IntStream.range(0, n).forEach(i -> c[i] = scanner.nextLong());
+			int[] p = IntStream.range(0, n).map(i -> scanner.nextInt() - 1).toArray();
+			long[] c = IntStream.range(0, n).mapToLong(i -> scanner.nextLong()).toArray();
+			long[] scores = new long[n + 1];
 			long max = Long.MIN_VALUE;
 			for (int i = 0; i < n; i++) {
 				Set<Integer> set = new HashSet<>();
 				Arrays.fill(scores, 0L);
 				long score = 0L;
-				int count = 0;
-				int current = i;
+				int count = 0, current = i;
 				while ((!set.contains(current)) && (k > count)) {
 					// ループを計算
 					set.add(current);

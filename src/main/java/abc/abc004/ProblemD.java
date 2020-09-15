@@ -3,17 +3,21 @@ package abc.abc004;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemD {
 
+	/** 赤いマーブルが入っている箱 */
 	private static final int RED = -100;
+	/** 緑のマーブルが入っている箱 */
 	private static final int GREEN = 0;
+	/** 青いマーブルが入っている箱 */
 	private static final int BLUE = 100;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int r = scanner.nextInt();
-			int g = scanner.nextInt();
-			int b = scanner.nextInt();
+			int r = scanner.nextInt(), g = scanner.nextInt(), b = scanner.nextInt();
 			System.out.println(IntStream.range(-1000, 1000).map(i -> getResult(i, r, g, b)).min().getAsInt());
 		}
 	}

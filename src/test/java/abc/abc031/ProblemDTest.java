@@ -58,7 +58,7 @@ class ProblemDTest extends TestBase {
 		Map<String, String> outputMap = new HashMap<>();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
-			IntStream.rangeClosed(1, k).forEach(i -> outputMap.put(String.valueOf(i), scanner.nextLine()));
+			IntStream.rangeClosed(1, k).forEach(i -> outputMap.put(String.valueOf(i), scanner.next()));
 		}
 		inputMap.entrySet().forEach(entry -> {
 			StringBuilder sb = new StringBuilder();

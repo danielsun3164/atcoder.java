@@ -7,14 +7,10 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
-			int x = scanner.nextInt();
-			int y = scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
-			int[] b = new int[m];
-			IntStream.range(0, m).forEach(i -> b[i] = scanner.nextInt());
+			int n = scanner.nextInt(), m = scanner.nextInt();
+			int x = scanner.nextInt(), y = scanner.nextInt();
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
+			int[] b = IntStream.range(0, m).map(i -> scanner.nextInt()).toArray();
 			int aCounter = 0, bCounter = 0;
 			// 往復した回数
 			int count = 0;

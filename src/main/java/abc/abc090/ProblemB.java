@@ -13,8 +13,7 @@ public class ProblemB {
 			int[] count = new int[MAX];
 			count[0] = 0;
 			IntStream.range(1, MAX).forEach(i -> count[i] = count[i - 1] + (isPalindromic(i) ? 1 : 0));
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int a = scanner.nextInt(), b = scanner.nextInt();
 			System.out.println(count[b] - count[a - 1]);
 		}
 	}

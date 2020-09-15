@@ -8,12 +8,9 @@ public class ProblemA {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int s = scanner.nextInt();
-			int t = scanner.nextInt();
+			int n = scanner.nextInt(), s = scanner.nextInt(), t = scanner.nextInt();
 			// 入力データ
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			// 毎日の体重を計算
 			int[] now = new int[n];
 			now[0] = a[0];

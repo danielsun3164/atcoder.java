@@ -6,8 +6,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			long x = scanner.nextLong(), k = scanner.nextLong(), d = scanner.nextLong();
-			x = Math.abs(x);
+			long x = Math.abs(scanner.nextLong()), k = scanner.nextLong(), d = scanner.nextLong();
 			if (k < (x / d)) {
 				System.out.println(x - k * d);
 			} else {

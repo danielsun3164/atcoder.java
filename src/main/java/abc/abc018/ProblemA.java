@@ -6,12 +6,12 @@ import java.util.stream.IntStream;
 
 public class ProblemA {
 
+	/** 数字の数 */
 	private static final int N = 3;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int[] array = new int[N];
-			IntStream.range(0, N).forEach(i -> array[i] = scanner.nextInt());
+			int[] array = IntStream.range(0, N).map(i -> scanner.nextInt()).toArray();
 			int[] sortedArray = array.clone();
 			Arrays.sort(sortedArray);
 			IntStream.range(0, N).map(i -> N - Arrays.binarySearch(sortedArray, array[i])).forEach(System.out::println);

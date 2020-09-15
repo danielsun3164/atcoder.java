@@ -4,15 +4,14 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに実装したソースコード
+ * 解説通りに実装したソースコード
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] t = new int[n];
-			IntStream.range(0, n).forEach(i -> t[i] = scanner.nextInt());
+			int[] t = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			// 時間制限区間の開始時間と終了時間
 			int[] l = new int[n + 2], r = new int[n + 2];
 			l[0] = r[0] = l[1] = 0;

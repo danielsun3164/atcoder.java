@@ -15,8 +15,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
+			int n = scanner.nextInt(), k = scanner.nextInt();
 			// kの約数を求める
 			List<Integer> divList = new ArrayList<>();
 			int sqrtK = (int) Math.sqrt(k);

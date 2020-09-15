@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに実装したソースコード
+ * 解説通りに実装したソースコード
  */
 public class ProblemD {
 

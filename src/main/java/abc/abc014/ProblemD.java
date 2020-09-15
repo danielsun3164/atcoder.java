@@ -17,8 +17,7 @@ public class ProblemD {
 			List<Integer>[] lists = new List[n];
 			IntStream.range(0, n).forEach(i -> lists[i] = new ArrayList<>());
 			IntStream.range(1, n).forEach(i -> {
-				int x = scanner.nextInt() - 1;
-				int y = scanner.nextInt() - 1;
+				int x = scanner.nextInt() - 1, y = scanner.nextInt() - 1;
 				lists[x].add(y);
 				lists[y].add(x);
 			});
@@ -43,6 +42,13 @@ public class ProblemD {
 		int[][] parents;
 		int log2_n;
 
+		/**
+		 * コンストラクター
+		 * 
+		 * @param n
+		 * @param lists
+		 * @param root
+		 */
 		Lca(int n, List<Integer>[] lists, int root) {
 			this.lists = lists;
 			depths = new int[n];

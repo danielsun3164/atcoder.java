@@ -5,14 +5,13 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに実装したソースコード
+ * 解説通りに実装したソースコード
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int k = scanner.nextInt();
+			int n = scanner.nextInt(), k = scanner.nextInt();
 			int[] x = new int[n], y = new int[n];
 			IntStream.range(0, n).forEach(i -> {
 				x[i] = scanner.nextInt();

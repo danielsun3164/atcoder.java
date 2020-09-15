@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
@@ -18,9 +18,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
-			scanner.nextLine();
+			int h = scanner.nextInt(), w = scanner.nextInt();
 			boolean[][] s = new boolean[h + 1][w + 1];
 			IntStream.range(0, h + 1).forEach(i -> Arrays.fill(s[i], false));
 			int whiteCount = 0;
@@ -28,7 +26,7 @@ public class ProblemD {
 			List<Path>[] pathLists = new List[h * w];
 			IntStream.range(0, h * w).forEach(i -> pathLists[i] = new ArrayList<>());
 			for (int i = 1; i <= h; i++) {
-				char[] l = scanner.nextLine().toCharArray();
+				char[] l = scanner.next().toCharArray();
 				for (int j = 1; j <= w; j++) {
 					s[i][j] = (l[j - 1] == WHITE);
 					if (s[i][j]) {

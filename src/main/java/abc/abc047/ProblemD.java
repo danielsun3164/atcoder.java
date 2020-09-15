@@ -12,8 +12,7 @@ public class ProblemD {
 			int n = scanner.nextInt();
 			// t
 			scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			// max[i] はa[i]〜a[n-1]の最大値
 			int[] max = new int[n];
 			max[n - 1] = a[n - 1];

@@ -13,8 +13,7 @@ public class ProblemC {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			long k = scanner.nextLong();
-			long[] s = new long[n];
-			IntStream.range(0, n).forEach(i -> s[i] = scanner.nextLong());
+			long[] s = IntStream.range(0, n).mapToLong(i -> scanner.nextLong()).toArray();
 			if (Arrays.stream(s).filter(l -> 0L == l).count() > 0) {
 				// 配列には0が含まれる
 				System.out.println(n);

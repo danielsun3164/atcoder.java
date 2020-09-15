@@ -3,6 +3,9 @@ package abc.abc009;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemD {
 
 	/** 32bitの1 */
@@ -10,12 +13,9 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int k = scanner.nextInt();
-			int m = scanner.nextInt();
-			long[] a = new long[k];
-			IntStream.range(0, k).forEach(i -> a[i] = scanner.nextLong());
-			long[] c = new long[k];
-			IntStream.range(0, k).forEach(i -> c[i] = scanner.nextLong());
+			int k = scanner.nextInt(), m = scanner.nextInt();
+			long[] a = IntStream.range(0, k).mapToLong(i -> scanner.nextLong()).toArray();
+			long[] c = IntStream.range(0, k).mapToLong(i -> scanner.nextLong()).toArray();
 			if (m <= k) {
 				System.out.println(a[m - 1]);
 			} else {

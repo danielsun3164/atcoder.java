@@ -11,8 +11,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			Route[] routes = new Route[m];
 			IntStream.range(0, m).forEach(
 					i -> routes[i] = new Route(scanner.nextInt() - 1, scanner.nextInt() - 1, scanner.nextInt()));

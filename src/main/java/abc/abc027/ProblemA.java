@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class ProblemA {
 
+	/** 数字の数 */
 	private static final int SIZE = 3;
 
 	public static void main(String[] args) {

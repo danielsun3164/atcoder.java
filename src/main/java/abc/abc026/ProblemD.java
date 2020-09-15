@@ -14,9 +14,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
-			int c = scanner.nextInt();
+			int a = scanner.nextInt(), b = scanner.nextInt(), c = scanner.nextInt();
 			double from = (100.0d - b) / a;
 			double to = (100.0d + b) / a;
 			System.out.println(calc(a, b, c, from, to));

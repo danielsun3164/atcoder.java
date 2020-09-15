@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  * 
  * https://atcoder.jp/contests/abc091/submissions/5275478 にも参考
  */
@@ -14,10 +14,9 @@ public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
-			int[] a = new int[n], b = new int[n];
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
+			int[] b = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			int[] na = new int[n], nb = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
-			IntStream.range(0, n).forEach(i -> b[i] = scanner.nextInt());
 			int answer = 0;
 			for (int k = 0; k < 30; k++) {
 				int mask = (1 << (k + 1)) - 1;

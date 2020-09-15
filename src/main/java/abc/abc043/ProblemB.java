@@ -6,7 +6,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			String s = scanner.nextLine();
+			String s = scanner.next();
 			StringBuilder sb = new StringBuilder();
 			s.chars().forEach(c -> {
 				switch (c) {

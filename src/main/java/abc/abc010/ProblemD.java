@@ -10,9 +10,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int g = scanner.nextInt();
-			int e = scanner.nextInt();
+			int n = scanner.nextInt(), g = scanner.nextInt(), e = scanner.nextInt();
 			int[][] graph = new int[n + 1][n + 1];
 			IntStream.range(0, g).forEach(i -> graph[scanner.nextInt()][n] = 1);
 			IntStream.range(0, e).forEach(i -> {
@@ -33,7 +31,17 @@ public class ProblemD {
 		}
 	}
 
-	private static int[] dfs(int[][] graph, int start, int goal, int depth, boolean[] searched) {
+	/**
+	 * 開始ノードから目的ノードまでのパスの配列を計算する
+	 * 
+	 * @param graph    グラフを表す配列
+	 * @param start    開始ノード
+	 * @param goal     目的ノード
+	 * @param depth    処理したノードの数
+	 * @param searched 各ノードが処理したかどうかを保存する配列
+	 * @return 開始ノードから目的ノードまでのパスの配列
+	 */
+	private static int[] dfs(int[][] graph, final int start, final int goal, final int depth, boolean[] searched) {
 		if (start == goal) {
 			int[] res = new int[depth + 1];
 			res[depth] = goal;

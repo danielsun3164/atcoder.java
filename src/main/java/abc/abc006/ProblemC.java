@@ -2,12 +2,14 @@ package abc.abc006;
 
 import java.util.Scanner;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
+			int n = scanner.nextInt(), m = scanner.nextInt();
 			// 大人、老人、赤ちゃんの数
 			int a = 0, b = 0, c = 0;
 			if ((m < n * 2) || (m > n * 4)) {

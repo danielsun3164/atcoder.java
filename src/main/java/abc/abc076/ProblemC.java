@@ -8,8 +8,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			String s = scanner.next();
-			String t = scanner.next();
+			String s = scanner.next(), t = scanner.next();
 			StringBuilder sb = new StringBuilder();
 			for (char c : t.toCharArray()) {
 				sb.append("[").append(c).append("\\?]");

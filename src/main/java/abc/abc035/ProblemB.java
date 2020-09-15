@@ -17,7 +17,7 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] s = scanner.nextLine().toCharArray();
+			char[] s = scanner.next().toCharArray();
 			int t = scanner.nextInt();
 			Map<Character, Integer> map = new HashMap<>();
 			for (char c : s) {

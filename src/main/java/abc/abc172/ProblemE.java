@@ -27,9 +27,7 @@ public class ProblemE {
 				// (−1)^i × n_C_i
 				long result = ((0 == (i & 1)) ? 1 : -1) * factorial[n] % MOD * revFactorial[i] % MOD
 						* revFactorial[n - i] % MOD;
-				if (result < 0) {
-					result += MOD;
-				}
+				result = (result + MOD) % MOD;
 				// m_P_i × (m-i_P_n-i)^2
 				result = result * factorial[m] % MOD * revFactorial[m - i] % MOD * factorial[m - i] % MOD
 						* factorial[m - i] % MOD * revFactorial[m - n] % MOD * revFactorial[m - n] % MOD;

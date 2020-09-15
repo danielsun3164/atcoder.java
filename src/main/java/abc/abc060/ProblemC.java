@@ -9,8 +9,7 @@ public class ProblemC {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			long t = scanner.nextLong();
-			long[] a = new long[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
+			long[] a = IntStream.range(0, n).mapToLong(i -> scanner.nextLong()).toArray();
 			System.out.println(IntStream.range(1, n).mapToLong(i -> Math.min(a[i] - a[i - 1], t)).sum() + t);
 		}
 	}

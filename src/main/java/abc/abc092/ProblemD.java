@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
@@ -18,8 +18,7 @@ public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int a = scanner.nextInt(), b = scanner.nextInt();
 			// 2K × 2K のグリッドを用意する。
 			char[][] s = new char[2 * K][2 * K];
 			// 上から K 行以内にあるマスを全て黒く塗り、残りのマスをすべて白く塗る。

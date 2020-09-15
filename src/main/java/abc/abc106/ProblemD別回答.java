@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード（二次元累積和使用）
+ * 解説通りに作成したソースコード（二次元累積和使用）
  */
 public class ProblemD別回答 {
 

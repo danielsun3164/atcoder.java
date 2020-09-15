@@ -7,8 +7,8 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] s = scanner.nextLine().toCharArray();
-			int max = (int) Math.pow(2, s.length - 1);
+			char[] s = scanner.next().toCharArray();
+			int max = 1 << (s.length - 1);
 			System.out.println(IntStream.range(0, max).mapToLong(i -> eval(i, s)).sum());
 		}
 	}

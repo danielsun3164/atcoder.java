@@ -6,7 +6,7 @@ public class ProblemEX12 {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] s = scanner.nextLine().toCharArray();
+			char[] s = scanner.next().toCharArray();
 			char prev = '+';
 			int number = 0;
 			for (char c : s) {

@@ -4,17 +4,15 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int m = scanner.nextInt();
-			int d = scanner.nextInt();
-			int[] a = new int[m];
-			IntStream.range(0, m).forEach(i -> {
-				a[i] = scanner.nextInt();
-			});
+			int n = scanner.nextInt(), m = scanner.nextInt(), d = scanner.nextInt();
+			int[] a = IntStream.range(0, m).map(i -> scanner.nextInt()).toArray();
 			// 1回分阿弥陀くじを計算
 			int[] t = IntStream.rangeClosed(1, n).toArray();
 			for (int i = m - 1; i >= 0; i--) {
@@ -62,8 +60,6 @@ public class ProblemD {
 	 * @return t_a[t_b]の配列
 	 */
 	private static int[] multipy(int[] a, int[] b) {
-		int[] result = new int[a.length];
-		IntStream.rangeClosed(1, a.length).forEach(i -> result[i - 1] = a[b[i - 1] - 1]);
-		return result;
+		return IntStream.rangeClosed(1, a.length).map(i -> a[b[i - 1] - 1]).toArray();
 	}
 }

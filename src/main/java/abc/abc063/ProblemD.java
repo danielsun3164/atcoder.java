@@ -5,15 +5,13 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
+			int n = scanner.nextInt(), a = scanner.nextInt(), b = scanner.nextInt();
 			int[] h = new int[n];
 			int max = IntStream.range(0, n).map(i -> h[i] = scanner.nextInt()).max().getAsInt();
 			int high = (max + b - 1) / b, low = 0;

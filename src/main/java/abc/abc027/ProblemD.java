@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 public class ProblemD {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] s = scanner.nextLine().toCharArray();
+			char[] s = scanner.next().toCharArray();
 			// '-'と'+'の個数
 			int minus = 0, plus = 0;
 			// (自分より右の'+'の個数)-(自分より右の'-'の個数)の一覧

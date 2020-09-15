@@ -11,9 +11,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int r = scanner.nextInt();
-			int c = scanner.nextInt();
-			int k = scanner.nextInt();
+			int r = scanner.nextInt(), c = scanner.nextInt(), k = scanner.nextInt();
 			// 毎行の飴の数
 			int[] rowCounts = new int[r];
 			Arrays.fill(rowCounts, 0);

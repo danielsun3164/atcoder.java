@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
@@ -14,11 +14,9 @@ public class ProblemD {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int h = scanner.nextInt(), w = scanner.nextInt();
 			int n = scanner.nextInt();
-			int[] a = new int[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextInt());
+			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			int[][] result = new int[h][w];
-			int color = 1;
-			int currentX = 0, currentY = 0;
+			int color = 1, currentX = 0, currentY = 0;
 			for (int ai : a) {
 				while (currentY + ai >= w) {
 					// 改行が発生する

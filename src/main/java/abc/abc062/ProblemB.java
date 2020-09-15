@@ -6,14 +6,13 @@ import java.util.stream.IntStream;
 
 public class ProblemB {
 
+	/** 囲む文字 */
 	private static final char BORDER = '#';
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int h = scanner.nextInt();
-			int w = scanner.nextInt();
-			String[] a = new String[h];
-			IntStream.range(0, h).forEach(i -> a[i] = scanner.next());
+			int h = scanner.nextInt(), w = scanner.nextInt();
+			String[] a = IntStream.range(0, h).mapToObj(i -> scanner.next()).toArray(String[]::new);
 			char[] border = new char[w + 2];
 			Arrays.fill(border, BORDER);
 			System.out.println(border);

@@ -11,15 +11,11 @@ public class ProblemB {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int w = scanner.nextInt();
-			int h = scanner.nextInt();
+			int w = scanner.nextInt(), h = scanner.nextInt(), n = scanner.nextInt();
 			int[][] cells = new int[w][h];
 			IntStream.range(0, w).forEach(i -> Arrays.fill(cells[i], WHITE));
-			int n = scanner.nextInt();
 			IntStream.range(0, n).forEach(i -> {
-				int x = scanner.nextInt() - 1;
-				int y = scanner.nextInt() - 1;
-				int a = scanner.nextInt();
+				int x = scanner.nextInt() - 1, y = scanner.nextInt() - 1, a = scanner.nextInt();
 				switch (a) {
 				case 1:
 					IntStream.rangeClosed(0, x).forEach(j -> Arrays.fill(cells[j], BLACK));

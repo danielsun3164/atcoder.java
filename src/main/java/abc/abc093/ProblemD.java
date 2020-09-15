@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
- * 解説どおりに作成したソースコード
+ * 解説通りに作成したソースコード
  */
 public class ProblemD {
 
@@ -17,7 +17,7 @@ public class ProblemD {
 	}
 
 	/**
-	 * 順位が高橋より低い最大の人数を計算する （解説どおりに実装）
+	 * 順位が高橋より低い最大の人数を計算する （解説通りに実装）
 	 * 
 	 * @param a 高橋の1回目の順位
 	 * @param b 高橋の2回目の順位

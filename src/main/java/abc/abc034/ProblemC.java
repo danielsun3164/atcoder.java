@@ -11,8 +11,7 @@ public class ProblemC {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int w = scanner.nextInt();
-			int h = scanner.nextInt();
+			int w = scanner.nextInt(), h = scanner.nextInt();
 			System.out.println(factorialMod(w + h - 2) * powMod(factorialMod(h - 1), MOD - 2) % MOD
 					* powMod(factorialMod(w - 1), MOD - 2) % MOD);
 		}

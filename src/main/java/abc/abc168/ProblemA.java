@@ -23,6 +23,7 @@ public class ProblemA {
 				break;
 			default:
 				System.out.println("bon");
+				break;
 			}
 		}
 	}
