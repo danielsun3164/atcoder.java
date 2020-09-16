@@ -6,6 +6,7 @@ import practice.TestBase;
 
 class ProblemATest extends TestBase {
 
+	/** 誤差 */
 	private static final double TOLERANCE = 0.001d;
 
 	@Test
