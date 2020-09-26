@@ -1,8 +1,8 @@
 package other.joi2006ho;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -30,25 +30,28 @@ public class ProblemE {
 			IntStream.range(0, 2).forEach(i -> Arrays.fill(dp[i], 0));
 			// 現在処理している長方形のindex
 			int count = 0;
-			// 現在の処理対象の長方形一覧（y2でソートする）
-			Queue<Region> queue = new PriorityQueue<>((a, b) -> Integer.compare(a.y2, b.y2));
+			// 現在の処理対象の長方形一覧
+			List<Region> list = new ArrayList<>();
 			// 面積と周の長さ
 			long area = 0L, perimeter = 0L;
 			// 現在処理している行
 			for (int currentLine = yMin; currentLine <= yMax; currentLine++) {
 				// 現在処理の行のデータをクリア
 				Arrays.fill(dp[currentLine & 1], 0);
-				// すでに一番上の行を通過した場合、現在の処理対象を削除
-				while ((!queue.isEmpty()) && (queue.peek().y2 == currentLine)) {
-					queue.poll();
-				}
 				// 現在の行から処理対象となる長方形を追加
 				while ((count < n) && (regions[count].y1 == currentLine)) {
-					queue.add(regions[count++]);
+					list.add(regions[count++]);
 				}
-				for (Region region : queue) {
-					dp[currentLine & 1][region.x1 - xMin]++;
-					dp[currentLine & 1][region.x2 - xMin]--;
+				for (int j = 0; j < list.size(); j++) {
+					Region region = list.get(j);
+					// すでに通過した長方形を一覧から削除
+					if (region.y2 == currentLine) {
+						list.remove(j);
+						j--;
+					} else {
+						dp[currentLine & 1][region.x1 - xMin]++;
+						dp[currentLine & 1][region.x2 - xMin]--;
+					}
 				}
 				// imos法で計算
 				for (int j = 1; j < dp[currentLine & 1].length; j++) {
