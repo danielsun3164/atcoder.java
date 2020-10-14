@@ -2,7 +2,7 @@ package other.joi2006yo;
 
 import org.junit.jupiter.api.Test;
 
-import practice.TestBase;
+import testbase.TestBase;
 
 class ProblemBTest extends TestBase {
 

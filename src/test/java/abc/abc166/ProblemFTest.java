@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import practice.TestBase;
+import testbase.TestBase;
 
 class ProblemFTest extends TestBase {
 

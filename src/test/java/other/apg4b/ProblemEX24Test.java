@@ -2,7 +2,7 @@ package other.apg4b;
 
 import org.junit.jupiter.api.Test;
 
-import practice.TestBase;
+import testbase.TestBase;
 
 class ProblemEX24Test extends TestBase {
 
