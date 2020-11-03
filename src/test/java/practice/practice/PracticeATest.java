@@ -2,6 +2,8 @@ package practice;
 
 import org.junit.jupiter.api.Test;
 
+import testbase.TestBase;
+
 class PracticeATest extends TestBase {
 
 	@Test

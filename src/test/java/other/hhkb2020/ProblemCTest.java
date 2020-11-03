@@ -2,7 +2,7 @@ package other.hhkb2020;
 
 import org.junit.jupiter.api.Test;
 
-import practice.TestBase;
+import testbase.TestBase;
 
 class ProblemCTest extends TestBase {
 
