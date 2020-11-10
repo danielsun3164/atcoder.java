@@ -1,4 +1,4 @@
-package other.past201912;
+package other.past201912open;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,10 +1,10 @@
-package other.past201912;
+package other.past201912open;
 
 import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
 
-class ProblemK別回答Test extends TestBase {
+class ProblemKTest extends TestBase {
 
 	@Test
 	void case1() {
