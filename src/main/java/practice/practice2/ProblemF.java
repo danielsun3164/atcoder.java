@@ -242,8 +242,9 @@ public class ProblemF {
 	 */
 	static long[] invGcd(long a, long b) {
 		a = safeMod(a, b);
-		if (a == 0)
+		if (a == 0) {
 			return new long[] { b, 0 };
+		}
 
 		// Contracts:
 		// [1] s - m0 * a = 0 (mod b)
