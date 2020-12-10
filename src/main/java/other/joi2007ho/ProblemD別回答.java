@@ -27,6 +27,7 @@ public class ProblemD別回答 {
 			int[][] dp = new int[n][];
 			IntStream.range(0, n).forEach(i -> dp[i] = new int[lCount[i]]);
 			IntStream.range(0, m).forEach(i -> dp[l[i]][--lCount[l[i]]] = w[i]);
+			IntStream.range(0, n).forEach(i -> Arrays.sort(dp[i]));
 			boolean[] used = new boolean[n];
 			Arrays.fill(used, false);
 			int[] result = new int[n];
@@ -36,14 +37,7 @@ public class ProblemD別回答 {
 				System.out.println(1);
 			} else {
 				for (int i = 0; i < n - 1; i++) {
-					boolean found = false;
-					for (int wj : dp[result[i + 1]]) {
-						if (wj == result[i]) {
-							found = true;
-							break;
-						}
-					}
-					if (!found) {
+					if (Arrays.binarySearch(dp[result[i + 1]], result[i]) < 0) {
 						System.out.println(1);
 						return;
 					}
