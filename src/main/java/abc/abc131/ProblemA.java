@@ -6,9 +6,9 @@ public class ProblemA {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] array = scanner.nextLine().toCharArray();
+			char[] s = scanner.nextLine().toCharArray();
 			char prev = ' ';
-			for (char c : array) {
+			for (char c : s) {
 				if (prev == c) {
 					System.out.println("Bad");
 					return;

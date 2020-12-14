@@ -47,6 +47,13 @@ public class ProblemC {
 			return r;
 		}
 
+		/**
+		 * x^-1 mod m を計算する
+		 * 
+		 * @param x
+		 * @param m
+		 * @return x^-1 mod m
+		 */
 		@SuppressWarnings("unused")
 		static long invMod(long x, long m) {
 			if (!(1 <= m)) {
