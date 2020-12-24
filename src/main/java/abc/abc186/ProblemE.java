@@ -19,12 +19,12 @@ public class ProblemE {
 	}
 
 	/**
-	 * a x + b ≡ 0 mod m となるxを計算する
+	 * a x ≡ (m-b) mod m となるxを計算する
 	 * 
 	 * @param a
 	 * @param b
 	 * @param m
-	 * @return a x + b = 0 mod m となるx
+	 * @return a x ≡ (m-b) mod m となるx
 	 */
 	private static long getResult(long a, long b, long m) {
 		long gcd = gcd(a, gcd(b, m));
@@ -37,7 +37,7 @@ public class ProblemE {
 		if (1L != invGcd[0]) {
 			return -1L;
 		}
-		return (m - invGcd[1] * b % m);
+		return (invGcd[1] * (m - b) % m);
 	}
 
 	/**
