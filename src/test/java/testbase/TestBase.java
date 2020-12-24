@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -126,6 +128,27 @@ public abstract class TestBase {
 		in.input(input);
 		execute();
 		assertResultIs(expected);
+	}
+
+	/**
+	 * テストを実施する
+	 * 
+	 * @param input    入力文字列を保存するファイル
+	 * @param expected 予想される実行結果
+	 */
+	protected void check(File input, String expected) {
+		try (FileReader fr = new FileReader(input)) {
+			char[] buffer = new char[4096];
+			int length = 0;
+			while (-1 != (length = fr.read(buffer))) {
+				in.buffer.append(buffer, 0, length);
+			}
+			in.buffer.append(LF);
+			execute();
+			assertResultIs(expected);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
