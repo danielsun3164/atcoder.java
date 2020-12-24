@@ -9,7 +9,7 @@ public class ProblemA {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			char[] s = scanner.nextLine().toCharArray();
+			char[] s = scanner.next().toCharArray();
 			Map<Character, Integer> map = new HashMap<>();
 			IntStream.range(0, s.length).forEach(i -> map.put(s[i], map.getOrDefault(s[i], 0) + 1));
 			if (2 == map.size()) {
