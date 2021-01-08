@@ -1,58 +1,45 @@
 package other.exawizards2019;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /**
- * 計算結果が実際のサンプル結果と異なる
+ * 解説通りに実装したソースコード
+ * 
+ * https://atcoder.jp/contests/exawizards2019/submissions/18389212 にも参照
  */
 public class ProblemC {
 
+	/** 左へ移動する文字 */
+	private static final char LEFT = 'L';
+	/** 右へ移動する文字 */
+	private static final char RIGHT = 'R';
+
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			int n = scanner.nextInt();
-			int q = scanner.nextInt();
-			scanner.nextLine();
-			String s = scanner.nextLine();
-			Map<String, List<Integer>> map = new HashMap<>();
-			for (int i = 0; i < s.length(); i++) {
-				String substring = String.valueOf(s.charAt(i));
-				List<Integer> list = map.get(substring);
-				if (null == list) {
-					list = new ArrayList<>();
-					map.put(substring, list);
+			int n = scanner.nextInt(), q = scanner.nextInt();
+			char[] s = scanner.next().toCharArray();
+			char[] t = new char[q], d = new char[q];
+			IntStream.range(0, q).forEach(i -> {
+				t[i] = scanner.next().charAt(0);
+				d[i] = scanner.next().charAt(0);
+			});
+			int l = 0, r = n - 1;
+			for (int i = q - 1; i >= 0; i--) {
+				if ((l < n) && (s[l] == t[i]) && (LEFT == d[i])) {
+					l++;
 				}
-				list.add(i + 1);
-			}
-			int result = n;
-			for (int i = 0; i < q; i++) {
-				String t = scanner.next();
-				String d = scanner.next();
-				scanner.nextLine();
-				List<Integer> list = map.get(t);
-				if (null != list) {
-					int difference = 0;
-					if ("L".equals(d)) {
-						difference = -1;
-					} else {
-						difference = 1;
-					}
-					for (int j = 0; i < list.size(); i++) {
-						int number = list.get(j);
-						if ((number >= 1) && (number <= n)) {
-							int newNumber = number + difference;
-							list.set(i, newNumber);
-							if ((newNumber > n) || (newNumber < 1)) {
-								result--;
-							}
-						}
-					}
+				if ((l > 0) && (s[l - 1] == t[i]) && (RIGHT == d[i])) {
+					l--;
+				}
+				if ((r >= 0) && (s[r] == t[i]) && (RIGHT == d[i])) {
+					r--;
+				}
+				if ((r < n - 1) && (s[r + 1] == t[i]) && (LEFT == d[i])) {
+					r++;
 				}
 			}
-			System.out.println(result);
+			System.out.println(Math.max(r - l + 1, 0));
 		}
 	}
 }
