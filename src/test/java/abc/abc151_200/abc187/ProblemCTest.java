@@ -8,7 +8,7 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case1() {
-		check("6\n" + "a\n" + "!a\n" + "b\n" + "!c\n" + "d\n" + "!d", "a");
+		checkResultIn("6\n" + "a\n" + "!a\n" + "b\n" + "!c\n" + "d\n" + "!d", "a", "d");
 	}
 
 	@Test
