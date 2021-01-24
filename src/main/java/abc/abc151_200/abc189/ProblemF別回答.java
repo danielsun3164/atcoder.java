@@ -1,9 +1,8 @@
 package abc.abc151_200.abc189;
 
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -21,7 +20,8 @@ public class ProblemF別回答 {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt(), m = scanner.nextInt(), k = scanner.nextInt();
-			Set<Integer> a = IntStream.range(0, k).map(i -> scanner.nextInt()).boxed().collect(Collectors.toSet());
+			BitSet bitSet = new BitSet(n);
+			IntStream.range(0, k).forEach(i -> bitSet.set(scanner.nextInt(), true));
 			double[] h = new double[n + m];
 			Arrays.fill(h, 0.0d);
 			// rightは回答
@@ -30,7 +30,7 @@ public class ProblemF別回答 {
 				// sumはh[i+1]+...+h[i+m]
 				double sum = 0.0d, med = (left + right) / 2.0;
 				for (int i = n - 1; i >= 0; i--) {
-					if (a.contains(i)) {
+					if (bitSet.get(i)) {
 						h[i] = med;
 					} else {
 						h[i] = sum / m + 1.0d;
@@ -43,7 +43,7 @@ public class ProblemF別回答 {
 					right = med;
 				}
 			}
-			System.out.println(((INF - right) < TOLERANCE) ? String.valueOf(-1) : String.valueOf(right));
+			System.out.println((INF == right) ? String.valueOf(-1) : String.valueOf(right));
 		}
 	}
 }

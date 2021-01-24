@@ -1,9 +1,8 @@
 package abc.abc151_200.abc189;
 
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -16,14 +15,15 @@ public class ProblemF {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt(), m = scanner.nextInt(), k = scanner.nextInt();
-			Set<Integer> a = IntStream.range(0, k).map(i -> scanner.nextInt()).boxed().collect(Collectors.toSet());
+			BitSet bitSet = new BitSet(n);
+			IntStream.range(0, k).forEach(i -> bitSet.set(scanner.nextInt(), true));
 			// g[i][0]はXの係数、g[i][1]は数字そのまま
 			double[][] g = new double[n + m][2];
 			IntStream.range(0, n + m).forEach(i -> Arrays.fill(g[i], 0.0d));
 			// sum[k]はg[i+1][k]+...+h[i+m][k]
 			double[] sum = new double[] { 0.0d, 0.0d };
 			for (int i = n - 1; i >= 0; i--) {
-				if (a.contains(i)) {
+				if (bitSet.get(i)) {
 					g[i][0] = 1.0d;
 					g[i][1] = 0.0d;
 				} else {
