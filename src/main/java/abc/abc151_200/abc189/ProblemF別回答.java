@@ -15,8 +15,8 @@ public class ProblemF別回答 {
 
 	/** 二分探索の最大値 */
 	private static final double INF = 8E10d;
-	/** 誤差 */ // 1E-4dの場合ではWAになる
-	private static final double TOLERANCE = 1E-5d;
+	/** 誤差 */
+	private static final double TOLERANCE = 1E-3d;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
@@ -24,7 +24,7 @@ public class ProblemF別回答 {
 			Set<Integer> a = IntStream.range(0, k).map(i -> scanner.nextInt()).boxed().collect(Collectors.toSet());
 			double[] h = new double[n + m];
 			Arrays.fill(h, 0.0d);
-			// leftは回答
+			// rightは回答
 			double left = 0.0d, right = INF;
 			while (right - left >= TOLERANCE) {
 				// sumはh[i+1]+...+h[i+m]
@@ -43,7 +43,7 @@ public class ProblemF別回答 {
 					right = med;
 				}
 			}
-			System.out.println(((INF - left) < TOLERANCE) ? String.valueOf(-1) : String.valueOf(right));
+			System.out.println(((INF - right) < TOLERANCE) ? String.valueOf(-1) : String.valueOf(right));
 		}
 	}
 }
