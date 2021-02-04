@@ -19,24 +19,24 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(2, 3, new int[][] { { 1, 2, 3 }, { 0, 1, 1 } }, 6L);
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		check(3, 2, new int[][] { { 1, 0 }, { 2, 1 }, { 1, 0 } }, 5L);
 	}
 
 	@Test
-	void case3() throws IOException {
+	void case3() {
 		check(1, 5, new int[][] { { 9, 9, 9, 9, 9 } }, 4L);
 	}
 
-	private void check(int h, int w, int[][] a, long expected) throws IOException {
+	private void check(int h, int w, int[][] a, long expected) {
 		in.input(h + " " + w);
 		in.input(toString(a));
-		ProblemD.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt();
@@ -61,6 +61,8 @@ class ProblemDTest extends TestBase {
 			});
 			assertEquals(expected, IntStream.range(0, h)
 					.mapToLong(i -> IntStream.range(0, w).filter(j -> 0 == (a[i][j] & 1)).count()).sum());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

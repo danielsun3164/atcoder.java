@@ -18,23 +18,23 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(4);
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		check(5);
 	}
 
 	@Test
-	void case3() throws IOException {
+	void case3() {
 		check(1000000);
 	}
 
-	private void check(int l) throws IOException {
+	private void check(int l) {
 		in.input(l);
-		ProblemD.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt(), m = scanner.nextInt();
@@ -55,6 +55,8 @@ class ProblemDTest extends TestBase {
 			int[] expected = new int[l];
 			Arrays.fill(expected, 1);
 			assertArrayEquals(expected, counts);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

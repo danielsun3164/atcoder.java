@@ -17,39 +17,40 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void case1() throws Exception {
+	void case1() {
 		check(0L);
 	}
 
 	@Test
-	void case2() throws Exception {
+	void case2() {
 		check(1L);
 	}
 
 	@Test
-	void case3() throws Exception {
+	void case3() {
 		check(2L);
 	}
 
 	@Test
-	void case4() throws Exception {
+	void case4() {
 		check(3L);
 	}
 
 	@Test
-	void case5() throws Exception {
+	void case5() {
 		check(12345L);
 	}
 
-	private void check(long value) throws IOException {
+	private void check(long value) {
 		in.input(value);
-		ProblemD.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt();
-			long[] a = new long[n];
-			IntStream.range(0, n).forEach(i -> a[i] = scanner.nextLong());
+			long[] a = IntStream.range(0, n).mapToLong(i -> scanner.nextLong()).toArray();
 			assertEquals(value, calc(a));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

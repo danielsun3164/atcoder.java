@@ -16,7 +16,7 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("356", "migoro");
 		inputMap.put("461", "yoroi");
@@ -26,7 +26,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("12", "aaa");
 		inputMap.put("21", "aaa");
@@ -36,7 +36,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void case3() throws IOException {
+	void case3() {
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("12211", "abcaaaaabcabc");
 		inputMap.put("2121", "aaabcaaabc");
@@ -45,20 +45,22 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void case4() throws IOException {
+	void case4() {
 		Map<String, String> inputMap = new HashMap<>();
 		inputMap.put("12", "abcab");
 		check(2, inputMap);
 	}
 
-	private void check(int k, Map<String, String> inputMap) throws IOException {
+	private void check(int k, Map<String, String> inputMap) {
 		in.input(k + " " + inputMap.size());
 		inputMap.entrySet().forEach(entry -> in.input(entry.getKey() + " " + entry.getValue()));
-		ProblemD.main(null);
+		execute();
 		Map<String, String> outputMap = new HashMap<>();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			IntStream.rangeClosed(1, k).forEach(i -> outputMap.put(String.valueOf(i), scanner.next()));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		inputMap.entrySet().forEach(entry -> {
 			StringBuilder sb = new StringBuilder();

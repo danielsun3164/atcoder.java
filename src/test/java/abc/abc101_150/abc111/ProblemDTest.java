@@ -19,7 +19,7 @@ class ProblemDTest extends TestBase {
 	private static final Pattern PATTERN = Pattern.compile("^[LRDU]+");
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(3, new int[] { -1, 0, 2 }, new int[] { 0, 3, -1 });
 	}
 
@@ -29,25 +29,26 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void case3() throws IOException {
+	void case3() {
 		check(2, new int[] { 1, 1 }, new int[] { 1, 1 });
 	}
 
-	private void check(int n, int[] x, int[] y) throws IOException {
+	private void check(int n, int[] x, int[] y) {
 		in.input(n);
 		IntStream.range(0, n).forEach(i -> in.input(x[i] + " " + y[i]));
-		ProblemD.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int m = scanner.nextInt();
-			int[] d = new int[m];
-			IntStream.range(0, m).forEach(i -> d[i] = scanner.nextInt());
+			int[] d = IntStream.range(0, m).map(i -> scanner.nextInt()).toArray();
 			IntStream.range(0, n).forEach(i -> {
 				String w = scanner.next();
 				assertEquals(m, w.length());
 				assertTrue(PATTERN.matcher(w).matches(), "w is " + w);
 				check(m, d, w.toCharArray(), x[i], y[i]);
 			});
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
