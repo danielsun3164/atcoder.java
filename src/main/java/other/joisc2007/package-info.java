@@ -4,7 +4,5 @@
  * https://atcoder.jp/contests/joisc2007
  * 
  * 問題F salt - SALT TREE XV はC++しか対応しないため、回答なし
- * 
- * 問題L以降 packing - 半導体工場 (Packing) は既存の回答に正解がないため、回答なし
  */
 package other.joisc2007;
