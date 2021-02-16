@@ -187,7 +187,6 @@ public class ProblemF {
 		 * @param a
 		 * @return aの所属グループのメンバー数
 		 */
-		@SuppressWarnings("unused")
 		int size(int a) {
 			if (!((0 <= a) && (a < n))) {
 				throw new IllegalArgumentException("a is " + a);

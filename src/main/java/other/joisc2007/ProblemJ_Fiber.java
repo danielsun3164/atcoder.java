@@ -29,7 +29,6 @@ public class ProblemJ_Fiber {
 		/** 親のidかグループのサイズ */
 		final int[] parentOrSize;
 		/** グループの数 */
-		@SuppressWarnings("unused")
 		int groupNum;
 
 		/**
