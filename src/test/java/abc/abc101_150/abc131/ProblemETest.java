@@ -1,6 +1,7 @@
 package abc.abc101_150.abc131;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -50,6 +51,7 @@ class ProblemETest extends TestBase {
 					.map(i -> (int) IntStream.range(i + 1, n).filter(j -> INF == d[i][j]).count()).sum());
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 

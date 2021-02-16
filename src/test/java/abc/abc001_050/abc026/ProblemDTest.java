@@ -1,6 +1,7 @@
 package abc.abc001_050.abc026;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -32,6 +33,7 @@ class ProblemDTest extends TestBase {
 					"value is " + (a * t + b * Math.sin(c * t * Math.PI)));
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package abc.abc001_050.abc006;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -27,6 +28,7 @@ class ProblemCTest extends TestBase {
 			assertEquals(m, a1 * 2 + a2 * 3 + a3 * 4);
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 

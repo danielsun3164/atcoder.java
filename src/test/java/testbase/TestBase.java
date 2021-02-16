@@ -2,6 +2,7 @@ package testbase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -116,6 +117,7 @@ public abstract class TestBase {
 		} catch (ClassNotFoundException | SecurityException | IllegalArgumentException | NoSuchMethodException
 				| IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 
@@ -149,6 +151,7 @@ public abstract class TestBase {
 			assertResultIs(expected);
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 
@@ -174,6 +177,7 @@ public abstract class TestBase {
 			assertEquals(expectedSb.toString(), out.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 

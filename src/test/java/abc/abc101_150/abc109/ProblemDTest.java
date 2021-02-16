@@ -3,6 +3,7 @@ package abc.abc101_150.abc109;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -63,6 +64,7 @@ class ProblemDTest extends TestBase {
 					.mapToLong(i -> IntStream.range(0, w).filter(j -> 0 == (a[i][j] & 1)).count()).sum());
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 

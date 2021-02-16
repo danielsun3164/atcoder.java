@@ -1,6 +1,7 @@
 package abc.abc001_050.abc019;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -27,6 +28,7 @@ class ProblemDTest extends TestBase {
 			assertEquals(14, myPs.result);
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 

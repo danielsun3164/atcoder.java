@@ -1,6 +1,7 @@
 package abc.abc001_050.abc031;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -61,6 +62,7 @@ class ProblemDTest extends TestBase {
 			IntStream.rangeClosed(1, k).forEach(i -> outputMap.put(String.valueOf(i), scanner.next()));
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 		inputMap.entrySet().forEach(entry -> {
 			StringBuilder sb = new StringBuilder();

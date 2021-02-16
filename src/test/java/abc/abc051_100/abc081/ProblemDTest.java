@@ -1,6 +1,7 @@
 package abc.abc051_100.abc081;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -44,6 +45,7 @@ class ProblemDTest extends TestBase {
 			assertTrue(ProblemD.isIncreasing(a));
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 }

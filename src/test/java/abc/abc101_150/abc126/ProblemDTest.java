@@ -1,6 +1,7 @@
 package abc.abc101_150.abc126;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -48,6 +49,7 @@ class ProblemDTest extends TestBase {
 					.forEach(j -> assertEquals(0, 1 & distances[blacks[i]][blacks[j]])));
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 }
