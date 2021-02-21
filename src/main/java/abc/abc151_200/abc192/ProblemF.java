@@ -13,6 +13,7 @@ public class ProblemF {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			long x = scanner.nextLong();
+			// ソートしないとWAになるケースもある
 			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).sorted().toArray();
 			System.out.println(IntStream.rangeClosed(1, n).mapToLong(i -> getResult(n, x, a, i)).filter(ri -> ri != -1L)
 					.min().getAsLong());
