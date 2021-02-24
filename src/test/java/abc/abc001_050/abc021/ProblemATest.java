@@ -1,6 +1,7 @@
 package abc.abc001_050.abc021;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -14,23 +15,26 @@ import testbase.TestBase;
 class ProblemATest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(5);
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		check(1);
 	}
 
-	private void check(int n) throws IOException {
+	private void check(int n) {
 		in.input(n);
-		ProblemA.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
-			int number = scanner.nextInt();
-			int sum = IntStream.range(0, number).map(i -> scanner.nextInt()).sum();
+			int k = scanner.nextInt();
+			int sum = IntStream.range(0, k).map(i -> scanner.nextInt()).sum();
 			assertEquals(n, sum);
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 }

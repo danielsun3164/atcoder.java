@@ -1,6 +1,7 @@
 package abc.abc001_050.abc019;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -18,13 +19,16 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		try (PipedOutputStream pos = new PipedOutputStream();
 				ProblemDTestPrintStream myPs = new ProblemDTestPrintStream(pos)) {
 			System.setOut(myPs);
-			in.input("5");
-			ProblemD.main(null);
+			in.input(5);
+			execute();
 			assertEquals(14, myPs.result);
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 

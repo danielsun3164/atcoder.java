@@ -1,6 +1,7 @@
 package abc.abc051_100.abc096;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -35,33 +36,35 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(5);
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		check(6);
 	}
 
 	@Test
-	void case3() throws IOException {
+	void case3() {
 		check(8);
 	}
 
-	private void check(int n) throws IOException {
+	private void check(int n) {
 		in.input(n);
-		ProblemD.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
-			int[] answers = new int[n];
-			IntStream.range(0, n).forEach(i -> answers[i] = scanner.nextInt());
+			int[] answers = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			IntStream.range(0x1F, 1 << n).filter(i -> Integer.bitCount(i) == ProblemD.N)
 					.map(i -> IntStream.range(0, n).filter(j -> (i & (1 << j)) > 0).map(j -> answers[j]).sum())
 					.forEach(i -> {
 						assertEquals(0, i % 5);
 						assertEquals(false, primeSet.contains(i));
 					});
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 }

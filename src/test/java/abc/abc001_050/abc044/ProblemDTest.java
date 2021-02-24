@@ -1,7 +1,5 @@
 package abc.abc001_050.abc044;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
@@ -24,12 +22,12 @@ class ProblemDTest extends TestBase {
 	}
 
 	@Test
-	void case4() throws IOException {
+	void case4() {
 		check("31415926535\n" + "1", "31415926535");
 	}
 
 	@Test
-	void case5() throws IOException {
+	void case5() {
 		check("1\n" + "31415926535", "-1");
 	}
 }

@@ -2,7 +2,9 @@ package testbase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
@@ -115,6 +117,7 @@ public abstract class TestBase {
 		} catch (ClassNotFoundException | SecurityException | IllegalArgumentException | NoSuchMethodException
 				| IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 
@@ -138,7 +141,7 @@ public abstract class TestBase {
 	 */
 	protected void check(File input, String expected) {
 		try (FileReader fr = new FileReader(input)) {
-			char[] buffer = new char[4096];
+			char[] buffer = new char[8192];
 			int length = 0;
 			while (-1 != (length = fr.read(buffer))) {
 				in.buffer.append(buffer, 0, length);
@@ -148,6 +151,33 @@ public abstract class TestBase {
 			assertResultIs(expected);
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	/**
+	 * テストを実施する
+	 * 
+	 * @param input    入力文字列を保存するファイル
+	 * @param expected 予想される実行結果を保存するファイル
+	 */
+	protected void check(File input, File expected) {
+		try (FileReader inFr = new FileReader(input); FileReader expectedFr = new FileReader(expected)) {
+			char[] buffer = new char[8192];
+			int length = 0;
+			while (-1 != (length = inFr.read(buffer))) {
+				in.buffer.append(buffer, 0, length);
+			}
+			in.buffer.append(LF);
+			StringBuilder expectedSb = new StringBuilder();
+			while (-1 != (length = expectedFr.read(buffer))) {
+				expectedSb.append(buffer, 0, length);
+			}
+			execute();
+			assertEquals(expectedSb.toString(), out.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 
@@ -218,12 +248,15 @@ public abstract class TestBase {
 
 		private StringBuilder buffer = new StringBuilder();
 
+		private ByteArrayInputStream inputStream = null;
+
 		/**
 		 * 文字列を入力する。
 		 * 
 		 * @param str 入力文字列
 		 */
 		public void input(String str) {
+			clearIfInputStreamExists();
 			buffer.append(str).append(LF);
 		}
 
@@ -233,17 +266,32 @@ public abstract class TestBase {
 		 * @param num 入力数字
 		 */
 		public void input(Number num) {
+			clearIfInputStreamExists();
 			buffer.append(num).append(LF);
 		}
 
 		@Override
 		public int read() throws IOException {
-			if (buffer.length() == 0) {
-				return -1;
+			if (null == inputStream) {
+				initInputStream();
 			}
-			int result = buffer.charAt(0);
-			buffer.deleteCharAt(0);
-			return result;
+			return inputStream.read();
+		}
+
+		/**
+		 * inputStreamを作成する
+		 */
+		private void initInputStream() {
+			inputStream = new ByteArrayInputStream(buffer.toString().getBytes());
+		}
+
+		/**
+		 * inputStreamが存在する場合、バッファーをクリアする
+		 */
+		private void clearIfInputStreamExists() {
+			if (null != inputStream) {
+				clear();
+			}
 		}
 
 		/**
@@ -251,6 +299,28 @@ public abstract class TestBase {
 		 */
 		public void clear() {
 			buffer.setLength(0);
+			closeInputStream();
+		}
+
+		/**
+		 * inputStreamをクローズする
+		 */
+		private void closeInputStream() {
+			if (null != inputStream) {
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				inputStream = null;
+			}
+		}
+
+		@Override
+		public void close() throws IOException {
+			if (null != inputStream) {
+				inputStream.close();
+			}
 		}
 	}
 }

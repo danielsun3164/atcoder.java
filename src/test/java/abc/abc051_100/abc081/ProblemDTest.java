@@ -1,6 +1,7 @@
 package abc.abc051_100.abc081;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -16,12 +17,12 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(new int[] { -2, 5, -1 });
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		check(new int[] { -1, -3 });
 	}
 
@@ -30,7 +31,7 @@ class ProblemDTest extends TestBase {
 		check("5\n" + "0 0 0 0 0", "0");
 	}
 
-	private void check(int[] a) throws IOException {
+	private void check(int[] a) {
 		in.input(a.length);
 		in.input(Arrays.stream(a).mapToObj(i -> String.valueOf(i)).collect(Collectors.joining(" ")));
 		ProblemD.main(null);
@@ -42,6 +43,9 @@ class ProblemDTest extends TestBase {
 				a[scanner.nextInt() - 1] += a[x];
 			});
 			assertTrue(ProblemD.isIncreasing(a));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 }

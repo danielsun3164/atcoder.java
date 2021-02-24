@@ -1,6 +1,7 @@
 package abc.abc051_100.abc092;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -18,27 +19,27 @@ class ProblemDTest extends TestBase {
 	private static final char WHITE = '.';
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(2, 3);
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		check(7, 8);
 	}
 
 	@Test
-	void case3() throws IOException {
+	void case3() {
 		check(1, 1);
 	}
 
 	@Test
-	void case4() throws IOException {
+	void case4() {
 		check(1, 500);
 	}
 
 	@Test
-	void case5() throws IOException {
+	void case5() {
 		check(500, 500);
 	}
 
@@ -47,11 +48,10 @@ class ProblemDTest extends TestBase {
 	 * 
 	 * @param a 白いコマの数
 	 * @param b 黒いコマの数
-	 * @throws IOException 例外
 	 */
-	private void check(int a, int b) throws IOException {
+	private void check(int a, int b) {
 		in.input(a + " " + b);
-		ProblemD.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int h = scanner.nextInt(), w = scanner.nextInt();
@@ -66,6 +66,9 @@ class ProblemDTest extends TestBase {
 					(int) IntStream.range(0, h)
 							.flatMap(i -> IntStream.range(0, w).filter(j -> s[i][j] != WHITE).map(j -> t[i][j]))
 							.distinct().count());
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 

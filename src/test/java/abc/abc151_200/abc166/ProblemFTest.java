@@ -16,33 +16,29 @@ import testbase.TestBase;
 class ProblemFTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(2, 1, 3, 0, new String[] { "AB", "AC" });
 	}
 
 	@Test
 	void case2() {
-		in.input("3 1 0 0\n" + "AB\n" + "BC\n" + "AB");
-		ProblemF.main(null);
-		assertResultIs("No");
+		check("3 1 0 0\n" + "AB\n" + "BC\n" + "AB", "No");
 	}
 
 	@Test
 	void case3() {
-		in.input("1 0 9 0\n" + "AC");
-		ProblemF.main(null);
-		assertResultIs("No");
+		check("1 0 9 0\n" + "AC", "No");
 	}
 
 	@Test
-	void case4() throws Exception {
+	void case4() {
 		check(8, 6, 9, 1, new String[] { "AC", "BC", "AB", "BC", "AC", "BC", "AB", "AB" });
 	}
 
-	private void check(int n, int a, int b, int c, String[] s) throws IOException {
+	private void check(int n, int a, int b, int c, String[] s) {
 		in.input(n + " " + a + " " + b + " " + c);
 		in.input(Arrays.stream(s).collect(Collectors.joining("\n")));
-		ProblemF.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			assertEquals("Yes", scanner.next());
@@ -77,6 +73,8 @@ class ProblemFTest extends TestBase {
 					break;
 				}
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

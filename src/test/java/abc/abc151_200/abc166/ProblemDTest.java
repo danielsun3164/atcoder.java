@@ -13,22 +13,24 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(33);
 	}
 
 	@Test
-	void case2() throws IOException {
+	void case2() {
 		check(1);
 	}
 
-	private void check(int x) throws IOException {
+	private void check(int x) {
 		in.input(x);
 		ProblemD.main(null);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			long a = scanner.nextLong(), b = scanner.nextLong();
 			assertEquals(x, a * a * a * a * a - b * b * b * b * b);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

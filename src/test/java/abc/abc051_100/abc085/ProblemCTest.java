@@ -1,6 +1,7 @@
 package abc.abc051_100.abc085;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import testbase.TestBase;
 class ProblemCTest extends TestBase {
 
 	@Test
-	void case1() throws IOException {
+	void case1() {
 		check(9, 45000);
 	}
 
@@ -23,7 +24,7 @@ class ProblemCTest extends TestBase {
 	}
 
 	@Test
-	void case3() throws IOException {
+	void case3() {
 		check(1000, 1234000);
 	}
 
@@ -32,16 +33,17 @@ class ProblemCTest extends TestBase {
 		check("2000 20000000", "2000 0 0");
 	}
 
-	private void check(int n, int y) throws IOException {
+	private void check(int n, int y) {
 		in.input(n + " " + y);
 		ProblemC.main(null);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
-			int c = scanner.nextInt();
+			int a = scanner.nextInt(), b = scanner.nextInt(), c = scanner.nextInt();
 			assertEquals(n, a + b + c);
 			assertEquals(y, a * 10000 + b * 5000 + c * 1000);
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 }
