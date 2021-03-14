@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ class ProblemFTest extends TestBase {
 
 	@Test
 	void case1() {
-		check("4 5\n" + "1 2\n" + "2 3\n" + "2 4\n" + "4 1\n" + "4 3", 3, new HashSet<>(Set.of(1, 2, 4)));
+		check("4 5\n" + "1 2\n" + "2 3\n" + "2 4\n" + "4 1\n" + "4 3", 3, Set.of(1, 2, 4));
 	}
 
 	@Test
@@ -30,7 +29,7 @@ class ProblemFTest extends TestBase {
 	@Test
 	void case3() {
 		check("6 9\n" + "1 2\n" + "2 3\n" + "3 4\n" + "4 5\n" + "5 6\n" + "5 1\n" + "5 2\n" + "6 1\n" + "6 2", 4,
-				new HashSet<>(Set.of(2, 3, 4, 5)));
+				Set.of(2, 3, 4, 5));
 	}
 
 	private void check(String input, int expectedK, Set<Integer> expectedVs) {
