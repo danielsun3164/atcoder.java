@@ -1,4 +1,4 @@
-# atcoder.answer
+# atcoder.java
 My answers to Atcoder problems written in Java.
 
 以下の点にご注意ください。
