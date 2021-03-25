@@ -10,8 +10,6 @@ public class ProblemC {
 	private static final long[] MINS = { 11L, 10_10L, 100100, 1000_1000L, 10000_10000L, 100000_100000L };
 	/** 条件を見なす数字の最大値の一覧 */
 	private static final long[] MAXS = { 99L, 99_99L, 999_999L, 9999_9999L, 99999_99999L, 999999_999999L };
-	/** それぞれ条件を見なす数字の数 */
-	private static final int[] RESULTS = { 9, 90, 900, 9000, 90000, 900000 };
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
@@ -20,11 +18,7 @@ public class ProblemC {
 				if (n < MINS[i]) {
 					break;
 				}
-				if (n > MAXS[i]) {
-					answer += RESULTS[i];
-				} else {
-					answer += (n - MINS[i]) / KEYS[i] + 1;
-				}
+				answer += (Math.min(n, MAXS[i]) - MINS[i]) / KEYS[i] + 1;
 			}
 			System.out.println(answer);
 		}
