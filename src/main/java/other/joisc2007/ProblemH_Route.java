@@ -41,15 +41,12 @@ public class ProblemH_Route {
 			que.addAll(childrens[0]);
 			while (!que.isEmpty()) {
 				Edge edge = que.poll();
-				int a2 = (x[edge.from] - x[edge.to]) * (x[edge.from] - x[edge.to])
-						+ (y[edge.from] - y[edge.to]) * (y[edge.from] - y[edge.to]);
+				int a2 = getEdge2(edge.from, edge.to, x, y);
 				dist[edge.to] = Math.min(dist[edge.to], edge.cost);
 				if (!visited[edge.from][edge.to]) {
 					for (Edge next : childrens[edge.to]) {
-						int b2 = (x[next.to] - x[edge.to]) * (x[next.to] - x[edge.to])
-								+ (y[next.to] - y[edge.to]) * (y[next.to] - y[edge.to]);
-						int c2 = (x[edge.from] - x[next.to]) * (x[edge.from] - x[next.to])
-								+ (y[edge.from] - y[next.to]) * (y[edge.from] - y[next.to]);
+						int b2 = getEdge2(next.to, edge.to, x, y);
+						int c2 = getEdge2(edge.from, next.to, x, y);
 						// 角度の条件は https://atcoder.jp/contests/joisc2007/submissions/18212565 に参考
 						if (a2 + b2 - c2 <= 0) {
 							dist[next.to] = Math.min(dist[next.to], edge.cost + next.cost);
@@ -61,6 +58,20 @@ public class ProblemH_Route {
 			}
 			System.out.println((INF == dist[1]) ? -1 : dist[1]);
 		}
+	}
+
+	/**
+	 * from、toの間の距離の2乗を取得する
+	 * 
+	 * @param from
+	 * @param to
+	 * @param x X座標一覧の配列
+	 * @param y X座標一覧の配列
+	 * @return from、toの間の距離の2乗
+	 */
+	private static int getEdge2(int from, int to, final int[] x, final int[] y) {
+		return (x[from] - x[to]) * (x[from] - x[to])
+				+ (y[from] - y[to]) * (y[from] - y[to]);
 	}
 
 	/**
