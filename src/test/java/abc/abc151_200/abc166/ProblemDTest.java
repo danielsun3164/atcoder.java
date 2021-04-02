@@ -1,6 +1,7 @@
 package abc.abc151_200.abc166;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,13 +25,14 @@ class ProblemDTest extends TestBase {
 
 	private void check(int x) {
 		in.input(x);
-		ProblemD.main(null);
+		execute();
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			long a = scanner.nextLong(), b = scanner.nextLong();
 			assertEquals(x, a * a * a * a * a - b * b * b * b * b);
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail(e);
 		}
 	}
 }
