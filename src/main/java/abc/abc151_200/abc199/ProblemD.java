@@ -73,14 +73,16 @@ public class ProblemD {
 			return 1L;
 		}
 		int u = ts.get(index);
-		boolean[] canUse = new boolean[N + 1];
-		IntStream.rangeClosed(1, N).forEach(i -> canUse[i] = true);
-		for (int v : edges[u]) {
-			canUse[color[v]] = false;
-		}
 		long answer = 0L;
 		for (int i = 1; i <= N; i++) {
-			if (canUse[i]) {
+			boolean canUse = true;
+			for (int v : edges[u]) {
+				if (i == color[v]) {
+					canUse = false;
+					break;
+				}
+			}
+			if (canUse) {
 				color[u] = i;
 				answer += calc(edges, color, ts, index + 1);
 			}
