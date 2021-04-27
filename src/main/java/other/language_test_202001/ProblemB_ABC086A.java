@@ -1,8 +1,8 @@
-package abc.abc051_100.abc086;
+package other.language_test_202001;
 
 import java.util.Scanner;
 
-public class ProblemA {
+public class ProblemB_ABC086A {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

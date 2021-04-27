@@ -1,4 +1,4 @@
-package abc.abc051_100.abc081;
+package abc.abc101_150.abc145;
 
 import java.util.Scanner;
 
@@ -6,8 +6,8 @@ public class ProblemA {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
-			String s = scanner.next();
-			System.out.println(s.chars().filter(x -> '1' == x).count());
+			int r = scanner.nextInt();
+			System.out.println(r * r);
 		}
 	}
 }
