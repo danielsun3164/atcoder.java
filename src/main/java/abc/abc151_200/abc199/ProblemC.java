@@ -40,7 +40,6 @@ public class ProblemC {
 		char tmp = ss[a / n][a % n];
 		ss[a / n][a % n] = ss[b / n][b % n];
 		ss[b / n][b % n] = tmp;
-
 	}
 
 	/**
