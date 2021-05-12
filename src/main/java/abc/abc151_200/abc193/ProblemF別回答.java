@@ -140,7 +140,6 @@ public class ProblemF別回答 {
 		 * @param newCap
 		 * @param newFlow
 		 */
-		@SuppressWarnings("unused")
 		void changeEdge(int i, long newCap, long newFlow) {
 			if (!((0 <= i) && (i < pos.size()))) {
 				throw new IllegalArgumentException("i is " + i + ", pos.size()=" + pos.size());
