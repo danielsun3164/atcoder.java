@@ -41,10 +41,11 @@ public class ProblemB {
 				if (hasBlack) {
 					IntStream.range(0, w).map(j -> a[i][j]).filter(c -> EMPTY != (char) c)
 							.forEach(c -> sb.append((char) c));
-					sb.append("\n");
+					sb.append(System.lineSeparator());
 				}
 			});
 			System.out.print(sb);
+			System.out.flush();
 		}
 	}
 }

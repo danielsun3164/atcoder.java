@@ -8,7 +8,7 @@ class ProblemEX1Test extends TestBase {
 
 	@Test
 	void case1() {
-		ProblemEX1.main(null);
+		execute();
 		assertResultIs("こんにちは" + LF + "AtCoder");
 	}
 }

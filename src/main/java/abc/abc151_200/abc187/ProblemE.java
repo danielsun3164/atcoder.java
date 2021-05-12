@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc187/submissions/19103187 にも参考
  */
 public class ProblemE {
@@ -56,14 +56,15 @@ public class ProblemE {
 			}
 			// TLE対策のためのStringBuilder
 			StringBuilder sb = new StringBuilder();
-			Arrays.stream(answer).forEach(ai -> sb.append(ai).append("\n"));
+			Arrays.stream(answer).forEach(ai -> sb.append(ai).append(System.lineSeparator()));
 			System.out.print(sb.toString());
+			System.out.flush();
 		}
 	}
 
 	/**
 	 * depthsの配列を入れる
-	 * 
+	 *
 	 * @param now       現在の処理対象
 	 * @param from      直前の処理対象
 	 * @param depths    depths

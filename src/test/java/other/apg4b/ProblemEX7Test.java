@@ -8,7 +8,7 @@ class ProblemEX7Test extends TestBase {
 
 	@Test
 	void case1() {
-		ProblemEX7.main(null);
+		execute();
 		assertResultIs("AtCoder");
 	}
 }
