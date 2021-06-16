@@ -10,14 +10,14 @@ import java.util.Scanner;
  */
 public class ProblemD {
 
-	/** 誤差（求められる誤差より細かい必要あり） */
-	private static final double TOLERANCE = 10E-7d;
+	/** 誤差 */
+	private static final double TOLERANCE = 1E-6d;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int a = scanner.nextInt(), b = scanner.nextInt(), x = scanner.nextInt();
 			double left = 0.0d, right = 90.0d;
-			while (right - left >= TOLERANCE) {
+			while ((right - left) >= TOLERANCE) {
 				double med = (left + right) / 2.0d;
 				double f = f(a, b, med);
 				if (f > x) {
@@ -39,7 +39,7 @@ public class ProblemD {
 	 * @return 水の容量
 	 */
 	private static double f(int a, int b, double theta) {
-		double tan = Math.tan(Math.PI * theta / 180.d);
-		return (b * tan > a) ? a * (b - a / tan / 2.0d) * a : b * b * tan / 2.0 * a;
+		double tan = Math.tan((Math.PI * theta) / 180.d);
+		return ((b * tan) > a) ? a * (b - (a / tan / 2.0d)) * a : ((b * b * tan) / 2.0) * a;
 	}
 }
