@@ -3,51 +3,62 @@ package abc.abc201_250.abc204;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 /**
  * 解説通りに実装したソースコード
  *
- * https://atcoder.jp/contests/abc204/submissions/23280058 にも参考
+ * https://atcoder.jp/contests/abc204/submissions/23263864 にも参考
  */
-public class ProblemF {
+public class ProblemF別回答 {
 
 	/** modの対象値 */
 	private static final long MOD = 998_244_353L;
-
-	/** フィボナッチ数列 */
-	private static final int[] LENGTHS = { 1, 1, 2, 3, 5, 8, 13 };
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int h = scanner.nextInt();
 			long w = scanner.nextLong();
 			int n = 1 << h;
-			long[][] m = new long[n][n];
-			IntStream.range(0, n).forEach(prev -> IntStream.range(0, n).forEach(next -> {
-				int flag = 0;
-				for (int k = 0; k < h; k++) {
-					if ((0 == (prev & (1 << k))) && (0 == (next & (1 << k)))) {
-						flag |= 1 << k;
-					}
-					if ((0 != (prev & (1 << k))) && (0 != (next & (1 << k)))) {
-						flag = -1;
-						break;
-					}
-				}
-				if (-1 != flag) {
-					m[prev][next] = 1L;
-					int c = 0;
-					for (int k = 0; k <= h; k++) {
-						if (0 != (flag & (1 << k))) {
-							c++;
+			long[] init = new long[n];
+			IntStream.range(0, n).forEach(mask -> {
+				boolean nextPlace = false, ok = true;
+				for (int i = 0; i < h; i++) {
+					if (nextPlace) {
+						if (0 != (mask & (1 << i))) {
+							nextPlace = false;
 						} else {
-							m[prev][next] = (m[prev][next] * LENGTHS[c]) % MOD;
-							c = 0;
+							ok = false;
 						}
+					} else if (0 != (mask & (1 << i))) {
+						nextPlace = true;
 					}
 				}
-			}));
-			System.out.println(pow(m, w)[0][0]);
+				if (nextPlace) {
+					ok = false;
+				}
+				init[mask] = ok ? 1L : 0L;
+			});
+			long[][] m = new long[n][n];
+			IntStream.range(0, n).forEach(i -> Arrays.fill(m[i], 0L));
+			IntStream.range(0, n)
+					.forEach(from -> IntStream.range(0, n).forEach(to -> IntStream.range(0, n).forEach(used -> {
+						boolean ok = true;
+						for (int i = 0; i < h; i++) {
+							if ((0 != (used & (1 << i))) && (((0 != (from & (1 << i))) || (0 != (to & (1 << i)))))) {
+								ok = false;
+								break;
+							}
+						}
+						if (ok) {
+							int to2 = to + used;
+							m[to2][from] = (m[to2][from] + init[to]) % MOD;
+						}
+					})));
+			long[][] v = new long[n][1];
+			IntStream.range(0, n).forEach(i -> v[i][0] = init[i]);
+			long[][] v2 = multiply(pow(m, w - 1), v);
+			System.out.println(LongStream.range(0, n).reduce(0L, (s, i) -> (s + v2[(int) i][0]) % MOD));
 		}
 	}
 
