@@ -18,6 +18,7 @@ import testbase.TestBase;
 
 class ProblemDTest extends TestBase {
 
+	/** 素数を格納するセット */
 	private final static Set<Integer> primeSet = new HashSet<>();
 
 	@BeforeAll
@@ -53,6 +54,10 @@ class ProblemDTest extends TestBase {
 	private void check(int n) {
 		in.input(n);
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(1, lines.length);
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(n, numbers.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int[] answers = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();

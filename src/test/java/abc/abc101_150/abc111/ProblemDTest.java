@@ -38,6 +38,16 @@ class ProblemDTest extends TestBase {
 		in.input(n);
 		IntStream.range(0, n).forEach(i -> in.input(x[i] + " " + y[i]));
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(n + 2, lines.length);
+		try {
+			int m = Integer.parseInt(lines[0]);
+			String[] numbers = lines[1].split("\\ ");
+			assertEquals(m, numbers.length);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int m = scanner.nextInt();
@@ -56,7 +66,7 @@ class ProblemDTest extends TestBase {
 
 	/**
 	 * 指定されたモードで関節mが(expectedX,expectedY)にあるかをチェック
-	 * 
+	 *
 	 * @param m         腕数
 	 * @param d         腕の長さの配列
 	 * @param w         モード

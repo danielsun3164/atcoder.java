@@ -42,6 +42,8 @@ class ProblemETest extends TestBase {
 		in.input(k);
 		in.input(x + " " + y);
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(m + 1, lines.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int s = scanner.nextInt();

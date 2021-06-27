@@ -37,7 +37,15 @@ class ProblemFTest extends TestBase {
 		in.input(n);
 		in.input(Arrays.stream(a).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
 		in.input(Arrays.stream(b).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
-		ProblemF.main(null);
+		execute();
+		String[] lines = out.toString().split("\\R");
+		if (expected) {
+			assertEquals(2, lines.length);
+			String[] numbers = lines[1].split("\\ ");
+			assertEquals(n, numbers.length);
+		} else {
+			assertEquals(1, lines.length);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			String result = scanner.next();

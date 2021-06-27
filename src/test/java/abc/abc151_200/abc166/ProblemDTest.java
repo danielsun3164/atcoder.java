@@ -26,6 +26,10 @@ class ProblemDTest extends TestBase {
 	private void check(int x) {
 		in.input(x);
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(1, lines.length);
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(2, numbers.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			long a = scanner.nextLong(), b = scanner.nextLong();

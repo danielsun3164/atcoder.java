@@ -33,6 +33,8 @@ class ProblemBTest extends TestBase {
 		in.input(x.length);
 		in.input(Arrays.stream(x).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(3, lines.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			assertEquals(a, scanner.nextInt());

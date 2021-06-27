@@ -36,12 +36,16 @@ class ProblemFTest extends TestBase {
 	}
 
 	private void check(int n, int m, int[] a) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(n).append(" ").append(m).append("\n");
-		sb.append(Arrays.stream(a).mapToObj(ai -> String.valueOf(ai)).collect(Collectors.joining(" ")));
+		in.input(n + " " + m);
+		in.input(Arrays.stream(a).mapToObj(ai -> String.valueOf(ai)).collect(Collectors.joining(" ")));
 		Set<Integer> set = Arrays.stream(a).boxed().collect(Collectors.toSet());
-		in.input(sb.toString());
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(n - 1, lines.length);
+		Arrays.stream(lines).forEach(line -> {
+			String[] numbers = line.split("\\ ");
+			assertEquals(2, numbers.length);
+		});
 		DisjointSetUnion dsu = new DisjointSetUnion(n);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {

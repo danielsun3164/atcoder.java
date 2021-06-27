@@ -1,6 +1,7 @@
 package abc.abc101_150.abc142;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
@@ -35,6 +36,15 @@ class ProblemFTest extends TestBase {
 	private void check(String input, int expectedK, Set<Integer> expectedVs) {
 		in.input(input);
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertTrue(lines.length > 0, "line is empty");
+		try {
+			int k = Integer.parseInt(lines[0]);
+			assertEquals(k + 1, lines.length);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int k = scanner.nextInt();

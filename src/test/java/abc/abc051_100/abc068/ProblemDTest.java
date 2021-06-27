@@ -1,6 +1,7 @@
 package abc.abc051_100.abc068;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
@@ -42,14 +43,29 @@ class ProblemDTest extends TestBase {
 		check(12345L);
 	}
 
-	private void check(long value) {
-		in.input(value);
+	private void check(long k) {
+		in.input(k);
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(2, lines.length);
+		try {
+			int n = Integer.parseInt(lines[0]);
+			String[] numbers = lines[1].split("\\ ");
+			assertEquals(n, numbers.length);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt();
-			long[] a = IntStream.range(0, n).mapToLong(i -> scanner.nextLong()).toArray();
-			assertEquals(value, calc(a));
+			assertTrue((2 <= n) & (n <= 50), "n is " + n);
+			long[] a = IntStream.range(0, n).mapToLong(i -> {
+				long ai = scanner.nextLong();
+				assertTrue((0 <= ai) && (ai <= 10_000_000_000_001_000L), "a[" + i + "] is " + ai);
+				return ai;
+			}).toArray();
+			assertEquals(k, calc(a));
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
@@ -58,7 +74,7 @@ class ProblemDTest extends TestBase {
 
 	/**
 	 * 入力配列に対して，操作を繰り返して実施する
-	 * 
+	 *
 	 * @param a 入力配列
 	 * @return 操作の実施回数
 	 */

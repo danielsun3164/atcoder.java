@@ -8,13 +8,18 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
 
 class ProblemFTest extends TestBase {
+
+	/** 結果のパターン */
+	private static final Pattern PATTERN = Pattern.compile("[A-C]");
 
 	@Test
 	void case1() {
@@ -40,6 +45,9 @@ class ProblemFTest extends TestBase {
 		in.input(n + " " + a + " " + b + " " + c);
 		in.input(Arrays.stream(s).collect(Collectors.joining("\n")));
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(n + 1, lines.length);
+		IntStream.rangeClosed(1, n).forEach(i -> assertTrue(PATTERN.matcher(lines[i]).matches()));
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			assertEquals("Yes", scanner.next());

@@ -27,9 +27,13 @@ class ProblemCTest extends TestBase {
 		check("2 2 1 1", 2.0000000d, 1);
 	}
 
-	private void check(String s, double d, int n) {
-		in.input(s);
-		ProblemC.main(null);
+	private void check(String input, double d, int n) {
+		in.input(input);
+		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(1, lines.length);
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(2, numbers.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			double result1 = scanner.nextDouble();

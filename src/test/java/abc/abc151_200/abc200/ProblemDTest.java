@@ -1,5 +1,6 @@
 package abc.abc151_200.abc200;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -17,6 +18,7 @@ import testbase.TestBase;
 
 class ProblemDTest extends TestBase {
 
+	/** 余りを取るために割る数字 */
 	private static final int N = 200;
 
 	@Test
@@ -30,11 +32,13 @@ class ProblemDTest extends TestBase {
 	}
 
 	void check(int n, int[] a) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(n).append("\n");
-		sb.append(Arrays.stream(a).mapToObj(ai -> String.valueOf(ai)).collect(Collectors.joining(" ")));
-		in.input(sb.toString());
+		in.input(n);
+		in.input(Arrays.stream(a).mapToObj(ai -> String.valueOf(ai)).collect(Collectors.joining(" ")));
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(3, lines.length);
+		check(lines[1]);
+		check(lines[2]);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			String result = scanner.next();
@@ -52,6 +56,18 @@ class ProblemDTest extends TestBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail();
+		}
+	}
+
+	private void check(String line) {
+		String[] numbers = line.split("\\ ");
+		assertTrue(numbers.length > 0);
+		try {
+			int n = Integer.parseInt(numbers[0]);
+			assertEquals(n + 1, numbers.length);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
 		}
 	}
 

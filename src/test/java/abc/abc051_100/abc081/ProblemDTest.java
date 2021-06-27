@@ -1,5 +1,6 @@
 package abc.abc051_100.abc081;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -34,11 +35,20 @@ class ProblemDTest extends TestBase {
 	private void check(int[] a) {
 		in.input(a.length);
 		in.input(Arrays.stream(a).mapToObj(i -> String.valueOf(i)).collect(Collectors.joining(" ")));
-		ProblemD.main(null);
+		execute();
+		String[] lines = out.toString().split("\\R");
+		assertTrue(lines.length > 0, "no lines");
+		try {
+			int m = Integer.parseInt(lines[0]);
+			assertEquals(m + 1, lines.length);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
-			int n = scanner.nextInt();
-			IntStream.range(0, n).forEach(i -> {
+			int m = scanner.nextInt();
+			IntStream.range(0, m).forEach(i -> {
 				int x = scanner.nextInt() - 1;
 				a[scanner.nextInt() - 1] += a[x];
 			});
