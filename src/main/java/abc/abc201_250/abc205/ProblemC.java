@@ -22,7 +22,7 @@ public class ProblemC {
 	 */
 	private static int compare(int a, int b, int c) {
 		if (0 == (1 & c)) {
-			return compare(Math.abs(a), Math.abs(b), c >> 1);
+			return Integer.compare(Math.abs(a), Math.abs(b));
 		} else {
 			return Integer.compare(a, b);
 		}
