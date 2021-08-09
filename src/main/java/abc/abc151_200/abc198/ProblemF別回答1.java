@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  *
  * https://atcoder.jp/contests/abc198/submissions/21762228 にも参考
  */
-public class ProblemF別回答 {
+public class ProblemF別回答1 {
 
 	/** mod対象の数字 */
 	private static final long MOD = 998_244_353L;
