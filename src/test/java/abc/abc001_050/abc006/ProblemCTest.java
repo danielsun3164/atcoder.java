@@ -20,7 +20,11 @@ class ProblemCTest extends TestBase {
 
 	private void check(int n, int m) {
 		in.input(n + " " + m);
-		ProblemC.main(null);
+		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(1, lines.length);
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(3, numbers.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int a1 = scanner.nextInt(), a2 = scanner.nextInt(), a3 = scanner.nextInt();

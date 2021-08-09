@@ -60,14 +60,16 @@ public class ProblemE {
 				}
 			}
 			StringBuffer sb = new StringBuffer();
-			IntStream.range(0, q).forEach(i -> sb.append(answer[i][0] + " " + answer[i][1] + "\n"));
+			IntStream.range(0, q).forEach(
+					i -> sb.append(answer[i][0]).append(" ").append(answer[i][1]).append(System.lineSeparator()));
 			System.out.print(sb.toString());
+			System.out.flush();
 		}
 	}
 
 	/**
 	 * 行列aと行列bの掛け算を計算する
-	 * 
+	 *
 	 * @param a
 	 * @param b
 	 * @return 行列aと行列bの掛け算の計算結果

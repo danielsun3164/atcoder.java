@@ -38,6 +38,15 @@ class ProblemDTest extends TestBase {
 		in.input(h + " " + w);
 		in.input(toString(a));
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertTrue(lines.length > 0, "line is empty");
+		try {
+			int n = Integer.parseInt(lines[0]);
+			assertEquals(n + 1, lines.length);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt();
@@ -70,7 +79,7 @@ class ProblemDTest extends TestBase {
 
 	/**
 	 * 数字の配列を文字列へ変換する
-	 * 
+	 *
 	 * @param a 数字の配列
 	 * @return 数字の配列から変換される文字列
 	 */

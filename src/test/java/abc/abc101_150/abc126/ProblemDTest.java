@@ -1,12 +1,14 @@
 package abc.abc101_150.abc126;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,9 @@ import org.junit.jupiter.api.Test;
 import testbase.TestBase;
 
 class ProblemDTest extends TestBase {
+
+	/** 0,1の文字列のパターン */
+	private static Pattern PATTERN = Pattern.compile("[01]");
 
 	@Test
 	void case1() {
@@ -37,7 +42,10 @@ class ProblemDTest extends TestBase {
 				distances[i][j] = distances[i][k] + distances[k][j];
 			}
 		})));
-		ProblemD.main(null);
+		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(n, lines.length);
+		Arrays.stream(lines).forEach(line -> assertTrue(PATTERN.matcher(line).matches()));
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int[] answer = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();

@@ -9,7 +9,7 @@ import java.util.Queue;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc174/submissions/15644133 と https://atcoder.jp/contests/abc174/submissions/15644479
  * にも参考<br/>
  * TLE回避するため以下のことを実施
@@ -42,7 +42,7 @@ public class ProblemF {
 				}
 				bit.add(i + 1, 1);
 				indexes[c] = i + 1;
-				while (!queue.isEmpty() && (i + 1 == queue.peek().right)) {
+				while (!queue.isEmpty() && ((i + 1) == queue.peek().right)) {
 					Query query = queue.poll();
 					answers[query.index] = bit.sum(query.left, query.right);
 				}
@@ -52,9 +52,10 @@ public class ProblemF {
 			}
 			StringBuilder sb = new StringBuilder();
 			for (int x : answers) {
-				sb.append(x).append("\n");
+				sb.append(x).append(System.lineSeparator());
 			}
-			System.out.print(sb);
+			System.out.print(sb.toString());
+			System.out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -74,7 +75,7 @@ public class ProblemF {
 
 		@Override
 		public int compareTo(Query o) {
-			return this.right - o.right;
+			return right - o.right;
 		}
 	}
 

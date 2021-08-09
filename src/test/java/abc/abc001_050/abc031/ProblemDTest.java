@@ -1,13 +1,9 @@
 package abc.abc001_050.abc031;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -56,14 +52,10 @@ class ProblemDTest extends TestBase {
 		in.input(k + " " + inputMap.size());
 		inputMap.entrySet().forEach(entry -> in.input(entry.getKey() + " " + entry.getValue()));
 		execute();
+		String[] lines = out.toString().split("\\R");
 		Map<String, String> outputMap = new HashMap<>();
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
-			IntStream.rangeClosed(1, k).forEach(i -> outputMap.put(String.valueOf(i), scanner.next()));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e);
-		}
+		assertEquals(k, lines.length);
+		IntStream.range(0, k).forEach(i -> outputMap.put(String.valueOf(i + 1), lines[i]));
 		inputMap.entrySet().forEach(entry -> {
 			StringBuilder sb = new StringBuilder();
 			String key = entry.getKey();

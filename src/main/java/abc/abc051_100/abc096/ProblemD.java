@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -36,7 +37,8 @@ public class ProblemD {
 			IntStream.range(0, N).forEach(i -> lists[i] = new ArrayList<>());
 			IntStream.range(2, MAX).filter(i -> isPrime[i]).forEach(i -> lists[i % N].add(i));
 			int index = IntStream.range(1, N).filter(i -> lists[i].size() >= n).findFirst().getAsInt();
-			IntStream.range(0, n).forEach(i -> System.out.println(lists[index].get(i)));
+			System.out.println(IntStream.range(0, n).mapToObj(i -> String.valueOf(lists[index].get(i)))
+					.collect(Collectors.joining(" ")));
 		}
 	}
 }

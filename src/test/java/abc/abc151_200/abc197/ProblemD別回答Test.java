@@ -1,11 +1,6 @@
 package abc.abc151_200.abc197;
 
-import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.Scanner;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +9,7 @@ import testbase.TestBase;
 class ProblemD別回答Test extends TestBase {
 
 	/** 誤差 */
-	private static final double TOLERANCE = 10E-5d;
+	private static final double TOLERANCE = 1E-5d;
 
 	@Test
 	void case1() {
@@ -51,14 +46,11 @@ class ProblemD別回答Test extends TestBase {
 		in.input(x0 + " " + y0);
 		in.input(xn2 + " " + yn2);
 		execute();
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
-			double rx = scanner.nextDouble(), ry = scanner.nextDouble();
-			assertTrue(Math.abs(rx - ex) < TOLERANCE, "rx is " + rx);
-			assertTrue(Math.abs(ry - ey) < TOLERANCE, "ry is " + ry);
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail();
-		}
+		String[] lines = out.toString().split("\\R");
+		assertEquals(1, lines.length);
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(2, numbers.length);
+		assertNumberIsAbout(numbers[0], ex, TOLERANCE);
+		assertNumberIsAbout(numbers[1], ey, TOLERANCE);
 	}
 }

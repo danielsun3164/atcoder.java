@@ -44,7 +44,11 @@ class ProblemFTest extends TestBase {
 
 	private void check(int m, int k) {
 		in.input(m + " " + k);
-		ProblemF.main(null);
+		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(1, lines.length);
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(1 << (m + 1), numbers.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int max = 1 << m;

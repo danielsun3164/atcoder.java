@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * 結果を一行ずつSystem.out.printlnでは遅くなるため、StringBuilderで組み立ててからprintする
  */
 public class ProblemE {
@@ -33,8 +33,9 @@ public class ProblemE {
 				}
 			}
 			StringBuilder sb = new StringBuilder();
-			Arrays.stream(result).forEach(i -> sb.append(i).append("\n"));
+			Arrays.stream(result).forEach(i -> sb.append(i).append(System.lineSeparator()));
 			System.out.print(sb.toString());
+			System.out.flush();
 		}
 	}
 

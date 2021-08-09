@@ -22,8 +22,9 @@ public class ProblemC {
 			Iterator<Integer> iterator = (0 == (n & 1)) ? list.iterator() : list.descendingIterator();
 			while (iterator.hasNext()) {
 				System.out.print(iterator.next());
-				System.out.print(iterator.hasNext() ? " " : "\n");
+				System.out.print(iterator.hasNext() ? " " : System.lineSeparator());
 			}
+			System.out.flush();
 		}
 	}
 }

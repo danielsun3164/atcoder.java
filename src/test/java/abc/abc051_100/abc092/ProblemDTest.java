@@ -1,6 +1,7 @@
 package abc.abc051_100.abc092;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
@@ -45,13 +46,25 @@ class ProblemDTest extends TestBase {
 
 	/**
 	 * テストを実施
-	 * 
+	 *
 	 * @param a 白いコマの数
 	 * @param b 黒いコマの数
 	 */
 	private void check(int a, int b) {
 		in.input(a + " " + b);
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertTrue(lines.length > 0, "line is empty");
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(2, numbers.length);
+		try {
+			int h = Integer.parseInt(numbers[0]), w = Integer.parseInt(numbers[1]);
+			assertEquals(h + 1, lines.length);
+			IntStream.rangeClosed(1, h).forEach(i -> assertEquals(w, lines[i].length()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int h = scanner.nextInt(), w = scanner.nextInt();
@@ -74,7 +87,7 @@ class ProblemDTest extends TestBase {
 
 	/**
 	 * コマの分布を計算する
-	 * 
+	 *
 	 * @param h 高さ
 	 * @param w 幅
 	 * @param s コマを表す配列
@@ -94,7 +107,7 @@ class ProblemDTest extends TestBase {
 
 	/**
 	 * コマの(i,j)部分の分布を計算する
-	 * 
+	 *
 	 * @param h     高さ
 	 * @param w     幅
 	 * @param s     コマを表す配列

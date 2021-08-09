@@ -13,7 +13,7 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case2() {
-		checkResultIsAbout("5", 0.6d, 10E-6d);
+		checkResultIsAbout("5", 0.6d, 1E-6d);
 	}
 
 	@Test

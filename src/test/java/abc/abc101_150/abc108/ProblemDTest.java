@@ -1,6 +1,7 @@
 package abc.abc101_150.abc108;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -36,11 +37,22 @@ class ProblemDTest extends TestBase {
 	private void check(int l) {
 		in.input(l);
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertTrue(lines.length > 0, "line is empty");
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(2, numbers.length);
+		try {
+			int n = Integer.parseInt(numbers[0]), m = Integer.parseInt(numbers[1]);
+			assertTrue(n <= 20, "n is " + n);
+			assertTrue(m <= 60, "m is " + m);
+			assertEquals(m + 1, lines.length);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail(e);
+		}
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int n = scanner.nextInt(), m = scanner.nextInt();
-			assertTrue(n <= 20, "n is " + n);
-			assertTrue(m <= 60, "m is " + m);
 			@SuppressWarnings("unchecked")
 			List<Path>[] paths = new List[n];
 			IntStream.range(0, n).forEach(i -> paths[i] = new ArrayList<>());
@@ -64,7 +76,7 @@ class ProblemDTest extends TestBase {
 
 	/**
 	 * 起点から終点までのすべてのパスのコストを計算する
-	 * 
+	 *
 	 * @param source      起点
 	 * @param destination 終点
 	 * @param paths       パスの配列

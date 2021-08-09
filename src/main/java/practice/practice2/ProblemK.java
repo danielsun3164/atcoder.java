@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 /**
  * https://atcoder.github.io/ac-library/master/document_ja/lazysegtree.html を参考に作成
- * 
+ *
  * TLE対応のため、以下のことを実施<br/>
  * 1．Scannerの代わりにBufferedReaderを使用<br/>
  * 2．System.out.printlnの代わりにStringBuilderを使用<br/>
@@ -17,6 +17,7 @@ import java.util.stream.IntStream;
  */
 public class ProblemK {
 
+	/** mod対象の数字 */
 	private static final long MOD = 998_244_353L;
 
 	public static void main(String[] args) {
@@ -42,14 +43,14 @@ public class ProblemK {
 
 				@Override
 				void mapping(FData f, SData s, SData ret) {
-					ret.a = (s.a * f.a + s.size * f.b) % MOD;
+					ret.a = ((s.a * f.a) + (s.size * f.b)) % MOD;
 					ret.size = s.size;
 				}
 
 				@Override
 				void composition(FData a, FData b, FData ret) {
-					long na = a.a * b.a % MOD;
-					long nb = (b.b * a.a + a.b) % MOD;
+					long na = (a.a * b.a) % MOD;
+					long nb = ((b.b * a.a) + a.b) % MOD;
 					ret.a = na;
 					ret.b = nb;
 				}
@@ -68,10 +69,11 @@ public class ProblemK {
 					long b = Long.parseLong(strings[3]), c = Long.parseLong(strings[4]);
 					seg.apply(l, r, new FData(b, c));
 				} else {
-					sb.append(seg.prod(l, r).a).append("\n");
+					sb.append(seg.prod(l, r).a).append(System.lineSeparator());
 				}
 			}
 			System.out.print(sb);
+			System.out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -149,13 +151,13 @@ public class ProblemK {
 
 		/**
 		 * a[p] = x と設定する
-		 * 
+		 *
 		 * @param p
 		 * @param x
 		 */
 		@SuppressWarnings("unused")
 		void set(int p, S x) {
-			if (!(0 <= p && p < n)) {
+			if (!((0 <= p) && (p < n))) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
@@ -166,13 +168,13 @@ public class ProblemK {
 
 		/**
 		 * a[p] を返す
-		 * 
+		 *
 		 * @param p
 		 * @return a[p]
 		 */
 		@SuppressWarnings("unused")
 		S get(int p) {
-			if (!(0 <= p && p < n)) {
+			if (!((0 <= p) && (p < n))) {
 				new IllegalArgumentException("p is " + p);
 			}
 			p += size;
@@ -182,13 +184,13 @@ public class ProblemK {
 
 		/**
 		 * op(a[l], ..., a[r - 1]) を、モノイドの性質を満たしていると仮定して計算する。l==r のときは e() を返す。
-		 * 
+		 *
 		 * @param l
 		 * @param r
 		 * @return op(a[l], ..., a[r - 1])
 		 */
 		S prod(int l, int r) {
-			if (!(0 <= l && l <= r && r <= n)) {
+			if (!((0 <= l) && (l <= r) && (r <= n))) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
 			if (l == r) {
@@ -223,7 +225,7 @@ public class ProblemK {
 
 		/**
 		 * op(a[0], ..., a[n-1]) を計算する。n==0 のときは e() を返す。
-		 * 
+		 *
 		 * @return op(a[0], ..., a[n-1])
 		 */
 		@SuppressWarnings("unused")
@@ -233,13 +235,13 @@ public class ProblemK {
 
 		/**
 		 * a[p] = f(a[p]) と設定する
-		 * 
+		 *
 		 * @param p
 		 * @param f
 		 */
 		@SuppressWarnings("unused")
 		void apply(int p, F f) {
-			if (!(0 <= p && p < n)) {
+			if (!((0 <= p) && (p < n))) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
@@ -250,13 +252,13 @@ public class ProblemK {
 
 		/**
 		 * i = l..r-1についてa[i] = f(a[i]) と設定する
-		 * 
+		 *
 		 * @param l
 		 * @param r
 		 * @param f
 		 */
 		void apply(int l, int r, F f) {
-			if (!(0 <= l && l <= r && r <= n)) {
+			if (!((0 <= l) && (l <= r) && (r <= n))) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
 			if (l == r) {
@@ -303,14 +305,14 @@ public class ProblemK {
 		 * r = l もしくは g(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * r = n もしくは g(op(a[l], a[l + 1], ..., a[r])) = false <br/>
 		 * gが単調だとすれば、g(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最大の r、と解釈することが可能です。
-		 * 
+		 *
 		 * @param l
 		 * @param g
 		 * @return
 		 */
 		@SuppressWarnings("unused")
 		int maxRight(int l, Predicate<S> g) {
-			if (!(0 <= l && l <= n)) {
+			if (!((0 <= l) && (l <= n))) {
 				throw new IllegalArgumentException("l is " + l);
 			}
 			if (!g.test(e())) {
@@ -351,14 +353,14 @@ public class ProblemK {
 		 * l = r もしくは g(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * l = 0 もしくは g(op(a[l - 1], a[l], ..., a[r - 1])) = false <br/>
 		 * gが単調だとすれば、g(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最小の l、と解釈することが可能です。
-		 * 
+		 *
 		 * @param r
 		 * @param g
 		 * @return
 		 */
 		@SuppressWarnings("unused")
 		int minLeft(int r, Predicate<S> g) {
-			if (!(0 <= r && r <= n)) {
+			if (!((0 <= r) && (r <= n))) {
 				throw new IllegalArgumentException("r is " + r);
 			}
 			if (!g.test(e())) {
@@ -374,7 +376,7 @@ public class ProblemK {
 			S sm = e();
 			do {
 				r--;
-				while (r > 1 && (r & 1) > 0) {
+				while ((r > 1) && ((r & 1) > 0)) {
 					r >>= 1;
 				}
 				S s = e();
@@ -382,14 +384,14 @@ public class ProblemK {
 				if (!g.test(s)) {
 					while (r < size) {
 						push(r);
-						r = (2 * r + 1);
+						r = ((2 * r) + 1);
 						op(d[r], sm, s);
 						if (g.test(s)) {
 							op(d[r], sm, sm);
 							r--;
 						}
 					}
-					return r + 1 - size;
+					return (r + 1) - size;
 				}
 				op(d[r], sm, sm);
 			} while ((r & -r) != r);
@@ -397,7 +399,7 @@ public class ProblemK {
 		}
 
 		private void update(int k) {
-			op(d[k << 1], d[k << 1 | 1], d[k]);
+			op(d[k << 1], d[(k << 1) | 1], d[k]);
 		}
 
 		private void allApply(int k, F f) {
@@ -409,7 +411,7 @@ public class ProblemK {
 
 		private void push(int k) {
 			allApply(k << 1, lz[k]);
-			allApply(k << 1 | 1, lz[k]);
+			allApply((k << 1) | 1, lz[k]);
 			lz[k] = id();
 		}
 
@@ -428,7 +430,7 @@ public class ProblemK {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param n `0 <= n`
 	 * @return minimum non-negative `x` s.t. `n <= 2**x`
 	 */

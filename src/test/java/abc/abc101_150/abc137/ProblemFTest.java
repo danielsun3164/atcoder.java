@@ -36,6 +36,10 @@ class ProblemFTest extends TestBase {
 		in.input(p);
 		in.input(Arrays.stream(a).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
 		execute();
+		String[] lines = out.toString().split("\\R");
+		assertEquals(1, lines.length);
+		String[] numbers = lines[0].split("\\ ");
+		assertEquals(p, numbers.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
 			int[] b = IntStream.range(0, p).map(i -> scanner.nextInt()).toArray();
@@ -48,7 +52,7 @@ class ProblemFTest extends TestBase {
 
 	/**
 	 * 多項式の値 mod pを計算する
-	 * 
+	 *
 	 * @param b 多項式の係数の配列
 	 * @param x xの値
 	 * @param p
@@ -60,7 +64,7 @@ class ProblemFTest extends TestBase {
 
 	/**
 	 * n^m mod p を計算する
-	 * 
+	 *
 	 * @param n
 	 * @param m
 	 * @param p
