@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
 
-class ProblemF別回答Test extends TestBase {
+class ProblemF別回答1Test extends TestBase {
 
 	@Test
 	void case1() {
