@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
  */
 public class ProblemD {
 
+	/** 計算結果を保存するマップ */
 	private static Map<List<Integer>, Integer> map = new HashMap<>();
 
 	public static void main(String[] args) {
