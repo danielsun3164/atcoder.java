@@ -66,21 +66,16 @@ public class ProblemD {
 	private static long[][] pow(long[][] a, int b) {
 		// 結果
 		long[][] result = null;
-		// 一つ前の結果
-		long[][] prevResult = null;
-		for (int i = 0; i <= Math.ceil(Math.log(b) / Math.log(2)); i++) {
-			if (null == prevResult) {
-				prevResult = a;
-			} else {
-				prevResult = multipy(prevResult, prevResult);
-			}
-			if ((b & (0x1 << i)) != 0) {
+		while (b > 0) {
+			if (1 == (1 & b)) {
 				if (null != result) {
-					result = multipy(result, prevResult);
+					result = multipy(result, a);
 				} else {
-					result = prevResult;
+					result = a;
 				}
 			}
+			a = multipy(a, a);
+			b >>= 1;
 		}
 		return result;
 	}
