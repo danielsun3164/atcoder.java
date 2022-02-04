@@ -2,6 +2,7 @@ package abc.abc101_150.abc138;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NavigableSet;
 import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.stream.IntStream;
@@ -11,7 +12,7 @@ public class ProblemE {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			char[] s = scanner.next().toCharArray(), t = scanner.next().toCharArray();
-			Map<Character, TreeSet<Integer>> map = new HashMap<>();
+			Map<Character, NavigableSet<Integer>> map = new HashMap<>();
 			IntStream.range(0, s.length).forEach(i -> {
 				if (!map.containsKey(s[i])) {
 					map.put(s[i], new TreeSet<>());

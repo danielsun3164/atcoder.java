@@ -1,5 +1,6 @@
 package abc.abc151_200.abc174;
 
+import java.util.NavigableSet;
 import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.stream.IntStream;
@@ -10,7 +11,7 @@ public class ProblemD {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			char[] c = scanner.next().toCharArray();
-			TreeSet<Integer> redSet = new TreeSet<>(), whiteSet = new TreeSet<>();
+			NavigableSet<Integer> redSet = new TreeSet<>(), whiteSet = new TreeSet<>();
 			IntStream.range(0, n).forEach(i -> {
 				if ('R' == c[i]) {
 					redSet.add(i);
