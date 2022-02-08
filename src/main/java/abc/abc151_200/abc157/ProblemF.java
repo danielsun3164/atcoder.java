@@ -29,7 +29,7 @@ public class ProblemF {
 			double ok = 150000.0d, ng = 0.0d;
 			while (ok - ng > TOLERANCE) {
 				double med = (((ok - ng) < 1.0d) && (ng > 0.0d)) ? Math.sqrt(ok * ng) : (ok + ng) / 2.0d;
-				if (count(points, c, med) >= k) {
+				if (ok(n, k, points, c, med)) {
 					ok = med;
 				} else {
 					ng = med;
@@ -40,15 +40,16 @@ public class ProblemF {
 	}
 
 	/**
-	 * 指定された時間で焼ける肉の数を計算する
+	 * 指定された時間で焼ける肉の数が必要な肉の数以上かを計算する
 	 *
+	 * @param n      肉の数
+	 * @param k      必要な肉の数
 	 * @param points 肉の座標一覧
 	 * @param c      肉の焼にくさ一覧
 	 * @param time   時間
-	 * @return 指定された時間で焼ける肉の数
+	 * @return 指定された時間で焼ける肉の数が必要な肉の数以上か
 	 */
-	private static int count(Point[] points, double[] c, double time) {
-		int n = points.length;
+	private static boolean ok(int n, int k, Point[] points, double[] c, double time) {
 		List<Point> list = new ArrayList<>();
 		IntStream.range(0, n).forEach(i -> {
 			double xi = points[i].x, yi = points[i].y, ri = time / c[i];
@@ -68,11 +69,14 @@ public class ProblemF {
 				}
 			});
 		});
-		return list.stream()
-				.mapToInt(point -> (int) IntStream.range(0, n)
-						.filter(i -> Math.hypot(point.x - points[i].x, point.y - points[i].y) * c[i] < time + TOLERANCE)
-						.count())
-				.max().getAsInt();
+		for (Point point : list) {
+			if (IntStream.range(0, n)
+					.filter(i -> Math.hypot(point.x - points[i].x, point.y - points[i].y) * c[i] < time + TOLERANCE)
+					.count() >= k) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
