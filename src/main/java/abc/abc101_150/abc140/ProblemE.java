@@ -1,5 +1,6 @@
 package abc.abc101_150.abc140;
 
+import java.util.NavigableSet;
 import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.stream.IntStream;
@@ -16,7 +17,7 @@ public class ProblemE {
 			int n = scanner.nextInt();
 			int[] indexes = new int[n + 1];
 			IntStream.rangeClosed(1, n).forEach(i -> indexes[scanner.nextInt()] = i);
-			TreeSet<Integer> set = new TreeSet<>();
+			NavigableSet<Integer> set = new TreeSet<>();
 			set.add(0);
 			set.add(n + 1);
 			System.out.println(IntStream.range(0, n).map(i -> n - i).mapToLong(pi -> {

@@ -1,5 +1,6 @@
 package abc.abc151_200.abc184;
 
+import java.util.NavigableSet;
 import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public class ProblemF {
 			int n = scanner.nextInt();
 			long t = scanner.nextLong();
 			@SuppressWarnings("unchecked")
-			TreeSet<Long>[] sets = new TreeSet[2];
+			NavigableSet<Long>[] sets = new TreeSet[2];
 			IntStream.range(0, 2).forEach(i -> {
 				sets[i] = new TreeSet<>();
 				sets[i].add(0L);
