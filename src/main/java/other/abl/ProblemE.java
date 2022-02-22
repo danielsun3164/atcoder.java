@@ -288,7 +288,7 @@ public class ProblemE {
 		 *
 		 * @param l
 		 * @param g
-		 * @return
+		 * @return 条件を両方満たす r を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
 		int maxRight(int l, Predicate<S> g) {
@@ -333,7 +333,7 @@ public class ProblemE {
 		 *
 		 * @param r
 		 * @param g
-		 * @return
+		 * @return 条件を両方満たす l を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
 		int minLeft(int r, Predicate<S> g) {

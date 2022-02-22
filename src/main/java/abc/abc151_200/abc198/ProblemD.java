@@ -64,7 +64,7 @@ public class ProblemD {
 	 * @param list  変数の一覧
 	 * @param used  ある数字がすでに変数の値として使用されているかどうかの配列
 	 * @param index 現在処理対象の変数のインデックス
-	 * @return
+	 * @return s1+s2=s3のような解があるかどうか
 	 */
 	private static boolean solve(char[] s1, char[] s2, char[] s3, int[] dict, List<Character> list, boolean[] used,
 			int index) {

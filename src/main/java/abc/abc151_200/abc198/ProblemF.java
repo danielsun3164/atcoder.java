@@ -33,7 +33,7 @@ public class ProblemF {
 	 *
 	 * @param x
 	 * @param s
-	 * @return
+	 * @return 結果
 	 */
 	private static long solve(int[] x, long s) {
 		int l = Arrays.stream(x).sum();

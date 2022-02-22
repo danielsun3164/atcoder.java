@@ -17,12 +17,12 @@ public class ProblemC {
 
 	/**
 	 * 条件を満たすような最小の「水やり」操作の回数を計算する
-	 * 
+	 *
 	 * @param h       希望する高さの配列
 	 * @param from    処理対象indexのfrom
 	 * @param to      処理対象indexのfrom
 	 * @param current 現在の高さ
-	 * @return
+	 * @return 条件を満たすような最小の「水やり」操作の回数
 	 */
 	private static int getResult(final int[] h, int from, int to, int current) {
 		if (from > to) {
