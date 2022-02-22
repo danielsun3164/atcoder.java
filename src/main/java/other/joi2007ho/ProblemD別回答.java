@@ -49,11 +49,10 @@ public class ProblemD別回答 {
 
 	/**
 	 * 計算結果を再帰的に計算する
-	 * 
+	 *
 	 * @param now    現在処理しているチーム
 	 * @param m      試合結果の数
-	 * @param w      勝ったチームの配列
-	 * @param l      負けたチームの配列
+	 * @param dp     勝ったチームの配列
 	 * @param used   出力されたかどうかを保存する配列
 	 * @param result 計算結果
 	 */
