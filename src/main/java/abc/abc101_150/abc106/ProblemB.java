@@ -15,13 +15,13 @@ public class ProblemB {
 
 	/**
 	 * nの約数の数を計算する
-	 * 
+	 *
 	 * @param n
 	 * @return nの約数の数
 	 */
 	private static int getDivisorNumber(int n) {
 		int count = 0;
-		for (int i = 1; i <= (int) Math.sqrt(n); i++) {
+		for (int i = 1; i * i <= n; i++) {
 			if (0 == n % i) {
 				count += (i == n / i) ? 1 : 2;
 			}
