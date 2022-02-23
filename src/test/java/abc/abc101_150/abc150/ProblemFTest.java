@@ -25,6 +25,7 @@ class ProblemFTest extends TestBase {
 
 	@Test
 	void case4() {
+		// 出力に改行がないため、checkメソッドが使用できない
 		in.input("2\n" + "1 2\n" + "0 0");
 		execute();
 		assertEquals("", out.toString());
