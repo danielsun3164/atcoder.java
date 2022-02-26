@@ -1,7 +1,5 @@
 package abc.abc151_200.abc161;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
@@ -20,10 +18,7 @@ class ProblemETest extends TestBase {
 
 	@Test
 	void case3() {
-		// 出力に改行がないため、checkメソッドが使用できない
-		in.input("5 1 0\n" + "ooooo");
-		execute();
-		assertEquals("", out.toString());
+		checkResultIsEmpty("5 1 0\n" + "ooooo");
 	}
 
 	@Test

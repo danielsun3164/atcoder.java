@@ -220,6 +220,17 @@ public abstract class TestBase {
 	}
 
 	/**
+	 * 想定結果がが空のテストを実施する
+	 *
+	 * @param input 入力文字列
+	 */
+	protected void checkResultIsEmpty(String input) {
+		in.input(input);
+		execute();
+		assertEquals("", out.toString());
+	}
+
+	/**
 	 * テストを実施する
 	 *
 	 * @param input    入力文字列
