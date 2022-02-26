@@ -8,7 +8,6 @@ class ProblemATest extends TestBase {
 
 	@Test
 	void case1() {
-		execute();
-		assertResultIs("Hello, world!");
+		check("", "Hello, world!");
 	}
 }
