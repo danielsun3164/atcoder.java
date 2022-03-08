@@ -73,9 +73,9 @@ public class ProblemF {
 		}));
 		long[] bits = new long[n];
 		fill(n, s, t, u, v, temp, bits, pos);
-		transpose(n, s, t, u, v, temp);
-		fill(n, s, t, u, v, temp, bits, pos);
-		transpose(n, s, t, u, v, temp);
+		transpose(n, temp);
+		fill(n, t, s, v, u, temp, bits, pos);
+		transpose(n, temp);
 		IntStream.range(0, n).forEach(i -> IntStream.range(0, n).forEach(j -> answer[i][j] |= (temp[i][j] << pos)));
 	}
 
@@ -113,13 +113,9 @@ public class ProblemF {
 	 * 配列を回転する
 	 *
 	 * @param n    配列の長さ
-	 * @param s
-	 * @param t
-	 * @param u
-	 * @param v
 	 * @param temp 各ビットの配列
 	 */
-	private static void transpose(int n, int[] s, int[] t, long[] u, long[] v, long[][] temp) {
+	private static void transpose(int n, long[][] temp) {
 		IntStream.range(0, n).forEach(i -> {
 			IntStream.range(0, i).forEach(j -> {
 				// swap(temp[i][j], temp[j][i])
@@ -127,14 +123,6 @@ public class ProblemF {
 				temp[i][j] = temp[j][i];
 				temp[j][i] = z;
 			});
-			// swap(u[i], v[i])
-			long z = u[i];
-			u[i] = v[i];
-			v[i] = z;
-			// swap(s[i], t[i])
-			int y = s[i];
-			s[i] = t[i];
-			t[i] = y;
 		});
 	}
 
