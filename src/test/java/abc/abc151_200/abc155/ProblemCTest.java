@@ -24,6 +24,6 @@ class ProblemCTest extends TestBase {
 
 	@Test
 	void case4() {
-		check("4\n" + "ushi\n" + "tapu\n" + "nichia\n" + "kun", "kun\n" + "nichia\n" + "tapu\n" + "ushi");
+		check("4\n" + "ushi\n" + "tapu\n" + "nichia\n" + "kun", "kun" + LF + "nichia" + LF + "tapu" + LF + "ushi");
 	}
 }

@@ -19,6 +19,6 @@ class ProblemETest extends TestBase {
 	@Test
 	void case3() {
 		check("5\n" + "eaaaabaa\n" + "eaaaacaa\n" + "daaaaaaa\n" + "eaaaadaa\n" + "daaaafaa",
-				"Takahashi\n" + "Takahashi\n" + "Takahashi\n" + "Aoki\n" + "Takahashi");
+				"Takahashi" + LF + "Takahashi" + LF + "Takahashi" + LF + "Aoki" + LF + "Takahashi");
 	}
 }
