@@ -13,7 +13,7 @@ public class ProblemI {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			String s = scanner.next();
-			System.out.println(Arrays.stream(AtcoderStringUtils.lcpArray(s, AtcoderStringUtils.suffixArray(s)))
+			System.out.println(Arrays.stream(AtcoderString.lcpArray(s, AtcoderString.suffixArray(s)))
 					.mapToLong(i -> i).reduce(1L * s.length() * (s.length() + 1) / 2L, (sum, x) -> sum - x));
 		}
 	}
@@ -21,7 +21,7 @@ public class ProblemI {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/string.hpp を参考に作成
 	 */
-	private static class AtcoderStringUtils {
+	private static class AtcoderString {
 		static int[] saNaive(int[] s) {
 			int n = s.length;
 			return IntStream.range(0, n).boxed().sorted((l, r) -> {
