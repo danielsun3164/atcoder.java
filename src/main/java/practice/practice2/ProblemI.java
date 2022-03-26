@@ -22,9 +22,9 @@ public class ProblemI {
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/string.hpp を参考に作成
 	 */
 	private static class AtcoderStringUtils {
-		private static int[] saNaive(int[] s) {
+		static int[] saNaive(int[] s) {
 			int n = s.length;
-			return IntStream.range(0, n).mapToObj(Integer::valueOf).sorted((l, r) -> {
+			return IntStream.range(0, n).boxed().sorted((l, r) -> {
 				if (Objects.equals(l, r)) {
 					return 0;
 				}
@@ -35,23 +35,23 @@ public class ProblemI {
 					l++;
 					r++;
 				}
-				return Integer.compare(l, n);
+				return (l == n) ? -1 : 1;
 			}).mapToInt(Integer::intValue).toArray();
 		}
 
 		static int[] saDoubling(int[] s) {
 			int n = s.length;
-			Integer[] sa = IntStream.range(0, n).mapToObj(i -> i).toArray(Integer[]::new);
-			int[] rnk = s, tmp = new int[n];
-			for (int k = 1; k < n; k *= 2) {
-				int[] rnk2 = rnk;
-				int k2 = k;
+			Integer[] sa = IntStream.range(0, n).boxed().toArray(Integer[]::new);
+			int[] rnk2 = Arrays.copyOf(s, n), tmp = new int[n];
+			for (int k2 = 0; (1 << k2) < n; k2++) {
+				int[] rnk = rnk2;
+				int k = 1 << k2;
 				Arrays.sort(sa, (x, y) -> {
-					if (rnk2[x] != rnk2[y]) {
-						return Integer.compare(rnk2[x], rnk2[y]);
+					if (rnk[x] != rnk[y]) {
+						return Integer.compare(rnk[x], rnk[y]);
 					}
-					int rx = x + k2 < n ? rnk2[x + k2] : -1;
-					int ry = y + k2 < n ? rnk2[y + k2] : -1;
+					int rx = (x + k < n) ? rnk[x + k] : -1;
+					int ry = (y + k < n) ? rnk[y + k] : -1;
 					return Integer.compare(rx, ry);
 				});
 				tmp[sa[0]] = 0;
@@ -59,8 +59,8 @@ public class ProblemI {
 					tmp[sa[i]] = tmp[sa[i - 1]] + (cmp(sa[i - 1], sa[i], n, k, rnk) ? 1 : 0);
 				}
 				int[] tmp2 = tmp;
-				tmp = rnk;
-				rnk = tmp2;
+				tmp = rnk2;
+				rnk2 = tmp2;
 			}
 			return Arrays.stream(sa).mapToInt(Integer::intValue).toArray();
 		}
@@ -69,15 +69,19 @@ public class ProblemI {
 			if (rnk[x] != rnk[y]) {
 				return rnk[x] < rnk[y];
 			}
-			int rx = x + k < n ? rnk[x + k] : -1;
-			int ry = y + k < n ? rnk[y + k] : -1;
+			int rx = (x + k < n) ? rnk[x + k] : -1;
+			int ry = (y + k < n) ? rnk[y + k] : -1;
 			return rx < ry;
 		}
 
 		private static final int THRESHOLD_NAIVE = 10;
 		private static final int THRESHOLD_DOUBLING = 40;
 
-		private static int[] saIs(int[] s, int upper) {
+		static int[] saIs(int[] s, int upper) {
+			return saIs(s, upper, THRESHOLD_NAIVE, THRESHOLD_DOUBLING);
+		}
+
+		static int[] saIs(int[] s, int upper, final int naive, final int doubling) {
 			if (null == s) {
 				return new int[] {};
 			}
@@ -95,10 +99,10 @@ public class ProblemI {
 					return new int[] { 1, 0 };
 				}
 			}
-			if (n < THRESHOLD_NAIVE) {
+			if (n < naive) {
 				return saNaive(s);
 			}
-			if (n < THRESHOLD_DOUBLING) {
+			if (n < doubling) {
 				return saDoubling(s);
 			}
 			int[] sa = new int[n];
@@ -116,8 +120,9 @@ public class ProblemI {
 			});
 			IntStream.rangeClosed(0, upper).forEach(i -> {
 				sumS[i] += sumL[i];
-				if (i < upper)
+				if (i < upper) {
 					sumL[i + 1] += sumS[i];
+				}
 			});
 			int[] lmsMap = new int[n + 1];
 			Arrays.fill(lmsMap, -1);
@@ -130,7 +135,7 @@ public class ProblemI {
 			int[] lms = IntStream.range(1, n).filter(i -> !ls[i - 1] && ls[i]).toArray();
 			induce(n, s, upper, sa, ls, sumL, sumS, lms);
 
-			if (m > 0) {
+			if (0 != m) {
 				int[] sortedLms = Arrays.stream(sa).filter(v -> lmsMap[v] != -1).toArray();
 				int[] recS = new int[m];
 				int recUpper = 0;
@@ -150,7 +155,7 @@ public class ProblemI {
 							l++;
 							r++;
 						}
-						if (l == n || s[l] != s[r]) {
+						if ((l == n) || (s[l] != s[r])) {
 							same = false;
 						}
 					}
@@ -183,14 +188,14 @@ public class ProblemI {
 			sa[buf[s[n - 1]]++] = n - 1;
 			IntStream.range(0, n).forEach(i -> {
 				int v = sa[i];
-				if (v >= 1 && !ls[v - 1]) {
+				if ((v >= 1) && !ls[v - 1]) {
 					sa[buf[s[v - 1]]++] = v - 1;
 				}
 			});
 			System.arraycopy(sumL, 0, buf, 0, upper + 1);
 			for (int i = n - 1; i >= 0; i--) {
 				int v = sa[i];
-				if (v >= 1 && ls[v - 1]) {
+				if ((v >= 1) && ls[v - 1]) {
 					sa[--buf[s[v - 1] + 1]] = v - 1;
 				}
 			}
@@ -198,7 +203,7 @@ public class ProblemI {
 
 		/**
 		 * 配列sのSuffix Arrayを計算する
-		 * 
+		 *
 		 * @param s     配列
 		 * @param upper sの最大値
 		 * @return 配列sのSuffix Array
@@ -218,19 +223,19 @@ public class ProblemI {
 
 		/**
 		 * 配列sのSuffix Arrayを計算する
-		 * 
+		 *
 		 * @param s 配列
 		 * @return 配列sのSuffix Array
 		 */
 		@SuppressWarnings("unused")
 		static int[] suffixArray(int[] s) {
 			int n = s.length;
-			int[] idx = IntStream.range(0, n).mapToObj(Integer::valueOf).sorted((a, b) -> Integer.compare(s[a], s[b]))
-					.mapToInt(i -> i).toArray();
+			int[] idx = IntStream.range(0, n).boxed().sorted((a, b) -> Integer.compare(s[a], s[b])).mapToInt(i -> i)
+					.toArray();
 			int[] s2 = new int[n];
 			int now = 0;
 			for (int i = 0; i < n; i++) {
-				if ((i > 0) && s[idx[i - 1]] != s[idx[i]]) {
+				if ((i > 0) && (s[idx[i - 1]] != s[idx[i]])) {
 					now++;
 				}
 				s2[idx[i]] = now;
@@ -240,7 +245,7 @@ public class ProblemI {
 
 		/**
 		 * 文字列sのSuffix Arrayを計算する
-		 * 
+		 *
 		 * @param s 文字列
 		 * @return 文字列sのSuffix Array
 		 */
@@ -251,7 +256,7 @@ public class ProblemI {
 
 		/**
 		 * 配列sのLCP Arrayを計算する
-		 * 
+		 *
 		 * @param s  配列
 		 * @param sa sのSuffix Array
 		 * @return 配列sのLCP Array，i番目の要素は s[sa[i]..n), s[sa[i+1]..n) の LCP(Longest Common Prefix) の長さ。
@@ -275,7 +280,44 @@ public class ProblemI {
 					continue;
 				}
 				int j = sa[rnk[i] - 1];
-				for (; j + h < n && i + h < n; h++) {
+				for (; (j + h < n) && (i + h < n); h++) {
+					if (s[j + h] != s[i + h]) {
+						break;
+					}
+				}
+				lcp[rnk[i] - 1] = h;
+			}
+			return lcp;
+		}
+
+		/**
+		 * 配列sのLCP Arrayを計算する
+		 *
+		 * @param s  配列
+		 * @param sa sのSuffix Array
+		 * @return 配列sのLCP Array，i番目の要素は s[sa[i]..n), s[sa[i+1]..n) の LCP(Longest Common Prefix) の長さ。
+		 */
+		@SuppressWarnings("unused")
+		static int[] lcpArray(long[] s, int[] sa) {
+			int n = s.length;
+			if (!(n >= 1)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int[] rnk = new int[n];
+			IntStream.range(0, n).forEach(i -> {
+				rnk[sa[i]] = i;
+			});
+			int[] lcp = new int[n - 1];
+			int h = 0;
+			for (int i = 0; i < n; i++) {
+				if (h > 0) {
+					h--;
+				}
+				if (0 == rnk[i]) {
+					continue;
+				}
+				int j = sa[rnk[i] - 1];
+				for (; (j + h < n) && (i + h < n); h++) {
 					if (s[j + h] != s[i + h]) {
 						break;
 					}
@@ -287,7 +329,7 @@ public class ProblemI {
 
 		/**
 		 * 文字列sのLCP Arrayを計算する
-		 * 
+		 *
 		 * @param s  文字列
 		 * @param sa sのSuffix Array
 		 * @return 文字列sのLCP Array，i番目の要素は s[sa[i]..n), s[sa[i+1]..n) の LCP(Longest Common Prefix) の長さ。
@@ -303,8 +345,9 @@ public class ProblemI {
 		 */
 		static int[] zAlgorithm(int[] s) {
 			int n = s.length;
-			if (n == 0)
+			if (0 == n) {
 				return new int[] {};
+			}
 			int[] z = new int[n];
 			z[0] = 0;
 			for (int i = 1, j = 0; i < n; i++) {

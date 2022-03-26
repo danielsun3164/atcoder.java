@@ -7,14 +7,14 @@ import java.util.stream.IntStream;
 
 public class ProblemF {
 
-	private static final long MOD = 998244353L;
+	private static final int MOD = 998_244_353;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt(), m = scanner.nextInt();
 			long[] a = IntStream.range(0, n).mapToLong(i -> scanner.nextLong()).toArray();
 			long[] b = IntStream.range(0, m).mapToLong(i -> scanner.nextLong()).toArray();
-			System.out.println(Arrays.stream(Convolution.convolution(a, b)).mapToObj(Long::toString)
+			System.out.println(Arrays.stream(Convolution.convolution(a, b, MOD)).mapToObj(Long::toString)
 					.collect(Collectors.joining(" ")));
 		}
 	}
@@ -23,24 +23,26 @@ public class ProblemF {
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/convolution.hpp をもとに作成
 	 */
 	private static class Convolution {
-		private static int SIZE = 32;
+		static int MOD = -1;
+		private static int SIZE = 30;
 		private static boolean first = true;
 		// sum_e[i] = ies[0] * ... * ies[i - 1] * es[i]
 		private static long[] sum_e = new long[SIZE];
 		private static boolean invFirst = true;
 		// sum_ie[i] = es[0] * ... * es[i - 1] * ies[i]
 		private static long[] sum_ie = new long[SIZE];
-		private static int g = primitiveRoot(MOD);
+		private static int g;
 
 		private static void butterfly(long[] a) {
+			g = primitiveRoot(MOD);
 			int n = a.length, h = ceilPow2(n);
 
 			if (first) {
 				first = false;
 				Arrays.fill(sum_e, 0L);
 				// es[i]^(2^(2+i)) == 1
-				int cnt2 = bsf((int) MOD - 1);
-				long[] es = new long[cnt2], ies = new long[cnt2];
+				int cnt2 = bsf(MOD - 1);
+				long[] es = new long[SIZE], ies = new long[SIZE];
 				long e = powMod(g, (MOD - 1) >> cnt2), ie = invMod(e);
 				for (int i = cnt2; i >= 2; i--) {
 					// e^(2^i) == 1
@@ -50,7 +52,7 @@ public class ProblemF {
 					ie = safeMod(ie * ie);
 				}
 				long now = 1L;
-				for (int i = 0; i <= cnt2 - 2; i++) {
+				for (int i = 0; i <= (cnt2 - 2); i++) {
 					sum_e[i] = safeMod(es[i] * now);
 					now = safeMod(now * ies[i]);
 				}
@@ -59,7 +61,7 @@ public class ProblemF {
 				int w = 1 << (ph - 1), p = 1 << (h - ph);
 				long now = 1L;
 				for (int s = 0; s < w; s++) {
-					int offset = s << (h - ph + 1);
+					int offset = s << ((h - ph) + 1);
 					for (int i = 0; i < p; i++) {
 						long l = a[i + offset];
 						long r = safeMod(a[i + offset + p] * now);
@@ -72,14 +74,15 @@ public class ProblemF {
 		}
 
 		private static void butterflyInv(long[] a) {
+			g = primitiveRoot(MOD);
 			int n = a.length, h = ceilPow2(n);
 
 			if (invFirst) {
 				invFirst = false;
 				Arrays.fill(sum_ie, 0L);
 				// es[i]^(2^(2+i)) == 1
-				int cnt2 = bsf((int) MOD - 1);
-				long[] es = new long[cnt2], ies = new long[cnt2];
+				int cnt2 = bsf(MOD - 1);
+				long[] es = new long[SIZE], ies = new long[SIZE];
 				long e = powMod(g, (MOD - 1) >> cnt2), ie = invMod(e);
 				for (int i = cnt2; i >= 2; i--) {
 					// e^(2^i) == 1
@@ -89,7 +92,7 @@ public class ProblemF {
 					ie = safeMod(ie * ie);
 				}
 				long now = 1L;
-				for (int i = 0; i <= cnt2 - 2; i++) {
+				for (int i = 0; i <= (cnt2 - 2); i++) {
 					sum_ie[i] = safeMod(ies[i] * now);
 					now = safeMod(now * es[i]);
 				}
@@ -99,7 +102,7 @@ public class ProblemF {
 				int w = 1 << (ph - 1), p = 1 << (h - ph);
 				long inow = 1L;
 				for (int s = 0; s < w; s++) {
-					int offset = s << (h - ph + 1);
+					int offset = s << ((h - ph) + 1);
 					for (int i = 0; i < p; i++) {
 						long l = a[i + offset];
 						long r = a[i + offset + p];
@@ -111,36 +114,28 @@ public class ProblemF {
 			}
 		}
 
-		static long[] convolution(long[] a, long[] b) {
+		private static long[] convolutionNaive(long[] a, long[] b) {
 			int n = a.length, m = b.length;
-			if ((0 == n) || (0 == m)) {
-				throw new IllegalArgumentException("n is " + n + ", m is " + m);
-			}
-			if (Math.min(n, m) <= 60) {
-				int min, max;
-				long[] minAB, maxAB;
-				if (n < m) {
-					min = n;
-					max = m;
-					minAB = a;
-					maxAB = b;
-				} else {
-					min = m;
-					max = n;
-					minAB = b;
-					maxAB = a;
-				}
-				long[] ans = new long[n + m - 1];
-				Arrays.fill(ans, 0L);
-				for (int i = 0; i < max; i++) {
-					for (int j = 0; j < min; j++) {
-						ans[i + j] = safeMod(ans[i + j] + safeMod(maxAB[i] * minAB[j]));
+			long[] ans = new long[(n + m) - 1];
+			if (n < m) {
+				for (int j = 0; j < m; j++) {
+					for (int i = 0; i < n; i++) {
+						ans[i + j] = safeMod(ans[i + j] + safeMod(a[i] * b[j]));
 					}
 				}
-				return ans;
+			} else {
+				for (int i = 0; i < n; i++) {
+					for (int j = 0; j < m; j++) {
+						ans[i + j] = safeMod(ans[i + j] + safeMod(a[i] * b[j]));
+					}
+				}
 			}
+			return ans;
+		}
 
-			int z = 1 << ceilPow2(n + m - 1);
+		private static long[] convolutionFft(long[] a, long[] b) {
+			int n = a.length, m = b.length;
+			int z = 1 << ceilPow2((n + m) - 1);
 			a = Arrays.copyOf(a, z);
 			butterfly(a);
 			b = Arrays.copyOf(b, z);
@@ -149,209 +144,284 @@ public class ProblemF {
 				a[i] = safeMod(a[i] * b[i]);
 			}
 			butterflyInv(a);
-			a = Arrays.copyOf(a, n + m - 1);
+			a = Arrays.copyOf(a, (n + m) - 1);
 			long iz = invMod(z);
-			for (int i = 0; i < n + m - 1; i++) {
+			for (int i = 0; i < ((n + m) - 1); i++) {
 				a[i] = safeMod(a[i] * iz);
 			}
 			return a;
 		}
-	}
 
-	/**
-	 * x^n mod MOD
-	 * 
-	 * @param x
-	 * @param n
-	 * @return x^n mod MOD を計算する
-	 */
-	static long powMod(long x, long n) {
-		return powMod(x, n, MOD);
-	}
-
-	/**
-	 * x^n mod m
-	 * 
-	 * @param x
-	 * @param n
-	 * @param m
-	 * @return x^n mod m を計算する
-	 */
-	static long powMod(long x, long n, long m) {
-		if (!((0L <= n) || (1L <= m))) {
-			throw new IllegalArgumentException("n is " + n + ", m is " + m);
-		}
-		if (1L == m) {
-			return 0L;
-		}
-		long r = 1L, y = safeMod(x, m);
-		while (n > 0L) {
-			if (1L == (n & 1L)) {
-				r = safeMod(r * y, m);
+		private static long[] convolution(long[] a, long[] b) {
+			int n = a.length, m = b.length;
+			if ((0 == n) || (0 == m)) {
+				return new long[0];
 			}
-			y = safeMod(y * y, m);
-			n >>= 1;
-		}
-		return r;
-	}
-
-	/**
-	 * x mod MOD を安全に計算する
-	 * 
-	 * @param x
-	 * @return x mod MOD
-	 */
-	private static long safeMod(long x) {
-		return safeMod(x, MOD);
-	}
-
-	/**
-	 * x mod m を安全に計算する
-	 * 
-	 * @param x
-	 * @param m
-	 * @return x mod m
-	 */
-	private static long safeMod(long x, long m) {
-		x %= m;
-		if (x < 0) {
-			x += m;
-		}
-		return x;
-	}
-
-	static long invMod(long x) {
-		return invMod(x, MOD);
-	}
-
-	static long invMod(long x, long m) {
-		if (!(1 <= m)) {
-			throw new IllegalArgumentException("m is " + m);
-		}
-		long[] z = invGcd(x, m);
-		if (1L != z[0]) {
-			throw new IllegalArgumentException("z[0] is " + z[0]);
-		}
-		return z[1];
-	}
-
-	/**
-	 * @param a
-	 * @param b `1 <= b`
-	 * @return {g, x} s.t. g = gcd(a, b), x a = g (mod b), 0 <= x < b/g
-	 */
-	static long[] invGcd(long a, long b) {
-		a = safeMod(a, b);
-		if (a == 0) {
-			return new long[] { b, 0 };
+			if (Math.min(n, m) <= 60) {
+				return convolutionNaive(a, b);
+			} else {
+				return convolutionFft(a, b);
+			}
 		}
 
-		// Contracts:
-		// [1] s - m0 * a = 0 (mod b)
-		// [2] t - m1 * a = 0 (mod b)
-		// [3] s * |m1| + t * |m0| <= b
-		long s = b, t = a;
-		long m0 = 0, m1 = 1;
+		/**
+		 * 畳み込みを mod m で計算します。a,b の少なくとも一方が空配列の場合は空配列を返します。
+		 *
+		 * @param a
+		 * @param b
+		 * @param m
+		 * @return 計算した結果配列
+		 */
+		static long[] convolution(long[] a, long[] b, int m) {
+			if (MOD != m) {
+				MOD = m;
+				first = true;
+				invFirst = true;
+			}
+			return convolution(a, b);
+		}
 
-		while (t > 0) {
-			long u = s / t;
-			s -= t * u;
-			m0 -= m1 * u; // |m1 * u| <= |m1| * s <= b
+		private static final long MOD1 = 754_974_721L; // 2^24
+		private static final long MOD2 = 167_772_161L; // 2^25
+		private static final long MOD3 = 469_762_049L; // 2^26
+		private static final long M2M3 = MOD2 * MOD3;
+		private static final long M1M3 = MOD1 * MOD3;
+		private static final long M1M2 = MOD1 * MOD2;
+		private static final long M1M2M3 = MOD1 * MOD2 * MOD3;
 
-			// [3]:
-			// (s - t * u) * |m1| + t * |m0 - m1 * u|
-			// <= s * |m1| - t * u * |m1| + t * (|m0| + |m1| * u)
-			// = s * |m1| + t * |m0| <= b
-			long tmp = s;
-			s = t;
-			t = tmp;
-			tmp = m0;
-			m0 = m1;
-			m1 = tmp;
-		}
-		// by [3]: |m0| <= b/g
-		// by g != b: |m0| < b/g
-		if (m0 < 0) {
-			m0 += b / s;
-		}
-		return new long[] { s, m0 };
-	}
+		private static final long i1 = invGcd(MOD2 * MOD3, MOD1)[1];
+		private static final long i2 = invGcd(MOD1 * MOD3, MOD2)[1];
+		private static final long i3 = invGcd(MOD1 * MOD2, MOD3)[1];
 
-	static int primitiveRoot(long m) {
-		if (2L == m) {
-			return 1;
+		/**
+		 * 畳み込みを計算します。a,b の少なくとも一方が空配列の場合は空配列を返します。
+		 *
+		 * @param a
+		 * @param b
+		 * @return 計算した結果配列
+		 */
+		@SuppressWarnings("unused")
+		static long[] convolutionLong(long[] a, long[] b) {
+			int n = a.length, m = b.length;
+			if ((0 == n) || (0 == m)) {
+				return new long[0];
+			}
+
+			long[] c1 = convolution(a, b, (int) MOD1);
+			long[] c2 = convolution(a, b, (int) MOD2);
+			long[] c3 = convolution(a, b, (int) MOD3);
+
+			long[] c = new long[(n + m) - 1];
+			for (int i = 0; i < ((n + m) - 1); i++) {
+				long x = 0L;
+				x += ((c1[i] * i1) % MOD1) * M2M3;
+				x += ((c2[i] * i2) % MOD2) * M1M3;
+				x += ((c3[i] * i3) % MOD3) * M1M2;
+				int diff = (int) safeMod(c1[i] - safeMod(x, MOD1), MOD1);
+				long[] offset = { 0L, 0L, M1M2M3, 2 * M1M2M3, 3 * M1M2M3 };
+				x -= offset[diff % 5];
+				c[i] = x;
+			}
+
+			return c;
 		}
-		if (167772161L == m) {
-			return 3;
+
+		// 以下 https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp を参考に作成
+		/**
+		 * x^n mod MOD
+		 *
+		 * @param x
+		 * @param n
+		 * @return x^n mod MOD を計算する
+		 */
+		static long powMod(long x, long n) {
+			return powMod(x, n, MOD);
 		}
-		if (469762049L == m) {
-			return 3;
+
+		/**
+		 * x^n mod m を計算する
+		 *
+		 * @param x
+		 * @param n
+		 * @param m
+		 * @return x^n mod m
+		 */
+		static long powMod(long x, long n, long m) {
+			if (!((0L <= n) || (1L <= m))) {
+				throw new IllegalArgumentException("n is " + n + ", m is " + m);
+			}
+			if (1L == m) {
+				return 0L;
+			}
+			long r = 1L, y = safeMod(x, m);
+			while (n > 0L) {
+				if (1L == (n & 1L)) {
+					r = safeMod(r * y, m);
+				}
+				y = safeMod(y * y, m);
+				n >>= 1;
+			}
+			return r;
 		}
-		if (754974721L == m) {
-			return 11;
+
+		/**
+		 * x mod MOD を安全に計算する
+		 *
+		 * @param x
+		 * @return x mod MOD
+		 */
+		private static long safeMod(long x) {
+			return safeMod(x, MOD);
 		}
-		if (998244353L == m) {
-			return 3;
+
+		/**
+		 * x mod m を安全に計算する
+		 *
+		 * @param x
+		 * @param m
+		 * @return x mod m
+		 */
+		static long safeMod(long x, long m) {
+			x %= m;
+			if (x < 0) {
+				x += m;
+			}
+			return x;
 		}
-		long[] divs = new long[20];
-		Arrays.fill(divs, 0L);
-		divs[0] = 2;
-		int cnt = 1;
-		long x = (m - 1) / 2;
-		while (0 == (x & 1)) {
-			x >>= 1;
+
+		static long invMod(long x) {
+			return invMod(x, MOD);
 		}
-		for (int i = 3; (long) (i) * i <= x; i += 2) {
-			if (0 == x % i) {
-				divs[cnt++] = i;
-				while (0 == x % i) {
-					x /= i;
+
+		/**
+		 * xy≡1(mod m) なる y のうち、0≤y<m を満たすものを返します。
+		 *
+		 * @param x
+		 * @param m
+		 * @return xy≡1 (mod m) なる y のうち、0≤y<m を満たすもの
+		 */
+		static long invMod(long x, long m) {
+			if (!(1 <= m)) {
+				throw new IllegalArgumentException("m is " + m);
+			}
+			long[] z = invGcd(x, m);
+			if (1L != z[0]) {
+				throw new IllegalArgumentException("z[0] is " + z[0]);
+			}
+			return z[1];
+		}
+
+		/**
+		 * @param a
+		 * @param b `1 <= b`
+		 * @return {g, x} s.t. g = gcd(a, b), x a = g (mod b), 0 <= x < b/g
+		 */
+		static long[] invGcd(long a, long b) {
+			a = safeMod(a, b);
+			if (a == 0) {
+				return new long[] { b, 0 };
+			}
+
+			long s = b, t = a;
+			long m0 = 0L, m1 = 1L;
+
+			while (t != 0) {
+				long u = s / t;
+				s -= t * u;
+				m0 -= m1 * u;
+
+				long tmp = s;
+				s = t;
+				t = tmp;
+				tmp = m0;
+				m0 = m1;
+				m1 = tmp;
+			}
+			if (m0 < 0) {
+				m0 += b / s;
+			}
+			return new long[] { s, m0 };
+		}
+
+		static int primitiveRoot(int m) {
+			if (2 == m) {
+				return 1;
+			}
+			if (167772161 == m) {
+				return 3;
+			}
+			if (469762049 == m) {
+				return 3;
+			}
+			if (754974721 == m) {
+				return 11;
+			}
+			if (998244353 == m) {
+				return 3;
+			}
+			int[] divs = new int[20];
+			Arrays.fill(divs, 0);
+			divs[0] = 2;
+			int cnt = 1;
+			int x = (m - 1) / 2;
+			while (0 == (x & 1)) {
+				x >>= 1;
+			}
+			for (int i = 3; ((long) (i) * i) <= x; i += 2) {
+				if (0 == (x % i)) {
+					divs[cnt++] = i;
+					while (0 == (x % i)) {
+						x /= i;
+					}
+				}
+			}
+			if (x > 1) {
+				divs[cnt++] = x;
+			}
+			for (int g = 2;; g++) {
+				boolean ok = true;
+				for (int i = 0; i < cnt; i++) {
+					if (1L == powMod(g, (m - 1) / divs[i], m)) {
+						ok = false;
+						break;
+					}
+				}
+				if (ok) {
+					return g;
 				}
 			}
 		}
-		if (x > 1) {
-			divs[cnt++] = x;
-		}
-		for (int g = 2;; g++) {
-			boolean ok = true;
-			for (int i = 0; i < cnt; i++) {
-				if (1L == powMod(g, (m - 1) / divs[i], m)) {
-					ok = false;
-					break;
-				}
-			}
-			if (ok) {
-				return g;
-			}
-		}
-	}
 
-	/**
-	 * 
-	 * @param n `0 <= n`
-	 * @return minimum non-negative `x` s.t. `n <= 2**x`
-	 */
-	static int ceilPow2(int n) {
-		int x = 0;
-		while ((1 << x) < n) {
-			x++;
+		/**
+		 *
+		 * @param n `0 <= n`
+		 * @return minimum non-negative `x` s.t. `n <= 2**x`
+		 */
+		static int ceilPow2(int n) {
+			if (!(0 <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 0;
+			while ((1L << x) < n) {
+				x++;
+			}
+			return x;
 		}
-		return x;
-	}
 
-	/**
-	 * 
-	 * @param n `1 <= n`
-	 * @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
-	 */
-	static int bsf(int n) {
-		if (!(1 <= n)) {
-			throw new IllegalArgumentException("n is " + n);
+		/**
+		 *
+		 * @param n `1 <= n`
+		 * @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
+		 */
+		static int bsf(long n) {
+			if (!(1L <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 0;
+			while ((0 == (n & (1L << x))) && (x < 31)) {
+				x++;
+			}
+			return x;
 		}
-		int x = 0;
-		while ((0 == (n & (1 << x))) && (x < 31)) {
-			x++;
-		}
-		return x;
 	}
 }

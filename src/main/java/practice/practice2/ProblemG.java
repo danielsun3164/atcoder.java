@@ -37,7 +37,15 @@ public class ProblemG {
 
 		/**
 		 * コンストラクター
-		 * 
+		 */
+		@SuppressWarnings("unused")
+		SccGraph() {
+			this(0);
+		}
+
+		/**
+		 * コンストラクター
+		 *
 		 * @param n ノード数
 		 */
 		SccGraph(int n) {
@@ -47,11 +55,17 @@ public class ProblemG {
 
 		/**
 		 * 辺を追加
-		 * 
+		 *
 		 * @param from 始点
 		 * @param to   終点
 		 */
 		void addEdge(int from, int to) {
+			if (!((0 <= from) && (from < n))) {
+				throw new IllegalArgumentException("from is " + from);
+			}
+			if (!((0 <= to) && (to < n))) {
+				throw new IllegalArgumentException("to is " + to);
+			}
 			edges.add(new LEdge(from, to));
 		}
 
@@ -79,7 +93,7 @@ public class ProblemG {
 			return new LGraph(groupNum, ids);
 		}
 
-		void dfs(int v, Csr g, Stack<Integer> visited, int[] low, int[] ord, int[] ids) {
+		private void dfs(int v, Csr g, Stack<Integer> visited, int[] low, int[] ord, int[] ids) {
 			low[v] = ord[v] = nowOrd++;
 			visited.add(v);
 			for (int i = g.start[v]; i < g.start[v + 1]; i++) {
@@ -134,9 +148,9 @@ public class ProblemG {
 			int nodes;
 			int[] edges;
 
-			LGraph(int node, int[] edges) {
+			LGraph(int nodes, int[] edges) {
 				super();
-				this.nodes = node;
+				this.nodes = nodes;
 				this.edges = edges;
 			}
 		}

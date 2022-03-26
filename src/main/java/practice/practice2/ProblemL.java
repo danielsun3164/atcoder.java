@@ -122,7 +122,7 @@ public class ProblemL {
 
 		/**
 		 * a[p] = x と設定する
-		 * 
+		 *
 		 * @param p
 		 * @param x
 		 */
@@ -139,14 +139,14 @@ public class ProblemL {
 
 		/**
 		 * a[p] を返す
-		 * 
+		 *
 		 * @param p
 		 * @return a[p]
 		 */
 		@SuppressWarnings("unused")
 		S get(int p) {
 			if (!(0 <= p && p < n)) {
-				new IllegalArgumentException("p is " + p);
+				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
 			pushTo(p);
@@ -155,7 +155,7 @@ public class ProblemL {
 
 		/**
 		 * op(a[l], ..., a[r - 1]) を、モノイドの性質を満たしていると仮定して計算する。l==r のときは e() を返す。
-		 * 
+		 *
 		 * @param l
 		 * @param r
 		 * @return op(a[l], ..., a[r - 1])
@@ -195,7 +195,7 @@ public class ProblemL {
 
 		/**
 		 * op(a[0], ..., a[n-1]) を計算する。n==0 のときは e() を返す。
-		 * 
+		 *
 		 * @return op(a[0], ..., a[n-1])
 		 */
 		@SuppressWarnings("unused")
@@ -205,7 +205,7 @@ public class ProblemL {
 
 		/**
 		 * a[p] = f(a[p]) と設定する
-		 * 
+		 *
 		 * @param p
 		 * @param f
 		 */
@@ -222,7 +222,7 @@ public class ProblemL {
 
 		/**
 		 * i = l..r-1についてa[i] = f(a[i]) と設定する
-		 * 
+		 *
 		 * @param l
 		 * @param r
 		 * @param f
@@ -275,10 +275,10 @@ public class ProblemL {
 		 * r = l もしくは g(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * r = n もしくは g(op(a[l], a[l + 1], ..., a[r])) = false <br/>
 		 * gが単調だとすれば、g(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最大の r、と解釈することが可能です。
-		 * 
+		 *
 		 * @param l
 		 * @param g
-		 * @return
+		 * @return 条件を両方満たす r を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
 		int maxRight(int l, Predicate<S> g) {
@@ -320,10 +320,10 @@ public class ProblemL {
 		 * l = r もしくは g(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * l = 0 もしくは g(op(a[l - 1], a[l], ..., a[r - 1])) = false <br/>
 		 * gが単調だとすれば、g(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最小の l、と解釈することが可能です。
-		 * 
+		 *
 		 * @param r
 		 * @param g
-		 * @return
+		 * @return 条件を両方満たす l を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
 		int minLeft(int r, Predicate<S> g) {
@@ -394,7 +394,7 @@ public class ProblemL {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param n `0 <= n`
 	 * @return minimum non-negative `x` s.t. `n <= 2**x`
 	 */
