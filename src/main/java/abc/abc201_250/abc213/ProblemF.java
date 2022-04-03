@@ -298,7 +298,6 @@ public class ProblemF {
 		 * @param s 文字列
 		 * @return 文字列sのSuffix Array
 		 */
-		@SuppressWarnings("unused")
 		static int[] suffixArray(String s) {
 			int[] s2 = IntStream.range(0, s.length()).map(i -> s.charAt(i)).toArray();
 			return saIs(s2, 255);
@@ -384,7 +383,6 @@ public class ProblemF {
 		 * @param sa sのSuffix Array
 		 * @return 文字列sのLCP Array，i番目の要素は s[sa[i]..n), s[sa[i+1]..n) の LCP(Longest Common Prefix) の長さ。
 		 */
-		@SuppressWarnings("unused")
 		static int[] lcpArray(String s, int[] sa) {
 			int[] s2 = IntStream.range(0, s.length()).map(i -> s.charAt(i)).toArray();
 			return lcpArray(s2, sa);
