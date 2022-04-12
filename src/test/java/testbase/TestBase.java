@@ -245,13 +245,24 @@ public abstract class TestBase {
 	/**
 	 * テストケースを実行した結果をチェック
 	 *
-	 * @param number    実行結果の数字形式の文字列
 	 * @param expected  予定した結果
+	 * @param number    実行結果の数字形式の文字列
 	 * @param tolerance 誤差範囲
 	 */
-	protected void assertNumberIsAbout(String number, double expected, double tolerance) {
+	protected void assertNumberIsAbout(double expected, String number, double tolerance) {
 		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance,
 				"number is " + number + ", expected is " + expected);
+	}
+
+	/**
+	 * テストケースを実行した結果をチェック
+	 *
+	 * @param expected  予定した結果
+	 * @param number    実行結果の数字
+	 * @param tolerance 誤差範囲
+	 */
+	protected void assertNumberIsAbout(double expected, double number, double tolerance) {
+		assertTrue(Math.abs(number - expected) < tolerance, "number is " + number + ", expected is " + expected);
 	}
 
 	/**

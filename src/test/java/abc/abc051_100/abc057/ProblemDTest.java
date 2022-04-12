@@ -21,7 +21,7 @@ class ProblemDTest extends TestBase {
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(2, lines.length);
-		assertNumberIsAbout(lines[0], average, TOLERANCE);
+		assertNumberIsAbout(average, lines[0], TOLERANCE);
 		assertEquals(n, lines[1]);
 	}
 
