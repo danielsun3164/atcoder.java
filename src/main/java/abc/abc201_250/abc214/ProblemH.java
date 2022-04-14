@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 /**
  * 解説通りに実装したソースコード
  *
- * https://atcoder.jp/contests/abc212/submissions/24641867 にも参考
+ * https://atcoder.jp/contests/abc214/submissions/24999725 にも参考
  */
 public class ProblemH {
 
