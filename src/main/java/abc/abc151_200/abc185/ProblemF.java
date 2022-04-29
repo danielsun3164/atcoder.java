@@ -46,7 +46,7 @@ public class ProblemF {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param n
 		 */
 		@SuppressWarnings({ "unused", "unchecked" })
@@ -62,7 +62,7 @@ public class ProblemF {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param v
 		 */
 		@SuppressWarnings("unchecked")
@@ -81,7 +81,7 @@ public class ProblemF {
 
 		/**
 		 * a[p] に x を代入する
-		 * 
+		 *
 		 * @param p
 		 * @param x
 		 */
@@ -99,7 +99,7 @@ public class ProblemF {
 
 		/**
 		 * a[p] を返す
-		 * 
+		 *
 		 * @param p
 		 * @return a[p]
 		 */
@@ -112,7 +112,7 @@ public class ProblemF {
 
 		/**
 		 * op(a[l], ..., a[r - 1]) を、モノイドの性質を満たしていると仮定して計算します。
-		 * 
+		 *
 		 * @param l
 		 * @param r
 		 * @return op(a[l], ..., a[r - 1])、 l==r のときは e()。
@@ -140,7 +140,7 @@ public class ProblemF {
 
 		/**
 		 * op(a[0], ..., a[n - 1]) を計算します。n==0 のときは e() を返します。
-		 * 
+		 *
 		 * @return op(a[0], ..., a[n - 1])、n==0 のときは e()。
 		 */
 		@SuppressWarnings("unused")
@@ -153,10 +153,10 @@ public class ProblemF {
 		 * r = l もしくは fRight(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * r = n もしくは fRight(op(a[l], a[l + 1], ..., a[r])) = false <br/>
 		 * fが単調だとすれば、fRight(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最大の r、と解釈することが可能です。
-		 * 
+		 *
 		 * @param l
 		 * @param f
-		 * @return
+		 * @return 条件を両方満たす r を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
 		int maxRight(int l, Predicate<S> f) {
@@ -196,10 +196,10 @@ public class ProblemF {
 		 * l = r もしくは f(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * l = 0 もしくは f(op(a[l - 1], a[l], ..., a[r - 1])) = false <br/>
 		 * fが単調だとすれば、f(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最小の l、と解釈することが可能です。
-		 * 
+		 *
 		 * @param r
 		 * @param f
-		 * @return
+		 * @return 条件を両方満たす l を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
 		int minLeft(int r, Predicate<S> f) {
@@ -240,7 +240,7 @@ public class ProblemF {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param n `0 <= n`
 	 * @return minimum non-negative `x` s.t. `n <= 2**x`
 	 */

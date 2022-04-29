@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc133/submissions/15583598 にも参考
  */
 public class ProblemF {
@@ -47,7 +47,7 @@ public class ProblemF {
 
 	/**
 	 * 各問いの結果を計算する
-	 * 
+	 *
 	 * @param now        現在の処理対象のノード
 	 * @param pre        遷移元のノード
 	 * @param edgeLists  辺の一覧
@@ -121,17 +121,17 @@ public class ProblemF {
 		/** ノードの数 */
 		int n;
 		/** 親の配列 */
-		int parents[][];
+		int[][] parents;
 		/** ノード0から各ノードへのステップ数 */
-		int dists[];
+		int[] dists;
 		/** ノード0から各ノードへの距離 */
-		int costs[];
+		int[] costs;
 		/** 辺の一覧 */
 		List<Edge>[] edgeLists;
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param edgeLists 辺の一覧
 		 */
 		Lca(List<Edge>[] edgeLists) {
@@ -149,7 +149,7 @@ public class ProblemF {
 
 		/**
 		 * 各ノードを再帰的初期化
-		 * 
+		 *
 		 * @param now  現在のノード
 		 * @param pre  遷移元のノード
 		 * @param dist ステップ数
@@ -179,7 +179,7 @@ public class ProblemF {
 
 		/**
 		 * aとbの共通の親を取得する
-		 * 
+		 *
 		 * @param a
 		 * @param b
 		 * @return aとbの共通の親
@@ -212,27 +212,25 @@ public class ProblemF {
 
 		/**
 		 * aからbへの移動ステップ数を取得する
-		 * 
+		 *
 		 * @param a
 		 * @param b
 		 * @return aからbへの移動ステップ数
 		 */
 		@SuppressWarnings("unused")
 		int dist(int a, int b) {
-			int c = get(a, b);
-			return dists[a] + dists[b] - 2 * dists[c];
+			return dists[a] + dists[b] - 2 * dists[get(a, b)];
 		}
 
 		/**
 		 * aからbへの移動コストを取得する
-		 * 
+		 *
 		 * @param a
 		 * @param b
 		 * @return aからbへの移動コスト
 		 */
 		int cost(int a, int b) {
-			int c = get(a, b);
-			return costs[a] + costs[b] - 2 * costs[c];
+			return costs[a] + costs[b] - 2 * costs[get(a, b)];
 		}
 	}
 }

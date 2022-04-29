@@ -1,12 +1,13 @@
 package practice.practice2;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.Stack;
 import java.util.stream.IntStream;
 
 /**
@@ -25,7 +26,7 @@ public class ProblemE {
 			 * generate (s -> row -> column -> t) graph<br/>
 			 * i-th row correspond to vertex i i-th col correspond to vertex n + i
 			 **/
-			MinCostFlow graph = new MinCostFlow(2 * n + 2);
+			MinCostFlowGraph graph = new MinCostFlowGraph(2 * n + 2);
 			int s = 2 * n, t = 2 * n + 1;
 
 			graph.addEdge(s, t, n * k, INF);
@@ -36,7 +37,7 @@ public class ProblemE {
 			IntStream.range(0, n).forEach(
 					i -> IntStream.range(0, n).forEach(j -> graph.addEdge(i, n + j, 1L, INF - scanner.nextLong())));
 
-			Result result = graph.flow(s, t, n * k);
+			MinCostFlowGraph.Result result = graph.flow(s, t, n * k);
 			System.out.println(1L * n * k * INF - result.cost);
 
 			char[][] grid = new char[n][n];
@@ -50,29 +51,34 @@ public class ProblemE {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/mincostflow.hpp をもとに作成
 	 */
-	private static class MinCostFlow {
+	private static class MinCostFlowGraph {
 		/** ノード数 */
 		final int n;
 		/** 各ノードからの辺の一覧 */
-		final List<LEdge>[] g;
-		final List<int[]> pos;
+		private final List<Edge> edges;
 
 		/**
 		 * コンストラクター
-		 * 
+		 */
+		@SuppressWarnings("unused")
+		MinCostFlowGraph() {
+			this(0);
+		}
+
+		/**
+		 * コンストラクター
+		 *
 		 * @param n ノード数
 		 */
-		@SuppressWarnings("unchecked")
-		MinCostFlow(int n) {
+		MinCostFlowGraph(int n) {
 			super();
 			this.n = n;
-			g = IntStream.range(0, n).mapToObj(i -> new ArrayList<LEdge>()).toArray(List[]::new);
-			pos = new ArrayList<>();
+			edges = new ArrayList<>();
 		}
 
 		/**
 		 * 辺を追加
-		 * 
+		 *
 		 * @param from 始点
 		 * @param to   終点
 		 * @param cap  容量
@@ -92,57 +98,79 @@ public class ProblemE {
 			if (!(0 <= cost)) {
 				throw new IllegalArgumentException("cost is " + cost);
 			}
-			int m = pos.size();
-			pos.add(new int[] { from, g[from].size() });
-			int fromId = g[from].size();
-			int toId = g[to].size();
-			if (from == to) {
-				toId++;
-			}
-			g[from].add(new LEdge(to, toId, cap, cost));
-			g[to].add(new LEdge(from, fromId, 0L, -cost));
+			int m = edges.size();
+			edges.add(new Edge(from, to, cap, 0L, cost));
 			return m;
 		}
 
 		/**
-		 * i番目のパスを取得する
-		 * 
+		 * i番目の辺を取得する
+		 *
 		 * @param i
-		 * @return i番目のパス
+		 * @return i番目の辺
 		 */
+		@SuppressWarnings("unused")
 		Edge getEdge(int i) {
-			if (!((0 <= i) && (i < pos.size()))) {
-				throw new IllegalArgumentException("i is " + i + ", pos.size() is " + pos.size());
+			if (!((0 <= i) && (i < edges.size()))) {
+				throw new IllegalArgumentException("i is " + i + ", edges.size() is " + edges.size());
 			}
-			LEdge e = g[pos.get(i)[0]].get(pos.get(i)[1]);
-			LEdge re = g[e.to].get(e.rev);
-			return new Edge(pos.get(i)[0], e.to, e.cap + re.cap, re.cap, e.cost);
+			return edges.get(i);
 		}
 
 		/**
 		 * パスの一覧を取得する
-		 * 
+		 *
 		 * @return パスの一覧
 		 */
 		List<Edge> edges() {
-			return IntStream.range(0, pos.size()).mapToObj(i -> getEdge(i)).collect(Collectors.toList());
+			return edges;
 		}
 
+		/**
+		 * s から t へ流せるだけ流し、その流量とコストを返す。
+		 *
+		 * @param s
+		 * @param t
+		 * @return 流量とコストのクラス
+		 */
 		@SuppressWarnings("unused")
 		Result flow(int s, int t) {
 			return flow(s, t, Long.MAX_VALUE);
 		}
 
+		/**
+		 * s から t へ流せるだけ流し、その流量とコストを返す。
+		 *
+		 * @param s
+		 * @param t
+		 * @param flowLimit 流量の最大値
+		 * @return 流量とコストのクラス
+		 */
 		Result flow(int s, int t, long flowLimit) {
 			List<Result> result = slope(s, t, flowLimit);
 			return result.get(result.size() - 1);
 		}
 
+		/**
+		 * s から t へ流せる min_cost_slope を計算する
+		 *
+		 * @param s
+		 * @param t
+		 * @return min_cost_slope
+		 */
 		@SuppressWarnings("unused")
 		List<Result> slope(int s, int t) {
 			return slope(s, t, Long.MAX_VALUE);
 		}
 
+		/**
+		 * s から t へ流せる min_cost_slope を計算する
+		 *
+		 * @param s
+		 * @param t
+		 * @param flowLimit 流量の最大値
+		 * @return min_cost_slope
+		 */
 		List<Result> slope(int s, int t, long flowLimit) {
 			if (!((0 <= s) && (s < n))) {
 				throw new IllegalArgumentException("s is " + s);
@@ -154,28 +182,52 @@ public class ProblemE {
 				throw new IllegalArgumentException("s is " + s + ", t is " + t);
 			}
 
-			// variants (C = maxcost):
-			// -(n-1)C <= dual[s] <= dual[i] <= dual[t] = 0
-			// reduced cost (= e.cost + dual[e.from] - dual[e.to]) >= 0 for all edge
+			int m = edges.size();
+			int[] edgeIndex = new int[m];
+			Arrays.fill(edgeIndex, 0);
+
+			Csr<InternalEdge> g = calcCsr(edgeIndex);
+			List<Result> result = slope(g, s, t, flowLimit);
+			IntStream.range(0, m).forEach(i -> {
+				InternalEdge e = g.elist[edgeIndex[i]];
+				edges.get(i).flow = edges.get(i).cap - e.cap;
+			});
+			return result;
+		}
+
+		/**
+		 * s から t へ流せる min_cost_slope を計算する
+		 *
+		 * @param g
+		 * @param s
+		 * @param t
+		 * @param flowLimit 流量の最大値
+		 * @return min_cost_slope
+		 */
+		private List<Result> slope(Csr<InternalEdge> g, int s, int t, long flowLimit) {
 			long[] dual = new long[n], dist = new long[n];
-			int[] pv = new int[n], pe = new int[n];
-			boolean[] vis = new boolean[n];
 			Arrays.fill(dual, 0L);
+			int[] prevE = new int[n];
+			boolean[] vis = new boolean[n];
+
+			Stack<Integer> queMin = new Stack<>();
+			Queue<Q> que = new PriorityQueue<>();
+
 			long flow = 0L, cost = 0L, prevCostPerFlow = -1L;
 			List<Result> result = new ArrayList<>();
-			result.add(new Result(flow, cost));
+			result.add(new Result(0L, 0L));
 			while (flow < flowLimit) {
-				if (!dualRef(s, t, dual, dist, pv, pe, vis)) {
+				if (!dualRef(g, s, t, dual, dist, prevE, vis, queMin, que)) {
 					break;
 				}
 				long c = flowLimit - flow;
-				for (int v = t; v != s; v = pv[v]) {
-					c = Math.min(c, g[pv[v]].get(pe[v]).cap);
+				for (int v = t; v != s; v = g.elist[prevE[v]].to) {
+					c = Math.min(c, g.elist[g.elist[prevE[v]].rev].cap);
 				}
-				for (int v = t; v != s; v = pv[v]) {
-					LEdge e = g[pv[v]].get(pe[v]);
-					e.cap -= c;
-					g[v].get(e.rev).cap += c;
+				for (int v = t; v != s; v = g.elist[prevE[v]].to) {
+					InternalEdge e = g.elist[prevE[v]];
+					e.cap += c;
+					g.elist[e.rev].cap -= c;
 				}
 				long d = -dual[s];
 				flow += c;
@@ -189,16 +241,49 @@ public class ProblemE {
 			return result;
 		}
 
-		boolean dualRef(int s, int t, long[] dual, long[] dist, int[] pv, int[] pe, boolean[] vis) {
+		/**
+		 * Csrクラスを計算する
+		 *
+		 * @param edgeIndex
+		 * @return Csrクラス
+		 */
+		private Csr<InternalEdge> calcCsr(int[] edgeIndex) {
+			int m = edges.size();
+			int[] degree = new int[n], redgeIndex = new int[m];
+			Arrays.fill(degree, 0);
+			Arrays.fill(redgeIndex, 0);
+			int[] indexes = new int[2 * m];
+			InternalEdge[] inEdges = new InternalEdge[m * 2];
+			IntStream.range(0, m).forEach(i -> {
+				Edge e = edges.get(i);
+				edgeIndex[i] = degree[e.from]++;
+				redgeIndex[i] = degree[e.to]++;
+				indexes[i * 2] = e.from;
+				inEdges[i * 2] = new InternalEdge(e.to, -1, e.cap - e.flow, e.cost);
+				indexes[i * 2 + 1] = e.to;
+				inEdges[i * 2 + 1] = new InternalEdge(e.from, -1, e.flow, -e.cost);
+			});
+			Csr<InternalEdge> g = new Csr<>(n, indexes, inEdges, InternalEdge.class);
+			IntStream.range(0, m).forEach(i -> {
+				Edge e = edges.get(i);
+				edgeIndex[i] += g.start[e.from];
+				redgeIndex[i] += g.start[e.to];
+				g.elist[edgeIndex[i]].rev = redgeIndex[i];
+				g.elist[redgeIndex[i]].rev = edgeIndex[i];
+			});
+			return g;
+		}
+
+		private boolean dualRef(Csr<InternalEdge> g, int s, int t, long[] dual, long[] dist, int[] prevE, boolean[] vis,
+				Stack<Integer> queMin, Queue<Q> que) {
 			Arrays.fill(dist, Long.MAX_VALUE);
-			Arrays.fill(pv, -1);
-			Arrays.fill(pe, -1);
 			Arrays.fill(vis, false);
-			Queue<Q> que = new PriorityQueue<>();
+			queMin.clear();
+			que.clear();
 			dist[s] = 0L;
-			que.add(new Q(0L, s));
-			while (!que.isEmpty()) {
-				int v = que.poll().to;
+			queMin.add(s);
+			while (!queMin.isEmpty() || !que.isEmpty()) {
+				int v = (!queMin.isEmpty()) ? queMin.pop() : que.poll().to;
 				if (vis[v]) {
 					continue;
 				}
@@ -206,46 +291,38 @@ public class ProblemE {
 				if (v == t) {
 					break;
 				}
-				// dist[v] = shortest(s, v) + dual[s] - dual[v]
-				// dist[v] >= 0 (all reduced cost are positive)
-				// dist[v] <= (n-1)C
-				for (int i = 0; i < g[v].size(); i++) {
-					LEdge e = g[v].get(i);
-					if (vis[e.to] || (0L == e.cap)) {
-						continue;
+				IntStream.range(g.start[v], g.start[v + 1]).forEach(i -> {
+					InternalEdge e = g.elist[i];
+					if (e.cap != 0L) {
+						long cost = e.cost - dual[e.to] + dual[v];
+						if (dist[e.to] - dist[v] > cost) {
+							long distTo = dist[v] + cost;
+							dist[e.to] = distTo;
+							prevE[e.to] = e.rev;
+							if (distTo == dist[v]) {
+								queMin.add(e.to);
+							} else {
+								que.add(new Q(distTo, e.to));
+							}
+						}
 					}
-					// |-dual[e.to] + dual[v]| <= (n-1)C
-					// cost <= C - -(n-1)C + 0 = nC
-					long cost = e.cost - dual[e.to] + dual[v];
-					if (dist[e.to] - dist[v] > cost) {
-						dist[e.to] = dist[v] + cost;
-						pv[e.to] = v;
-						pe[e.to] = i;
-						que.add(new Q(dist[e.to], e.to));
-					}
-				}
+				});
 			}
 			if (!vis[t]) {
 				return false;
 			}
-
-			for (int v = 0; v < n; v++) {
-				if (!vis[v]) {
-					continue;
+			IntStream.range(0, n).forEach(v -> {
+				if (vis[v]) {
+					dual[v] -= dist[t] - dist[v];
 				}
-				// dual[v] = dual[v] - dist[t] + dist[v]
-				// = dual[v] - (shortest(s, t) + dual[s] - dual[t]) + (shortest(s, v) + dual[s] - dual[v])
-				// = - shortest(s, t) + dual[t] + shortest(s, v)
-				// = shortest(s, v) - shortest(s, t) >= 0 - (n-1)C
-				dual[v] -= dist[t] - dist[v];
-			}
+			});
 			return true;
 		}
 
 		/**
 		 * 内部用の辺を表すクラス
 		 */
-		private static class LEdge {
+		private static class InternalEdge {
 			/** 終点 */
 			int to;
 			/** 戻る辺は宛先の何番目の辺か */
@@ -257,13 +334,13 @@ public class ProblemE {
 
 			/**
 			 * コンストラクター
-			 * 
+			 *
 			 * @param to
 			 * @param rev
 			 * @param cap
 			 * @param cost
 			 */
-			LEdge(int to, int rev, long cap, long cost) {
+			InternalEdge(int to, int rev, long cap, long cost) {
 				super();
 				this.to = to;
 				this.rev = rev;
@@ -287,64 +364,80 @@ public class ProblemE {
 				return Long.compare(key, q.key);
 			}
 		}
-	}
 
-	/**
-	 * パスを表すクラス
-	 */
-	private static class Edge {
-		/** 始点 */
-		int from;
-		/** 終点 */
-		int to;
-		/** 容量 */
-		@SuppressWarnings("unused")
-		long cap;
-		/** フロー */
-		long flow;
-		/** コスト */
-		@SuppressWarnings("unused")
-		long cost;
+		private static class Csr<E> {
+			final int[] start;
+			final E[] elist;
 
-		/**
-		 * コンストラクター
-		 * 
-		 * @param from
-		 * @param to
-		 * @param cap
-		 * @param flow
-		 * @param cost
-		 */
-		Edge(int from, int to, long cap, long flow, long cost) {
-			super();
-			this.from = from;
-			this.to = to;
-			this.cap = cap;
-			this.flow = flow;
-			this.cost = cost;
+			@SuppressWarnings("unchecked")
+			Csr(int n, int[] indexes, E[] inEdges, Class<E> clazz) {
+				start = new int[n + 1];
+				Arrays.fill(start, 0);
+				int m = inEdges.length;
+				elist = (E[]) Array.newInstance(clazz, m);
+
+				Arrays.stream(indexes).forEach(index -> start[index + 1]++);
+				IntStream.rangeClosed(1, n).forEach(i -> start[i] += start[i - 1]);
+				int[] counter = Arrays.copyOf(start, start.length);
+				IntStream.range(0, m).forEach(i -> elist[counter[indexes[i]]++] = inEdges[i]);
+			}
 		}
-	}
-
-	/**
-	 * 計算結果を表すクラス
-	 */
-	private static class Result {
-		/** 容量 */
-		@SuppressWarnings("unused")
-		long cap;
-		/** コスト */
-		long cost;
 
 		/**
-		 * コンストラクター
-		 * 
-		 * @param cap
-		 * @param cost
+		 * 辺を表すクラス
 		 */
-		Result(long cap, long cost) {
-			super();
-			this.cap = cap;
-			this.cost = cost;
+		static class Edge {
+			/** 始点 */
+			int from;
+			/** 終点 */
+			int to;
+			/** 容量 */
+			long cap;
+			/** フロー */
+			long flow;
+			/** コスト */
+			long cost;
+
+			/**
+			 * コンストラクター
+			 *
+			 * @param from
+			 * @param to
+			 * @param cap
+			 * @param flow
+			 * @param cost
+			 */
+			Edge(int from, int to, long cap, long flow, long cost) {
+				super();
+				this.from = from;
+				this.to = to;
+				this.cap = cap;
+				this.flow = flow;
+				this.cost = cost;
+			}
+		}
+
+		/**
+		 * 計算結果を表すクラス
+		 */
+		static class Result {
+			/** 容量 */
+			@SuppressWarnings("unused")
+			long cap;
+			/** コスト */
+			long cost;
+
+			/**
+			 * コンストラクター
+			 *
+			 * @param cap
+			 * @param cost
+			 */
+			Result(long cap, long cost) {
+				super();
+				this.cap = cap;
+				this.cost = cost;
+			}
 		}
 	}
 }

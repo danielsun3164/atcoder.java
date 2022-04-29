@@ -50,7 +50,7 @@ class ProblemDTest extends TestBase {
 		assertEquals(1, lines.length);
 		String[] numbers = lines[0].split("\\ ");
 		assertEquals(2, numbers.length);
-		assertNumberIsAbout(numbers[0], ex, TOLERANCE);
-		assertNumberIsAbout(numbers[1], ey, TOLERANCE);
+		assertNumberIsAbout(ex, numbers[0], TOLERANCE);
+		assertNumberIsAbout(ey, numbers[1], TOLERANCE);
 	}
 }

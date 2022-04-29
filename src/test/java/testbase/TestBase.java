@@ -59,36 +59,37 @@ public abstract class TestBase {
 
 	/**
 	 * テストケースを実行した結果をチェック
-	 * 
+	 *
 	 * @param expected 予定される結果
 	 */
 	protected void assertResultIs(String expected) {
-		assertEquals(expected + LF, out.toString());
+		assertEquals(replaceLineSeparator(expected + LF), replaceLineSeparator(out.toString()));
 	}
 
 	/**
 	 * テストケースを実行した結果をチェック
-	 * 
+	 *
 	 * @param expecteds 予定される結果の一覧
 	 */
 	protected void assertResultIn(String... expecteds) {
-		String actualResult = out.toString();
-		assertTrue(Arrays.stream(expecteds).filter(s -> (s + LF).equals(actualResult)).count() > 0,
+		String actualResult = replaceLineSeparator(out.toString());
+		assertTrue(Arrays.stream(expecteds).filter(s -> replaceLineSeparator(s + LF).equals(actualResult)).count() > 0,
 				"result is " + actualResult);
 	}
 
 	/**
 	 * テストケースを実行した結果をチェック
-	 * 
+	 *
 	 * @param regexp 予定される結果の正規表現
 	 */
 	protected void assertResultMatches(String regexp) {
-		assertTrue(out.toString().matches(regexp + LF), "result is " + out.toString());
+		assertTrue(replaceLineSeparator(out.toString()).matches(replaceLineSeparator(regexp + LF)),
+				"result is " + out.toString());
 	}
 
 	/**
 	 * テストケースを実行した結果をチェック
-	 * 
+	 *
 	 * @param expected 予定される結果
 	 */
 	protected void assertResultIs(double expected) {
@@ -97,7 +98,7 @@ public abstract class TestBase {
 
 	/**
 	 * テストケースを実行した結果をチェック
-	 * 
+	 *
 	 * @param expected  予定される結果
 	 * @param tolerance 誤差範囲
 	 */
@@ -123,7 +124,7 @@ public abstract class TestBase {
 
 	/**
 	 * テストを実施する
-	 * 
+	 *
 	 * @param input    入力文字列
 	 * @param expected 予想される実行結果
 	 */
@@ -135,7 +136,7 @@ public abstract class TestBase {
 
 	/**
 	 * テストを実施する
-	 * 
+	 *
 	 * @param input    入力文字列を保存するファイル
 	 * @param expected 予想される実行結果
 	 */
@@ -157,7 +158,7 @@ public abstract class TestBase {
 
 	/**
 	 * テストを実施する
-	 * 
+	 *
 	 * @param input    入力文字列を保存するファイル
 	 * @param expected 予想される実行結果を保存するファイル
 	 */
@@ -174,7 +175,7 @@ public abstract class TestBase {
 				expectedSb.append(buffer, 0, length);
 			}
 			execute();
-			assertEquals(expectedSb.toString(), out.toString());
+			assertEquals(replaceLineSeparator(expectedSb.toString()), replaceLineSeparator(out.toString()));
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
@@ -183,7 +184,7 @@ public abstract class TestBase {
 
 	/**
 	 * テストを実施する
-	 * 
+	 *
 	 * @param input    入力文字列
 	 * @param expected 予想される実行結果の一覧
 	 */
@@ -195,7 +196,7 @@ public abstract class TestBase {
 
 	/**
 	 * テストを実施する
-	 * 
+	 *
 	 * @param input     入力文字列
 	 * @param expected  予想される実行結果
 	 * @param tolerance 誤差範囲
@@ -208,7 +209,7 @@ public abstract class TestBase {
 
 	/**
 	 * テストを実施する
-	 * 
+	 *
 	 * @param input          入力文字列
 	 * @param expectedRegexp 予想される実行結果の正規表現
 	 */
@@ -219,8 +220,19 @@ public abstract class TestBase {
 	}
 
 	/**
+	 * 想定結果がが空のテストを実施する
+	 *
+	 * @param input 入力文字列
+	 */
+	protected void checkResultIsEmpty(String input) {
+		in.input(input);
+		execute();
+		assertEquals("", out.toString());
+	}
+
+	/**
 	 * テストを実施する
-	 * 
+	 *
 	 * @param input    入力文字列
 	 * @param expected 予想される実行結果
 	 */
@@ -232,13 +244,35 @@ public abstract class TestBase {
 
 	/**
 	 * テストケースを実行した結果をチェック
-	 * 
-	 * @param number    実行結果の数字形式の文字列
+	 *
 	 * @param expected  予定した結果
+	 * @param number    実行結果の数字形式の文字列
 	 * @param tolerance 誤差範囲
 	 */
-	protected void assertNumberIsAbout(String number, double expected, double tolerance) {
-		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance, "number is " + number);
+	protected void assertNumberIsAbout(double expected, String number, double tolerance) {
+		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance,
+				"number is " + number + ", expected is " + expected);
+	}
+
+	/**
+	 * テストケースを実行した結果をチェック
+	 *
+	 * @param expected  予定した結果
+	 * @param number    実行結果の数字
+	 * @param tolerance 誤差範囲
+	 */
+	protected void assertNumberIsAbout(double expected, double number, double tolerance) {
+		assertTrue(Math.abs(number - expected) < tolerance, "number is " + number + ", expected is " + expected);
+	}
+
+	/**
+	 * 入力文字列の改行コードをすべてLFに置き換える
+	 *
+	 * @param string 入力文字列
+	 * @return 入力文字列の改行コードをすべてLFに置き換えた文字列
+	 */
+	protected String replaceLineSeparator(String string) {
+		return string.replaceAll("\\R", LF);
 	}
 
 	/**
@@ -252,7 +286,7 @@ public abstract class TestBase {
 
 		/**
 		 * 文字列を入力する。
-		 * 
+		 *
 		 * @param str 入力文字列
 		 */
 		public void input(String str) {
@@ -262,7 +296,7 @@ public abstract class TestBase {
 
 		/**
 		 * 数字を入力する。
-		 * 
+		 *
 		 * @param num 入力数字
 		 */
 		public void input(Number num) {

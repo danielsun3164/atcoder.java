@@ -1,7 +1,5 @@
 package abc.abc201_250.abc212;
 
-import java.io.File;
-
 import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
@@ -24,10 +22,5 @@ class ProblemF別回答Test extends TestBase {
 				+ "108790644 7 879874292\n" + "883275610 1 994982498",
 				"4" + LF + "6 1" + LF + "4 1" + LF + "8" + LF + "6 1" + LF + "1" + LF + "2" + LF + "2" + LF + "7 2" + LF
 						+ "1");
-	}
-
-	@Test
-	void case3() {
-		check(new File("/daniel/tmp/20211120/in/001.txt"), new File("/daniel/tmp/20211120/out/001.txt"));
 	}
 }

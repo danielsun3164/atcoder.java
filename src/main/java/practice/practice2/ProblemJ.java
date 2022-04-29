@@ -44,7 +44,7 @@ public class ProblemJ {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/segtree.hpp を参考に作成
 	 */
-	private static abstract class SegTree<S> {
+	private abstract static class SegTree<S> {
 		final int n, size;
 		final S[] d;
 
@@ -54,10 +54,10 @@ public class ProblemJ {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param n
 		 */
-		@SuppressWarnings({ "unused", "unchecked" })
+		@SuppressWarnings({ "unchecked", "unused" })
 		SegTree(int n) {
 			this.n = n;
 			size = 1 << ceilPow2(n);
@@ -70,7 +70,7 @@ public class ProblemJ {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param v
 		 */
 		@SuppressWarnings("unchecked")
@@ -89,7 +89,7 @@ public class ProblemJ {
 
 		/**
 		 * a[p] に x を代入する
-		 * 
+		 *
 		 * @param p
 		 * @param x
 		 */
@@ -107,7 +107,7 @@ public class ProblemJ {
 
 		/**
 		 * a[p] を返す
-		 * 
+		 *
 		 * @param p
 		 * @return a[p]
 		 */
@@ -121,7 +121,7 @@ public class ProblemJ {
 
 		/**
 		 * op(a[l], ..., a[r - 1]) を、モノイドの性質を満たしていると仮定して計算します。
-		 * 
+		 *
 		 * @param l
 		 * @param r
 		 * @return op(a[l], ..., a[r - 1])、 l==r のときは e()。
@@ -135,10 +135,10 @@ public class ProblemJ {
 			r += size;
 
 			while (l < r) {
-				if ((l & 1) > 0) {
+				if (0 != (l & 1)) {
 					sml = op(sml, d[l++]);
 				}
-				if ((r & 1) > 0) {
+				if (0 != (r & 1)) {
 					smr = op(d[--r], smr);
 				}
 				l >>= 1;
@@ -149,7 +149,7 @@ public class ProblemJ {
 
 		/**
 		 * op(a[0], ..., a[n - 1]) を計算します。n==0 のときは e() を返します。
-		 * 
+		 *
 		 * @return op(a[0], ..., a[n - 1])、n==0 のときは e()。
 		 */
 		@SuppressWarnings("unused")
@@ -162,10 +162,10 @@ public class ProblemJ {
 		 * r = l もしくは fRight(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * r = n もしくは fRight(op(a[l], a[l + 1], ..., a[r])) = false <br/>
 		 * fが単調だとすれば、fRight(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最大の r、と解釈することが可能です。
-		 * 
+		 *
 		 * @param l
 		 * @param f
-		 * @return
+		 * @return 条件を両方満たす r を(いずれか一つ)
 		 */
 		int maxRight(int l, Predicate<S> f) {
 			if (!(0 <= l && l <= n)) {
@@ -204,10 +204,10 @@ public class ProblemJ {
 		 * l = r もしくは f(op(a[l], a[l + 1], ..., a[r - 1])) = true <br/>
 		 * l = 0 もしくは f(op(a[l - 1], a[l], ..., a[r - 1])) = false <br/>
 		 * fが単調だとすれば、f(op(a[l], a[l + 1], ..., a[r - 1])) = true となる最小の l、と解釈することが可能です。
-		 * 
+		 *
 		 * @param r
 		 * @param f
-		 * @return
+		 * @return 条件を両方満たす l を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
 		int minLeft(int r, Predicate<S> f) {
@@ -224,7 +224,7 @@ public class ProblemJ {
 			S sm = e();
 			do {
 				r--;
-				while (r > 1 && (r & 1) > 0) {
+				while (r > 1 && 0 != (r & 1)) {
 					r >>= 1;
 				}
 				if (!f.test(op(d[r], sm))) {
@@ -245,21 +245,21 @@ public class ProblemJ {
 		private void update(int k) {
 			d[k] = op(d[k << 1], d[k << 1 | 1]);
 		}
-	}
 
-	/**
-	 * 
-	 * @param n `0 <= n`
-	 * @return minimum non-negative `x` s.t. `n <= 2**x`
-	 */
-	private static int ceilPow2(int n) {
-		if (!(0 <= n)) {
-			throw new IllegalArgumentException("n is " + n);
+		/**
+		 *
+		 * @param n `0 <= n`
+		 * @return minimum non-negative `x` s.t. `n <= 2**x`
+		 */
+		private static int ceilPow2(int n) {
+			if (!(0 <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 0;
+			while ((1 << x) < n) {
+				x++;
+			}
+			return x;
 		}
-		int x = 0;
-		while ((1 << x) < n) {
-			x++;
-		}
-		return x;
 	}
 }

@@ -14,7 +14,7 @@ public class ProblemC {
 			// 分針の先端の座標を計算
 			double x2 = b * Math.sin(m / 30.d * Math.PI);
 			double y2 = b * Math.cos(m / 30.d * Math.PI);
-			System.out.println(Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+			System.out.println(Math.hypot(x1 - x2, y1 - y2));
 		}
 	}
 }

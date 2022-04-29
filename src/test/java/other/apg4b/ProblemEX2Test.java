@@ -8,7 +8,6 @@ class ProblemEX2Test extends TestBase {
 
 	@Test
 	void case1() {
-		execute();
-		assertResultIs("いつも2525" + LF + "AtCoderくん");
+		check("", "いつも2525" + LF + "AtCoderくん");
 	}
 }

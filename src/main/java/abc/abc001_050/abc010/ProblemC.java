@@ -18,8 +18,7 @@ public class ProblemC {
 			});
 			boolean found = false;
 			for (int i = 0; i < n; i++) {
-				if (Math.sqrt((x[i] - txa) * (x[i] - txa) + (y[i] - tya) * (y[i] - tya))
-						+ Math.sqrt((x[i] - txb) * (x[i] - txb) + (y[i] - tyb) * (y[i] - tyb)) <= d) {
+				if (Math.hypot(x[i] - txa, y[i] - tya) + Math.hypot(x[i] - txb, y[i] - tyb) <= d) {
 					found = true;
 					break;
 				}

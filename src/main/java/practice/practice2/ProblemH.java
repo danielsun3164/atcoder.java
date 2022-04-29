@@ -1,10 +1,7 @@
 package practice.practice2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Stack;
 import java.util.stream.IntStream;
 
 /**
@@ -46,164 +43,40 @@ public class ProblemH {
 	}
 
 	/**
-	 * https://github.com/atcoder/ac-library/blob/master/atcoder/scc.hpp<br/>
-	 * https://github.com/atcoder/ac-library/blob/master/atcoder/internal_scc.hpp をもちに作成
-	 */
-	private static class SccGraph {
-		/** ノード数 */
-		final int n;
-		/** 辺の一覧 */
-		private final List<LEdge> edges;
-
-		/**
-		 * コンストラクター
-		 * 
-		 * @param n ノード数
-		 */
-		SccGraph(int n) {
-			this.n = n;
-			edges = new ArrayList<>();
-		}
-
-		/**
-		 * 辺を追加
-		 * 
-		 * @param from 始点
-		 * @param to   終点
-		 */
-		void addEdge(int from, int to) {
-			edges.add(new LEdge(from, to));
-		}
-
-		int nowOrd;
-		int groupNum;
-
-		// @return pair of (# of scc, scc id)
-		private LGraph sccIds() {
-			Csr g = new Csr(n, edges);
-			nowOrd = 0;
-			groupNum = 0;
-			Stack<Integer> visited = new Stack<>();
-			int[] low = new int[n], ord = new int[n], ids = new int[n];
-			Arrays.fill(low, 0);
-			Arrays.fill(ord, -1);
-			Arrays.fill(ids, 0);
-			for (int i = 0; i < n; i++) {
-				if (-1 == ord[i]) {
-					dfs(i, g, visited, low, ord, ids);
-				}
-			}
-			for (int i = 0; i < ids.length; i++) {
-				ids[i] = groupNum - 1 - ids[i];
-			}
-			return new LGraph(groupNum, ids);
-		}
-
-		void dfs(int v, Csr g, Stack<Integer> visited, int[] low, int[] ord, int[] ids) {
-			low[v] = ord[v] = nowOrd++;
-			visited.add(v);
-			for (int i = g.start[v]; i < g.start[v + 1]; i++) {
-				int to = g.elist[i];
-				if (-1 == ord[to]) {
-					dfs(to, g, visited, low, ord, ids);
-					low[v] = Math.min(low[v], low[to]);
-				} else {
-					low[v] = Math.min(low[v], ord[to]);
-				}
-			}
-			if (low[v] == ord[v]) {
-				while (true) {
-					int u = visited.pop();
-					ord[u] = n;
-					ids[u] = groupNum;
-					if (u == v) {
-						break;
-					}
-				}
-				groupNum++;
-			}
-		}
-
-		@SuppressWarnings("unused")
-		List<Integer>[] scc() {
-			LGraph ids = sccIds();
-			@SuppressWarnings("unchecked")
-			List<Integer>[] groups = new List[ids.nodes];
-			IntStream.range(0, groupNum).forEach(i -> groups[i] = new ArrayList<>());
-			IntStream.range(0, n).forEach(i -> groups[ids.edges[i]].add(0, i));
-			return groups;
-		}
-
-		/**
-		 * 辺を表すクラス
-		 */
-		private static class LEdge {
-			int from;
-			int to;
-
-			LEdge(int from, int to) {
-				super();
-				this.from = from;
-				this.to = to;
-			}
-		}
-
-		/**
-		 * グラフを表すクラス
-		 */
-		private static class LGraph {
-			int nodes;
-			int[] edges;
-
-			LGraph(int node, int[] edges) {
-				super();
-				this.nodes = node;
-				this.edges = edges;
-			}
-		}
-
-		private static class Csr {
-			final int[] start;
-			final int[] elist;
-
-			Csr(int n, List<LEdge> edges) {
-				start = new int[n + 1];
-				Arrays.fill(start, 0);
-				elist = new int[edges.size()];
-
-				edges.forEach(edge -> start[edge.from + 1]++);
-				IntStream.rangeClosed(1, n).forEach(i -> start[i] += start[i - 1]);
-				int[] counter = Arrays.copyOf(start, start.length);
-				edges.forEach(edge -> elist[counter[edge.from]++] = edge.to);
-			}
-		}
-	}
-
-	/**
-	 * https://github.com/atcoder/ac-library/blob/master/atcoder/twosat.hpp を参考に作成
+	 * https://github.com/atcoder/ac-library/blob/master/atcoder/twosat.hpp をもとに作成
 	 */
 	private static class TwoSat {
 		/** 要素数 */
 		final int n;
 		/** 回答 */
 		final boolean[] answer;
-		final SccGraph scc;
+		final InternalScc scc;
 
 		/**
 		 * コンストラクター
-		 * 
+		 */
+		@SuppressWarnings("unused")
+		TwoSat() {
+			n = 0;
+			answer = new boolean[n];
+			scc = new InternalScc(2 * n);
+		}
+
+		/**
+		 * コンストラクター
+		 *
 		 * @param n
 		 */
 		TwoSat(int n) {
 			this.n = n;
 			answer = new boolean[n];
 			Arrays.fill(answer, false);
-			scc = new SccGraph(2 * n);
+			scc = new InternalScc(2 * n);
 		}
 
 		/**
 		 * 条件を追加
-		 * 
+		 *
 		 * @param i
 		 * @param f
 		 * @param j
@@ -224,7 +97,7 @@ public class ProblemH {
 		 * @return 全体の条件結果
 		 */
 		boolean satisfiable() {
-			int[] id = scc.sccIds().edges;
+			int[] id = scc.sccIds();
 			for (int i = 0; i < n; i++) {
 				if (id[2 * i] == id[2 * i + 1]) {
 					return false;
@@ -232,6 +105,119 @@ public class ProblemH {
 				answer[i] = id[2 * i] < id[2 * i + 1];
 			}
 			return true;
+		}
+
+		/**
+		 * https://github.com/NASU41/AtCoderLibraryForJava/blob/master/2SAT/TwoSAT.java を参考に作成
+		 */
+		private static final class EdgeList {
+			long[] a;
+			int ptr = 0;
+
+			EdgeList(int cap) {
+				a = new long[cap];
+			}
+
+			void add(int upper, int lower) {
+				if (ptr == a.length) {
+					grow();
+				}
+				a[ptr++] = (long) upper << 32 | lower;
+			}
+
+			void grow() {
+				long[] b = new long[a.length << 1];
+				System.arraycopy(a, 0, b, 0, a.length);
+				a = b;
+			}
+		}
+
+		private static final class InternalScc {
+			final int n;
+			final EdgeList unorderedEdges;
+			final int[] start;
+			int m;
+			private static final long MASK = 0xFFFF_FFFFL;
+
+			InternalScc(int n) {
+				this.n = n;
+				unorderedEdges = new EdgeList(n);
+				start = new int[n + 1];
+				m = 0;
+			}
+
+			void addEdge(int from, int to) {
+				unorderedEdges.add(from, to);
+				start[from + 1]++;
+				m++;
+			}
+
+			int[] sccIds() {
+				for (int i = 1; i <= n; i++) {
+					start[i] += start[i - 1];
+				}
+				int[] orderedEdges = new int[m];
+				int[] count = new int[n + 1];
+				System.arraycopy(start, 0, count, 0, n + 1);
+				for (int i = 0; i < m; i++) {
+					long e = unorderedEdges.a[i];
+					orderedEdges[count[(int) (e >>> 32)]++] = (int) (e & MASK);
+				}
+				int nowOrd = 0, groupNum = 0, k = 0;
+				int[] par = new int[n], vis = new int[n], low = new int[n], ord = new int[n];
+				Arrays.fill(ord, -1);
+				int[] ids = new int[n];
+				long[] stack = new long[n];
+				int ptr = 0;
+				for (int i = 0; i < n; i++) {
+					if (ord[i] >= 0) {
+						continue;
+					}
+					par[i] = -1;
+					stack[ptr++] = i;
+					while (ptr > 0) {
+						long p = stack[--ptr];
+						int u = (int) (p & MASK);
+						int j = (int) (p >>> 32);
+						if (j == 0) {
+							low[u] = ord[u] = nowOrd++;
+							vis[k++] = u;
+						}
+						if (start[u] + j < count[u]) {
+							int to = orderedEdges[start[u] + j];
+							stack[ptr++] += 1L << 32;
+							if (ord[to] == -1) {
+								stack[ptr++] = to;
+								par[to] = u;
+							} else {
+								low[u] = Math.min(low[u], ord[to]);
+							}
+						} else {
+							while (j-- > 0) {
+								int to = orderedEdges[start[u] + j];
+								if (par[to] == u) {
+									low[u] = Math.min(low[u], low[to]);
+								}
+							}
+							if (low[u] == ord[u]) {
+								while (true) {
+									int v = vis[--k];
+									ord[v] = n;
+									ids[v] = groupNum;
+									if (v == u) {
+										break;
+									}
+								}
+								groupNum++;
+							}
+						}
+					}
+				}
+				for (int i = 0; i < n; i++) {
+					ids[i] = groupNum - 1 - ids[i];
+				}
+				return ids;
+			}
 		}
 	}
 }

@@ -8,7 +8,7 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() {
-		check("5\n" + "1 3\n" + "1 5\n" + "3\n" + "2 2\n" + "3", "3\n" + "7");
+		check("5\n" + "1 3\n" + "1 5\n" + "3\n" + "2 2\n" + "3", "3" + LF + "7");
 	}
 
 	@Test

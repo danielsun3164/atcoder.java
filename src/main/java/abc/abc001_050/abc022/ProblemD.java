@@ -56,6 +56,6 @@ public class ProblemD {
 	 * @return fromとtoの間の距離
 	 */
 	private static double getDistance(int[] from, double[] to) {
-		return Math.sqrt((from[0] - to[0]) * (from[0] - to[0]) + (from[1] - to[1]) * (from[1] - to[1]));
+		return Math.hypot(from[0] - to[0], from[1] - to[1]);
 	}
 }

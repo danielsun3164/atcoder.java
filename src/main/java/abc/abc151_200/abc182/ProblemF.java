@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc182/submissions/18039449 に参考してに実装したソースコード
  */
 public class ProblemF {
@@ -26,17 +26,17 @@ public class ProblemF {
 
 	/**
 	 * dp[current][value]を計算する
-	 * 
+	 *
 	 * valueの正の方をYとすると、上の不等式からYとY - A_iの二つ</br>
 	 * Y = 0の時のみ1つ</br>
 	 * dp[i][Y] = dp[i-1][Y%A_i] + dp[i-1][Y%A_i-A_i]
-	 * 
+	 *
 	 * @param n       コインの種類数
 	 * @param a       それぞれコインの金額の配列
 	 * @param dp      計算結果を保存するマップ
 	 * @param current 現在計算中のコイン
 	 * @param value   計算目標の金額
-	 * @return
+	 * @return dp[current][value]
 	 */
 	private static long dfs(final int n, final long[] a, final Map<Long, Long>[] dp, int current, long value) {
 		if (current < 0) {

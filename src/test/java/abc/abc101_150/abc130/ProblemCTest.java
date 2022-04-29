@@ -1,7 +1,6 @@
 package abc.abc101_150.abc130;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
@@ -36,10 +35,8 @@ class ProblemCTest extends TestBase {
 		assertEquals(2, numbers.length);
 		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
 				Scanner scanner = new Scanner(bais)) {
-			double result1 = scanner.nextDouble();
-			int result2 = scanner.nextInt();
-			assertTrue(Math.abs(result1 - d) < TOLERANCE, "result is " + result1);
-			assertEquals(n, result2);
+			assertNumberIsAbout(d, scanner.nextDouble(), TOLERANCE);
+			assertEquals(n, scanner.nextInt());
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
