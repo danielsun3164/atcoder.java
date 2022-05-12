@@ -18,13 +18,19 @@ import java.util.Arrays;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
 
+@DisplayNameGeneration(CustomDisplayNameGenerator.class)
 public abstract class TestBase {
 
+	/** システム入力を保存 */
 	private static InputStream systemIn = System.in;
+	/** システム出力を保存 */
 	private static PrintStream systemOut = System.out;
 
+	/** カスタマイズ入力 */
 	protected static StandardInputSnatcher in = new StandardInputSnatcher();
+	/** カスタマイズ入力 */
 	protected static ByteArrayOutputStream out = new ByteArrayOutputStream();
 	private static PrintStream mySystemOut;
 
