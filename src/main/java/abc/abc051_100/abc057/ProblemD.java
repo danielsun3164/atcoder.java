@@ -1,5 +1,7 @@
 package abc.abc051_100.abc057;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,10 @@ public class ProblemD {
 				map.put(v[i], map.getOrDefault(v[i], 0) + 1);
 			});
 			Arrays.sort(v);
-			System.out.println(IntStream.rangeClosed(1, a).mapToLong(i -> v[n - i]).average().getAsDouble());
+			// doubleでは誤差が発生するため、平均値はBigDecimalで計算
+			System.out.println(IntStream.rangeClosed(1, a).mapToObj(i -> BigDecimal.valueOf(v[n - i]))
+					.reduce(BigDecimal.ZERO, (s, vi) -> s.add(vi))
+					.divide(BigDecimal.valueOf(a), 10, RoundingMode.HALF_UP));
 			if (v[n - 1] == v[n - a]) {
 				Integer count = map.get(v[n - 1]);
 				int max = Math.min(count, b);
@@ -46,7 +51,7 @@ public class ProblemD {
 
 	/**
 	 * パスカルの三角形を使ってm_C_nを計算
-	 * 
+	 *
 	 * @param n 整数の最大値
 	 * @return m_C_n の配列，c[m][n]はm_C_n
 	 */
