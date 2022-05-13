@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -34,8 +35,7 @@ class ProblemBTest extends TestBase {
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(3, lines.length);
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			assertEquals(a, scanner.nextInt());
 			assertNumberIsAbout(b, scanner.nextDouble(), TOLERANCE);
 			assertEquals(c, scanner.nextInt());

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -58,8 +59,7 @@ class ProblemDTest extends TestBase {
 		assertEquals(1, lines.length);
 		String[] numbers = lines[0].split("\\ ");
 		assertEquals(n, numbers.length);
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int[] answers = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
 			IntStream.range(0x1F, 1 << n).filter(i -> Integer.bitCount(i) == ProblemD.N)
 					.map(i -> IntStream.range(0, n).filter(j -> (i & (1 << j)) > 0).map(j -> answers[j]).sum())

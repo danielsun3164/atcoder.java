@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -47,8 +48,7 @@ class ProblemFTest extends TestBase {
 			assertEquals(2, numbers.length);
 		});
 		DisjointSetUnion dsu = new DisjointSetUnion(n);
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			IntStream.range(1, n).forEach(i -> {
 				int u = scanner.nextInt(), v = scanner.nextInt();
 				assertFalse(u + "^" + v + "=" + (u ^ v) + "はaに含まれている", set.contains(u ^ v));

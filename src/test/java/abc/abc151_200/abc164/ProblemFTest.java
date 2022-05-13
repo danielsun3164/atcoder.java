@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -39,8 +40,7 @@ class ProblemFTest extends TestBase {
 			String[] numbers = line.split("\\ ");
 			assertEquals(n, numbers.length);
 		});
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			long[][] a = new long[n][n];
 			IntStream.range(0, n)
 					.forEach(i -> IntStream.range(0, n).forEach(j -> a[i][j] = Long.parseUnsignedLong(scanner.next())));

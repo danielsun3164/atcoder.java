@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -39,8 +40,7 @@ class ProblemDTest extends TestBase {
 		assertEquals(3, lines.length);
 		check(lines[1]);
 		check(lines[2]);
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			String result = scanner.next();
 			assertEquals("Yes", result);
 			int nb = scanner.nextInt();

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -36,8 +37,7 @@ class ProblemETest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int[][] d = new int[n][n];
 			IntStream.range(0, n).forEach(i -> {
 				Arrays.fill(d[i], INF);

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,8 +46,7 @@ class ProblemFTest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int k = scanner.nextInt();
 			assertEquals(expectedK, k);
 			Set<Integer> vs = IntStream.range(0, k).map(i -> scanner.nextInt()).boxed().collect(Collectors.toSet());

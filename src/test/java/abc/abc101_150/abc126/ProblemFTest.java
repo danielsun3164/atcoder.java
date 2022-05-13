@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,8 +50,7 @@ class ProblemFTest extends TestBase {
 		assertEquals(1, lines.length);
 		String[] numbers = lines[0].split("\\ ");
 		assertEquals(1 << (m + 1), numbers.length);
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int max = 1 << m;
 			@SuppressWarnings("unchecked")
 			List<Integer>[] indexes = new List[max];

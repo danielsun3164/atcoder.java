@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -35,8 +36,7 @@ class ProblemFTest extends TestBase {
 			String[] numbers = lines[1].split("\\ ");
 			assertEquals(tk, numbers.length);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int k = scanner.nextInt();
 			if (k > 0) {
 				int[] c = IntStream.range(0, k).map(i -> {

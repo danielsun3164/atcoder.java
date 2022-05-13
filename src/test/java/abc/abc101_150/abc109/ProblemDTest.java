@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Scanner;
@@ -47,8 +48,7 @@ class ProblemDTest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int n = scanner.nextInt();
 			Set<Pair> set = new HashSet<>();
 			IntStream.range(0, n).forEach(i -> {

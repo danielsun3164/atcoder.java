@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -48,8 +49,7 @@ class ProblemFTest extends TestBase {
 		String[] lines = out.toString().split("\\R");
 		assertEquals(n + 1, lines.length);
 		IntStream.rangeClosed(1, n).forEach(i -> assertTrue(PATTERN.matcher(lines[i]).matches()));
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			assertEquals("Yes", scanner.next());
 			for (int i = 0; i < n; i++) {
 				String r = scanner.next();

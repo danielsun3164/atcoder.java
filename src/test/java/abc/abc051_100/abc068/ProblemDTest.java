@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -56,8 +57,7 @@ class ProblemDTest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int n = scanner.nextInt();
 			assertTrue((2 <= n) & (n <= 50), "n is " + n);
 			long[] a = IntStream.range(0, n).mapToLong(i -> {
