@@ -21,7 +21,10 @@ class ProblemDTest extends TestBase {
 
 	@Test
 	void case1() {
-		try (PipedOutputStream pos = new PipedOutputStream(); TestPrintStream myPs = new TestPrintStream(pos)) {
+		try (InterpreterInputSnatcher in = new InterpreterInputSnatcher();
+				PipedOutputStream pos = new PipedOutputStream();
+				TestPrintStream myPs = new TestPrintStream(pos, in)) {
+			System.setIn(in);
 			System.setOut(myPs);
 			in.input(5);
 			execute();
@@ -46,17 +49,20 @@ class ProblemDTest extends TestBase {
 
 		private static PipedInputStream pis;
 		private static Scanner scanner;
+		private final InputSnatcher in;
 
 		/**
 		 * コンストラクター
 		 *
 		 * @param pos
+		 * @param in  入力用
 		 * @throws IOException 例外
 		 */
-		public TestPrintStream(PipedOutputStream pos) throws IOException {
+		public TestPrintStream(PipedOutputStream pos, InputSnatcher in) throws IOException {
 			super(pos);
 			pis = new PipedInputStream(pos);
 			scanner = new Scanner(pis);
+			this.in = in;
 		}
 
 		/**

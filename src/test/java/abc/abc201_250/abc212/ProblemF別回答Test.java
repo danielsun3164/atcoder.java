@@ -1,6 +1,10 @@
 package abc.abc201_250.abc212;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -22,5 +26,10 @@ class ProblemF別回答Test extends TestBase {
 				+ "108790644 7 879874292\n" + "883275610 1 994982498",
 				"4" + LF + "6 1" + LF + "4 1" + LF + "8" + LF + "6 1" + LF + "1" + LF + "2" + LF + "2" + LF + "7 2" + LF
 						+ "1");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("abc212/F");
 	}
 }

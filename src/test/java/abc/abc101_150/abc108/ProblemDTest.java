@@ -10,11 +10,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -107,6 +110,17 @@ class ProblemDTest extends TestBase {
 			this.from = from;
 			this.to = to;
 			this.cost = cost;
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC108/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner scanner = new Scanner(inputIs)) {
+			check(scanner.nextInt());
 		}
 	}
 }

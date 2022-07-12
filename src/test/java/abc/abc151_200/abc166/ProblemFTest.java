@@ -8,12 +8,15 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -85,6 +88,25 @@ class ProblemFTest extends TestBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC166/F", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			String r = expectedScanner.next();
+			if ("No".equals(r)) {
+				check(inputIs, "No");
+			} else {
+				int n = inputScanner.nextInt(), a = inputScanner.nextInt(), b = inputScanner.nextInt(),
+						c = inputScanner.nextInt();
+				String[] s = IntStream.range(0, n).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
+				check(n, a, b, c, s);
+			}
 		}
 	}
 }

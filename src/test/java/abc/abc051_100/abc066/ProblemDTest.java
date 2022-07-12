@@ -1,6 +1,10 @@
 package abc.abc051_100.abc066;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -25,5 +29,10 @@ class ProblemDTest extends TestBase {
 						+ "37158313" + LF + "818809200" + LF + "573166440" + LF + "354817320" + LF + "193536720" + LF
 						+ "92561040" + LF + "38567100" + LF + "13884156" + LF + "4272048" + LF + "1107568" + LF
 						+ "237336" + LF + "40920" + LF + "5456" + LF + "528" + LF + "33" + LF + "1");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ARC077/D");
 	}
 }

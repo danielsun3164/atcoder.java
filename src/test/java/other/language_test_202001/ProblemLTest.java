@@ -38,8 +38,10 @@ class ProblemLTest extends TestBase {
 	}
 
 	void check(int n, int q, String expected) {
-		try (PipedOutputStream pos = new PipedOutputStream();
-				TestPrintStream myPs = new TestPrintStream(pos, expected)) {
+		try (InterpreterInputSnatcher in = new InterpreterInputSnatcher();
+				PipedOutputStream pos = new PipedOutputStream();
+				TestPrintStream myPs = new TestPrintStream(pos, in, expected)) {
+			System.setIn(in);
 			System.setOut(myPs);
 			in.input(n + " " + q);
 			execute();
@@ -60,8 +62,9 @@ class ProblemLTest extends TestBase {
 		/** 比較回数 */
 		int count;
 
-		private PipedInputStream pis;
-		private Scanner scanner;
+		private final PipedInputStream pis;
+		private final Scanner scanner;
+		private final InputSnatcher in;
 
 		/** 各文字のインデックス */
 		private final int[] indexes;
@@ -70,14 +73,16 @@ class ProblemLTest extends TestBase {
 		 * コンストラクター
 		 *
 		 * @param pos
+		 * @param in       入力用
 		 * @param expected 期待された結果
 		 * @throws IOException 例外
 		 */
-		public TestPrintStream(PipedOutputStream pos, String expected) throws IOException {
+		public TestPrintStream(PipedOutputStream pos, InputSnatcher in, String expected) throws IOException {
 			super(pos);
 			count = 0;
 			pis = new PipedInputStream(pos);
 			scanner = new Scanner(pis);
+			this.in = in;
 			char[] array = expected.toCharArray();
 			indexes = new int[array.length];
 			IntStream.range(0, array.length).forEach(i -> indexes[array[i] - 'A'] = i);

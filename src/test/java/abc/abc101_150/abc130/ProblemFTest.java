@@ -1,6 +1,10 @@
 package abc.abc101_150.abc130;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -34,5 +38,10 @@ class ProblemFTest extends TestBase {
 						+ "-305 -519 R\n" + "458 146 R\n" + "890 -320 R\n" + "357 185 R\n" + "317 552 R\n"
 						+ "-159 -52 R\n" + "-827 -95 R\n" + "219 912 R\n" + "881 147 R\n" + "392 -346 R",
 				3410385.0d, TOLERANCE);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC130/F", TOLERANCE);
 	}
 }

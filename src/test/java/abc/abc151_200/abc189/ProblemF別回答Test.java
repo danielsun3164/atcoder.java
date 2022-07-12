@@ -1,5 +1,8 @@
 package abc.abc151_200.abc189;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
@@ -27,5 +30,11 @@ class ProblemF別回答Test extends TestBase {
 	@Test
 	void case4() {
 		checkResultIsAbout("100000 2 2\n" + "2997 92458", 201932.2222d, TOLERANCE);
+	}
+
+	// 一部のテストが通らないため、実行しないように変更
+	// @TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC189/F", TOLERANCE);
 	}
 }

@@ -8,13 +8,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -120,6 +123,28 @@ class ProblemDTest extends TestBase {
 				return (x == pair.x) && (y == pair.y);
 			}
 			return false;
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC109/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int h = inputScanner.nextInt(), w = inputScanner.nextInt();
+			int[][] a = new int[h][w];
+			IntStream.range(0, h).forEach(i -> IntStream.range(0, w).forEach(j -> a[i][j] = inputScanner.nextInt()));
+			int n = expectedScanner.nextInt();
+			IntStream.range(0, n).forEach(i -> {
+				int x1 = expectedScanner.nextInt() - 1, y1 = expectedScanner.nextInt() - 1,
+						x2 = expectedScanner.nextInt() - 1, y2 = expectedScanner.nextInt() - 1;
+				a[x1][y1]--;
+				a[x2][y2]++;
+			});
+			check(h, w, a, IntStream.range(0, h)
+					.mapToLong(i -> IntStream.range(0, w).filter(j -> 0 == (a[i][j] & 1)).count()).sum());
 		}
 	}
 }

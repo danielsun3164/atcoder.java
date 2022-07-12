@@ -8,10 +8,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -78,5 +81,21 @@ class ProblemETest extends TestBase {
 	@Test
 	void case4() {
 		check(100, 0);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC131/E", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int result = expectedScanner.nextInt();
+			if (-1 == result) {
+				check(inputIs, "-1");
+				return;
+			}
+			check(inputScanner.nextInt(), inputScanner.nextInt());
+		}
 	}
 }

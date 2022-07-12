@@ -5,10 +5,14 @@ import java.util.stream.IntStream;
 
 public class ProblemC {
 
-	private static final char UP = 'U';
-	private static final char DOWN = 'D';
-	private static final char LEFT = 'L';
-	private static final char RIGHT = 'R';
+	/** 上 */
+	static final char UP = 'U';
+	/** 下 */
+	static final char DOWN = 'D';
+	/** 左 */
+	static final char LEFT = 'L';
+	/** 右 */
+	static final char RIGHT = 'R';
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

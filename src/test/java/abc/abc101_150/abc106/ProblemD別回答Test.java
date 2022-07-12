@@ -1,6 +1,10 @@
 package abc.abc101_150.abc106;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -23,5 +27,10 @@ class ProblemD別回答Test extends TestBase {
 				+ "1 10",
 				"7" + LF + "9" + LF + "10" + LF + "6" + LF + "8" + LF + "9" + LF + "6" + LF + "7" + LF + "8" + LF
 						+ "10");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC106/D");
 	}
 }

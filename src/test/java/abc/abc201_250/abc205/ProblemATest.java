@@ -1,10 +1,17 @@
 package abc.abc201_250.abc205;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
 class ProblemATest extends TestBase {
+
+	/** 誤差 */
+	private static final double TOLERANCE = 1E-6d;
 
 	@Test
 	void case1() {
@@ -24,5 +31,10 @@ class ProblemATest extends TestBase {
 	@Test
 	void case4() {
 		check("50 0", 0.0d);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("abc205/A", TOLERANCE);
 	}
 }

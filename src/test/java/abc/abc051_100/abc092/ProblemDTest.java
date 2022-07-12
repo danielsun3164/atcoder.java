@@ -8,10 +8,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -137,5 +140,16 @@ class ProblemDTest extends TestBase {
 			return count + 1;
 		}
 		return count;
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ARC093/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner scanner = new Scanner(inputIs)) {
+			check(scanner.nextInt(), scanner.nextInt());
+		}
 	}
 }

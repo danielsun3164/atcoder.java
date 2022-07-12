@@ -1,6 +1,10 @@
 package other.zone2021;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -24,5 +28,10 @@ class ProblemETest extends TestBase {
 	@Test
 	void case3() {
 		check("4 4\n" + "0 0 0\n" + "0 0 0\n" + "0 0 0\n" + "0 0 0\n" + "0 0 0 0\n" + "0 0 0 0\n" + "0 0 0 0", "0");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ZONe2021/E");
 	}
 }

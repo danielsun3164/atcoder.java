@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -62,6 +65,22 @@ class ProblemETest extends TestBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC135/E", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int m = expectedScanner.nextInt();
+			if (-1 == m) {
+				check(inputIs, "-1");
+				return;
+			}
+			check(inputScanner.nextInt(), inputScanner.nextInt(), inputScanner.nextInt(), m);
 		}
 	}
 }

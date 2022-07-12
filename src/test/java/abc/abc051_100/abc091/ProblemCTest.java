@@ -1,6 +1,10 @@
 package abc.abc051_100.abc091;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -31,5 +35,10 @@ class ProblemCTest extends TestBase {
 	void case5() {
 		check("5\n" + "0 0\n" + "1 1\n" + "5 5\n" + "6 6\n" + "7 7\n" + "2 2\n" + "3 3\n" + "4 4\n" + "8 8\n" + "9 9",
 				"4");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ARC092/C");
 	}
 }

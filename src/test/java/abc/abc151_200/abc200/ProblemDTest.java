@@ -9,11 +9,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -34,7 +37,7 @@ class ProblemDTest extends TestBase {
 
 	void check(int n, int[] a) {
 		in.input(n);
-		in.input(Arrays.stream(a).mapToObj(ai -> String.valueOf(ai)).collect(Collectors.joining(" ")));
+		in.input(Arrays.stream(a).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(3, lines.length);
@@ -42,7 +45,7 @@ class ProblemDTest extends TestBase {
 		check(lines[2]);
 		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			String result = scanner.next();
-			assertEquals("Yes", result);
+			assertTrue("Yes".equalsIgnoreCase(result));
 			int nb = scanner.nextInt();
 			int[] b = IntStream.range(0, nb).map(i -> scanner.nextInt() - 1).toArray();
 			int bBit = Arrays.stream(b).map(bi -> (1 << bi)).sum();
@@ -55,7 +58,7 @@ class ProblemDTest extends TestBase {
 			assertEquals(bSum, cSum);
 		} catch (IOException e) {
 			e.printStackTrace();
-			fail();
+			fail(e);
 		}
 	}
 
@@ -74,5 +77,25 @@ class ProblemDTest extends TestBase {
 	@Test
 	void case3() {
 		check("6\n" + "2013 1012 2765 2021 508 6971", "No");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("abc200/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner expectedScanner = new Scanner(expectedIs)) {
+			String result = expectedScanner.next();
+			if ("No".equalsIgnoreCase(result)) {
+				check(inputIs, "No");
+			} else {
+				try (Scanner inputScanner = new Scanner(inputIs)) {
+					int n = inputScanner.nextInt();
+					int[] a = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
+					check(n, a);
+				}
+			}
+		}
 	}
 }

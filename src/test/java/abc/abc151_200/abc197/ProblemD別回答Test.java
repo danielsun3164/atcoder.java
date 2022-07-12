@@ -2,7 +2,13 @@ package abc.abc151_200.abc197;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Scanner;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -52,5 +58,20 @@ class ProblemD別回答Test extends TestBase {
 		assertEquals(2, numbers.length);
 		assertNumberIsAbout(ex, numbers[0], TOLERANCE);
 		assertNumberIsAbout(ey, numbers[1], TOLERANCE);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC197/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int n = inputScanner.nextInt();
+			int x0 = inputScanner.nextInt(), y0 = inputScanner.nextInt();
+			int xn2 = inputScanner.nextInt(), yn2 = inputScanner.nextInt();
+			double ex = expectedScanner.nextDouble(), ey = expectedScanner.nextDouble();
+			check(n, x0, y0, xn2, yn2, ex, ey);
+		}
 	}
 }

@@ -6,12 +6,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -34,7 +38,7 @@ class ProblemDTest extends TestBase {
 
 	private void check(int[] a) {
 		in.input(a.length);
-		in.input(Arrays.stream(a).mapToObj(i -> String.valueOf(i)).collect(Collectors.joining(" ")));
+		in.input(Arrays.stream(a).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertTrue(lines.length > 0, "no lines");
@@ -56,6 +60,18 @@ class ProblemDTest extends TestBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ARC086/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner scanner = new Scanner(inputIs)) {
+			int n = scanner.nextInt();
+			check(IntStream.range(0, n).map(i -> scanner.nextInt()).toArray());
 		}
 	}
 }

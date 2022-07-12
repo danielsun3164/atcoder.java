@@ -1,6 +1,10 @@
 package abc.abc101_150.abc144;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -25,5 +29,10 @@ class ProblemFTest extends TestBase {
 				+ "1 4\n" + "1 3\n" + "8 10\n" + "1 5\n" + "2 6\n" + "6 9\n" + "5 6\n" + "5 8\n" + "3 6\n" + "4 8\n"
 				+ "2 7\n" + "2 9\n" + "6 7\n" + "1 2\n" + "5 9\n" + "6 8\n" + "9 10\n" + "3 9\n" + "7 8\n" + "4 5\n"
 				+ "2 10\n" + "5 7\n" + "3 5\n" + "4 7\n" + "4 9", 3.0133333333d, TOLERANCE);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC144/F", TOLERANCE);
 	}
 }

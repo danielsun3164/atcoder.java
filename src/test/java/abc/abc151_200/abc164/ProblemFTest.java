@@ -7,11 +7,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -29,10 +32,10 @@ class ProblemFTest extends TestBase {
 
 	void check(int n, int[] s, int[] t, long[] u, long[] v) {
 		in.input(n);
-		in.input(Arrays.stream(s).mapToObj(si -> String.valueOf(si)).collect(Collectors.joining(" ")));
-		in.input(Arrays.stream(t).mapToObj(si -> String.valueOf(si)).collect(Collectors.joining(" ")));
-		in.input(Arrays.stream(u).mapToObj(si -> String.valueOf(si)).collect(Collectors.joining(" ")));
-		in.input(Arrays.stream(v).mapToObj(si -> String.valueOf(si)).collect(Collectors.joining(" ")));
+		in.input(Arrays.stream(s).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
+		in.input(Arrays.stream(t).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
+		in.input(Arrays.stream(u).mapToObj(l -> Long.toUnsignedString(l)).collect(Collectors.joining(" ")));
+		in.input(Arrays.stream(v).mapToObj(l -> Long.toUnsignedString(l)).collect(Collectors.joining(" ")));
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(n, lines.length);
@@ -59,6 +62,27 @@ class ProblemFTest extends TestBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC164/F", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			String r = expectedScanner.next();
+			if ("-1".equals(r)) {
+				check(inputIs, r);
+			} else {
+				int n = inputScanner.nextInt();
+				int[] s = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
+				int[] t = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
+				long[] u = IntStream.range(0, n).mapToLong(i -> Long.parseUnsignedLong(inputScanner.next())).toArray();
+				long[] v = IntStream.range(0, n).mapToLong(i -> Long.parseUnsignedLong(inputScanner.next())).toArray();
+				check(n, s, t, u, v);
+			}
 		}
 	}
 }

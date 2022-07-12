@@ -1,6 +1,10 @@
 package other.exawizards2019;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -23,5 +27,10 @@ class ProblemFTest extends TestBase {
 				+ "4 3 5 4\n" + "7 4 6 4\n" + "2 5 8 6\n" + "6 6 2 7\n" + "2 4 7 5\n" + "7 2 9 7",
 				"9" + LF + "-1" + LF + "4" + LF + "9" + LF + "2" + LF + "3" + LF + "7" + LF + "7" + LF + "6" + LF
 						+ "-1");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("2019exa/F");
 	}
 }
