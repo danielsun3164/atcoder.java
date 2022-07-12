@@ -6,11 +6,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -65,8 +69,7 @@ class ProblemDTest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int h = scanner.nextInt(), w = scanner.nextInt();
 			char[][] s = new char[h][];
 			IntStream.range(0, h).forEach(i -> s[i] = scanner.next().toCharArray());
@@ -137,5 +140,16 @@ class ProblemDTest extends TestBase {
 			return count + 1;
 		}
 		return count;
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ARC093/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner scanner = new Scanner(inputIs)) {
+			check(scanner.nextInt(), scanner.nextInt());
+		}
 	}
 }

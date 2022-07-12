@@ -6,12 +6,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -49,8 +53,7 @@ class ProblemFTest extends TestBase {
 		assertEquals(1, lines.length);
 		String[] numbers = lines[0].split("\\ ");
 		assertEquals(1 << (m + 1), numbers.length);
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int max = 1 << m;
 			@SuppressWarnings("unchecked")
 			List<Integer>[] indexes = new List[max];
@@ -61,14 +64,34 @@ class ProblemFTest extends TestBase {
 				indexes[ai].add(i);
 				return ai;
 			}).toArray();
+			int[] xorSum = new int[(max << 1) + 1];
+			xorSum[0] = 0;
+			IntStream.range(0, max << 1).forEach(i -> xorSum[i + 1] = xorSum[i] ^ a[i]);
 			IntStream.range(0, max).forEach(i -> {
 				assertEquals(2, indexes[i].size());
-				assertEquals(k,
-						IntStream.rangeClosed(indexes[i].get(0), indexes[i].get(1)).reduce(0, (xor, j) -> xor ^ a[j]));
+				assertEquals(k, xorSum[indexes[i].get(0)] ^ xorSum[indexes[i].get(1) + 1]);
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC126/F", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner expectedScanner = new Scanner(expectedIs)) {
+			int result = expectedScanner.nextInt();
+			if (-1 == result) {
+				check(inputIs, "-1");
+				return;
+			}
+			try (Scanner inputScanner = new Scanner(inputIs)) {
+				check(inputScanner.nextInt(), inputScanner.nextInt());
+			}
 		}
 	}
 }

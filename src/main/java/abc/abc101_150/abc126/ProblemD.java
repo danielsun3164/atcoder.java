@@ -64,9 +64,8 @@ public class ProblemD {
 	/**
 	 * ノード間の一つのパスを表すクラス
 	 */
-	private static class Path implements Comparable<Path> {
+	static class Path implements Comparable<Path> {
 		/** 開始ノード */
-		@SuppressWarnings("unused")
 		int from;
 		/** 終了ノード */
 		int to;

@@ -1,6 +1,10 @@
 package other.language_test_202001;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -19,5 +23,10 @@ class ProblemE_ABC087BTest extends TestBase {
 	@Test
 	void case3() {
 		check("30\n" + "40\n" + "50\n" + "6000", "213");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ARC090/B");
 	}
 }

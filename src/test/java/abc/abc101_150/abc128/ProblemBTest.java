@@ -1,6 +1,10 @@
 package abc.abc101_150.abc128;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -18,5 +22,10 @@ class ProblemBTest extends TestBase {
 				+ "yakutsk 60\n" + "yakutsk 70\n" + "yakutsk 80\n" + "yakutsk 90\n" + "yakutsk 100",
 				"10" + LF + "9" + LF + "8" + LF + "7" + LF + "6" + LF + "5" + LF + "4" + LF + "3" + LF + "2" + LF
 						+ "1");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC128/B");
 	}
 }

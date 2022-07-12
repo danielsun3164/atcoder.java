@@ -1,6 +1,10 @@
 package abc.abc101_150.abc123;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -29,5 +33,10 @@ class ProblemDTest extends TestBase {
 						+ "21085311041" + LF + "21059876163" + LF + "21017997739" + LF + "20703329561" + LF
 						+ "20702387965" + LF + "20590247696" + LF + "20383761436" + LF + "20343962175" + LF
 						+ "20254073196" + LF + "20210218542" + LF + "20150096547");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC123/D");
 	}
 }

@@ -1,13 +1,17 @@
 package abc.abc151_200.abc168;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
 class ProblemCTest extends TestBase {
 
 	/** 誤差 */
-	private static final double TOLERANCE = 0.000000001d;
+	private static final double TOLERANCE = 1E-9d;
 
 	@Test
 	void case1() {
@@ -17,5 +21,10 @@ class ProblemCTest extends TestBase {
 	@Test
 	void case2() {
 		checkResultIsAbout("3 4 10 40", 4.56425719433005567605d, TOLERANCE);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC168/C", TOLERANCE);
 	}
 }

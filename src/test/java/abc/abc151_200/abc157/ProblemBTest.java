@@ -1,6 +1,10 @@
 package abc.abc151_200.abc157;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -21,5 +25,10 @@ class ProblemBTest extends TestBase {
 	void case3() {
 		check("60 88 34\n" + "92 41 43\n" + "65 73 48\n" + "10\n" + "60\n" + "43\n" + "88\n" + "11\n" + "48\n" + "73\n"
 				+ "65\n" + "41\n" + "92\n" + "34", "Yes");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC157/B");
 	}
 }

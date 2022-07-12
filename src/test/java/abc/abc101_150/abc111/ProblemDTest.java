@@ -6,11 +6,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -48,8 +52,7 @@ class ProblemDTest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int m = scanner.nextInt();
 			int[] d = IntStream.range(0, m).map(i -> scanner.nextInt()).toArray();
 			IntStream.range(0, n).forEach(i -> {
@@ -94,5 +97,27 @@ class ProblemDTest extends TestBase {
 		}
 		assertEquals(expectedX, x);
 		assertEquals(expectedY, y);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC111/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int m = expectedScanner.nextInt();
+			if (-1 == m) {
+				check(inputIs, "-1");
+				return;
+			}
+			int n = inputScanner.nextInt();
+			int[] x = new int[n], y = new int[n];
+			IntStream.range(0, n).forEach(i -> {
+				x[i] = inputScanner.nextInt();
+				y[i] = inputScanner.nextInt();
+			});
+			check(n, x, y);
+		}
 	}
 }

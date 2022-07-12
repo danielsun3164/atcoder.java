@@ -1,6 +1,10 @@
 package other.exawizards2019;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -22,5 +26,10 @@ class ProblemETest extends TestBase {
 				"500000004" + LF + "500000004" + LF + "500000004" + LF + "500000004" + LF + "500000004" + LF
 						+ "500000004" + LF + "929687507" + LF + "218750002" + LF + "224609377" + LF + "303710940" + LF
 						+ "633300786" + LF + "694091802" + LF + "172485353" + LF + "411682132" + LF + "411682132");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("2019exa/E");
 	}
 }

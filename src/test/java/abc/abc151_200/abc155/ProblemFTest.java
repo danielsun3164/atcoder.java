@@ -7,12 +7,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -29,14 +33,14 @@ class ProblemFTest extends TestBase {
 		IntStream.range(0, m).forEach(i -> in.input(l[i] + " " + r[i]));
 		execute();
 		String[] lines = out.toString().split("\\R");
-		assertEquals(2, lines.length);
+		assertTrue(lines.length >= 1, "lines.length=" + lines.length);
 		int tk = Integer.parseInt(lines[0]);
 		if (tk > 0) {
+			assertEquals(2, lines.length);
 			String[] numbers = lines[1].split("\\ ");
 			assertEquals(tk, numbers.length);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int k = scanner.nextInt();
 			if (k > 0) {
 				int[] c = IntStream.range(0, k).map(i -> {
@@ -45,12 +49,29 @@ class ProblemFTest extends TestBase {
 					return ci - 1;
 				}).toArray();
 				IntStream.range(1, k).forEach(i -> assertTrue(c[i - 1] < c[i]));
-				TreeMap<Integer, Integer> map = new TreeMap<>();
-				IntStream.range(0, n).forEach(i -> map.put(a[i], i));
+				TreeMap<Integer, Integer> sumMap = new TreeMap<>(), indexMap = new TreeMap<>();
+				IntStream.range(0, n).forEach(i -> sumMap.put(a[i], 0));
+				IntStream.range(0, n).forEach(i -> indexMap.put(a[i], i));
+				// sumMap.put(0, 0);
+				// map.put(ProblemF.INF, 0);
 				Arrays.stream(c).forEach(ci -> {
-					map.subMap(l[ci], r[ci] + 1).entrySet()
-							.forEach(entry -> b[entry.getValue()] = 1 - b[entry.getValue()]);
+					Integer key = sumMap.ceilingKey(l[ci]);
+					sumMap.put(key, sumMap.get(key) + 1);
+					key = sumMap.higherKey(r[ci]);
+					if (null != key) {
+						sumMap.put(key, sumMap.get(key) - 1);
+					}
 				});
+				Integer prevKey = null;
+				for (Integer key : sumMap.keySet()) {
+					if (null != prevKey) {
+						sumMap.put(key, sumMap.get(key) + sumMap.get(prevKey));
+					}
+					if (1 == (1 & sumMap.get(key))) {
+						b[indexMap.get(key)] = 1 - b[indexMap.get(key)];
+					}
+					prevKey = key;
+				}
 			}
 			int[] expected = IntStream.range(0, n).map(i -> 0).toArray();
 			assertArrayEquals(expected, b);
@@ -82,5 +103,31 @@ class ProblemFTest extends TestBase {
 				new int[] { 142460201, 384985131, 144788076, 497115965, 563350571, 458996604, 297258009, 555985828,
 						520203502, 501051309, 300372385, 630621190, 517850028, 192476406, 520655694, 304034433,
 						359737255, 463983307, 504362212, 83124235 });
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC155/F", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int k = expectedScanner.nextInt();
+			if (-1 == k) {
+				check(inputIs, "-1");
+			} else {
+				int n = inputScanner.nextInt(), m = inputScanner.nextInt();
+				int[] a = new int[n], b = new int[n], l = new int[m], r = new int[m];
+				IntStream.range(0, n).forEach(i -> {
+					a[i] = inputScanner.nextInt();
+					b[i] = inputScanner.nextInt();
+				});
+				IntStream.range(0, m).forEach(i -> {
+					l[i] = inputScanner.nextInt();
+					r[i] = inputScanner.nextInt();
+				});
+				check(n, m, a, b, l, r);
+			}
+		}
 	}
 }

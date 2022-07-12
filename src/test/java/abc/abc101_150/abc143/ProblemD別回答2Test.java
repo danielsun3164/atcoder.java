@@ -1,6 +1,10 @@
 package abc.abc101_150.abc143;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -19,5 +23,10 @@ class ProblemD別回答2Test extends TestBase {
 	@Test
 	void case3() {
 		check("7\n" + "218 786 704 233 645 728 389", "23");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC143/D");
 	}
 }

@@ -2,6 +2,7 @@ package abc.abc101_150.abc134;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ProblemD {
@@ -18,8 +19,12 @@ public class ProblemD {
 				}
 				b[i] &= 1;
 			}
-			System.out.println(Arrays.stream(b).filter(bi -> bi > 0).count());
-			IntStream.range(0, n).filter(i -> b[i] > 0).forEach(i -> System.out.println(i + 1));
+			long count = Arrays.stream(b).filter(bi -> bi > 0).count();
+			System.out.println(count);
+			if (count > 0L) {
+				System.out.println(IntStream.range(0, n).filter(i -> b[i] > 0).mapToObj(i -> String.valueOf(i + 1))
+						.collect(Collectors.joining(" ")));
+			}
 		}
 	}
 }

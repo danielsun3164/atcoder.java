@@ -2,14 +2,22 @@ package abc.abc051_100.abc057;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Scanner;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
 class ProblemDTest extends TestBase {
 
 	/** 誤差 */
-	private static final double TOLERANCE = 0.000001d;
+	private static final double TOLERANCE = 1E-6d;
 
 	@Test
 	void case1() {
@@ -41,5 +49,23 @@ class ProblemDTest extends TestBase {
 		check("50 1 50\n"
 				+ "1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1",
 				1.0d, "1125899906842623");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC057/D", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (ByteArrayOutputStream boas = new ByteArrayOutputStream(); Scanner scanner = new Scanner(expectedIs)) {
+			byte[] buffer = new byte[8192];
+			int length = 0;
+			while (-1 != (length = inputIs.read(buffer))) {
+				boas.write(buffer, 0, length);
+			}
+			check(boas.toString(), scanner.nextDouble(), scanner.next());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

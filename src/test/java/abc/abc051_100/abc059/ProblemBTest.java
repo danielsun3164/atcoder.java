@@ -1,6 +1,10 @@
 package abc.abc051_100.abc059;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -24,5 +28,10 @@ class ProblemBTest extends TestBase {
 	@Test
 	void case4() {
 		check("123456789012345678901234567890\n" + "234567890123456789012345678901", "LESS");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ARC072/B");
 	}
 }

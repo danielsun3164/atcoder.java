@@ -1,12 +1,16 @@
 package abc.abc151_200.abc181;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
 class ProblemFTest extends TestBase {
 
-	private static final double TOLERANCE = 0.0001d;
+	private static final double TOLERANCE = 1E-4d;
 
 	@Test
 	void case1() {
@@ -28,5 +32,10 @@ class ProblemFTest extends TestBase {
 	void case4() {
 		checkResultIsAbout("10\n" + "65 -90\n" + "-34 -2\n" + "62 99\n" + "42 -13\n" + "47 -84\n" + "84 87\n"
 				+ "16 -78\n" + "56 35\n" + "90 8\n" + "90 19", 35.003571246374276203d, TOLERANCE);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC181/F", TOLERANCE);
 	}
 }

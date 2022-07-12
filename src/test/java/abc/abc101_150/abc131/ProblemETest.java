@@ -6,11 +6,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -36,8 +40,7 @@ class ProblemETest extends TestBase {
 			e.printStackTrace();
 			fail(e);
 		}
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int[][] d = new int[n][n];
 			IntStream.range(0, n).forEach(i -> {
 				Arrays.fill(d[i], INF);
@@ -78,5 +81,21 @@ class ProblemETest extends TestBase {
 	@Test
 	void case4() {
 		check(100, 0);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC131/E", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int result = expectedScanner.nextInt();
+			if (-1 == result) {
+				check(inputIs, "-1");
+				return;
+			}
+			check(inputScanner.nextInt(), inputScanner.nextInt());
+		}
 	}
 }

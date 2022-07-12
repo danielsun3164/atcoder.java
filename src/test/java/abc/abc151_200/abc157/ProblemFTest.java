@@ -1,13 +1,17 @@
 package abc.abc151_200.abc157;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
 class ProblemFTest extends TestBase {
 
 	/** 誤差 */
-	private static final double TOLERANCE = 1E-6;
+	private static final double TOLERANCE = 1E-6d;
 
 	@Test
 	void case1() {
@@ -20,5 +24,10 @@ class ProblemFTest extends TestBase {
 				"10 5\n" + "-879 981 26\n" + "890 -406 81\n" + "512 859 97\n" + "362 -955 25\n" + "128 553 17\n"
 						+ "-885 763 2\n" + "449 310 57\n" + "-656 -204 11\n" + "-270 76 40\n" + "184 170 16",
 				7411.225279d, TOLERANCE);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC157/F", TOLERANCE);
 	}
 }

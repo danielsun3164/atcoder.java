@@ -7,7 +7,7 @@ import testbase.TestBase;
 class ProblemDTest extends TestBase {
 
 	/** 誤差 */
-	private static final double TOLERANCE = 0.0000001d;
+	private static final double TOLERANCE = 1E-6d;
 
 	@Test
 	void case1() {

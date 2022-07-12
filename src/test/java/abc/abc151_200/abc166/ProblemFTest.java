@@ -6,13 +6,17 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -48,8 +52,7 @@ class ProblemFTest extends TestBase {
 		String[] lines = out.toString().split("\\R");
 		assertEquals(n + 1, lines.length);
 		IntStream.rangeClosed(1, n).forEach(i -> assertTrue(PATTERN.matcher(lines[i]).matches()));
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			assertEquals("Yes", scanner.next());
 			for (int i = 0; i < n; i++) {
 				String r = scanner.next();
@@ -85,6 +88,25 @@ class ProblemFTest extends TestBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC166/F", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			String r = expectedScanner.next();
+			if ("No".equals(r)) {
+				check(inputIs, "No");
+			} else {
+				int n = inputScanner.nextInt(), a = inputScanner.nextInt(), b = inputScanner.nextInt(),
+						c = inputScanner.nextInt();
+				String[] s = IntStream.range(0, n).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
+				check(n, a, b, c, s);
+			}
 		}
 	}
 }

@@ -38,8 +38,10 @@ class ProblemLTest extends TestBase {
 	}
 
 	void check(int n, int q, String expected) {
-		try (PipedOutputStream pos = new PipedOutputStream();
-				ProblemLTestPrintStream myPs = new ProblemLTestPrintStream(pos, expected)) {
+		try (InterpreterInputSnatcher in = new InterpreterInputSnatcher();
+				PipedOutputStream pos = new PipedOutputStream();
+				TestPrintStream myPs = new TestPrintStream(pos, in, expected)) {
+			System.setIn(in);
 			System.setOut(myPs);
 			in.input(n + " " + q);
 			execute();
@@ -51,20 +53,36 @@ class ProblemLTest extends TestBase {
 		}
 	}
 
-	private static class ProblemLTestPrintStream extends PrintStream {
+	/**
+	 * 対話型プログラムのための出力を受け取るクラス
+	 */
+	private static class TestPrintStream extends PrintStream {
+		/** プログラムの実行結果 */
 		String result;
+		/** 比較回数 */
 		int count;
 
-		private PipedInputStream pis;
-		private Scanner scanner;
+		private final PipedInputStream pis;
+		private final Scanner scanner;
+		private final InputSnatcher in;
 
+		/** 各文字のインデックス */
 		private final int[] indexes;
 
-		public ProblemLTestPrintStream(PipedOutputStream pos, String expected) throws IOException {
+		/**
+		 * コンストラクター
+		 *
+		 * @param pos
+		 * @param in       入力用
+		 * @param expected 期待された結果
+		 * @throws IOException 例外
+		 */
+		public TestPrintStream(PipedOutputStream pos, InputSnatcher in, String expected) throws IOException {
 			super(pos);
 			count = 0;
 			pis = new PipedInputStream(pos);
 			scanner = new Scanner(pis);
+			this.in = in;
 			char[] array = expected.toCharArray();
 			indexes = new int[array.length];
 			IntStream.range(0, array.length).forEach(i -> indexes[array[i] - 'A'] = i);
@@ -73,7 +91,7 @@ class ProblemLTest extends TestBase {
 		/**
 		 * テスト対象プログラムはprintlnしか使用しないため、このメソッドだけを上書きする
 		 *
-		 * @param x
+		 * @param x プログラムのprintlnの内容
 		 */
 		@Override
 		public void println(String x) {
@@ -83,13 +101,17 @@ class ProblemLTest extends TestBase {
 				result = scanner.next();
 			} else {
 				int a = scanner.next().charAt(0) - 'A';
+				assertTrue((a >= 0) && (a < indexes.length), "a is " + a);
 				int b = scanner.next().charAt(0) - 'A';
+				assertTrue((b >= 0) && (b < indexes.length), "b is " + b);
 				in.input((indexes[a] > indexes[b]) ? ">" : "<");
 				count++;
 			}
-			TestBase.out.reset();
 		}
 
+		/**
+		 * クローズ
+		 */
 		@Override
 		public void close() {
 			super.close();

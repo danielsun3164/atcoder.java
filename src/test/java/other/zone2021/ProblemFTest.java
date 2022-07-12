@@ -6,14 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import other.zone2021.ProblemF.DisjointSetUnion;
 import testbase.TestBase;
@@ -37,7 +41,7 @@ class ProblemFTest extends TestBase {
 
 	private void check(int n, int m, int[] a) {
 		in.input(n + " " + m);
-		in.input(Arrays.stream(a).mapToObj(ai -> String.valueOf(ai)).collect(Collectors.joining(" ")));
+		in.input(Arrays.stream(a).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
 		Set<Integer> set = Arrays.stream(a).boxed().collect(Collectors.toSet());
 		execute();
 		String[] lines = out.toString().split("\\R");
@@ -47,8 +51,7 @@ class ProblemFTest extends TestBase {
 			assertEquals(2, numbers.length);
 		});
 		DisjointSetUnion dsu = new DisjointSetUnion(n);
-		try (ByteArrayInputStream bais = new ByteArrayInputStream(out.toByteArray());
-				Scanner scanner = new Scanner(bais)) {
+		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			IntStream.range(1, n).forEach(i -> {
 				int u = scanner.nextInt(), v = scanner.nextInt();
 				assertFalse(u + "^" + v + "=" + (u ^ v) + "はaに含まれている", set.contains(u ^ v));
@@ -58,6 +61,23 @@ class ProblemFTest extends TestBase {
 		} catch (IOException | NoSuchElementException e) {
 			e.printStackTrace();
 			fail();
+		}
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ZONe2021/F", this::check);
+	}
+
+	void check(InputStream inputIs, InputStream expectedIs) {
+		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+			int result = expectedScanner.nextInt();
+			if (-1 == result) {
+				check(inputIs, "-1");
+				return;
+			}
+			int n = inputScanner.nextInt(), m = inputScanner.nextInt();
+			check(n, m, IntStream.range(0, m).map(i -> inputScanner.nextInt()).toArray());
 		}
 	}
 }

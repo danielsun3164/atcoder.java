@@ -1,6 +1,10 @@
 package abc.abc101_150.abc144;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -22,5 +26,10 @@ class ProblemD別回答Test extends TestBase {
 	@Test
 	void case3() {
 		checkResultIsAbout("3 1 8", 4.2363947991d, TOLERANCE);
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("ABC144/D", TOLERANCE);
 	}
 }
