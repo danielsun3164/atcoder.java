@@ -19,7 +19,7 @@ public class ProblemF {
 			long[] fact = new long[max + 1], invFact = new long[max + 1];
 			fact[0] = 1L;
 			IntStream.range(0, max).forEach(i -> fact[i + 1] = fact[i] * (i + 1) % MOD);
-			invFact[max] = modPow(fact[max], MOD - 2);
+			invFact[max] = powMod(fact[max], MOD - 2);
 			IntStream.range(0, max).map(i -> max - 1 - i).forEach(i -> invFact[i] = invFact[i + 1] * (i + 1) % MOD);
 			System.out.println((g(r2, c2, fact, invFact) + g(r1 - 1, c1 - 1, fact, invFact)
 					- g(r1 - 1, c2, fact, invFact) + MOD - g(r2, c1 - 1, fact, invFact) + MOD) % MOD);
@@ -33,7 +33,7 @@ public class ProblemF {
 	 * @param b
 	 * @return a ^ b mod MOD
 	 */
-	private static long modPow(long a, long b) {
+	private static long powMod(long a, long b) {
 		long result = 1L;
 		while (b > 0) {
 			if (1L == (1L & b)) {

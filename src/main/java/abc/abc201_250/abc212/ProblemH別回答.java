@@ -70,7 +70,7 @@ public class ProblemH別回答 {
 		walshHadamardTransform(b2);
 		IntStream.range(0, n).forEach(i -> a2[i] = a2[i] * b2[i] % MOD);
 		walshHadamardTransform(a2);
-		long inv = modPow(n, MOD - 2);
+		long inv = powMod(n, MOD - 2);
 		IntStream.range(0, n).forEach(i -> a2[i] = a2[i] * inv % MOD);
 		return a2;
 	}
@@ -100,7 +100,7 @@ public class ProblemH別回答 {
 	 * @param a
 	 * @return x^a mod MOD
 	 */
-	private static long modPow(long x, long a) {
+	private static long powMod(long x, long a) {
 		long result = 1L;
 		x %= MOD;
 		while (a > 0) {
