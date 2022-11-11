@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Maven Verify
+name: Maven Verify master
 
 on:
   push:
