@@ -57,7 +57,7 @@ class ProblemDTest extends TestBase {
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(1, lines.length);
-		String[] numbers = lines[0].split("\\ ");
+		String[] numbers = lines[0].split("\\s+");
 		assertEquals(n, numbers.length);
 		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int[] answers = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();

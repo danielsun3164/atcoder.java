@@ -44,7 +44,7 @@ class ProblemF別回答Test extends TestBase {
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(2, lines.length);
-		String[] numbers = lines[1].split("\\ ");
+		String[] numbers = lines[1].split("\\s+");
 		assertEquals(n, numbers.length);
 		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			String result = scanner.next();

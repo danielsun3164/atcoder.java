@@ -16,11 +16,11 @@ public class ProblemD {
 
 	public static void main(String[] args) throws IOException {
 		try (InputStreamReader isr = new InputStreamReader(System.in); BufferedReader br = new BufferedReader(isr)) {
-			String[] strings = br.readLine().split(" ");
+			String[] strings = br.readLine().split("\\s+");
 			int h = Integer.parseInt(strings[0]), w = Integer.parseInt(strings[1]);
 			int[][] a = new int[h][w];
 			for (int i = 0; i < h; i++) {
-				String[] columns = br.readLine().split(" ");
+				String[] columns = br.readLine().split("\\s+");
 				for (int j = 0; j < w; j++) {
 					a[i][j] = Integer.parseInt(columns[j]);
 				}
@@ -40,7 +40,7 @@ public class ProblemD {
 
 	/**
 	 * (i,j)の項目の移動数を計算
-	 * 
+	 *
 	 * @param i
 	 * @param j
 	 * @param h      全体の高さ

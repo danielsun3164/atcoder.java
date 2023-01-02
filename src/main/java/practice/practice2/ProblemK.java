@@ -22,10 +22,10 @@ public class ProblemK {
 
 	public static void main(String[] args) {
 		try (InputStreamReader isr = new InputStreamReader(System.in); BufferedReader br = new BufferedReader(isr)) {
-			String[] strings = br.readLine().split("\\s");
+			String[] strings = br.readLine().split("\\s+");
 			@SuppressWarnings("unused")
 			int n = Integer.parseInt(strings[0]), q = Integer.parseInt(strings[1]);
-			strings = br.readLine().split("\\s");
+			strings = br.readLine().split("\\s+");
 			SData[] a = Arrays.stream(strings).map(s -> new SData(Integer.valueOf(s), 1)).toArray(SData[]::new);
 			LazySegTree<SData, FData> seg = new LazySegTree<>(a) {
 				@Override

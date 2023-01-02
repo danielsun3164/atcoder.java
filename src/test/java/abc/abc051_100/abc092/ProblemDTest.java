@@ -59,7 +59,7 @@ class ProblemDTest extends TestBase {
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertTrue(lines.length > 0, "line is empty");
-		String[] numbers = lines[0].split("\\ ");
+		String[] numbers = lines[0].split("\\s+");
 		assertEquals(2, numbers.length);
 		try {
 			int h = Integer.parseInt(numbers[0]), w = Integer.parseInt(numbers[1]);

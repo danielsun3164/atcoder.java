@@ -54,7 +54,7 @@ class ProblemD別回答Test extends TestBase {
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(1, lines.length);
-		String[] numbers = lines[0].split("\\ ");
+		String[] numbers = lines[0].split("\\s+");
 		assertEquals(2, numbers.length);
 		assertNumberIsAbout(ex, numbers[0], TOLERANCE);
 		assertNumberIsAbout(ey, numbers[1], TOLERANCE);

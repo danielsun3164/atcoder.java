@@ -63,7 +63,7 @@ class ProblemDTest extends TestBase {
 	}
 
 	private void check(String line) {
-		String[] numbers = line.split("\\ ");
+		String[] numbers = line.split("\\s+");
 		assertTrue(numbers.length > 0);
 		try {
 			int n = Integer.parseInt(numbers[0]);
