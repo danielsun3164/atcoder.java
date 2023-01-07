@@ -39,7 +39,7 @@ class ProblemETest extends TestBase {
 		String[] lines = out.toString().split("\\R");
 		assertEquals(m, lines.length);
 		Arrays.stream(lines).forEach(line -> {
-			String[] numbers = line.split("\\ ");
+			String[] numbers = line.split("\\s+");
 			assertEquals(2, numbers.length);
 		});
 		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {

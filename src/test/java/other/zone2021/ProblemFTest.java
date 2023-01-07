@@ -47,7 +47,7 @@ class ProblemFTest extends TestBase {
 		String[] lines = out.toString().split("\\R");
 		assertEquals(n - 1, lines.length);
 		Arrays.stream(lines).forEach(line -> {
-			String[] numbers = line.split("\\ ");
+			String[] numbers = line.split("\\s+");
 			assertEquals(2, numbers.length);
 		});
 		DisjointSetUnion dsu = new DisjointSetUnion(n);

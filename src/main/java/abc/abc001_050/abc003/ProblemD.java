@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 public class ProblemD {
 
+	/** mod対象数字 */
 	private static final long MOD = 1_000_000_007L;
 
 	public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class ProblemD {
 			long[] factoral = new long[x * y + 1], revFactoral = new long[x * y + 1];
 			factoral[0] = 1L;
 			IntStream.rangeClosed(1, x * y).forEach(i -> factoral[i] = factoral[i - 1] * i % MOD);
-			revFactoral[x * y] = modPow(factoral[x * y], MOD - 2);
+			revFactoral[x * y] = powMod(factoral[x * y], MOD - 2);
 			IntStream.rangeClosed(1, x * y).map(i -> x * y - i)
 					.forEach(i -> revFactoral[i] = revFactoral[i + 1] * (i + 1) % MOD);
 			// r*cの中でx*yを配置するパターン数
@@ -26,7 +27,7 @@ public class ProblemD {
 
 	/**
 	 * x*yのエリアの中でd個のデスクとl個サーバーラックを配置するパターン数を計算する
-	 * 
+	 *
 	 * @param x           行数
 	 * @param y           列数
 	 * @param d           デスク数
@@ -54,7 +55,7 @@ public class ProblemD {
 
 	/**
 	 * x*yのエリアの中でd個のデスクとl個サーバーラックを無条件で配置するパターン数を計算する
-	 * 
+	 *
 	 * @param x           行数
 	 * @param y           列数
 	 * @param d           デスク数
@@ -75,12 +76,12 @@ public class ProblemD {
 
 	/**
 	 * nのmべき乗 mod MOD を計算する
-	 * 
+	 *
 	 * @param n
 	 * @param m
 	 * @return nのmべき乗 mod MOD
 	 */
-	private static long modPow(long n, long m) {
+	private static long powMod(long n, long m) {
 		long result = 1L;
 		while (m > 0) {
 			if (1 == (m & 1)) {

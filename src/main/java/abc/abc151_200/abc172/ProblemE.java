@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
  */
 public class ProblemE {
 
+	/** mod対象数字 */
 	private static final long MOD = 1_000_000_007L;
 
 	public static void main(String[] args) {
@@ -19,7 +20,7 @@ public class ProblemE {
 			IntStream.rangeClosed(1, m).forEach(i -> factorial[i] = factorial[i - 1] * i % MOD);
 			// 階乗^-1を保存する配列
 			long[] revFactorial = new long[m + 1];
-			revFactorial[m] = modPow(factorial[m], MOD - 2);
+			revFactorial[m] = powMod(factorial[m], MOD - 2);
 			IntStream.rangeClosed(1, m).map(i -> m - i)
 					.forEach(i -> revFactorial[i] = revFactorial[i + 1] * (i + 1) % MOD);
 			long answer = 0L;
@@ -39,12 +40,12 @@ public class ProblemE {
 
 	/**
 	 * n^m mod MOD を計算する
-	 * 
+	 *
 	 * @param n
 	 * @param m
 	 * @return n^m mod MOD
 	 */
-	private static long modPow(long n, long m) {
+	private static long powMod(long n, long m) {
 		long result = 1L;
 		while (m > 0) {
 			if (1 == (m & 1)) {

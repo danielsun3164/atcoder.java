@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
  */
 public class ProblemD {
 
+	/** mod対象数字 */
 	private static final long MOD = 1_000_000_007L;
 
 	public static void main(String[] args) {
@@ -24,7 +25,7 @@ public class ProblemD {
 			long[] factorial = new long[max + n], revFactorial = new long[max + n];
 			factorial[0] = 1L;
 			IntStream.range(1, max + n).forEach(i -> factorial[i] = factorial[i - 1] * i % MOD);
-			revFactorial[max + n - 1] = modPow(factorial[max + n - 1], MOD - 2);
+			revFactorial[max + n - 1] = powMod(factorial[max + n - 1], MOD - 2);
 			IntStream.range(0, max + n - 1).map(i -> max + n - 2 - i)
 					.forEach(i -> revFactorial[i] = revFactorial[i + 1] * (i + 1) % MOD);
 			long result = 1L;
@@ -37,7 +38,7 @@ public class ProblemD {
 
 	/**
 	 * mの因数の数を計算する
-	 * 
+	 *
 	 * @param m
 	 * @return mの因数の数の一覧
 	 */
@@ -62,12 +63,12 @@ public class ProblemD {
 
 	/**
 	 * n^m mod MODを計算する
-	 * 
+	 *
 	 * @param n
 	 * @param m
 	 * @return n^m mod MOD
 	 */
-	private static long modPow(long n, long m) {
+	private static long powMod(long n, long m) {
 		long result = 1L;
 		while (m > 0) {
 			if (1 == (m & 1)) {

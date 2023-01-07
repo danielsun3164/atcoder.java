@@ -46,7 +46,7 @@ class ProblemDTest extends TestBase {
 		assertEquals(n + 2, lines.length);
 		try {
 			int m = Integer.parseInt(lines[0]);
-			String[] numbers = lines[1].split("\\ ");
+			String[] numbers = lines[1].split("\\s+");
 			assertEquals(m, numbers.length);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

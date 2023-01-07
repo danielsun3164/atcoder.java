@@ -42,7 +42,7 @@ class ProblemFTest extends TestBase {
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(1, lines.length);
-		String[] numbers = lines[0].split("\\ ");
+		String[] numbers = lines[0].split("\\s+");
 		assertEquals(p, numbers.length);
 		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int[] b = IntStream.range(0, p).map(i -> scanner.nextInt()).toArray();

@@ -37,7 +37,7 @@ class ProblemFTest extends TestBase {
 		int tk = Integer.parseInt(lines[0]);
 		if (tk > 0) {
 			assertEquals(2, lines.length);
-			String[] numbers = lines[1].split("\\ ");
+			String[] numbers = lines[1].split("\\s+");
 			assertEquals(tk, numbers.length);
 		}
 		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {

@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 public class ProblemD {
 
+	/** mod対象数字 */
 	private static final long MOD = 1_000_000_007L;
 
 	public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class ProblemD {
 			long[] factorial = new long[w], revFactorial = new long[w];
 			factorial[0] = 1L;
 			IntStream.range(1, w).forEach(i -> factorial[i] = factorial[i - 1] * i % MOD);
-			revFactorial[w - 1] = modPow(factorial[w - 1], MOD - 2);
+			revFactorial[w - 1] = powMod(factorial[w - 1], MOD - 2);
 			IntStream.range(0, w - 1).map(i -> w - 2 - i)
 					.forEach(i -> revFactorial[i] = revFactorial[i + 1] * (i + 1) % MOD);
 			IntStream.rangeClosed(1, h).forEach(i -> IntStream.range(0, w).forEach(j -> {
@@ -39,7 +40,7 @@ public class ProblemD {
 
 	/**
 	 * ( n_C_0 + (n-1)_C_1 + ... + (n-n/2)_C_(n/2) ) mod MODを計算する
-	 * 
+	 *
 	 * @param n
 	 * @param factorial    階乗の配列
 	 * @param revFactorial 逆階乗の配列
@@ -56,12 +57,12 @@ public class ProblemD {
 
 	/**
 	 * n^m mod MODを計算する
-	 * 
+	 *
 	 * @param n
 	 * @param m
 	 * @return n^m mod MOD
 	 */
-	private static long modPow(long n, long m) {
+	private static long powMod(long n, long m) {
 		long result = 1L;
 		while (m > 0) {
 			if (1 == (m & 1)) {

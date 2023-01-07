@@ -26,7 +26,7 @@ public class ProblemH {
 			walshHadamardTransform(c);
 			IntStream.range(0, N).forEach(i -> c[i] = func(c[i], n));
 			walshHadamardTransform(c);
-			System.out.println(IntStream.range(1, N).mapToLong(i -> c[i]).sum() % MOD * modPow(N, MOD - 2) % MOD);
+			System.out.println(IntStream.range(1, N).mapToLong(i -> c[i]).sum() % MOD * powMod(N, MOD - 2) % MOD);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class ProblemH {
 	 * @param a
 	 * @return x^a mod MOD
 	 */
-	private static long modPow(long x, long a) {
+	private static long powMod(long x, long a) {
 		long result = 1L;
 		x %= MOD;
 		while (a > 0) {
@@ -82,6 +82,6 @@ public class ProblemH {
 		if (1L == x) {
 			return n;
 		}
-		return (modPow(x, n) - 1L + MOD) % MOD * x % MOD * modPow(x - 1, MOD - 2) % MOD;
+		return (powMod(x, n) - 1L + MOD) % MOD * x % MOD * powMod(x - 1, MOD - 2) % MOD;
 	}
 }
