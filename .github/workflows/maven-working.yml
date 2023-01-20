@@ -13,6 +13,8 @@ on:
     branches: [ "working" ]
   pull_request:
     branches: [ "working" ]
+env:
+ MAVEN_OPTS: -Xmx3g -Xss512m 
 
 jobs:
   build:
