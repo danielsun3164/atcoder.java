@@ -47,8 +47,8 @@ class ProblemDTest extends TestBase {
 		/** プログラムの実行結果 */
 		int result;
 
-		private static PipedInputStream pis;
-		private static Scanner scanner;
+		private final PipedInputStream pis;
+		private final Scanner scanner;
 		private final InputSnatcher in;
 
 		/**
