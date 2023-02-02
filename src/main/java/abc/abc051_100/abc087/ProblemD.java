@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc087/submissions/5890910 にも参考
  */
 public class ProblemD {
@@ -73,13 +73,14 @@ public class ProblemD {
 			w -= weight(y);
 			x = find(x);
 			y = find(y);
-			if (x == y)
+			if (x == y) {
 				return;
+			}
 			if (rank[x] < rank[y]) {
 				int tmp = x;
 				x = y;
 				y = tmp;
-				w -= w;
+				w = 0;
 			}
 			par[y] = x;
 			diff_weight[y] = w;

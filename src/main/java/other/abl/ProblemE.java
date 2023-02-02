@@ -156,7 +156,7 @@ public class ProblemE {
 		@SuppressWarnings("unused")
 		S get(int p) {
 			if (!((0 <= p) && (p < n))) {
-				new IllegalArgumentException("p is " + p);
+				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
 			pushTo(p);

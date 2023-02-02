@@ -487,7 +487,7 @@ public abstract class TestBase {
 		assertNotNull(path);
 		assertNotNull(checker);
 		assertNotNull(testcase);
-		if ((null != path) && (!path.isBlank())) {
+		if (!path.isBlank()) {
 			// パスの分割符号をシステム標準のものに置き換える
 			path = path.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
 			File baseFolder = new File(EXTERNAL_FOLDER);
@@ -528,8 +528,8 @@ public abstract class TestBase {
 			File outFolder = Paths.get(folder.getAbsolutePath(), OUT_FOLDER).toFile();
 			if (inFolder.exists() && inFolder.isDirectory() && outFolder.exists() && outFolder.isDirectory()) {
 				File[] inFiles = inFolder.listFiles();
-				Arrays.sort(inFiles);
 				if (null != inFiles) {
+					Arrays.sort(inFiles);
 					return Arrays.stream(inFiles).filter(File::isFile)
 							.filter(inFile -> testcase.isEmpty() || inFile.getName().equals(testcase)).map(inFile -> {
 								File outFile = Paths
