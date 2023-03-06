@@ -3,4 +3,4 @@
  * 
  * https://atcoder.jp/contests/past201912-open
  */
-package other.past201912open;
+package other.past201912_open;

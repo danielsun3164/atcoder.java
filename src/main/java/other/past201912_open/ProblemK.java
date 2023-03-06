@@ -1,4 +1,4 @@
-package other.past201912open;
+package other.past201912_open;
 
 import java.util.ArrayList;
 import java.util.List;
