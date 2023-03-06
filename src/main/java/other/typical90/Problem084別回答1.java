@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * https://github.com/E869120/kyopro_educational_90/blob/main/sol/084-01.cpp をもとに作成
  */
-public class Problem084別回答 {
+public class Problem084別回答1 {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

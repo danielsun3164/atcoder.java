@@ -8,30 +8,35 @@ import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
-class Problem084別回答Test extends TestBase {
+class Problem090別回答1Test extends TestBase {
 
 	@Test
 	void case1() {
-		check("4\n" + "ooxo", "5");
+		check("2 2", "8");
 	}
 
 	@Test
 	void case2() {
-		check("5\n" + "oxoxo", "10");
+		check("17 29", "263173793");
 	}
 
 	@Test
 	void case3() {
-		check("5\n" + "ooooo", "0");
+		check("2718 2818", "393799986");
 	}
 
 	@Test
 	void case4() {
-		check("7\n" + "xxoooxx", "16");
+		check("28593 1", "365728740");
+	}
+
+	@Test
+	void case5() {
+		check("869120 1001", "967393022");
 	}
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/084");
+		return checkExternal("typical90/090");
 	}
 }

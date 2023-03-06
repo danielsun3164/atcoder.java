@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  *
  * https://github.com/E869120/kyopro_educational_90/blob/main/sol/090-07b.cpp を参考に実装
  */
-public class Problem090別回答 {
+public class Problem090別回答1 {
 
 	/** mod対象数字 */
 	private static final int MOD = 998_244_353;
