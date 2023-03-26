@@ -8,6 +8,9 @@ import java.util.Queue;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * 解説通りに実装したソースコード
+ */
 public class Problem054 {
 
 	/** 最大値 */

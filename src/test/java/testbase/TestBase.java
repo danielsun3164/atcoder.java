@@ -34,6 +34,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestInfo;
 
 @DisplayNameGeneration(CustomDisplayNameGenerator.class)
 public abstract class TestBase {
@@ -52,17 +53,22 @@ public abstract class TestBase {
 	/** Zipファイルから入力用 */
 	private static ZipFile zip = null;
 
+	/** 現在のテストクラス名を取得する */
+	protected String testClassName;
+	/** 現在のテストケース名を取得する */
+	protected String testCaseName;
+
 	/** システムの改行コード */
 	protected static final String LF = System.lineSeparator();
 
-	/** プロパティーファイル */
-	private static final String PROPERTIES_FILE = "external.properties";
+	/** 外部テストケース用プロパティーファイル */
+	private static final String EXTERNAL_PROPERTIES_FILE = "external.properties";
 	/** 外部フォルダーを使用するかどうかのキー */
 	private static final String USE_EXTERNAL_KEY = "USE_EXTERNAL";
 	/** 外部フォルダーのキー */
 	private static final String EXTERNAL_FOLDER_KEY = "EXTERNAL_FOLDER";
-	/** プロパティーファイル読み込み用 */
-	private static final Properties prop = new Properties();
+	/** 外部テストケース用プロパティーファイル読み込み用 */
+	private static final Properties EXTERNAL_PROPERTIES = new Properties();
 	/** 外部フォルダーを使用するかどうか */
 	private static boolean USE_EXTERNAL = false;
 	/** 外部フォルダー */
@@ -75,14 +81,33 @@ public abstract class TestBase {
 	private static final String ZIP_EXTENSION = ".zip";
 	/** ZIPファイルのパス分割符号 */
 	private static final String ZIP_FILE_SEPARATOR = "/";
+	/** 実行時間制限チェック用プロパティーファイル */
+	private static final String TIME_LIMIT_PROPERTIES_FILE = "timeLimit.properties";
+	/** 実行時間制限チェック用プロパティーファイル読み込み用 */
+	private static final Properties TIME_LIMIT_PROPERTIES = new Properties();
+	/** 実行時間制限チェックを実施するかどうかのキー */
+	private static final String CHECK_TIME_LIMIT_KEY = "CHECK_TIME_LIMIT";
+	/** 実行時間制限チェックを実施するときのデフォルト値（2000ms） */
+	private static final String TIME_LIMIT_DEFAULT_VALUE = "2000";
+	/** 実行時間制限チェックを実施するかどうか */
+	private static boolean CHECK_TIME_LIMIT = false;
+	/** 実行時間制限(ms) */
+	private static long TIME_LIMIT = 2_000;
 
 	static {
-		InputStream is = TestBase.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE);
 		try {
-			if (null != is) {
-				prop.load(is);
-				USE_EXTERNAL = Boolean.parseBoolean((String) prop.getOrDefault(USE_EXTERNAL_KEY, "false"));
-				EXTERNAL_FOLDER = (String) prop.getOrDefault(EXTERNAL_FOLDER_KEY, "");
+			InputStream externalIs = TestBase.class.getClassLoader().getResourceAsStream(EXTERNAL_PROPERTIES_FILE);
+			if (null != externalIs) {
+				EXTERNAL_PROPERTIES.load(externalIs);
+				USE_EXTERNAL = Boolean.parseBoolean(
+						(String) EXTERNAL_PROPERTIES.getOrDefault(USE_EXTERNAL_KEY, Boolean.FALSE.toString()));
+				EXTERNAL_FOLDER = (String) EXTERNAL_PROPERTIES.getOrDefault(EXTERNAL_FOLDER_KEY, "");
+			}
+			InputStream timeLimitIs = TestBase.class.getClassLoader().getResourceAsStream(TIME_LIMIT_PROPERTIES_FILE);
+			if (null != timeLimitIs) {
+				TIME_LIMIT_PROPERTIES.load(timeLimitIs);
+				CHECK_TIME_LIMIT = Boolean.parseBoolean(
+						TIME_LIMIT_PROPERTIES.getProperty(CHECK_TIME_LIMIT_KEY, Boolean.FALSE.toString()));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -113,11 +138,25 @@ public abstract class TestBase {
 	}
 
 	/**
+	 * テストケース実行前の処理
+	 *
+	 * @param testInfo
+	 * @throws IOException
+	 */
+	@BeforeEach
+	void beforeEach(TestInfo testInfo) throws IOException {
+		testClassName = testInfo.getTestClass().get().getName();
+		testCaseName = testInfo.getDisplayName();
+		// 実行時間制限を取得する
+		TIME_LIMIT = Long.parseLong(TIME_LIMIT_PROPERTIES.getProperty(testClassName, TIME_LIMIT_DEFAULT_VALUE));
+		clearInAndOut();
+	}
+
+	/**
 	 * カスタマイズ入力と出力をクリアする
 	 *
 	 * @throws IOException
 	 */
-	@BeforeEach
 	void clearInAndOut() throws IOException {
 		out.reset();
 		in.clear();
@@ -193,7 +232,14 @@ public abstract class TestBase {
 			// テストクラス名から末尾の「Test」を取ったクラス名のクラスを取得し、mainメソッドを実行
 			Class<?> clazz = Class.forName(this.getClass().getName().replaceFirst("Test$", ""));
 			Method method = clazz.getDeclaredMethod("main", String[].class);
+
+			long start = System.currentTimeMillis();
 			method.invoke(null, (Object) null);
+			long end = System.currentTimeMillis(), duration = end - start;
+			if (CHECK_TIME_LIMIT && (duration > TIME_LIMIT)) {
+				System.err.println(
+						testClassName + "#" + testCaseName + " costs " + duration + "ms, limit is " + TIME_LIMIT + ".");
+			}
 		} catch (ClassNotFoundException | SecurityException | IllegalArgumentException | NoSuchMethodException
 				| IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -487,7 +533,7 @@ public abstract class TestBase {
 		assertNotNull(path);
 		assertNotNull(checker);
 		assertNotNull(testcase);
-		if ((null != path) && (!path.isBlank())) {
+		if (!path.isBlank()) {
 			// パスの分割符号をシステム標準のものに置き換える
 			path = path.replaceAll("[\\\\/]", Matcher.quoteReplacement(File.separator));
 			File baseFolder = new File(EXTERNAL_FOLDER);
@@ -528,8 +574,8 @@ public abstract class TestBase {
 			File outFolder = Paths.get(folder.getAbsolutePath(), OUT_FOLDER).toFile();
 			if (inFolder.exists() && inFolder.isDirectory() && outFolder.exists() && outFolder.isDirectory()) {
 				File[] inFiles = inFolder.listFiles();
-				Arrays.sort(inFiles);
 				if (null != inFiles) {
+					Arrays.sort(inFiles);
 					return Arrays.stream(inFiles).filter(File::isFile)
 							.filter(inFile -> testcase.isEmpty() || inFile.getName().equals(testcase)).map(inFile -> {
 								File outFile = Paths
@@ -540,6 +586,7 @@ public abstract class TestBase {
 							}).filter(files -> files[1].exists() && files[1].isFile()).map(files -> DynamicTest
 									.dynamicTest(files[0].getName().replaceAll("\\." + IN_FOLDER + "$", ""), () -> {
 										clearInAndOutWithoutException();
+										testCaseName = files[0].getName().replaceAll("\\." + IN_FOLDER + "$", "");
 										check(files[0], files[1], checker);
 									}))
 							.collect(Collectors.toList());
@@ -614,10 +661,12 @@ public abstract class TestBase {
 							String fileName = entries[0].getName().replace(inPath, "");
 							return DynamicTest.dynamicTest(fileName.replaceAll("\\." + IN_FOLDER + "$", ""), () -> {
 								clearInAndOutWithoutException();
+								testCaseName = fileName.replaceAll("\\." + IN_FOLDER + "$", "");
 								try {
 									checker.check(zip.getInputStream(entries[0]), zip.getInputStream(entries[1]));
 								} catch (IOException e) {
 									e.printStackTrace();
+									fail(e);
 								}
 							});
 						}).collect(Collectors.toList());
