@@ -34,7 +34,7 @@ public class ProblemF {
 			});
 			long[][][][] dp = new long[n][][][];
 			dfs(edges, dp, 0);
-			// TLE対策
+			// TLE対策のため、結果をStringBuilderに入れる
 			// 結果の計算方法は https://blog.hamayanhamayan.com/entry/2021/06/27/005906 にも参考
 			StringBuilder sb = new StringBuilder();
 			IntStream.rangeClosed(0, n).forEach(i -> sb.append((dp[0][i][0][0] + dp[0][i][0][1] + dp[0][i][1][1]) % MOD)

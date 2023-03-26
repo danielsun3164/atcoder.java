@@ -28,6 +28,7 @@ public class ProblemB {
 					IntStream.range(0, h).forEach(i -> a[i][j] = EMPTY);
 				}
 			});
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			// 行を確認する
 			IntStream.range(0, h).forEach(i -> {

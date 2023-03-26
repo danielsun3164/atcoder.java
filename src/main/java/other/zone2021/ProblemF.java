@@ -38,6 +38,7 @@ public class ProblemF {
 				return;
 			}
 			DisjointSetUnion dsu = new DisjointSetUnion(n);
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			base.stream().forEach(x -> IntStream.range(0, n).forEach(i -> {
 				if (!dsu.same(i, i ^ x)) {

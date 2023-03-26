@@ -56,6 +56,7 @@ public class ProblemE {
 					return 0;
 				}
 			};
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, q).forEach(i -> {
 				int l = scanner.nextInt() - 1, r = scanner.nextInt(), d = scanner.nextInt();

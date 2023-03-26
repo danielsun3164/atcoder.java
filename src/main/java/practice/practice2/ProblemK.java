@@ -60,6 +60,7 @@ public class ProblemK {
 					return new FData(1L, 0L);
 				}
 			};
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < q; i++) {
 				strings = br.readLine().split("\\s");

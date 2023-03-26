@@ -33,6 +33,7 @@ public class ProblemF {
 			f[0] = 0L;
 			IntStream.rangeClosed(1, n).forEach(i -> f[i] = (sumKD[i] + i * (sumD[n] - sumD[i])) / i);
 			int index = n;
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			for (int i = 1; i <= n; i++) {
 				while ((index > 0) && (f[index] < i)) {

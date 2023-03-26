@@ -16,7 +16,7 @@ public class ProblemC {
 			Arrays.fill(answer, k / n);
 			k %= n;
 			IntStream.range(0, (int) k).forEach(i -> answer[datas[i].index]++);
-			// TLE対策
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			Arrays.stream(answer).forEach(ans -> sb.append(ans).append(System.lineSeparator()));
 			System.out.print(sb.toString());

@@ -38,6 +38,7 @@ public class ProblemD {
 					}
 				}
 			}
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, q).forEach(i -> {
 				int c = scanner.nextInt() - 1, d = scanner.nextInt() - 1;

@@ -18,7 +18,7 @@ public class ProblemE別回答 {
 			char[] s = scanner.next().toCharArray();
 			Integer[] is = new Integer[n];
 			IntStream.range(0, n).forEach(i -> is[i] = 1 << (s[i] - 'a'));
-			SegTree<Integer> seg = new SegTree<Integer>(is) {
+			SegTree<Integer> seg = new SegTree<>(is) {
 				@Override
 				Integer e() {
 					return 0;
@@ -30,6 +30,7 @@ public class ProblemE別回答 {
 				}
 			};
 			int q = scanner.nextInt();
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, q).forEach(k -> {
 				int t = scanner.nextInt();
