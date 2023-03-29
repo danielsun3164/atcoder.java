@@ -119,11 +119,16 @@ public class ProblemK {
 
 		abstract F id();
 
-		@SuppressWarnings({ "unchecked", "unused" })
+		/**
+		 * コンストラクター
+		 *
+		 * @param n
+		 */
+		@SuppressWarnings({ "unchecked" })
 		public LazySegTree(int n) {
 			this.n = n;
-			log = ceilPow2(n);
-			size = 1 << log;
+			size = bitCeil(n);
+			log = countrZero(size);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e());
 			lz = (F[]) new Object[size];
@@ -133,11 +138,24 @@ public class ProblemK {
 			}
 		}
 
+		/**
+		 * コンストラクター
+		 */
+		@SuppressWarnings("unused")
+		public LazySegTree() {
+			this(0);
+		}
+
+		/**
+		 * コンストラクター
+		 *
+		 * @param v
+		 */
 		@SuppressWarnings("unchecked")
 		public LazySegTree(S[] v) {
 			n = v.length;
-			log = ceilPow2(n);
-			size = 1 << log;
+			size = bitCeil(n);
+			log = countrZero(size);
 			d = (S[]) new Object[size << 1];
 			// Arrays.fill使用できない
 			IntStream.range(0, d.length).forEach(i -> d[i] = e());
@@ -158,7 +176,7 @@ public class ProblemK {
 		 */
 		@SuppressWarnings("unused")
 		void set(int p, S x) {
-			if (!((0 <= p) && (p < n))) {
+			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
@@ -175,7 +193,7 @@ public class ProblemK {
 		 */
 		@SuppressWarnings("unused")
 		S get(int p) {
-			if (!((0 <= p) && (p < n))) {
+			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
@@ -191,7 +209,7 @@ public class ProblemK {
 		 * @return op(a[l], ..., a[r - 1])
 		 */
 		S prod(int l, int r) {
-			if (!((0 <= l) && (l <= r) && (r <= n))) {
+			if (!(0 <= l && l <= r && r <= n)) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
 			if (l == r) {
@@ -205,7 +223,7 @@ public class ProblemK {
 					push(l >> i);
 				}
 				if (((r >> i) << i) != r) {
-					push(r >> i);
+					push((r - 1) >> i);
 				}
 			}
 
@@ -242,7 +260,7 @@ public class ProblemK {
 		 */
 		@SuppressWarnings("unused")
 		void apply(int p, F f) {
-			if (!((0 <= p) && (p < n))) {
+			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
@@ -259,7 +277,7 @@ public class ProblemK {
 		 * @param f
 		 */
 		void apply(int l, int r, F f) {
-			if (!((0 <= l) && (l <= r) && (r <= n))) {
+			if (!(0 <= l && l <= r && r <= n)) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
 			if (l == r) {
@@ -313,7 +331,7 @@ public class ProblemK {
 		 */
 		@SuppressWarnings("unused")
 		int maxRight(int l, Predicate<S> g) {
-			if (!((0 <= l) && (l <= n))) {
+			if (!(0 <= l && l <= n)) {
 				throw new IllegalArgumentException("l is " + l);
 			}
 			if (!g.test(e())) {
@@ -361,7 +379,7 @@ public class ProblemK {
 		 */
 		@SuppressWarnings("unused")
 		int minLeft(int r, Predicate<S> g) {
-			if (!((0 <= r) && (r <= n))) {
+			if (!(0 <= r && r <= n)) {
 				throw new IllegalArgumentException("r is " + r);
 			}
 			if (!g.test(e())) {
@@ -377,7 +395,7 @@ public class ProblemK {
 			S sm = e();
 			do {
 				r--;
-				while ((r > 1) && ((r & 1) > 0)) {
+				while (r > 1 && (r & 1) > 0) {
 					r >>= 1;
 				}
 				S s = e();
@@ -392,7 +410,7 @@ public class ProblemK {
 							r--;
 						}
 					}
-					return (r + 1) - size;
+					return r + 1 - size;
 				}
 				op(d[r], sm, sm);
 			} while ((r & -r) != r);
@@ -412,7 +430,7 @@ public class ProblemK {
 
 		private void push(int k) {
 			allApply(k << 1, lz[k]);
-			allApply((k << 1) | 1, lz[k]);
+			allApply(k << 1 | 1, lz[k]);
 			lz[k] = id();
 		}
 
@@ -428,21 +446,32 @@ public class ProblemK {
 				update(p);
 			}
 		}
-	}
 
-	/**
-	 *
-	 * @param n `0 <= n`
-	 * @return minimum non-negative `x` s.t. `n <= 2**x`
-	 */
-	private static int ceilPow2(int n) {
-		if (!(0 <= n)) {
-			throw new IllegalArgumentException("n is " + n);
+		/**
+		 * n以上最小の2^xの数字を計算する
+		 *
+		 * @param n
+		 * @return n以上最小の2^xの数字
+		 */
+		private static int bitCeil(int n) {
+			if (!(0 <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 1;
+			while (x < n) {
+				x <<= 1;
+			}
+			return x;
 		}
-		int x = 0;
-		while ((1 << x) < n) {
-			x++;
+
+		/**
+		 * 入力数値を2進で表した場合に、右から連続した0のビットを数える
+		 *
+		 * @param n 数値
+		 * @return 2進で表した場合に、右から連続した0のビット
+		 */
+		private static int countrZero(int n) {
+			return Integer.numberOfTrailingZeros(n);
 		}
-		return x;
 	}
 }

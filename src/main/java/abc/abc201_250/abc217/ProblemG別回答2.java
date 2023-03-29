@@ -45,15 +45,7 @@ public class ProblemG別回答2 {
 	 * @return n^m mod MOD
 	 */
 	private static long powMod(long n, long m) {
-		long result = 1L;
-		while (m > 0) {
-			if (1 == (1 & m)) {
-				result = (result * n) % MOD;
-			}
-			n = (n * n) % MOD;
-			m >>= 1;
-		}
-		return result;
+		return Convolution.powMod(n, m, MOD);
 	}
 
 	/**
@@ -78,7 +70,7 @@ public class ProblemG別回答2 {
 		private static FftInfo info;
 
 		private static void butterfly(long[] a) {
-			int n = a.length, h = ceilPow2(n);
+			int n = a.length, h = countrZero(n);
 			// a[i, i+(n>>len), i+2*(n>>len), ..] is transformed
 			int len = 0;
 			while (len < h) {
@@ -94,7 +86,7 @@ public class ProblemG別回答2 {
 							a[i + offset + p] = safeMod(l - r);
 						}
 						if ((s + 1) != (1 << len)) {
-							rot = safeMod(rot * info.rate2[bsf(~s & Integer.MAX_VALUE)]);
+							rot = safeMod(rot * info.rate2[countrZero(~s & Integer.MAX_VALUE)]);
 						}
 					}
 					len++;
@@ -119,7 +111,7 @@ public class ProblemG別回答2 {
 							a[i + offset + 3 * p] = safeMod(a0 + na2 - a1na3imag);
 						}
 						if ((s + 1) != (1 << len)) {
-							rot = safeMod(rot * info.rate3[bsf(~s & Integer.MAX_VALUE)]);
+							rot = safeMod(rot * info.rate3[countrZero(~s & Integer.MAX_VALUE)]);
 						}
 					}
 					len += 2;
@@ -128,7 +120,7 @@ public class ProblemG別回答2 {
 		}
 
 		private static void butterflyInv(long[] a) {
-			int n = a.length, h = ceilPow2(n);
+			int n = a.length, h = countrZero(n);
 
 			int len = h; // a[i, i+(n>>len), i+2*(n>>len), ..] is transformed
 			while (len > 0) {
@@ -143,7 +135,7 @@ public class ProblemG別回答2 {
 							a[i + offset + p] = safeMod((l - r) * irot);
 						}
 						if ((s + 1) != (1 << (len - 1))) {
-							irot = safeMod(irot * info.irate2[bsf(~s & Integer.MAX_VALUE)]);
+							irot = safeMod(irot * info.irate2[countrZero(~s & Integer.MAX_VALUE)]);
 						}
 					}
 					len--;
@@ -169,7 +161,7 @@ public class ProblemG別回答2 {
 							a[i + offset + 3 * p] = safeMod((a0 - a1 - a2na3iimag) * irot3);
 						}
 						if ((s + 1) != (1 << (len - 2))) {
-							irot = safeMod(irot * info.irate3[bsf(~s & Integer.MAX_VALUE)]);
+							irot = safeMod(irot * info.irate3[countrZero(~s & Integer.MAX_VALUE)]);
 						}
 					}
 					len -= 2;
@@ -200,7 +192,7 @@ public class ProblemG別回答2 {
 		private static long[] convolutionFft(long[] a, int aFromIndex, int aToIndex, long[] b, int bFromIndex,
 				int bToIndex) {
 			int n = aToIndex - aFromIndex, m = bToIndex - bFromIndex;
-			int z = 1 << ceilPow2(n + m - 1);
+			int z = bitCeil(n + m - 1);
 			{
 				long[] na = new long[z];
 				System.arraycopy(a, aFromIndex, na, 0, n);
@@ -229,6 +221,12 @@ public class ProblemG別回答2 {
 			if ((0 == n) || (0 == m)) {
 				return new long[0];
 			}
+
+			int z = bitCeil(n + m - 1);
+			if (!(0 == (MOD - 1) % z)) {
+				throw new IllegalArgumentException("(" + MOD + "-1)%" + z + "!=0");
+			}
+
 			if (Math.min(n, m) <= 60) {
 				return convolutionNaive(a, aFromIndex, aToIndex, b, bFromIndex, bToIndex);
 			} else {
@@ -304,6 +302,8 @@ public class ProblemG別回答2 {
 		private static final long i2 = invGcd(MOD1 * MOD3, MOD2)[1];
 		private static final long i3 = invGcd(MOD1 * MOD2, MOD3)[1];
 
+		private static final int MAX_AB_BIT = 24;
+
 		/**
 		 * 畳み込みを計算します。a,b の少なくとも一方が空配列の場合は空配列を返します。
 		 *
@@ -349,6 +349,10 @@ public class ProblemG別回答2 {
 			int n = aToIndex - aFromIndex, m = bToIndex - bFromIndex;
 			if ((0 == n) || (0 == m)) {
 				return new long[0];
+			}
+			if (!(n + m - 1 <= (1 << MAX_AB_BIT))) {
+				throw new IllegalArgumentException(
+						"n=" + n + ", m=" + m + ", n+m-1=" + (n + m - 1) + ">" + (1 << MAX_AB_BIT));
 			}
 
 			long[] c1 = convolution(a, b, (int) MOD1);
@@ -537,43 +541,27 @@ public class ProblemG別回答2 {
 		}
 
 		/**
+		 * n以上最小の2^xの数字を計算する
 		 *
-		 * @param n `0 <= n`
-		 * @return minimum non-negative `x` s.t. `n <= 2**x`
+		 * @param n
+		 * @return n以上最小の2^xの数字
 		 */
-		static int ceilPow2(int n) {
-			if (!(0 <= n)) {
-				throw new IllegalArgumentException("n is " + n);
-			}
-			int x = 0;
-			while ((1L << x) < n) {
-				x++;
+		static int bitCeil(int n) {
+			int x = 1;
+			while (x < n) {
+				x <<= 1;
 			}
 			return x;
 		}
 
 		/**
+		 * 入力数値を2進で表した場合に、右から連続した0のビットを数える
 		 *
-		 * @param n `1 <= n`
-		 * @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
+		 * @param n 数値
+		 * @return 2進で表した場合に、右から連続した0のビット
 		 */
-		static int bsf(int n) {
+		static int countrZero(int n) {
 			return Integer.numberOfTrailingZeros(n);
-		}
-
-		/**
-		 * @param n `1 <= n`
-		 * @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
-		 */
-		static int bsfConstexpr(long n) {
-			if (!(1L <= n)) {
-				throw new IllegalArgumentException("n is " + n);
-			}
-			int x = 0;
-			while (0 == (n & (1 << x))) {
-				x++;
-			}
-			return x;
 		}
 
 		private static class FftInfo {
@@ -586,7 +574,7 @@ public class ProblemG別回答2 {
 			final long[] irate3;
 
 			FftInfo() {
-				rank2 = bsfConstexpr(MOD - 1);
+				rank2 = countrZero(MOD - 1);
 				root = new long[rank2 + 1];
 				iroot = new long[rank2 + 1];
 				rate2 = new long[Math.max(0, rank2 - 2 + 1)];

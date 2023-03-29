@@ -77,6 +77,7 @@ public class ProblemL {
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/lazysegtree.hpp を参考に作成
 	 */
 	private static abstract class LazySegTree<S, F> {
+
 		final int n, size, log;
 		final S[] d;
 		final F[] lz;
@@ -91,11 +92,16 @@ public class ProblemL {
 
 		abstract F id();
 
-		@SuppressWarnings({ "unchecked", "unused" })
+		/**
+		 * コンストラクター
+		 *
+		 * @param n
+		 */
+		@SuppressWarnings({ "unchecked" })
 		public LazySegTree(int n) {
 			this.n = n;
-			log = ceilPow2(n);
-			size = 1 << log;
+			size = bitCeil(n);
+			log = countrZero(size);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e());
 			lz = (F[]) new Object[size];
@@ -105,11 +111,24 @@ public class ProblemL {
 			}
 		}
 
+		/**
+		 * コンストラクター
+		 */
+		@SuppressWarnings("unused")
+		public LazySegTree() {
+			this(0);
+		}
+
+		/**
+		 * コンストラクター
+		 *
+		 * @param v
+		 */
 		@SuppressWarnings("unchecked")
 		public LazySegTree(S[] v) {
 			n = v.length;
-			log = ceilPow2(n);
-			size = 1 << log;
+			size = bitCeil(n);
+			log = countrZero(size);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e());
 			lz = (F[]) new Object[size];
@@ -175,7 +194,7 @@ public class ProblemL {
 					push(l >> i);
 				}
 				if (((r >> i) << i) != r) {
-					push(r >> i);
+					push((r - 1) >> i);
 				}
 			}
 
@@ -391,21 +410,32 @@ public class ProblemL {
 				update(p);
 			}
 		}
-	}
 
-	/**
-	 *
-	 * @param n `0 <= n`
-	 * @return minimum non-negative `x` s.t. `n <= 2**x`
-	 */
-	private static int ceilPow2(int n) {
-		if (!(0 <= n)) {
-			throw new IllegalArgumentException("n is " + n);
+		/**
+		 * n以上最小の2^xの数字を計算する
+		 *
+		 * @param n
+		 * @return n以上最小の2^xの数字
+		 */
+		private static int bitCeil(int n) {
+			if (!(0 <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 1;
+			while (x < n) {
+				x <<= 1;
+			}
+			return x;
 		}
-		int x = 0;
-		while ((1 << x) < n) {
-			x++;
+
+		/**
+		 * 入力数値を2進で表した場合に、右から連続した0のビットを数える
+		 *
+		 * @param n 数値
+		 * @return 2進で表した場合に、右から連続した0のビット
+		 */
+		private static int countrZero(int n) {
+			return Integer.numberOfTrailingZeros(n);
 		}
-		return x;
 	}
 }

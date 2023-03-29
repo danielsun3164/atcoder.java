@@ -17,7 +17,7 @@ public class Problem006 {
 			char[] s = scanner.next().toCharArray();
 			// 各文字がsでの出現場所を保存するマップ
 			Map<Character, NavigableSet<Integer>> map = new HashMap<>();
-			SegTree<Character> st = new SegTree<Character>(n) {
+			SegTree<Character> st = new SegTree<>(n) {
 				@Override
 				Character e() {
 					return '{';
@@ -75,13 +75,21 @@ public class Problem006 {
 
 		/**
 		 * コンストラクター
+		 */
+		@SuppressWarnings("unused")
+		SegTree() {
+			this(0);
+		}
+
+		/**
+		 * コンストラクター
 		 *
 		 * @param n
 		 */
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked" })
 		SegTree(int n) {
 			this.n = n;
-			size = 1 << ceilPow2(n);
+			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e());
 			for (int i = size - 1; i >= 1; i--) {
@@ -97,7 +105,7 @@ public class Problem006 {
 		@SuppressWarnings({ "unchecked", "unused" })
 		SegTree(S[] v) {
 			n = v.length;
-			size = 1 << ceilPow2(n);
+			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e());
 			// https://atcoder.jp/contests/practice2/submissions/17594068 に参考
@@ -115,7 +123,7 @@ public class Problem006 {
 		 * @param x
 		 */
 		void set(int p, S x) {
-			if (!((0 <= p) && (p < n))) {
+			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
@@ -134,7 +142,7 @@ public class Problem006 {
 		 */
 		@SuppressWarnings("unused")
 		S get(int p) {
-			if (!((0 <= p) && (p < n))) {
+			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			return d[p + size];
@@ -148,7 +156,7 @@ public class Problem006 {
 		 * @return op(a[l], ..., a[r - 1])、 l==r のときは e()。
 		 */
 		S prod(int l, int r) {
-			if (!((0 <= l) && (l <= r) && (r <= n))) {
+			if (!(0 <= l && l <= r && r <= n)) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
 			S sml = e(), smr = e();
@@ -156,10 +164,10 @@ public class Problem006 {
 			r += size;
 
 			while (l < r) {
-				if ((l & 1) > 0) {
+				if (0 != (l & 1)) {
 					sml = op(sml, d[l++]);
 				}
-				if ((r & 1) > 0) {
+				if (0 != (r & 1)) {
 					smr = op(d[--r], smr);
 				}
 				l >>= 1;
@@ -190,7 +198,7 @@ public class Problem006 {
 		 */
 		@SuppressWarnings("unused")
 		int maxRight(int l, Predicate<S> f) {
-			if (!((0 <= l) && (l <= n))) {
+			if (!(0 <= l && l <= n)) {
 				throw new IllegalArgumentException("l is " + l);
 			}
 			if (!f.test(e())) {
@@ -233,7 +241,7 @@ public class Problem006 {
 		 */
 		@SuppressWarnings("unused")
 		int minLeft(int r, Predicate<S> f) {
-			if (!((0 <= r) && (r <= n))) {
+			if (!(0 <= r && r <= n)) {
 				throw new IllegalArgumentException("r is " + r);
 			}
 			if (!f.test(e())) {
@@ -246,18 +254,18 @@ public class Problem006 {
 			S sm = e();
 			do {
 				r--;
-				while ((r > 1) && ((r & 1) > 0)) {
+				while (r > 1 && 0 != (r & 1)) {
 					r >>= 1;
 				}
 				if (!f.test(op(d[r], sm))) {
 					while (r < size) {
-						r = ((2 * r) + 1);
+						r = (2 * r + 1);
 						if (f.test(op(d[r], sm))) {
 							sm = op(d[r], sm);
 							r--;
 						}
 					}
-					return (r + 1) - size;
+					return r + 1 - size;
 				}
 				sm = op(d[r], sm);
 			} while ((r & -r) != r);
@@ -265,23 +273,24 @@ public class Problem006 {
 		}
 
 		private void update(int k) {
-			d[k] = op(d[k << 1], d[(k << 1) | 1]);
+			d[k] = op(d[k << 1], d[k << 1 | 1]);
 		}
-	}
 
-	/**
-	 *
-	 * @param n `0 <= n`
-	 * @return minimum non-negative `x` s.t. `n <= 2**x`
-	 */
-	private static int ceilPow2(int n) {
-		if (!(0 <= n)) {
-			throw new IllegalArgumentException("n is " + n);
+		/**
+		 * n以上最小の2^xの数字を計算する
+		 *
+		 * @param n
+		 * @return n以上最小の2^xの数字
+		 */
+		private static int bitCeil(int n) {
+			if (!(0 <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 1;
+			while (x < n) {
+				x <<= 1;
+			}
+			return x;
 		}
-		int x = 0;
-		while ((1 << x) < n) {
-			x++;
-		}
-		return x;
 	}
 }
