@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  *
  * https://atcoder.jp/contests/abc216/editorial/2569 の解説のFenwick Treeとキューの実装
  */
-public class ProblemG別回答 {
+public class ProblemG別回答1 {
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

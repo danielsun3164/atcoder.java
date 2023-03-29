@@ -8,7 +8,7 @@ import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
-class ProblemG別回答Test extends TestBase {
+class ProblemG別回答1Test extends TestBase {
 
 	@Test
 	void case1() {
