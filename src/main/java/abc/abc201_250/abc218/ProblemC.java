@@ -36,36 +36,14 @@ public class ProblemC {
 	 */
 	private static char[][] trim(char[][] s) {
 		int n = s.length;
-		int sr = 0, er = 0, sc = 0, ec = 0;
-		main1: for (int i = 0; i < n; i++) {
+		int sr = Integer.MAX_VALUE, er = 0, sc = Integer.MAX_VALUE, ec = 0;
+		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (BLANK != s[i][j]) {
-					sr = i;
-					break main1;
-				}
-			}
-		}
-		main2: for (int i = n - 1; i >= 0; i--) {
-			for (int j = 0; j < n; j++) {
-				if (BLANK != s[i][j]) {
-					er = i;
-					break main2;
-				}
-			}
-		}
-		main3: for (int j = 0; j < n; j++) {
-			for (int i = 0; i < n; i++) {
-				if (BLANK != s[i][j]) {
-					sc = j;
-					break main3;
-				}
-			}
-		}
-		main4: for (int j = n - 1; j >= 0; j--) {
-			for (int i = 0; i < n; i++) {
-				if (BLANK != s[i][j]) {
-					ec = j;
-					break main4;
+					sr = Math.min(sr, i);
+					er = Math.max(er, i);
+					sc = Math.min(sc, j);
+					ec = Math.max(ec, j);
 				}
 			}
 		}
