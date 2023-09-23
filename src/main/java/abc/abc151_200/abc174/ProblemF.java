@@ -50,6 +50,7 @@ public class ProblemF {
 					break;
 				}
 			}
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			for (int x : answers) {
 				sb.append(x).append(System.lineSeparator());
@@ -61,6 +62,9 @@ public class ProblemF {
 		}
 	}
 
+	/**
+	 * index, left, rightを格納するクラス
+	 */
 	private static class Query implements Comparable<Query> {
 		int index;
 		int left;
@@ -79,6 +83,9 @@ public class ProblemF {
 		}
 	}
 
+	/**
+	 * Binary Indexed Treeの実装クラス
+	 */
 	private static class BinaryIndexedTree {
 		int size;
 		int[] data;

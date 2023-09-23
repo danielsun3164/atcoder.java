@@ -19,6 +19,7 @@ public class Problem015 {
 			IntStream.rangeClosed(1, n).forEach(i -> fact[i] = (fact[i - 1] * i) % MOD);
 			invFact[n] = powMod(fact[n], MOD - 2);
 			IntStream.rangeClosed(1, n).map(i -> n - i).forEach(i -> invFact[i] = (invFact[i + 1] * (i + 1)) % MOD);
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.rangeClosed(1, n)
 					.forEach(k -> sb

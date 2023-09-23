@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc135/submissions/7719127 にも参考
  */
 public class ProblemE {
@@ -18,6 +18,7 @@ public class ProblemE {
 			}
 			// 答え
 			int n = 0;
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			int tx = 0, ty = 0;
 			while (true) {
@@ -58,7 +59,7 @@ public class ProblemE {
 					tx += (((x - tx) >= 0) ? 1 : -1) * dx;
 					ty += (((y - ty) >= 0) ? 1 : -1) * (k - dx);
 				}
-				sb.append(tx + " " + ty + "\n");
+				sb.append(tx).append(" ").append(ty).append(System.lineSeparator());
 				if ((tx == x) && (ty == y)) {
 					break;
 				}

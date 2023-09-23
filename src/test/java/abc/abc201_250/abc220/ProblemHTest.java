@@ -1,4 +1,4 @@
-package abc.abc201_250.abc216;
+package abc.abc201_250.abc220;
 
 import java.util.Collection;
 
@@ -8,20 +8,20 @@ import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
-class ProblemG別回答Test extends TestBase {
+class ProblemHTest extends TestBase {
 
 	@Test
 	void case1() {
-		check("6 3\n" + "1 4 3\n" + "2 2 1\n" + "4 6 2", "0 1 1 1 0 1");
+		check("3 2\n" + "1 2\n" + "2 3", "6");
 	}
 
 	@Test
 	void case2() {
-		check("8 2\n" + "2 6 1\n" + "3 5 3", "0 0 1 1 1 0 0 0");
+		check("20 3\n" + "5 6\n" + "3 4\n" + "1 2", "458752");
 	}
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("abc216/G");
+		return checkExternal("abc220/H");
 	}
 }

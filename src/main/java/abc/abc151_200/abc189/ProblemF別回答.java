@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * 解法2 二分探索の実装
  */
 public class ProblemF別回答 {
@@ -15,7 +15,7 @@ public class ProblemF別回答 {
 	/** 二分探索の最大値 */
 	private static final double INF = 8E10d;
 	/** 誤差 */
-	private static final double TOLERANCE = 1E-3d;
+	private static final double TOLERANCE = 1E-5d;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

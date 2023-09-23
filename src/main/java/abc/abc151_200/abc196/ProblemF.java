@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
+ *
+ * 古いLibraryの実装
  */
 public class ProblemF {
 
@@ -169,202 +171,202 @@ public class ProblemF {
 			}
 			return a;
 		}
-	}
 
-	/**
-	 * x^n mod MOD
-	 *
-	 * @param x
-	 * @param n
-	 * @return x^n mod MOD を計算する
-	 */
-	static long powMod(long x, long n) {
-		return powMod(x, n, MOD);
-	}
+		/**
+		 * x^n mod MOD
+		 *
+		 * @param x
+		 * @param n
+		 * @return x^n mod MOD を計算する
+		 */
+		static long powMod(long x, long n) {
+			return powMod(x, n, MOD);
+		}
 
-	/**
-	 * x^n mod m
-	 *
-	 * @param x
-	 * @param n
-	 * @param m
-	 * @return x^n mod m を計算する
-	 */
-	static long powMod(long x, long n, long m) {
-		if (!((0L <= n) || (1L <= m))) {
-			throw new IllegalArgumentException("n is " + n + ", m is " + m);
-		}
-		if (1L == m) {
-			return 0L;
-		}
-		long r = 1L, y = safeMod(x, m);
-		while (n > 0L) {
-			if (1L == (n & 1L)) {
-				r = safeMod(r * y, m);
+		/**
+		 * x^n mod m
+		 *
+		 * @param x
+		 * @param n
+		 * @param m
+		 * @return x^n mod m を計算する
+		 */
+		static long powMod(long x, long n, long m) {
+			if (!((0L <= n) || (1L <= m))) {
+				throw new IllegalArgumentException("n is " + n + ", m is " + m);
 			}
-			y = safeMod(y * y, m);
-			n >>= 1;
-		}
-		return r;
-	}
-
-	/**
-	 * x mod MOD を安全に計算する
-	 *
-	 * @param x
-	 * @return x mod MOD
-	 */
-	private static long safeMod(long x) {
-		return safeMod(x, MOD);
-	}
-
-	/**
-	 * x mod m を安全に計算する
-	 *
-	 * @param x
-	 * @param m
-	 * @return x mod m
-	 */
-	private static long safeMod(long x, long m) {
-		x %= m;
-		if (x < 0) {
-			x += m;
-		}
-		return x;
-	}
-
-	static long invMod(long x) {
-		return invMod(x, MOD);
-	}
-
-	static long invMod(long x, long m) {
-		if (!(1 <= m)) {
-			throw new IllegalArgumentException("m is " + m);
-		}
-		long[] z = invGcd(x, m);
-		if (1L != z[0]) {
-			throw new IllegalArgumentException("z[0] is " + z[0]);
-		}
-		return z[1];
-	}
-
-	/**
-	 * @param a
-	 * @param b `1 <= b`
-	 * @return {g, x} s.t. g = gcd(a, b), x a = g (mod b), 0 <= x < b/g
-	 */
-	static long[] invGcd(long a, long b) {
-		a = safeMod(a, b);
-		if (a == 0) {
-			return new long[] { b, 0 };
+			if (1L == m) {
+				return 0L;
+			}
+			long r = 1L, y = safeMod(x, m);
+			while (n > 0L) {
+				if (1L == (n & 1L)) {
+					r = safeMod(r * y, m);
+				}
+				y = safeMod(y * y, m);
+				n >>= 1;
+			}
+			return r;
 		}
 
-		// Contracts:
-		// [1] s - m0 * a = 0 (mod b)
-		// [2] t - m1 * a = 0 (mod b)
-		// [3] s * |m1| + t * |m0| <= b
-		long s = b, t = a;
-		long m0 = 0, m1 = 1;
+		/**
+		 * x mod MOD を安全に計算する
+		 *
+		 * @param x
+		 * @return x mod MOD
+		 */
+		private static long safeMod(long x) {
+			return safeMod(x, MOD);
+		}
 
-		while (t > 0) {
-			long u = s / t;
-			s -= t * u;
-			m0 -= m1 * u; // |m1 * u| <= |m1| * s <= b
+		/**
+		 * x mod m を安全に計算する
+		 *
+		 * @param x
+		 * @param m
+		 * @return x mod m
+		 */
+		private static long safeMod(long x, long m) {
+			x %= m;
+			if (x < 0) {
+				x += m;
+			}
+			return x;
+		}
 
-			// [3]:
-			// (s - t * u) * |m1| + t * |m0 - m1 * u|
-			// <= s * |m1| - t * u * |m1| + t * (|m0| + |m1| * u)
-			// = s * |m1| + t * |m0| <= b
-			long tmp = s;
-			s = t;
-			t = tmp;
-			tmp = m0;
-			m0 = m1;
-			m1 = tmp;
+		static long invMod(long x) {
+			return invMod(x, MOD);
 		}
-		// by [3]: |m0| <= b/g
-		// by g != b: |m0| < b/g
-		if (m0 < 0) {
-			m0 += b / s;
-		}
-		return new long[] { s, m0 };
-	}
 
-	static int primitiveRoot(long m) {
-		if (2L == m) {
-			return 1;
+		static long invMod(long x, long m) {
+			if (!(1 <= m)) {
+				throw new IllegalArgumentException("m is " + m);
+			}
+			long[] z = invGcd(x, m);
+			if (1L != z[0]) {
+				throw new IllegalArgumentException("z[0] is " + z[0]);
+			}
+			return z[1];
 		}
-		if (167772161L == m) {
-			return 3;
+
+		/**
+		 * @param a
+		 * @param b `1 <= b`
+		 * @return {g, x} s.t. g = gcd(a, b), x a = g (mod b), 0 <= x < b/g
+		 */
+		static long[] invGcd(long a, long b) {
+			a = safeMod(a, b);
+			if (a == 0) {
+				return new long[] { b, 0 };
+			}
+
+			// Contracts:
+			// [1] s - m0 * a = 0 (mod b)
+			// [2] t - m1 * a = 0 (mod b)
+			// [3] s * |m1| + t * |m0| <= b
+			long s = b, t = a;
+			long m0 = 0, m1 = 1;
+
+			while (t > 0) {
+				long u = s / t;
+				s -= t * u;
+				m0 -= m1 * u; // |m1 * u| <= |m1| * s <= b
+
+				// [3]:
+				// (s - t * u) * |m1| + t * |m0 - m1 * u|
+				// <= s * |m1| - t * u * |m1| + t * (|m0| + |m1| * u)
+				// = s * |m1| + t * |m0| <= b
+				long tmp = s;
+				s = t;
+				t = tmp;
+				tmp = m0;
+				m0 = m1;
+				m1 = tmp;
+			}
+			// by [3]: |m0| <= b/g
+			// by g != b: |m0| < b/g
+			if (m0 < 0) {
+				m0 += b / s;
+			}
+			return new long[] { s, m0 };
 		}
-		if (469762049L == m) {
-			return 3;
-		}
-		if (754974721L == m) {
-			return 11;
-		}
-		if (998244353L == m) {
-			return 3;
-		}
-		long[] divs = new long[20];
-		Arrays.fill(divs, 0L);
-		divs[0] = 2;
-		int cnt = 1;
-		long x = (m - 1) / 2;
-		while (0 == (x & 1)) {
-			x >>= 1;
-		}
-		for (int i = 3; (long) (i) * i <= x; i += 2) {
-			if (0 == x % i) {
-				divs[cnt++] = i;
-				while (0 == x % i) {
-					x /= i;
+
+		static int primitiveRoot(long m) {
+			if (2L == m) {
+				return 1;
+			}
+			if (167772161L == m) {
+				return 3;
+			}
+			if (469762049L == m) {
+				return 3;
+			}
+			if (754974721L == m) {
+				return 11;
+			}
+			if (998244353L == m) {
+				return 3;
+			}
+			long[] divs = new long[20];
+			Arrays.fill(divs, 0L);
+			divs[0] = 2;
+			int cnt = 1;
+			long x = (m - 1) / 2;
+			while (0 == (x & 1)) {
+				x >>= 1;
+			}
+			for (int i = 3; (long) (i) * i <= x; i += 2) {
+				if (0 == x % i) {
+					divs[cnt++] = i;
+					while (0 == x % i) {
+						x /= i;
+					}
+				}
+			}
+			if (x > 1) {
+				divs[cnt++] = x;
+			}
+			for (int g = 2;; g++) {
+				boolean ok = true;
+				for (int i = 0; i < cnt; i++) {
+					if (1L == powMod(g, (m - 1) / divs[i], m)) {
+						ok = false;
+						break;
+					}
+				}
+				if (ok) {
+					return g;
 				}
 			}
 		}
-		if (x > 1) {
-			divs[cnt++] = x;
-		}
-		for (int g = 2;; g++) {
-			boolean ok = true;
-			for (int i = 0; i < cnt; i++) {
-				if (1L == powMod(g, (m - 1) / divs[i], m)) {
-					ok = false;
-					break;
-				}
-			}
-			if (ok) {
-				return g;
-			}
-		}
-	}
 
-	/**
-	 *
-	 * @param n `0 <= n`
-	 * @return minimum non-negative `x` s.t. `n <= 2**x`
-	 */
-	static int ceilPow2(int n) {
-		int x = 0;
-		while ((1 << x) < n) {
-			x++;
+		/**
+		 *
+		 * @param n `0 <= n`
+		 * @return minimum non-negative `x` s.t. `n <= 2**x`
+		 */
+		static int ceilPow2(int n) {
+			int x = 0;
+			while ((1 << x) < n) {
+				x++;
+			}
+			return x;
 		}
-		return x;
-	}
 
-	/**
-	 *
-	 * @param n `1 <= n`
-	 * @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
-	 */
-	static int bsf(int n) {
-		if (!(1 <= n)) {
-			throw new IllegalArgumentException("n is " + n);
+		/**
+		 *
+		 * @param n `1 <= n`
+		 * @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
+		 */
+		static int bsf(int n) {
+			if (!(1 <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 0;
+			while ((0 == (n & (1 << x))) && (x < 31)) {
+				x++;
+			}
+			return x;
 		}
-		int x = 0;
-		while ((0 == (n & (1 << x))) && (x < 31)) {
-			x++;
-		}
-		return x;
 	}
 }

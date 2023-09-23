@@ -22,6 +22,7 @@ public class ProblemD {
 				pre = a[i];
 			}
 			map.put((pre + 1) - n, (pre + 1));
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, q).forEach(i -> {
 				long k = scanner.nextLong();

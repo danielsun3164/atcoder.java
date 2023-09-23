@@ -65,6 +65,7 @@ public class ProblemE {
 					}
 				}
 			}
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, n)
 					.forEach(i -> sb.append((1 == result[i]) ? "Takahashi" : ((2 == result[i]) ? "Aoki" : "Draw"))

@@ -19,6 +19,7 @@ public class ProblemF {
 			int[] s = IntStream.range(0, 2 * n).map(i -> a[i % n] ^ a[(i + 1) % n]).toArray();
 			int[] t = IntStream.range(0, n).map(i -> b[i % n] ^ b[(i + 1) % n]).toArray();
 			int[] longestMatch = kmp(s, t);
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, n).filter(i -> n == longestMatch[i + 2 * n])
 					.forEach(i -> sb.append(i).append(" ").append(b[0] ^ a[i]).append(System.lineSeparator()));

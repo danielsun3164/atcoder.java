@@ -46,13 +46,21 @@ public class ProblemF {
 
 		/**
 		 * コンストラクター
+		 */
+		@SuppressWarnings("unused")
+		SegTree() {
+			this(0);
+		}
+
+		/**
+		 * コンストラクター
 		 *
 		 * @param n
 		 */
-		@SuppressWarnings({ "unused", "unchecked" })
+		@SuppressWarnings({ "unchecked" })
 		SegTree(int n) {
 			this.n = n;
-			size = 1 << ceilPow2(n);
+			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e());
 			for (int i = size - 1; i >= 1; i--) {
@@ -68,7 +76,7 @@ public class ProblemF {
 		@SuppressWarnings("unchecked")
 		SegTree(S[] v) {
 			n = v.length;
-			size = 1 << ceilPow2(n);
+			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e());
 			// https://atcoder.jp/contests/practice2/submissions/17594068 に参考
@@ -126,10 +134,10 @@ public class ProblemF {
 			r += size;
 
 			while (l < r) {
-				if ((l & 1) > 0) {
+				if (0 != (l & 1)) {
 					sml = op(sml, d[l++]);
 				}
-				if ((r & 1) > 0) {
+				if (0 != (r & 1)) {
 					smr = op(d[--r], smr);
 				}
 				l >>= 1;
@@ -216,7 +224,7 @@ public class ProblemF {
 			S sm = e();
 			do {
 				r--;
-				while (r > 1 && (r & 1) > 0) {
+				while (r > 1 && 0 != (r & 1)) {
 					r >>= 1;
 				}
 				if (!f.test(op(d[r], sm))) {
@@ -237,21 +245,22 @@ public class ProblemF {
 		private void update(int k) {
 			d[k] = op(d[k << 1], d[k << 1 | 1]);
 		}
-	}
 
-	/**
-	 *
-	 * @param n `0 <= n`
-	 * @return minimum non-negative `x` s.t. `n <= 2**x`
-	 */
-	private static int ceilPow2(int n) {
-		if (!(0 <= n)) {
-			throw new IllegalArgumentException("n is " + n);
+		/**
+		 * n以上最小の2^xの数字を計算する
+		 *
+		 * @param n
+		 * @return n以上最小の2^xの数字
+		 */
+		private static int bitCeil(int n) {
+			if (!(0 <= n)) {
+				throw new IllegalArgumentException("n is " + n);
+			}
+			int x = 1;
+			while (x < n) {
+				x <<= 1;
+			}
+			return x;
 		}
-		int x = 0;
-		while ((1 << x) < n) {
-			x++;
-		}
-		return x;
 	}
 }

@@ -15,12 +15,12 @@ public class ProblemD {
 				r++;
 			}
 			int n = r + 1, count = 2 * r;
+			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			for (int i = r; i >= 1; i--) {
-				// System.out.println("l=" + l + ", r=" + r + ", i=" + i);
 				if ((l - (1 << (i - 1))) >= (1 << r)) {
 					l -= 1 << (i - 1);
-					sb.append(i + " " + n + " " + l).append("\n");
+					sb.append(i + " " + n + " " + l).append(System.lineSeparator());
 					count++;
 				}
 			}
