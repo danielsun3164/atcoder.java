@@ -30,4 +30,29 @@ EXTERNAL_FOLDER=外部フォルダーのパス
 
 1. 該当のテストクラスをJUnitで実行する
 Eclipseでは以下の画像のようになれば、設定が正しいことが確認できる。
+
 ![ABC051のA問題のJUnitの実行結果](./junit.png)
+
+## テスト時実行時間チェックの使い方
+1. src/test/resources/timeLimit.properties.sample をコピーし、src/test/resources/timeLimit.properties ファイルを作成する
+
+1. src/test/resources/timeLimit.properties に以下の値が設定されていることを確認
+```
+# 実行時間制限チェックを実施するかどうか
+CHECK_TIME_LIMIT=true
+```
+
+1. src/test/resources/timeLimit.properties に以下のフォーマットで制限時間を指定する
+```
+テストクラスのパッケージも含めたクラス名=制限時間(ミリ秒)
+```
+例えば、
+```
+abc.abc001_050.abc005.ProblemDTest=5000
+```
+ただし、指定しない場合では、制限時間が2000msです。
+
+1. 該当のテストクラスのJUnitテストを実行する
+実行時間が制限時間を超えた場合、以下のようにコンソールに表示されます。
+
+![実行時間が制限時間を超えた場合のメッセージ](./console.png)
