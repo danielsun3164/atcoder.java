@@ -6,4 +6,9 @@
   <Match>
     <Bug pattern="NP_DEREFERENCE_OF_READLINE_VALUE"/>
   </Match>
+  <Match>
+    <Class name="abc.abc151_200.abc189.ProblemF別回答" />
+    <Method name="main" />
+    <Bug pattern="FE_FLOATING_POINT_EQUALITY" />
+  </Match>
 </FindBugsFilter>
