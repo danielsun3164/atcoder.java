@@ -37,10 +37,10 @@ public class ProblemF {
 	 * ノード関の移動コストを計算する
 	 *
 	 * @param dist ノード関の移動コストの配列
-	 * @param n     ノードの総数
+	 * @param n    ノードの総数
 	 */
 	private static void warshallFloyd(int[][] dist, int n) {
-		IntStream.range(0, n).forEach(k -> IntStream.range(0, n).forEach(j -> IntStream.range(0, n)
-				.forEach(i -> dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]))));
+		IntStream.range(0, n).forEach(k -> IntStream.range(0, n).forEach(
+				j -> IntStream.range(0, n).forEach(i -> dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]))));
 	}
 }

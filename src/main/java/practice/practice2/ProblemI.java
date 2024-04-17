@@ -13,8 +13,8 @@ public class ProblemI {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			String s = scanner.next();
-			System.out.println(Arrays.stream(AtcoderString.lcpArray(s, AtcoderString.suffixArray(s)))
-					.mapToLong(i -> i).reduce(1L * s.length() * (s.length() + 1) / 2L, (sum, x) -> sum - x));
+			System.out.println(Arrays.stream(AtcoderString.lcpArray(s, AtcoderString.suffixArray(s))).mapToLong(i -> i)
+					.reduce(1L * s.length() * (s.length() + 1) / 2L, (sum, x) -> sum - x));
 		}
 	}
 

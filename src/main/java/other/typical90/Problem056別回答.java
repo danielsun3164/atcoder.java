@@ -21,7 +21,8 @@ public class Problem056別回答 {
 				b[i] = scanner.nextInt();
 			});
 			StringBuilder sb = new StringBuilder();
-			System.out.println(calc(n, s, a, b, 0, s, sb, new HashMap<Integer, Boolean>()) ? sb.toString() : "Impossible");
+			System.out.println(
+					calc(n, s, a, b, 0, s, sb, new HashMap<Integer, Boolean>()) ? sb.toString() : "Impossible");
 		}
 	}
 

@@ -65,13 +65,12 @@ public class ProblemH_Route {
 	 * 
 	 * @param from
 	 * @param to
-	 * @param x X座標一覧の配列
-	 * @param y X座標一覧の配列
+	 * @param x    X座標一覧の配列
+	 * @param y    X座標一覧の配列
 	 * @return from、toの間の距離の2乗
 	 */
 	private static int getEdge2(int from, int to, final int[] x, final int[] y) {
-		return (x[from] - x[to]) * (x[from] - x[to])
-				+ (y[from] - y[to]) * (y[from] - y[to]);
+		return (x[from] - x[to]) * (x[from] - x[to]) + (y[from] - y[to]) * (y[from] - y[to]);
 	}
 
 	/**

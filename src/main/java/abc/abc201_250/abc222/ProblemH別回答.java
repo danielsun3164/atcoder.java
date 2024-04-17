@@ -1,6 +1,7 @@
 package abc.abc201_250.abc222;
 
 import java.util.Scanner;
+import java.util.stream.LongStream;
 
 /**
  * 解説通りに実装したソースコード
@@ -16,16 +17,13 @@ public class ProblemH別回答 {
 		try (Scanner scanner = new Scanner(System.in)) {
 			long n = scanner.nextLong();
 			long n2 = n << 1, p0 = n2 * 3, p1 = 1;
-			for (int i = 1; i <= n - 1; i++) {
+			for (int i = 1; i < n; i++) {
 				long p2 = p1, k = i;
 				p1 = p0;
 				p0 = (3 * ((n2 - k + MOD) % MOD) % MOD * p1 % MOD + k * ((n2 * 2 - k + 1 + MOD) % MOD) % MOD * p2 % MOD)
 						% MOD;
 			}
-			long fact = 1L;
-			for (int i = 1; i <= n; i++) {
-				fact = fact * i % MOD;
-			}
+			long fact = LongStream.rangeClosed(1L, n).reduce(1L, (s, i) -> s * i % MOD);
 			System.out.println(p1 * powMod(fact, MOD - 2) % MOD);
 		}
 	}

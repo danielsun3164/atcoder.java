@@ -10,7 +10,8 @@ public class ProblemC {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).sorted().toArray();
-			System.out.println(Arrays.stream(a).mapToDouble(ai -> (double) ai).reduce(a[0], (x, ai) -> (x + ai) / 2.0d));
+			System.out
+					.println(Arrays.stream(a).mapToDouble(ai -> (double) ai).reduce(a[0], (x, ai) -> (x + ai) / 2.0d));
 		}
 	}
 }
