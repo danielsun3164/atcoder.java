@@ -66,7 +66,14 @@ abc.abc201_250.abc220.ProblemGTest=3000
 abc.abc201_250.abc221.ProblemGTest=5000
 abc.abc201_250.abc221.ProblemG別回答Test=5000
 abc.abc201_250.abc222.ProblemFTest=4000
+abc.abc201_250.abc222.ProblemF別回答Test=4000
 abc.abc201_250.abc222.ProblemHTest=3000
+abc.abc201_250.abc222.ProblemH別回答Test=3000
+abc.abc201_250.abc222.ProblemH別回答2Test=3000
+abc.abc201_250.abc223.ProblemFTest=3000
+abc.abc201_250.abc223.ProblemF別回答Test=3000
+abc.abc201_250.abc223.ProblemHTest=3000
+abc.abc201_250.abc223.ProblemH別回答Test=3000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
