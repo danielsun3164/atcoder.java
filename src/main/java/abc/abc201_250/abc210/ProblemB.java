@@ -9,7 +9,9 @@ public class ProblemB {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			char[] s = scanner.next().toCharArray();
-			System.out.println((0 == (1 & IntStream.range(0, n).filter(i -> '1' == s[i]).findFirst().getAsInt())) ? "Takahashi" : "Aoki");
+			System.out.println(
+					(0 == (1 & IntStream.range(0, n).filter(i -> '1' == s[i]).findFirst().getAsInt())) ? "Takahashi"
+							: "Aoki");
 		}
 	}
 }

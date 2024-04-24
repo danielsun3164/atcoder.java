@@ -43,6 +43,7 @@ public class ProblemC {
 	 */
 	private static enum Player {
 		AOKI("Aoki"), TAKAHASHI("Takahashi");
+
 		private String name;
 
 		Player(String name) {
