@@ -78,6 +78,9 @@ abc.abc201_250.abc224.ProblemDTest=4000
 abc.abc201_250.abc227.ProblemFTest=3000
 abc.abc201_250.abc228.ProblemDTest=4000
 abc.abc201_250.abc228.ProblemGTest=4000
+abc.abc201_250.abc230.ProblemGTest=5000
+abc.abc201_250.abc230.ProblemHTest=8000
+abc.abc201_250.abc230.ProblemH別回答Test=8000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
