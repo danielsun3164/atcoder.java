@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 /**
  * 解説通りに実装したソースコード
  *
- * https://atcoder.jp/contests/abc230/submissions/27657533 を参考に作成
+ * https://atcoder.jp/contests/abc230/submissions/27635852 を参考に作成
  */
 public class ProblemF {
 
