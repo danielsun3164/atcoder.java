@@ -30,6 +30,6 @@ class ProblemATest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("abc231/A");
+		return checkExternal("abc231/A", TOLERANCE);
 	}
 }
