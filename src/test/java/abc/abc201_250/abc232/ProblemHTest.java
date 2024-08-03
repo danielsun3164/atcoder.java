@@ -43,9 +43,8 @@ class ProblemHTest extends TestBase {
 					assertEquals(0, hi);
 					assertEquals(0, wi);
 				} else {
-					int dh = hi - preH, dw = wi - preW;
-					assertTrue(Math.abs(dh) <= 1);
-					assertTrue(Math.abs(dw) <= 1);
+					assertTrue(Math.abs(hi - preH) <= 1);
+					assertTrue(Math.abs(wi - preW) <= 1);
 				}
 				if (h * w - 1 == i) {
 					assertEquals(a - 1, hi);

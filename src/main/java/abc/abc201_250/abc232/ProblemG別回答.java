@@ -40,8 +40,7 @@ public class ProblemG別回答 {
 					edges[i].add(new Edge(b[index].to + n, a[i] + b[index].cost - m));
 				}
 			});
-			long[] dist = dijkstra(edges, 0);
-			System.out.println(dist[n - 1]);
+			System.out.println(dijkstra(edges, 0)[n - 1]);
 		}
 	}
 

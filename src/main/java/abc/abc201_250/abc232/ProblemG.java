@@ -43,8 +43,7 @@ public class ProblemG {
 				edges[map.get(b[i])].add(new Edge(i, 0L));
 				edges[i].add(new Edge(map.get((m - a[i]) % m), 0L));
 			});
-			long[] dist = dijkstra(edges, 0);
-			System.out.println(dist[n - 1]);
+			System.out.println(dijkstra(edges, 0)[n - 1]);
 		}
 	}
 
