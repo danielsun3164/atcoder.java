@@ -49,7 +49,7 @@ public class ProblemD別回答2 {
 		}
 	}
 
-	static class DecrementalPredecessor {
+	private static class DecrementalPredecessor {
 		int n;
 		int[] small;
 		DisjointSetUnion large;
@@ -78,10 +78,12 @@ public class ProblemD別回答2 {
 			return true;
 		}
 
+		@SuppressWarnings("unused")
 		int universeSize() {
 			return n;
 		}
 
+		@SuppressWarnings("unused")
 		int predecessor(int x) {
 			x++;
 			int b = x / W, t = x % W;
@@ -116,7 +118,7 @@ public class ProblemD別回答2 {
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/dsu.hpp のJava実装<br/>
 	 * https://atcoder.jp/contests/abc228/submissions/27408315 の実装も追加
 	 */
-	static class DisjointSetUnion {
+	private static class DisjointSetUnion {
 		/** 項目数 */
 		final int n;
 		/** 親のidかグループのサイズ */
@@ -181,6 +183,7 @@ public class ProblemD別回答2 {
 		 * @param b
 		 * @return aとbが同じグループに所属しているか
 		 */
+		@SuppressWarnings("unused")
 		boolean same(int a, int b) {
 			if (!((0 <= a) && (a < n))) {
 				throw new IllegalArgumentException("a is " + a);
@@ -221,6 +224,7 @@ public class ProblemD別回答2 {
 		 * @param a
 		 * @return aの所属グループのメンバー数
 		 */
+		@SuppressWarnings("unused")
 		int size(int a) {
 			if (!((0 <= a) && (a < n))) {
 				throw new IllegalArgumentException("a is " + a);
@@ -231,6 +235,7 @@ public class ProblemD別回答2 {
 		/**
 		 * @return グループの一覧
 		 */
+		@SuppressWarnings("unused")
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];

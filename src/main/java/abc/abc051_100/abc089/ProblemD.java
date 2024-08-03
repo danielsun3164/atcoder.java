@@ -32,7 +32,7 @@ public class ProblemD {
 	/**
 	 * 座標データを格納するクラス
 	 */
-	static class Point {
+	private static class Point {
 		/** X座標 */
 		final int x;
 		/** Y座標 */

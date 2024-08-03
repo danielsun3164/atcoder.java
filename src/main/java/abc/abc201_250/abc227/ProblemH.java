@@ -166,7 +166,7 @@ public class ProblemH {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/dsu.hpp のJava実装
 	 */
-	static class DisjointSetUnion {
+	private static class DisjointSetUnion {
 		/** 項目数 */
 		final int n;
 		/** 親のidかグループのサイズ */
@@ -254,6 +254,7 @@ public class ProblemH {
 		 * @param a
 		 * @return aの所属グループのメンバー数
 		 */
+		@SuppressWarnings("unused")
 		int size(int a) {
 			if (!((0 <= a) && (a < n))) {
 				throw new IllegalArgumentException("a is " + a);
@@ -264,6 +265,7 @@ public class ProblemH {
 		/**
 		 * @return グループの一覧
 		 */
+		@SuppressWarnings("unused")
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];
@@ -300,19 +302,12 @@ public class ProblemH {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/maxflow.hpp をもとに作成
 	 */
-	static class MaxFlowGraph {
+	private static class MaxFlowGraph {
 		/** ノード数 */
 		final int n;
 		/** 辺の一覧 */
 		final List<InternalEdge>[] g;
 		final List<int[]> pos;
-
-		/**
-		 * コンストラクター
-		 */
-		MaxFlowGraph() {
-			this(0);
-		}
 
 		/**
 		 * コンストラクター
@@ -372,6 +367,7 @@ public class ProblemH {
 		 *
 		 * @return すべてのパス
 		 */
+		@SuppressWarnings("unused")
 		List<Edge> edges() {
 			return IntStream.range(0, pos.size()).mapToObj(i -> getEdge(i)).collect(Collectors.toList());
 		}
@@ -383,6 +379,7 @@ public class ProblemH {
 		 * @param newCap
 		 * @param newFlow
 		 */
+		@SuppressWarnings("unused")
 		void changeEdge(int i, long newCap, long newFlow) {
 			if (!((0 <= i) && (i < pos.size()))) {
 				throw new IllegalArgumentException("i is " + i + ", pos.size()=" + pos.size());
@@ -483,6 +480,7 @@ public class ProblemH {
 		 * @param s
 		 * @return 最小カット問題の回答
 		 */
+		@SuppressWarnings("unused")
 		boolean[] minCut(int s) {
 			if (!((0 <= s) && (s < n))) {
 				throw new IllegalArgumentException("s is " + s);
@@ -526,18 +524,20 @@ public class ProblemH {
 		/**
 		 * グラフのパスを表すクラス
 		 */
-		static class Edge {
+		private static class Edge {
 			/** 始点 */
+			@SuppressWarnings("unused")
 			int from;
 			/** 終点 */
+			@SuppressWarnings("unused")
 			int to;
 			/** 容量 */
+			@SuppressWarnings("unused")
 			long cap;
 			/** フロー */
 			long flow;
 
 			Edge(int from, int to, long cap, long flow) {
-				super();
 				this.from = from;
 				this.to = to;
 				this.cap = cap;

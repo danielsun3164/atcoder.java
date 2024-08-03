@@ -50,7 +50,7 @@ public class ProblemG {
 	 *
 	 * 本家のライブラリーより実行速度が速いため、念のため残す（制約：flowは一回しか実行できない）
 	 */
-	static class MaxFlowGraph {
+	private static class MaxFlowGraph {
 		class CapEdge {
 			final int from, to;
 			private long cap;
@@ -63,6 +63,7 @@ public class ProblemG {
 				this.rev = rev;
 			}
 
+			@SuppressWarnings("unused")
 			long getCap() {
 				return cap + getFlow();
 			}
@@ -77,13 +78,6 @@ public class ProblemG {
 		private final List<CapEdge> edges;
 		private final int[] count;
 		private final CapEdge[][] g;
-
-		/**
-		 * コンストラクター
-		 */
-		MaxFlowGraph() {
-			this(0);
-		}
 
 		/**
 		 * コンストラクター
@@ -112,6 +106,7 @@ public class ProblemG {
 			return m++;
 		}
 
+		@SuppressWarnings("unused")
 		CapEdge getEdge(int i) {
 			if (!((0 <= i) && (i < m))) {
 				throw new IllegalArgumentException("i is " + i + ", m=" + m);
@@ -119,10 +114,12 @@ public class ProblemG {
 			return edges.get(i);
 		}
 
+		@SuppressWarnings("unused")
 		List<CapEdge> edges() {
 			return edges;
 		}
 
+		@SuppressWarnings("unused")
 		void changeEdge(int i, long newCap, long newFlow) {
 			if (!((0 <= i) && (i < m))) {
 				throw new IllegalArgumentException("i is " + i + ", m=" + m);
@@ -228,6 +225,7 @@ public class ProblemG {
 			return res;
 		}
 
+		@SuppressWarnings("unused")
 		boolean[] minCut(int s) {
 			if (!((0 <= s) && (s < n))) {
 				throw new IllegalArgumentException("s is " + s);
