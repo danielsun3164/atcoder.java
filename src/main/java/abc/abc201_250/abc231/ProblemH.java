@@ -62,18 +62,11 @@ public class ProblemH {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/mincostflow.hpp をもとに作成
 	 */
-	static class MinCostFlowGraph {
+	private static class MinCostFlowGraph {
 		/** ノード数 */
 		final int n;
 		/** 各ノードからの辺の一覧 */
 		private final List<Edge> edges;
-
-		/**
-		 * コンストラクター
-		 */
-		MinCostFlowGraph() {
-			this(0);
-		}
 
 		/**
 		 * コンストラクター
@@ -119,6 +112,7 @@ public class ProblemH {
 		 * @param i
 		 * @return i番目の辺
 		 */
+		@SuppressWarnings("unused")
 		Edge getEdge(int i) {
 			if (!((0 <= i) && (i < edges.size()))) {
 				throw new IllegalArgumentException("i is " + i + ", edges.size() is " + edges.size());
@@ -131,6 +125,7 @@ public class ProblemH {
 		 *
 		 * @return パスの一覧
 		 */
+		@SuppressWarnings("unused")
 		List<Edge> edges() {
 			return edges;
 		}
@@ -142,6 +137,7 @@ public class ProblemH {
 		 * @param t
 		 * @return 流量とコストのクラス
 		 */
+		@SuppressWarnings("unused")
 		Result flow(int s, int t) {
 			return flow(s, t, Long.MAX_VALUE);
 		}

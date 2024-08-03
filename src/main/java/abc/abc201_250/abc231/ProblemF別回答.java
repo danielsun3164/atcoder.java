@@ -84,7 +84,7 @@ public class ProblemF別回答 {
 		}
 	}
 
-	static class WaveletMatrix {
+	private static class WaveletMatrix {
 		private static final int MAXLOG = 20;
 		int length;
 		SuccinctIndexableDictionary[] matrix = new SuccinctIndexableDictionary[MAXLOG];
@@ -118,6 +118,7 @@ public class ProblemF別回答 {
 					matrix[level].rank(f, r) + (f ? mid[level] : 0));
 		}
 
+		@SuppressWarnings("unused")
 		long access(int k) {
 			long result = 0L;
 			for (int level = MAXLOG - 1; level >= 0; level--) {
@@ -130,6 +131,7 @@ public class ProblemF別回答 {
 			return result;
 		}
 
+		@SuppressWarnings("unused")
 		int rank(long x, int r) {
 			int l = 0;
 			for (int level = MAXLOG - 1; level >= 0; level--) {
@@ -172,6 +174,7 @@ public class ProblemF別回答 {
 		 * @param k
 		 * @return k-th(0-indexed) largest number in v[l,r)
 		 */
+		@SuppressWarnings("unused")
 		long kthLargest(int l, int r, int k) {
 			return kthSmallest(l, r, r - l - k - 1);
 		}
@@ -219,6 +222,7 @@ public class ProblemF別回答 {
 		 * @param upper
 		 * @return max v[i] s.t. (l <= i < r) && (v[i] < upper)
 		 */
+		@SuppressWarnings("unused")
 		long prevValue(int l, int r, long upper) {
 			int count = rangeFreq(l, r, upper);
 			return (0 == count) ? -1L : kthSmallest(l, r, count - 1);
@@ -232,13 +236,14 @@ public class ProblemF別回答 {
 		 * @param lower
 		 * @return min v[i] s.t. (l <= i < r) && (lower <= v[i])
 		 */
+		@SuppressWarnings("unused")
 		long nextValue(int l, int r, long lower) {
 			int count = rangeFreq(l, r, lower);
 			return (r - l == count) ? -1L : kthSmallest(l, r, count);
 		}
 	}
 
-	static class SuccinctIndexableDictionary {
+	private static class SuccinctIndexableDictionary {
 		private static final int MASK = 31;
 		private static final int BITS = 5;
 		int length, blocks;
@@ -290,6 +295,7 @@ public class ProblemF別回答 {
 			return high - 1;
 		}
 
+		@SuppressWarnings("unused")
 		int select(boolean value, int i, int l) {
 			return select(value, i + rank(value, l));
 		}

@@ -27,7 +27,7 @@ public class ProblemC別回答1 {
 		}
 	}
 
-	static class BinaryTrie {
+	private static class BinaryTrie {
 		private static final int BIT_LENGTH = 30;
 		int n, id;
 		int[] nodes, count;
@@ -41,10 +41,12 @@ public class ProblemC別回答1 {
 			id = 0;
 		}
 
+		@SuppressWarnings("unused")
 		int size() {
 			return count[0];
 		}
 
+		@SuppressWarnings("unused")
 		int count(int x) {
 			int pt = 0;
 			for (int i = BIT_LENGTH - 1; i >= 0; i--) {
@@ -71,6 +73,7 @@ public class ProblemC別回答1 {
 			count[pt]++;
 		}
 
+		@SuppressWarnings("unused")
 		void erase(int x) {
 			if (0 == count[x]) {
 				return;
@@ -84,6 +87,7 @@ public class ProblemC別回答1 {
 			count[pt]--;
 		}
 
+		@SuppressWarnings("unused")
 		int kthElement(int x) {
 			int pt = 0, answer = 0;
 			for (int i = BIT_LENGTH - 1; i >= 0; i--) {

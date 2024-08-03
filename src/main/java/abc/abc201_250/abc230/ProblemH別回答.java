@@ -133,7 +133,7 @@ public class ProblemH別回答 {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/convolution.hpp をもとに作成
 	 */
-	static class Convolution {
+	private static class Convolution {
 		static int MOD = -1;
 		private static int g;
 		private static FftInfo info;
@@ -380,6 +380,7 @@ public class ProblemH別回答 {
 		 * @param b
 		 * @return 計算した結果配列
 		 */
+		@SuppressWarnings("unused")
 		static long[] convolutionLong(long[] a, long[] b) {
 			return convolutionLong(a, 0, a.length, b, 0, b.length);
 		}

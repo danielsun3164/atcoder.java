@@ -63,18 +63,11 @@ public class ProblemH別回答 {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/mincostflow.hpp をもとに作成
 	 */
-	static class MinCostFlowGraph {
+	private static class MinCostFlowGraph {
 		/** ノード数 */
 		final int n;
 		/** 各ノードからの辺の一覧 */
 		private final List<Edge> edges;
-
-		/**
-		 * コンストラクター
-		 */
-		MinCostFlowGraph() {
-			this(0);
-		}
 
 		/**
 		 * コンストラクター
@@ -120,6 +113,7 @@ public class ProblemH別回答 {
 		 * @param i
 		 * @return i番目の辺
 		 */
+		@SuppressWarnings("unused")
 		Edge getEdge(int i) {
 			if (!((0 <= i) && (i < edges.size()))) {
 				throw new IllegalArgumentException("i is " + i + ", edges.size() is " + edges.size());
@@ -132,6 +126,7 @@ public class ProblemH別回答 {
 		 *
 		 * @return パスの一覧
 		 */
+		@SuppressWarnings("unused")
 		List<Edge> edges() {
 			return edges;
 		}
@@ -143,6 +138,7 @@ public class ProblemH別回答 {
 		 * @param t
 		 * @return 流量とコストのクラス
 		 */
+		@SuppressWarnings("unused")
 		Result flow(int s, int t) {
 			return flow(s, t, Long.MAX_VALUE);
 		}
@@ -167,6 +163,7 @@ public class ProblemH別回答 {
 		 * @param t
 		 * @return min_cost_slope
 		 */
+		@SuppressWarnings("unused")
 		List<Result> slope(int s, int t) {
 			return slope(s, t, Long.MAX_VALUE);
 		}
@@ -429,7 +426,7 @@ public class ProblemH別回答 {
 	/**
 	 * 計算結果を表すクラス
 	 */
-	static class Result {
+	private static class Result {
 		/** 容量 */
 		long cap;
 		/** コスト */
