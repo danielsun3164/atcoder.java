@@ -82,7 +82,7 @@ public class ProblemEx別回答 {
 	 * https://atcoder.jp/contests/abc231/submissions/27836317 の実装
 	 */
 	private static class WaveletMatrix {
-		private static final int MAXLOG = 22;
+		private static final int MAXLOG = 20;
 		int length;
 		SuccinctIndexableDictionary[] matrix = new SuccinctIndexableDictionary[MAXLOG];
 		int[] mid = new int[MAXLOG];
