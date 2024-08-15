@@ -86,6 +86,11 @@ abc.abc201_250.abc232.ProblemG別回答Test=3000
 abc.abc201_250.abc233.ProblemExTest=7000
 abc.abc201_250.abc233.ProblemEx別回答Test=7000
 abc.abc201_250.abc234.ProblemExTest=4000
+abc.abc201_250.abc235.ProblemCTest=3000
+abc.abc201_250.abc235.ProblemETest=4000
+abc.abc201_250.abc235.ProblemE別回答Test=4000
+abc.abc201_250.abc235.ProblemGTest=3000
+abc.abc201_250.abc235.ProblemExTest=3000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
