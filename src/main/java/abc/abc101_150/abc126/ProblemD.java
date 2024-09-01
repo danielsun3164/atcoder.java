@@ -22,8 +22,8 @@ public class ProblemD {
 			IntStream.range(0, n - 1).forEach(i -> {
 				int u = scanner.nextInt() - 1, v = scanner.nextInt() - 1;
 				long w = scanner.nextLong();
-				pathLists[u].add(new Path(u, v, w));
-				pathLists[v].add(new Path(v, u, w));
+				pathLists[u].add(new Path(v, w));
+				pathLists[v].add(new Path(u, w));
 			});
 			long[] distances = dijkstra(pathLists, 0, n);
 			Arrays.stream(distances).map(l -> l & 1L).forEach(System.out::println);
@@ -45,7 +45,7 @@ public class ProblemD {
 		// 出発地点までの距離を0とする
 		distances[src] = 0;
 		Queue<Path> queue = new PriorityQueue<>();
-		queue.add(new Path(src, src, 0));
+		queue.add(new Path(src, 0));
 		while (!queue.isEmpty()) {
 			int now = queue.poll().to;
 			if (!fixed[now]) {
@@ -53,7 +53,7 @@ public class ProblemD {
 				for (Path path : pathLists[now]) {
 					if (!fixed[path.to] && distances[path.to] > distances[now] + path.cost) {
 						distances[path.to] = distances[now] + path.cost;
-						queue.add(new Path(path.to, path.to, distances[path.to]));
+						queue.add(new Path(path.to, distances[path.to]));
 					}
 				}
 			}
@@ -65,16 +65,12 @@ public class ProblemD {
 	 * ノード間の一つのパスを表すクラス
 	 */
 	static class Path implements Comparable<Path> {
-		/** 開始ノード */
-		int from;
 		/** 終了ノード */
 		int to;
 		/** 移動コスト */
 		long cost;
 
-		Path(int from, int to, long cost) {
-			super();
-			this.from = from;
+		Path(int to, long cost) {
 			this.to = to;
 			this.cost = cost;
 		}

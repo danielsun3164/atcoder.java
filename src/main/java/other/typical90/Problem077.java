@@ -73,7 +73,7 @@ public class Problem077 {
 	/**
 	 * https://atcoder.jp/contests/typical90/submissions/23831125 を参考に作成
 	 */
-	static class InputReader {
+	private static class InputReader {
 		private InputStream in;
 		private byte[] buffer = new byte[1024];
 		private int curbuf;
@@ -187,6 +187,7 @@ public class Problem077 {
 			return Double.parseDouble(next());
 		}
 
+		@SuppressWarnings("unused")
 		public int[] nextIntArray(int n) {
 			int[] a = new int[n];
 			for (int i = 0; i < n; i++) {
@@ -195,6 +196,7 @@ public class Problem077 {
 			return a;
 		}
 
+		@SuppressWarnings("unused")
 		public double[] nextDoubleArray(int n) {
 			double[] a = new double[n];
 			for (int i = 0; i < n; i++) {
@@ -203,6 +205,7 @@ public class Problem077 {
 			return a;
 		}
 
+		@SuppressWarnings("unused")
 		public long[] nextLongArray(int n) {
 			long[] a = new long[n];
 			for (int i = 0; i < n; i++) {
@@ -211,6 +214,7 @@ public class Problem077 {
 			return a;
 		}
 
+		@SuppressWarnings("unused")
 		public char[][] nextCharMap(int n, int m) {
 			char[][] map = new char[n][m];
 			for (int i = 0; i < n; i++) {

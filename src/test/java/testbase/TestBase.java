@@ -93,6 +93,8 @@ public abstract class TestBase {
 	private static boolean CHECK_TIME_LIMIT = false;
 	/** 実行時間制限(ms) */
 	private static long TIME_LIMIT = 2_000;
+	/** doubleの有効桁数 */
+	private static int DOUBLE_DIGITS = 50;
 
 	static {
 		try {
@@ -220,8 +222,14 @@ public abstract class TestBase {
 	 * @param tolerance 誤差範囲
 	 */
 	protected void assertResultIsAbout(double expected, double tolerance) {
+		// doubleの有効桁数が限られているため、値が大きすぎる場合、誤差範囲も合わせて大きくする
+		double max = Math.pow(2.0d, DOUBLE_DIGITS) * tolerance;
+		while (expected > max) {
+			max *= 2.0d;
+			tolerance *= 2.0d;
+		}
 		assertTrue(Math.abs(Double.parseDouble(out.toString()) - expected) < tolerance,
-				"number is " + out.toString() + ", expected is " + expected);
+				"number is " + out.toString() + ", expected is " + expected + ", tolerance is " + tolerance);
 	}
 
 	/**

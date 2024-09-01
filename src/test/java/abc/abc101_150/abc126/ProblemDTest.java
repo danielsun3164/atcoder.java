@@ -46,8 +46,8 @@ class ProblemDTest extends TestBase {
 		List<Path>[] paths = new List[n];
 		IntStream.range(0, n).forEach(i -> paths[i] = new ArrayList<>());
 		IntStream.range(0, n - 1).forEach(i -> {
-			paths[u[i] - 1].add(new Path(u[i] - 1, v[i] - 1, w[i]));
-			paths[v[i] - 1].add(new Path(v[i] - 1, u[i] - 1, w[i]));
+			paths[u[i] - 1].add(new Path(v[i] - 1, w[i]));
+			paths[v[i] - 1].add(new Path(u[i] - 1, w[i]));
 		});
 		execute();
 		String[] lines = out.toString().split("\\R");
@@ -71,14 +71,14 @@ class ProblemDTest extends TestBase {
 			Arrays.fill(distances, Long.MAX_VALUE >> 1);
 			int source = nodes[0];
 			Queue<Path> que = new PriorityQueue<>();
-			que.add(new Path(source, source, 0));
+			que.add(new Path(source, 0));
 			distances[source] = 0L;
 			while (!que.isEmpty()) {
 				Path now = que.poll();
 				for (Path path : paths[now.to]) {
 					if (distances[path.to] < distances[now.to] + path.cost) {
 						distances[path.to] = distances[now.to] + path.cost;
-						que.add(new Path(now.to, path.to, distances[path.to]));
+						que.add(new Path(path.to, distances[path.to]));
 					}
 				}
 			}
