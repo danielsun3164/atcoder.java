@@ -100,15 +100,13 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ARC080/D", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			int h = scanner.nextInt(), w = scanner.nextInt(), n = scanner.nextInt();
-			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
-			check(h, w, n, a);
-		}
+		return checkExternal("ARC080/D", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				int h = scanner.nextInt(), w = scanner.nextInt(), n = scanner.nextInt();
+				int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
+				check(h, w, n, a);
+			}
+		});
 	}
 
 	/**

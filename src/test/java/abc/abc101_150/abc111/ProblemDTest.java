@@ -101,23 +101,21 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC111/D", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			int m = expectedScanner.nextInt();
-			if (-1 == m) {
-				check(inputIs, "-1");
-				return;
+		return checkExternal("ABC111/D", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				int m = expectedScanner.nextInt();
+				if (-1 == m) {
+					check(inputIs, "-1");
+					return;
+				}
+				int n = inputScanner.nextInt();
+				int[] x = new int[n], y = new int[n];
+				IntStream.range(0, n).forEach(i -> {
+					x[i] = inputScanner.nextInt();
+					y[i] = inputScanner.nextInt();
+				});
+				check(n, x, y);
 			}
-			int n = inputScanner.nextInt();
-			int[] x = new int[n], y = new int[n];
-			IntStream.range(0, n).forEach(i -> {
-				x[i] = inputScanner.nextInt();
-				y[i] = inputScanner.nextInt();
-			});
-			check(n, x, y);
-		}
+		});
 	}
 }

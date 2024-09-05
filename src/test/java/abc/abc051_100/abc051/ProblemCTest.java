@@ -2,7 +2,6 @@ package abc.abc051_100.abc051;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +15,13 @@ import org.junit.jupiter.api.TestFactory;
 import testbase.TestBase;
 
 class ProblemCTest extends TestBase {
+
+	/** 上 */
+	private static final char UP = 'U';
+	/** 下 */
+	private static final char DOWN = 'D';
+	/** 左 */
+	private static final char LEFT = 'L';
 
 	@Test
 	void case1() {
@@ -37,19 +43,10 @@ class ProblemCTest extends TestBase {
 		Map<Point, Integer> map = new HashMap<>();
 		for (int c : lines[0].toCharArray()) {
 			switch (c) {
-			case ProblemC.UP:
-				ny++;
-				break;
-			case ProblemC.DOWN:
-				ny--;
-				break;
-			case ProblemC.LEFT:
-				nx--;
-				break;
-			case ProblemC.RIGHT:
-			default:
-				nx++;
-				break;
+			case UP -> ny++;
+			case DOWN -> ny--;
+			case LEFT -> nx--;
+			default -> nx++;
 			}
 			Point point = new Point(nx, ny);
 			map.put(point, map.getOrDefault(point, 0) + 1);
@@ -64,14 +61,12 @@ class ProblemCTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC051/C", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			check(inputScanner.nextInt(), inputScanner.nextInt(), inputScanner.nextInt(), inputScanner.nextInt(),
-					expectedScanner.next().length());
-		}
+		return checkExternal("ABC051/C", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				check(inputScanner.nextInt(), inputScanner.nextInt(), inputScanner.nextInt(), inputScanner.nextInt(),
+						expectedScanner.next().length());
+			}
+		});
 	}
 
 	/**

@@ -70,17 +70,15 @@ class ProblemETest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC135/E", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			int m = expectedScanner.nextInt();
-			if (-1 == m) {
-				check(inputIs, "-1");
-				return;
+		return checkExternal("ABC135/E", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				int m = expectedScanner.nextInt();
+				if (-1 == m) {
+					check(inputIs, "-1");
+					return;
+				}
+				check(inputScanner.nextInt(), inputScanner.nextInt(), inputScanner.nextInt(), m);
 			}
-			check(inputScanner.nextInt(), inputScanner.nextInt(), inputScanner.nextInt(), m);
-		}
+		});
 	}
 }

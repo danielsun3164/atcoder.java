@@ -2,7 +2,6 @@ package abc.abc201_250.abc216;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -42,13 +41,11 @@ class ProblemCTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("abc216/C", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			long n = scanner.nextLong();
-			check(n);
-		}
+		return checkExternal("abc216/C", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				long n = scanner.nextLong();
+				check(n);
+			}
+		});
 	}
 }

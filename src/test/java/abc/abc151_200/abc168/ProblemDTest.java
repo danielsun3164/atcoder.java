@@ -108,18 +108,16 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC168/D", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			int n = scanner.nextInt(), m = scanner.nextInt();
-			int[] a = new int[m], b = new int[m];
-			IntStream.range(0, m).forEach(i -> {
-				a[i] = scanner.nextInt();
-				b[i] = scanner.nextInt();
-			});
-			check(n, m, a, b);
-		}
+		return checkExternal("ABC168/D", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				int n = scanner.nextInt(), m = scanner.nextInt();
+				int[] a = new int[m], b = new int[m];
+				IntStream.range(0, m).forEach(i -> {
+					a[i] = scanner.nextInt();
+					b[i] = scanner.nextInt();
+				});
+				check(n, m, a, b);
+			}
+		});
 	}
 }

@@ -93,20 +93,18 @@ class ProblemFTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC166/F", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			String r = expectedScanner.next();
-			if ("No".equals(r)) {
-				check(inputIs, "No");
-			} else {
-				int n = inputScanner.nextInt(), a = inputScanner.nextInt(), b = inputScanner.nextInt(),
-						c = inputScanner.nextInt();
-				String[] s = IntStream.range(0, n).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
-				check(n, a, b, c, s);
+		return checkExternal("ABC166/F", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				String r = expectedScanner.next();
+				if ("No".equals(r)) {
+					check(inputIs, "No");
+				} else {
+					int n = inputScanner.nextInt(), a = inputScanner.nextInt(), b = inputScanner.nextInt(),
+							c = inputScanner.nextInt();
+					String[] s = IntStream.range(0, n).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
+					check(n, a, b, c, s);
+				}
 			}
-		}
+		});
 	}
 }

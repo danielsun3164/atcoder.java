@@ -67,22 +67,22 @@ class ProblemFTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC164/F", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			String r = expectedScanner.next();
-			if ("-1".equals(r)) {
-				check(inputIs, r);
-			} else {
-				int n = inputScanner.nextInt();
-				int[] s = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
-				int[] t = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
-				long[] u = IntStream.range(0, n).mapToLong(i -> Long.parseUnsignedLong(inputScanner.next())).toArray();
-				long[] v = IntStream.range(0, n).mapToLong(i -> Long.parseUnsignedLong(inputScanner.next())).toArray();
-				check(n, s, t, u, v);
+		return checkExternal("ABC164/F", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				String r = expectedScanner.next();
+				if ("-1".equals(r)) {
+					check(inputIs, r);
+				} else {
+					int n = inputScanner.nextInt();
+					int[] s = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
+					int[] t = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
+					long[] u = IntStream.range(0, n).mapToLong(i -> Long.parseUnsignedLong(inputScanner.next()))
+							.toArray();
+					long[] v = IntStream.range(0, n).mapToLong(i -> Long.parseUnsignedLong(inputScanner.next()))
+							.toArray();
+					check(n, s, t, u, v);
+				}
 			}
-		}
+		});
 	}
 }
