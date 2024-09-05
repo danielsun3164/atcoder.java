@@ -18,15 +18,9 @@ public class ProblemD {
 			List<Integer> list = new ArrayList<>();
 			for (int i = s.length - 1; i >= 0; i--) {
 				switch (s[i]) {
-				case '+':
-					plus++;
-					break;
-				case '-':
-					minus++;
-					break;
-				case 'M':
-				default:
-					list.add(plus - minus);
+				case '+' -> plus++;
+				case '-' -> minus++;
+				default -> list.add(plus - minus);
 				}
 			}
 			list.sort((x, y) -> x.compareTo(y));

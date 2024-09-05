@@ -58,31 +58,23 @@ class ProblemFTest extends TestBase {
 				String r = scanner.next();
 				assertTrue(s[i].contains(r));
 				switch (r) {
-				case "A":
-					a++;
-					break;
-				case "B":
-					b++;
-					break;
-				case "C":
-				default:
-					c++;
-					break;
+				case "A" -> a++;
+				case "B" -> b++;
+				case "C" -> c++;
 				}
 				switch (s[i].replace(r, "")) {
-				case "A":
+				case "A" -> {
 					a--;
 					assertTrue(a >= 0, "a is " + a);
-					break;
-				case "B":
+				}
+				case "B" -> {
 					b--;
 					assertTrue(b >= 0, "b is " + b);
-					break;
-				case "C":
-				default:
+				}
+				case "C" -> {
 					c--;
 					assertTrue(c >= 0, "c is " + c);
-					break;
+				}
 				}
 			}
 		} catch (IOException e) {

@@ -12,13 +12,8 @@ public class ProblemEX12 {
 			for (char c : s) {
 				if ((c >= '0') && (c <= '9')) {
 					switch (prev) {
-					case '+':
-						number += c - '0';
-						break;
-					case '-':
-					default:
-						number -= c - '0';
-						break;
+					case '+' -> number += c - '0';
+					case '-' -> number -= c - '0';
 					}
 				} else {
 					prev = c;

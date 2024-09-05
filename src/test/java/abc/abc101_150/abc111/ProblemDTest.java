@@ -80,19 +80,10 @@ class ProblemDTest extends TestBase {
 		int x = 0, y = 0;
 		for (int i = 0; i < m; i++) {
 			switch (w[i]) {
-			case 'L':
-				x -= d[i];
-				break;
-			case 'R':
-				x += d[i];
-				break;
-			case 'D':
-				y -= d[i];
-				break;
-			default:
-			case 'U':
-				y += d[i];
-				break;
+			case 'L' -> x -= d[i];
+			case 'R' -> x += d[i];
+			case 'D' -> y -= d[i];
+			case 'U' -> y += d[i];
 			}
 		}
 		assertEquals(expectedX, x);

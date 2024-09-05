@@ -17,23 +17,16 @@ public class ProblemEX11 {
 			});
 			for (int i = 0; i < n; i++) {
 				switch (op[i]) {
-				case "+":
-					a += b[i];
-					break;
-				case "-":
-					a -= b[i];
-					break;
-				case "*":
-					a *= b[i];
-					break;
-				case "/":
-				default:
+				case "+" -> a += b[i];
+				case "-" -> a -= b[i];
+				case "*" -> a *= b[i];
+				case "/" -> {
 					if (0 == b[i]) {
 						System.out.println("error");
 						return;
 					}
 					a /= b[i];
-					break;
+				}
 				}
 				System.out.println((i + 1) + ":" + a);
 			}
