@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
@@ -133,41 +132,39 @@ class Problem053Test extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/053", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			int t = scanner.nextInt();
-			int[][] data = new int[t][];
-			for (int i = 0; i < t; i++) {
-				String s = scanner.next();
-				if ("deterministic-judge".equals(s)) {
-					int n = scanner.nextInt();
-					data[i] = IntStream.range(0, n).map(j -> scanner.nextInt()).toArray();
-				} else {
-					int n = scanner.nextInt(), maxIndex = scanner.nextInt() - 1;
-					Random random = new Random(Long.parseUnsignedLong(scanner.next()));
-					data[i] = new int[n];
-					NavigableSet<Integer> set = new TreeSet<>();
-					// 前半
-					while (set.size() <= maxIndex) {
-						set.add(random.nextInt(MAX - 1) + 1);
-					}
-					int index = 0, max = set.last();
-					while (!set.isEmpty()) {
-						data[i][index++] = set.pollFirst();
-					}
-					// 後半
-					while (set.size() < n - 1 - maxIndex) {
-						set.add(random.nextInt(max - 1) + 1);
-					}
-					while (!set.isEmpty()) {
-						data[i][index++] = set.pollLast();
+		return checkExternal("typical90/053", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				int t = scanner.nextInt();
+				int[][] data = new int[t][];
+				for (int i = 0; i < t; i++) {
+					String s = scanner.next();
+					if ("deterministic-judge".equals(s)) {
+						int n = scanner.nextInt();
+						data[i] = IntStream.range(0, n).map(j -> scanner.nextInt()).toArray();
+					} else {
+						int n = scanner.nextInt(), maxIndex = scanner.nextInt() - 1;
+						Random random = new Random(Long.parseUnsignedLong(scanner.next()));
+						data[i] = new int[n];
+						NavigableSet<Integer> set = new TreeSet<>();
+						// 前半
+						while (set.size() <= maxIndex) {
+							set.add(random.nextInt(MAX - 1) + 1);
+						}
+						int index = 0, max = set.last();
+						while (!set.isEmpty()) {
+							data[i][index++] = set.pollFirst();
+						}
+						// 後半
+						while (set.size() < n - 1 - maxIndex) {
+							set.add(random.nextInt(max - 1) + 1);
+						}
+						while (!set.isEmpty()) {
+							data[i][index++] = set.pollLast();
+						}
 					}
 				}
+				check(data);
 			}
-			check(data);
-		}
+		});
 	}
 }

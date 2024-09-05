@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
@@ -76,25 +75,23 @@ class Problem077Test extends TestBase {
 
 	}
 
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			String r = expectedScanner.next();
-			if ("No".equals(r)) {
-				check(inputIs, r);
-			} else {
-				int n = inputScanner.nextInt(), t = inputScanner.nextInt();
-				int[][] a = new int[n][2], b = new int[n][2];
-				IntStream.range(0, n)
-						.forEach(i -> IntStream.range(0, 2).forEach(j -> a[i][j] = inputScanner.nextInt()));
-				IntStream.range(0, n)
-						.forEach(i -> IntStream.range(0, 2).forEach(j -> b[i][j] = inputScanner.nextInt()));
-				check(n, t, a, b);
-			}
-		}
-	}
-
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/077", this::check);
+		return checkExternal("typical90/077", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				String r = expectedScanner.next();
+				if ("No".equals(r)) {
+					check(inputIs, r);
+				} else {
+					int n = inputScanner.nextInt(), t = inputScanner.nextInt();
+					int[][] a = new int[n][2], b = new int[n][2];
+					IntStream.range(0, n)
+							.forEach(i -> IntStream.range(0, 2).forEach(j -> a[i][j] = inputScanner.nextInt()));
+					IntStream.range(0, n)
+							.forEach(i -> IntStream.range(0, 2).forEach(j -> b[i][j] = inputScanner.nextInt()));
+					check(n, t, a, b);
+				}
+			}
+		});
 	}
 }

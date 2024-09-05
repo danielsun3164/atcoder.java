@@ -2,7 +2,6 @@ package other.typical90;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -42,23 +41,21 @@ class Problem056別回答Test extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/056", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			String r = expectedScanner.next();
-			if ("Impossible".equals(r)) {
-				check(inputIs, r);
-			} else {
-				int n = inputScanner.nextInt(), s = inputScanner.nextInt();
-				int[] a = new int[n], b = new int[n];
-				IntStream.range(0, n).forEach(i -> {
-					a[i] = inputScanner.nextInt();
-					b[i] = inputScanner.nextInt();
-				});
-				check(n, s, a, b);
+		return checkExternal("typical90/056", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				String r = expectedScanner.next();
+				if ("Impossible".equals(r)) {
+					check(inputIs, r);
+				} else {
+					int n = inputScanner.nextInt(), s = inputScanner.nextInt();
+					int[] a = new int[n], b = new int[n];
+					IntStream.range(0, n).forEach(i -> {
+						a[i] = inputScanner.nextInt();
+						b[i] = inputScanner.nextInt();
+					});
+					check(n, s, a, b);
+				}
 			}
-		}
+		});
 	}
 }

@@ -2,7 +2,6 @@ package other.typical90;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -46,17 +45,15 @@ class Problem018Test extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/018", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			int t = inputScanner.nextInt(), l = inputScanner.nextInt(), x = inputScanner.nextInt(),
-					y = inputScanner.nextInt();
-			int q = inputScanner.nextInt();
-			int[] e = IntStream.range(0, q).map(i -> inputScanner.nextInt()).toArray();
-			double[] expected = IntStream.range(0, q).mapToDouble(i -> expectedScanner.nextDouble()).toArray();
-			check(t, l, x, y, q, e, expected);
-		}
+		return checkExternal("typical90/018", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				int t = inputScanner.nextInt(), l = inputScanner.nextInt(), x = inputScanner.nextInt(),
+						y = inputScanner.nextInt();
+				int q = inputScanner.nextInt();
+				int[] e = IntStream.range(0, q).map(i -> inputScanner.nextInt()).toArray();
+				double[] expected = IntStream.range(0, q).mapToDouble(i -> expectedScanner.nextDouble()).toArray();
+				check(t, l, x, y, q, e, expected);
+			}
+		});
 	}
 }

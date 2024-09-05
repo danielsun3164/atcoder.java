@@ -66,18 +66,16 @@ class ProblemFTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ZONe2021/F", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			int result = expectedScanner.nextInt();
-			if (-1 == result) {
-				check(inputIs, "-1");
-				return;
+		return checkExternal("ZONe2021/F", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				int result = expectedScanner.nextInt();
+				if (-1 == result) {
+					check(inputIs, "-1");
+					return;
+				}
+				int n = inputScanner.nextInt(), m = inputScanner.nextInt();
+				check(n, m, IntStream.range(0, m).map(i -> inputScanner.nextInt()).toArray());
 			}
-			int n = inputScanner.nextInt(), m = inputScanner.nextInt();
-			check(n, m, IntStream.range(0, m).map(i -> inputScanner.nextInt()).toArray());
-		}
+		});
 	}
 }

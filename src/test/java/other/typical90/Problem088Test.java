@@ -83,21 +83,19 @@ class Problem088Test extends TestBase {
 		}
 	}
 
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			int n = scanner.nextInt(), q = scanner.nextInt();
-			int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
-			int[] x = new int[q], y = new int[q];
-			IntStream.range(0, q).forEach(i -> {
-				x[i] = scanner.nextInt();
-				y[i] = scanner.nextInt();
-			});
-			check(n, q, a, x, y);
-		}
-	}
-
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/088", this::check);
+		return checkExternal("typical90/088", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				int n = scanner.nextInt(), q = scanner.nextInt();
+				int[] a = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
+				int[] x = new int[q], y = new int[q];
+				IntStream.range(0, q).forEach(i -> {
+					x[i] = scanner.nextInt();
+					y[i] = scanner.nextInt();
+				});
+				check(n, q, a, x, y);
+			}
+		});
 	}
 }
