@@ -19,22 +19,27 @@ import testbase.TestBase;
 
 class ProblemDTest extends TestBase {
 
+	/** 最大数 */
+	private static final int MAX = 55555;
+	/** 合計を計算する数字の数 */
+	private static final int N = 5;
+
 	/** 素数を格納するセット */
 	private final static Set<Integer> primeSet = new HashSet<>();
 
 	@BeforeAll
 	static void init() {
-		boolean[] isPrime = new boolean[ProblemD.MAX + 1];
+		boolean[] isPrime = new boolean[MAX + 1];
 		Arrays.fill(isPrime, true);
 		isPrime[0] = isPrime[1] = false;
-		for (int i = 2; i <= ProblemD.MAX; i++) {
+		for (int i = 2; i <= MAX; i++) {
 			if (isPrime[i]) {
-				for (int j = i * 2; j <= ProblemD.MAX; j += i) {
+				for (int j = i * 2; j <= MAX; j += i) {
 					isPrime[j] = false;
 				}
 			}
 		}
-		IntStream.range(2, ProblemD.MAX).filter(i -> isPrime[i]).forEach(i -> primeSet.add(i));
+		IntStream.range(2, MAX).filter(i -> isPrime[i]).forEach(i -> primeSet.add(i));
 	}
 
 	@Test
@@ -61,7 +66,7 @@ class ProblemDTest extends TestBase {
 		assertEquals(n, numbers.length);
 		try (InputStream is = new ByteArrayInputStream(out.toByteArray()); Scanner scanner = new Scanner(is)) {
 			int[] answers = IntStream.range(0, n).map(i -> scanner.nextInt()).toArray();
-			IntStream.range(0x1F, 1 << n).filter(i -> Integer.bitCount(i) == ProblemD.N)
+			IntStream.range(0x1F, 1 << n).filter(i -> Integer.bitCount(i) == N)
 					.map(i -> IntStream.range(0, n).filter(j -> (i & (1 << j)) > 0).map(j -> answers[j]).sum())
 					.forEach(i -> {
 						assertEquals(0, i % 5);

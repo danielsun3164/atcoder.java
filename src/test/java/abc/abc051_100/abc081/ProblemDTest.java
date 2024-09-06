@@ -55,7 +55,7 @@ class ProblemDTest extends TestBase {
 				int x = scanner.nextInt() - 1;
 				a[scanner.nextInt() - 1] += a[x];
 			});
-			assertTrue(ProblemD.isIncreasing(a));
+			assertTrue(isIncreasing(a));
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e);
@@ -70,5 +70,18 @@ class ProblemDTest extends TestBase {
 				check(IntStream.range(0, n).map(i -> scanner.nextInt()).toArray());
 			}
 		});
+	}
+
+	/**
+	 * @param a 入力配列
+	 * @return 入力配列は単調増加かどうか
+	 */
+	private static boolean isIncreasing(int[] a) {
+		for (int i = 1; i < a.length; i++) {
+			if (a[i] < a[i - 1]) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

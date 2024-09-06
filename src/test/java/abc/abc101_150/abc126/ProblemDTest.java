@@ -21,7 +21,6 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
-import abc.abc101_150.abc126.ProblemD.Path;
 import testbase.TestBase;
 
 class ProblemDTest extends TestBase {
@@ -100,5 +99,25 @@ class ProblemDTest extends TestBase {
 				check(n, u, v, w);
 			}
 		});
+	}
+
+	/**
+	 * ノード間の一つのパスを表すクラス
+	 */
+	private static class Path implements Comparable<Path> {
+		/** 終了ノード */
+		int to;
+		/** 移動コスト */
+		long cost;
+
+		Path(int to, long cost) {
+			this.to = to;
+			this.cost = cost;
+		}
+
+		@Override
+		public int compareTo(Path path) {
+			return Long.compare(cost, path.cost);
+		}
 	}
 }

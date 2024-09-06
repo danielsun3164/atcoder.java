@@ -52,8 +52,6 @@ class ProblemFTest extends TestBase {
 				TreeMap<Integer, Integer> sumMap = new TreeMap<>(), indexMap = new TreeMap<>();
 				IntStream.range(0, n).forEach(i -> sumMap.put(a[i], 0));
 				IntStream.range(0, n).forEach(i -> indexMap.put(a[i], i));
-				// sumMap.put(0, 0);
-				// map.put(ProblemF.INF, 0);
 				Arrays.stream(c).forEach(ci -> {
 					Integer key = sumMap.ceilingKey(l[ci]);
 					sumMap.put(key, sumMap.get(key) + 1);

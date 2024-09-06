@@ -13,10 +13,9 @@ import java.util.stream.IntStream;
 public class ProblemD {
 
 	/** 最大数 */
-	static final int MAX = 55555;
-
+	private static final int MAX = 55555;
 	/** 合計を計算する数字の数 */
-	static final int N = 5;
+	private static final int N = 5;
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
