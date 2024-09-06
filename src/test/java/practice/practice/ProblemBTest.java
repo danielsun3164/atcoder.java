@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import testbase.TestBase;
 
-class PracticeBTest extends TestBase {
+class ProblemBTest extends TestBase {
 
 	@Test
 	void case1() {

@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class PracticeB {
+public class ProblemB {
 
 	/** Merge insertion sort用 */
 	private static final int[] T = { 0, 2, 4, 10 };
