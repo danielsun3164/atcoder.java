@@ -1,6 +1,10 @@
 package other.joi2006ho;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -24,5 +28,10 @@ class ProblemETest extends TestBase {
 	@Test
 	void case4() {
 		check("3 2\n" + "2 2 8 8\n" + "3 0 4 9\n" + "5 0 7 9", "45" + LF + "36");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("joi2006ho/E");
 	}
 }
