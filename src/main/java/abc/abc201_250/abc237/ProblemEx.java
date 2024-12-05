@@ -22,7 +22,7 @@ public class ProblemEx {
 			char[] s = scanner.next().toCharArray();
 			int n = s.length;
 			Set<String> set = new HashSet<>();
-			IntStream.range(0, n).forEach(i -> IntStream.range(i, n).filter(j -> kaibun(s, i, j))
+			IntStream.range(0, n).forEach(i -> IntStream.range(i, n).filter(j -> isPalindrome(s, i, j))
 					.forEach(j -> set.add(new String(s, i, j - i + 1))));
 			String[] a = set.stream().toArray(String[]::new);
 			int m = a.length, p = m << 1, q = (m << 1) | 1;
@@ -45,7 +45,7 @@ public class ProblemEx {
 	 * @param end
 	 * @return 文字列sの[start,end]部分が回文かどうか
 	 */
-	private static boolean kaibun(char[] s, int start, int end) {
+	private static boolean isPalindrome(char[] s, int start, int end) {
 		while (end >= start) {
 			if (s[start++] != s[end--]) {
 				return false;
