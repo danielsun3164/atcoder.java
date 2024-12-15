@@ -92,6 +92,12 @@ abc.abc201_250.abc235.ProblemE別回答Test=4000
 abc.abc201_250.abc235.ProblemGTest=3000
 abc.abc201_250.abc235.ProblemExTest=3000
 abc.abc201_250.abc237.ProblemGTest=8000
+abc.abc201_250.abc238.ProblemGTest=3000
+abc.abc201_250.abc238.ProblemG別回答1Test=3000
+abc.abc201_250.abc238.ProblemG別回答2Test=3000
+abc.abc201_250.abc238.ProblemG別回答3Test=3000
+abc.abc201_250.abc238.ProblemG別回答4Test=3000
+abc.abc201_250.abc238.ProblemExTest=3000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
