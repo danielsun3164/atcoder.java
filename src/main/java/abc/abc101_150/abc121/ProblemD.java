@@ -20,16 +20,11 @@ public class ProblemD {
 	 */
 	private static long result(long input) {
 		long remainder = input % 4L;
-		switch ((int) remainder) {
-		case 0:
-			return input;
-		case 1:
-			return 1L;
-		case 2:
-			return input + 1;
-		case 3:
-		default:
-			return 0L;
-		}
+		return switch ((int) remainder) {
+		case 0 -> input;
+		case 1 -> 1L;
+		case 2 -> input + 1;
+		default -> 0L;
+		};
 	}
 }

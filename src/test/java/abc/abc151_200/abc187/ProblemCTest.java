@@ -3,7 +3,6 @@ package abc.abc151_200.abc187;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
@@ -42,19 +41,17 @@ class ProblemCTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC187/C", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			String result = expectedScanner.next();
-			if ("satisfiable".equals(result)) {
-				check(inputIs, result);
-			} else {
-				int n = inputScanner.nextInt();
-				String[] s = IntStream.range(0, n).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
-				check(s);
+		return checkExternal("ABC187/C", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				String result = expectedScanner.next();
+				if ("satisfiable".equals(result)) {
+					check(inputIs, result);
+				} else {
+					int n = inputScanner.nextInt();
+					String[] s = IntStream.range(0, n).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
+					check(s);
+				}
 			}
-		}
+		});
 	}
 }

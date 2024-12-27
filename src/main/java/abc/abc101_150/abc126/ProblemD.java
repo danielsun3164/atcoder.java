@@ -64,7 +64,7 @@ public class ProblemD {
 	/**
 	 * ノード間の一つのパスを表すクラス
 	 */
-	static class Path implements Comparable<Path> {
+	private static class Path implements Comparable<Path> {
 		/** 終了ノード */
 		int to;
 		/** 移動コスト */

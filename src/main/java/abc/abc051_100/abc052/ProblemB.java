@@ -15,14 +15,11 @@ public class ProblemB {
 			int max = 0, x = 0;
 			for (char c : s) {
 				switch (c) {
-				case INCREASE:
+				case INCREASE -> {
 					x++;
 					max = Math.max(x, max);
-					break;
-				case DECREASE:
-				default:
-					x--;
-					break;
+				}
+				case DECREASE -> x--;
 				}
 			}
 			System.out.println(max);

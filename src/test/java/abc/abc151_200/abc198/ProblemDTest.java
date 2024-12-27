@@ -2,7 +2,6 @@ package abc.abc151_200.abc198;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -65,18 +64,16 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("abc198/D", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			String result = expectedScanner.next();
-			if ("UNSOLVABLE".equals(result)) {
-				check(inputIs, result);
-			} else {
-				String[] s = IntStream.range(0, 3).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
-				check(s);
+		return checkExternal("abc198/D", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				String result = expectedScanner.next();
+				if ("UNSOLVABLE".equals(result)) {
+					check(inputIs, result);
+				} else {
+					String[] s = IntStream.range(0, 3).mapToObj(i -> inputScanner.next()).toArray(String[]::new);
+					check(s);
+				}
 			}
-		}
+		});
 	}
 }

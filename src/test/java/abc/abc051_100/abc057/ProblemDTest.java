@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -53,19 +52,17 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC057/D", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (ByteArrayOutputStream boas = new ByteArrayOutputStream(); Scanner scanner = new Scanner(expectedIs)) {
-			byte[] buffer = new byte[8192];
-			int length = 0;
-			while (-1 != (length = inputIs.read(buffer))) {
-				boas.write(buffer, 0, length);
+		return checkExternal("ABC057/D", (inputIs, expectedIs) -> {
+			try (ByteArrayOutputStream boas = new ByteArrayOutputStream(); Scanner scanner = new Scanner(expectedIs)) {
+				byte[] buffer = new byte[8192];
+				int length = 0;
+				while (-1 != (length = inputIs.read(buffer))) {
+					boas.write(buffer, 0, length);
+				}
+				check(boas.toString(), scanner.nextDouble(), scanner.next());
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			check(boas.toString(), scanner.nextDouble(), scanner.next());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		});
 	}
 }

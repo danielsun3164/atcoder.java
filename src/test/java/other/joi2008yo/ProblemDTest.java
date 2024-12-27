@@ -1,6 +1,10 @@
 package other.joi2008yo;
 
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 import testbase.TestBase;
 
@@ -18,5 +22,10 @@ class ProblemDTest extends TestBase {
 				+ "10\n" + "757559 866424\n" + "114810 239537\n" + "519926 989458\n" + "461089 424480\n"
 				+ "674361 448440\n" + "81851 150384\n" + "459107 795405\n" + "299682 6700\n" + "254125 362183\n"
 				+ "50795 541942", "-384281 179674");
+	}
+
+	@TestFactory
+	Collection<DynamicTest> external() {
+		return checkExternal("joi2008yo/D");
 	}
 }

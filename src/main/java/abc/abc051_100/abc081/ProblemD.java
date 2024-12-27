@@ -45,7 +45,7 @@ public class ProblemD {
 	 * @param a 入力配列
 	 * @return 入力配列は単調増加かどうか
 	 */
-	static boolean isIncreasing(int[] a) {
+	private static boolean isIncreasing(int[] a) {
 		for (int i = 1; i < a.length; i++) {
 			if (a[i] < a[i - 1]) {
 				return false;
@@ -56,7 +56,7 @@ public class ProblemD {
 
 	/**
 	 * 長さnの数列の計算ステップを出力する
-	 * 
+	 *
 	 * @param n       数列の長さ
 	 * @param reverse 逆順かどうか
 	 */
@@ -70,7 +70,7 @@ public class ProblemD {
 
 	/**
 	 * 数列のすべてにindexの数字を足す計算ステップを出力する
-	 * 
+	 *
 	 * @param n     数列の長さ
 	 * @param index 加算もととなるindex
 	 */

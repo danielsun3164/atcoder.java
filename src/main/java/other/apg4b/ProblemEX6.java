@@ -10,21 +10,11 @@ public class ProblemEX6 {
 			String op = scanner.next();
 			int b = scanner.nextInt();
 			switch (op) {
-			case "+":
-				System.out.println(a + b);
-				break;
-			case "-":
-				System.out.println(a - b);
-				break;
-			case "*":
-				System.out.println(a * b);
-				break;
-			case "/":
-				System.out.println((b == 0) ? "error" : a / b);
-				break;
-			default:
-				System.out.println("error");
-				break;
+			case "+" -> System.out.println(a + b);
+			case "-" -> System.out.println(a - b);
+			case "*" -> System.out.println(a * b);
+			case "/" -> System.out.println((b == 0) ? "error" : a / b);
+			default -> System.out.println("error");
 			}
 		}
 	}

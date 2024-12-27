@@ -1,7 +1,7 @@
 package testbase;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -222,14 +222,7 @@ public abstract class TestBase {
 	 * @param tolerance 誤差範囲
 	 */
 	protected void assertResultIsAbout(double expected, double tolerance) {
-		// doubleの有効桁数が限られているため、値が大きすぎる場合、誤差範囲も合わせて大きくする
-		double max = Math.pow(2.0d, DOUBLE_DIGITS) * tolerance;
-		while (expected > max) {
-			max *= 2.0d;
-			tolerance *= 2.0d;
-		}
-		assertTrue(Math.abs(Double.parseDouble(out.toString()) - expected) < tolerance,
-				"number is " + out.toString() + ", expected is " + expected + ", tolerance is " + tolerance);
+		assertNumberIsAbout(expected, out.toString(), tolerance);
 	}
 
 	/**
@@ -448,8 +441,7 @@ public abstract class TestBase {
 	 * @param tolerance 誤差範囲
 	 */
 	protected void assertNumberIsAbout(double expected, String number, double tolerance) {
-		assertTrue(Math.abs(Double.parseDouble(number) - expected) < tolerance,
-				"number is " + number + ", expected is " + expected);
+		assertNumberIsAbout(expected, Double.parseDouble(number), tolerance);
 	}
 
 	/**
@@ -460,6 +452,12 @@ public abstract class TestBase {
 	 * @param tolerance 誤差範囲
 	 */
 	protected void assertNumberIsAbout(double expected, double number, double tolerance) {
+		// doubleの有効桁数が限られているため、値が大きすぎる場合、誤差範囲も合わせて大きくする
+		double max = Math.pow(2.0d, DOUBLE_DIGITS) * tolerance;
+		while (expected > max) {
+			max *= 2.0d;
+			tolerance *= 2.0d;
+		}
 		assertTrue(Math.abs(number - expected) < tolerance, "number is " + number + ", expected is " + expected);
 	}
 

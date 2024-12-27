@@ -20,35 +20,26 @@ public class ProblemEX25 {
 			IntStream.range(0, m).forEach(i -> b.add(scanner.nextInt()));
 			String command = scanner.next();
 			switch (command) {
-			case "intersection":
-				println(intersection(a, b));
-				break;
-			case "union_set":
+			case "intersection" -> println(intersection(a, b));
+			case "union_set" -> {
 				a.addAll(b);
 				println(a);
-				break;
-			case "symmetric_diff":
-				println(symmetricDiff(a, b));
-				break;
-			case "subtract":
+			}
+			case "symmetric_diff" -> println(symmetricDiff(a, b));
+			case "subtract" -> {
 				Integer x = scanner.nextInt();
 				a.remove(x);
 				println(a);
-				break;
-			case "increment":
-				println(increment(a));
-				break;
-			case "decrement":
-			default:
-				println(decrement(a));
-				break;
+			}
+			case "increment" -> println(increment(a));
+			case "decrement" -> println(decrement(a));
 			}
 		}
 	}
 
 	/**
 	 * 入力集合を数字順に表示する
-	 * 
+	 *
 	 * @param set 入力集合
 	 */
 	private static void println(Set<Integer> set) {

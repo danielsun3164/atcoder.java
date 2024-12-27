@@ -64,20 +64,18 @@ class ProblemF別回答Test extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC178/F", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			String result = expectedScanner.next();
-			if ("No".equals(result)) {
-				check(inputIs, result);
-			} else {
-				int n = inputScanner.nextInt();
-				int[] a = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
-				int[] b = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
-				check(n, a, b);
+		return checkExternal("ABC178/F", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				String result = expectedScanner.next();
+				if ("No".equals(result)) {
+					check(inputIs, result);
+				} else {
+					int n = inputScanner.nextInt();
+					int[] a = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray(),
+							b = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
+					check(n, a, b);
+				}
 			}
-		}
+		});
 	}
 }

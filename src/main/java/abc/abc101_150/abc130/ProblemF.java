@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc130/submissions/15075589 にも参考
  */
 public class ProblemF {
@@ -34,23 +34,22 @@ public class ProblemF {
 				double x = scanner.nextInt(), y = scanner.nextInt();
 				char d = scanner.next().charAt(0);
 				switch (d) {
-				case R:
+				case R -> {
 					dx.add(x, 1);
 					dy.add(y, 0);
-					break;
-				case L:
+				}
+				case L -> {
 					dx.add(x, -1);
 					dy.add(y, 0);
-					break;
-				case U:
+				}
+				case U -> {
 					dx.add(x, 0);
 					dy.add(y, 1);
-					break;
-				default:
-				case D:
+				}
+				case D -> {
 					dx.add(x, 0);
 					dy.add(y, -1);
-					break;
+				}
 				}
 			});
 			Set<Double> set = new HashSet<>();
@@ -77,7 +76,7 @@ public class ProblemF {
 
 		/**
 		 * 座標の値を追加
-		 * 
+		 *
 		 * @param x 値
 		 * @param v 移動方向
 		 */
@@ -89,7 +88,7 @@ public class ProblemF {
 
 		/**
 		 * 時刻tの最大値と最小値の差分を計算する
-		 * 
+		 *
 		 * @param t
 		 * @return 時刻tの最大値と最小値の差分
 		 */
@@ -100,7 +99,7 @@ public class ProblemF {
 
 		/**
 		 * 座標のmaxかminの変化時刻の一覧を計算する
-		 * 
+		 *
 		 * @return 座標のmaxかminの変化時刻の一覧
 		 */
 		Set<Double> events() {

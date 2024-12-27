@@ -17,19 +17,12 @@ public class ProblemB {
 			IntStream.range(0, n).forEach(i -> {
 				int x = scanner.nextInt() - 1, y = scanner.nextInt() - 1, a = scanner.nextInt();
 				switch (a) {
-				case 1:
-					IntStream.rangeClosed(0, x).forEach(j -> Arrays.fill(cells[j], BLACK));
-					break;
-				case 2:
-					IntStream.range(x + 1, w).forEach(j -> Arrays.fill(cells[j], BLACK));
-					break;
-				case 3:
-					IntStream.rangeClosed(0, y).forEach(j -> IntStream.range(0, w).forEach(k -> cells[k][j] = BLACK));
-					break;
-				case 4:
-				default:
-					IntStream.range(y + 1, h).forEach(j -> IntStream.range(0, w).forEach(k -> cells[k][j] = BLACK));
-					break;
+				case 1 -> IntStream.rangeClosed(0, x).forEach(j -> Arrays.fill(cells[j], BLACK));
+				case 2 -> IntStream.range(x + 1, w).forEach(j -> Arrays.fill(cells[j], BLACK));
+				case 3 -> IntStream.rangeClosed(0, y)
+						.forEach(j -> IntStream.range(0, w).forEach(k -> cells[k][j] = BLACK));
+				default -> IntStream.range(y + 1, h)
+						.forEach(j -> IntStream.range(0, w).forEach(k -> cells[k][j] = BLACK));
 				}
 			});
 			System.out.println(IntStream.range(0, w).map(i -> Arrays.stream(cells[i]).sum()).sum());

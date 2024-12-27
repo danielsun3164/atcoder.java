@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
@@ -46,18 +45,16 @@ class Problem026Test extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/026", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			int n = scanner.nextInt();
-			int[] a = new int[n - 1], b = new int[n - 1];
-			IntStream.range(0, n - 1).forEach(i -> {
-				a[i] = scanner.nextInt();
-				b[i] = scanner.nextInt();
-			});
-			check(n, a, b);
-		}
+		return checkExternal("typical90/026", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				int n = scanner.nextInt();
+				int[] a = new int[n - 1], b = new int[n - 1];
+				IntStream.range(0, n - 1).forEach(i -> {
+					a[i] = scanner.nextInt();
+					b[i] = scanner.nextInt();
+				});
+				check(n, a, b);
+			}
+		});
 	}
 }

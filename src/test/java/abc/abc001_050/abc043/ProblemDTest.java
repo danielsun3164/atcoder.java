@@ -52,17 +52,6 @@ class ProblemDTest extends TestBase {
 		}
 	}
 
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			int a = expectedScanner.nextInt(), b = expectedScanner.nextInt();
-			if ((-1 == a) && (-1 == b)) {
-				check(inScanner.next(), "-1 -1");
-			} else {
-				check(inScanner.next());
-			}
-		}
-	}
-
 	@Test
 	void case2() {
 		check("atcoder", "-1 -1");
@@ -70,6 +59,15 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ARC059_ABC043/D", this::check);
+		return checkExternal("ARC059_ABC043/D", (inputIs, expectedIs) -> {
+			try (Scanner inScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				int a = expectedScanner.nextInt(), b = expectedScanner.nextInt();
+				if ((-1 == a) && (-1 == b)) {
+					check(inScanner.next(), "-1 -1");
+				} else {
+					check(inScanner.next());
+				}
+			}
+		});
 	}
 }

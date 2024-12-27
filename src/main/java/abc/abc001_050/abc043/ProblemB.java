@@ -10,17 +10,12 @@ public class ProblemB {
 			StringBuilder sb = new StringBuilder();
 			s.chars().forEach(c -> {
 				switch (c) {
-				case '0':
-				case '1':
-					sb.append((char) c);
-					break;
-				case 'B':
+				case '0', '1' -> sb.append((char) c);
+				default -> {
 					if (sb.length() > 0) {
 						sb.deleteCharAt(sb.length() - 1);
 					}
-					break;
-				default:
-					break;
+				}
 				}
 			});
 			System.out.println(sb.toString());

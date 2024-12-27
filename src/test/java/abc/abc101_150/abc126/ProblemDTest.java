@@ -21,7 +21,6 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
-import abc.abc101_150.abc126.ProblemD.Path;
 import testbase.TestBase;
 
 class ProblemDTest extends TestBase {
@@ -88,19 +87,37 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ABC126/D", this::check);
+		return checkExternal("ABC126/D", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				int n = scanner.nextInt();
+				int[] u = new int[n - 1], v = new int[n - 1], w = new int[n - 1];
+				IntStream.range(0, n - 1).forEach(i -> {
+					u[i] = scanner.nextInt();
+					v[i] = scanner.nextInt();
+					w[i] = scanner.nextInt();
+				});
+				check(n, u, v, w);
+			}
+		});
 	}
 
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			int n = scanner.nextInt();
-			int[] u = new int[n - 1], v = new int[n - 1], w = new int[n - 1];
-			IntStream.range(0, n - 1).forEach(i -> {
-				u[i] = scanner.nextInt();
-				v[i] = scanner.nextInt();
-				w[i] = scanner.nextInt();
-			});
-			check(n, u, v, w);
+	/**
+	 * ノード間の一つのパスを表すクラス
+	 */
+	private static class Path implements Comparable<Path> {
+		/** 終了ノード */
+		int to;
+		/** 移動コスト */
+		long cost;
+
+		Path(int to, long cost) {
+			this.to = to;
+			this.cost = cost;
+		}
+
+		@Override
+		public int compareTo(Path path) {
+			return Long.compare(cost, path.cost);
 		}
 	}
 }

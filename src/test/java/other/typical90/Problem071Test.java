@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -64,37 +63,35 @@ class Problem071Test extends TestBase {
 				new int[] { 4, 4, 2, 2, 6, 3, 4, 8, 1, 6, 9, 7, 3, 9, 3 }, 10);
 	}
 
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-			byte[] buffer = new byte[8192];
-			int length = 0;
-			while ((length = expectedIs.read(buffer)) > 0) {
-				baos.write(buffer, 0, length);
-			}
-			try (Scanner inScanner = new Scanner(inputIs);
-					ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-					Scanner expectedScanner = new Scanner(bais)) {
-				int exp = expectedScanner.nextInt();
-				if (-1 == exp) {
-					check(inputIs, "-1");
-				} else {
-					int n = inScanner.nextInt(), m = inScanner.nextInt(), k = inScanner.nextInt();
-					int[] a = new int[m], b = new int[m];
-					IntStream.range(0, m).forEach(i -> {
-						a[i] = inScanner.nextInt();
-						b[i] = inScanner.nextInt();
-					});
-					String[] lines = baos.toString().split("\\R");
-					check(n, m, k, a, b, lines.length);
-				}
-			}
-		} catch (IOException e) {
-			fail(e);
-		}
-	}
-
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("typical90/071", this::check);
+		return checkExternal("typical90/071", (inputIs, expectedIs) -> {
+			try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+				byte[] buffer = new byte[8192];
+				int length = 0;
+				while ((length = expectedIs.read(buffer)) > 0) {
+					baos.write(buffer, 0, length);
+				}
+				try (Scanner inScanner = new Scanner(inputIs);
+						ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+						Scanner expectedScanner = new Scanner(bais)) {
+					int exp = expectedScanner.nextInt();
+					if (-1 == exp) {
+						check(inputIs, "-1");
+					} else {
+						int n = inScanner.nextInt(), m = inScanner.nextInt(), k = inScanner.nextInt();
+						int[] a = new int[m], b = new int[m];
+						IntStream.range(0, m).forEach(i -> {
+							a[i] = inScanner.nextInt();
+							b[i] = inScanner.nextInt();
+						});
+						String[] lines = baos.toString().split("\\R");
+						check(n, m, k, a, b, lines.length);
+					}
+				}
+			} catch (IOException e) {
+				fail(e);
+			}
+		});
 	}
 }

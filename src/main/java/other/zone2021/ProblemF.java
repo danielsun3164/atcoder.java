@@ -54,7 +54,7 @@ public class ProblemF {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/dsu.hpp のJava実装
 	 */
-	static class DisjointSetUnion {
+	private static class DisjointSetUnion {
 		/** 項目数 */
 		final int n;
 		/** 親のidかグループのサイズ */
@@ -142,6 +142,7 @@ public class ProblemF {
 		 * @param a
 		 * @return aの所属グループのメンバー数
 		 */
+		@SuppressWarnings("unused")
 		int size(int a) {
 			if (!((0 <= a) && (a < n))) {
 				throw new IllegalArgumentException("a is " + a);
@@ -152,6 +153,7 @@ public class ProblemF {
 		/**
 		 * @return グループの一覧
 		 */
+		@SuppressWarnings("unused")
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];

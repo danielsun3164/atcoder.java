@@ -36,19 +36,11 @@ public class ProblemD {
 	private static long getResult(long min, long max, final int n, final int[] h, final int[] s, Status minStatus) {
 		// maxとminが1しか違わない場合
 		if (1L == max - min) {
-			switch (minStatus) {
-			case OK:
-				return min;
-			case NG:
-				return max;
-			case UNKNOWN:
-			default:
-				if (isPossible(min, n, h, s)) {
-					return min;
-				} else {
-					return max;
-				}
-			}
+			return switch (minStatus) {
+			case OK -> min;
+			case NG -> max;
+			default -> (isPossible(min, n, h, s)) ? min : max;
+			};
 		}
 		long middle = (min + max) / 2L;
 		if (isPossible(middle, n, h, s)) {
@@ -60,7 +52,7 @@ public class ProblemD {
 
 	/**
 	 * https://atcoder.jp/contests/abc023/submissions/5315101 を参考に作成
-	 * 
+	 *
 	 * @param result
 	 * @param n      風船の数
 	 * @param h      風船の初期位置の配列

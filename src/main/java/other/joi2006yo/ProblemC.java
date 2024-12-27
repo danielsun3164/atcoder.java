@@ -29,51 +29,50 @@ public class ProblemC {
 
 	/**
 	 * サイコロに操作を行い、一番上の数字を返す
-	 * 
+	 *
 	 * @param saikoro サイコロを表す配列
 	 * @param command 操作コマンド
 	 * @return 操作後のサイコロの一番上の数字
 	 */
 	private static int process(int[] saikoro, String command) {
 		switch (command) {
-		case EAST:
+		case EAST -> {
 			swap(saikoro, 0, 1);
 			swap(saikoro, 5, 3);
 			swap(saikoro, 0, 5);
-			break;
-		case SOUTH:
+		}
+		case SOUTH -> {
 			swap(saikoro, 0, 2);
 			swap(saikoro, 5, 4);
 			swap(saikoro, 0, 5);
-			break;
-		case WEST:
+		}
+		case WEST -> {
 			swap(saikoro, 0, 3);
 			swap(saikoro, 5, 1);
 			swap(saikoro, 0, 5);
-			break;
-		case NORTH:
+		}
+		case NORTH -> {
 			swap(saikoro, 0, 4);
 			swap(saikoro, 5, 2);
 			swap(saikoro, 0, 5);
-			break;
-		case LEFT:
+		}
+		case LEFT -> {
 			swap(saikoro, 2, 1);
 			swap(saikoro, 4, 3);
 			swap(saikoro, 2, 4);
-			break;
-		default:
-		case RIGHT:
+		}
+		case RIGHT -> {
 			swap(saikoro, 1, 2);
 			swap(saikoro, 3, 4);
 			swap(saikoro, 1, 3);
-			break;
+		}
 		}
 		return saikoro[0];
 	}
 
 	/**
 	 * 数列のi番目とj番目を交換する
-	 * 
+	 *
 	 * @param array
 	 * @param i
 	 * @param j

@@ -19,8 +19,8 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
-import other.zone2021.ProblemF.DisjointSetUnion;
 import testbase.TestBase;
+import testbase.library.DisjointSetUnion;
 
 class ProblemFTest extends TestBase {
 
@@ -57,7 +57,7 @@ class ProblemFTest extends TestBase {
 				assertFalse(u + "^" + v + "=" + (u ^ v) + "はaに含まれている", set.contains(u ^ v));
 				dsu.merge(u, v);
 			});
-			assertEquals(1, dsu.groupNum);
+			assertEquals(1, dsu.getGroupNum());
 		} catch (IOException | NoSuchElementException e) {
 			e.printStackTrace();
 			fail();
@@ -66,18 +66,16 @@ class ProblemFTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ZONe2021/F", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
-			int result = expectedScanner.nextInt();
-			if (-1 == result) {
-				check(inputIs, "-1");
-				return;
+		return checkExternal("ZONe2021/F", (inputIs, expectedIs) -> {
+			try (Scanner inputScanner = new Scanner(inputIs); Scanner expectedScanner = new Scanner(expectedIs)) {
+				int result = expectedScanner.nextInt();
+				if (-1 == result) {
+					check(inputIs, "-1");
+					return;
+				}
+				int n = inputScanner.nextInt(), m = inputScanner.nextInt();
+				check(n, m, IntStream.range(0, m).map(i -> inputScanner.nextInt()).toArray());
 			}
-			int n = inputScanner.nextInt(), m = inputScanner.nextInt();
-			check(n, m, IntStream.range(0, m).map(i -> inputScanner.nextInt()).toArray());
-		}
+		});
 	}
 }

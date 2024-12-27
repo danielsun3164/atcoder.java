@@ -144,12 +144,10 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("ARC093/D", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner scanner = new Scanner(inputIs)) {
-			check(scanner.nextInt(), scanner.nextInt());
-		}
+		return checkExternal("ARC093/D", (inputIs, expectedIs) -> {
+			try (Scanner scanner = new Scanner(inputIs)) {
+				check(scanner.nextInt(), scanner.nextInt());
+			}
+		});
 	}
 }

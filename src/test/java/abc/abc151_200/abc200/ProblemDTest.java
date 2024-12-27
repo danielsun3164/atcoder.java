@@ -81,21 +81,19 @@ class ProblemDTest extends TestBase {
 
 	@TestFactory
 	Collection<DynamicTest> external() {
-		return checkExternal("abc200/D", this::check);
-	}
-
-	void check(InputStream inputIs, InputStream expectedIs) {
-		try (Scanner expectedScanner = new Scanner(expectedIs)) {
-			String result = expectedScanner.next();
-			if ("No".equalsIgnoreCase(result)) {
-				check(inputIs, "No");
-			} else {
-				try (Scanner inputScanner = new Scanner(inputIs)) {
-					int n = inputScanner.nextInt();
-					int[] a = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
-					check(n, a);
+		return checkExternal("abc200/D", (inputIs, expectedIs) -> {
+			try (Scanner expectedScanner = new Scanner(expectedIs)) {
+				String result = expectedScanner.next();
+				if ("No".equalsIgnoreCase(result)) {
+					check(inputIs, "No");
+				} else {
+					try (Scanner inputScanner = new Scanner(inputIs)) {
+						int n = inputScanner.nextInt();
+						int[] a = IntStream.range(0, n).map(i -> inputScanner.nextInt()).toArray();
+						check(n, a);
+					}
 				}
 			}
-		}
+		});
 	}
 }

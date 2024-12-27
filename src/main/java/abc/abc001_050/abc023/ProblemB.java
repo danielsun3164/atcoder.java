@@ -21,14 +21,10 @@ public class ProblemB {
 		if (0 == n) {
 			return "b";
 		}
-		switch (n % 3) {
-		case 1:
-			return "a" + getResult(n - 1) + "c";
-		case 2:
-			return "c" + getResult(n - 1) + "a";
-		case 0:
-		default:
-			return "b" + getResult(n - 1) + "b";
-		}
+		return switch (n % 3) {
+		case 1 -> "a" + getResult(n - 1) + "c";
+		case 2 -> "c" + getResult(n - 1) + "a";
+		default -> "b" + getResult(n - 1) + "b";
+		};
 	}
 }
