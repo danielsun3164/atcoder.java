@@ -289,7 +289,6 @@ public class ProblemE別回答1 {
 			return result;
 		}
 
-		@SuppressWarnings("unused")
 		Path subTree(int p) {
 			return new Path(rangeL[p], rangeR[p]);
 		}

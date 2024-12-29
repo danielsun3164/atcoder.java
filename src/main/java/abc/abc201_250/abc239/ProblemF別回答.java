@@ -152,7 +152,6 @@ public class ProblemF別回答 {
 		 * @param b
 		 * @return aとbが同じグループに所属しているか
 		 */
-		@SuppressWarnings("unused")
 		boolean same(int a, int b) {
 			if (!((0 <= a) && (a < n))) {
 				throw new IllegalArgumentException("a is " + a);
