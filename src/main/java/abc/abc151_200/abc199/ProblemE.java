@@ -64,7 +64,6 @@ public class ProblemE {
 		int y, z;
 
 		Rule(int y, int z) {
-			super();
 			this.y = y;
 			this.z = z;
 		}

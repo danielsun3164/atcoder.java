@@ -56,7 +56,6 @@ public class Problem036 {
 		long x, y;
 
 		Point(long x, long y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

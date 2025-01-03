@@ -135,7 +135,6 @@ public class ProblemG別回答2 {
 		int from, to;
 
 		Edge(int from, int to) {
-			super();
 			this.from = from;
 			this.to = to;
 		}

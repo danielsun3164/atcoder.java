@@ -76,7 +76,6 @@ public class ProblemD {
 		long cost;
 
 		Path(int from, int to, long cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;
@@ -84,9 +83,9 @@ public class ProblemD {
 
 		@Override
 		public int compareTo(Path path) {
-			if (this.cost > path.cost) {
+			if (cost > path.cost) {
 				return 1;
-			} else if (this.cost == path.cost) {
+			} else if (cost == path.cost) {
 				return 0;
 			} else {
 				return -1;

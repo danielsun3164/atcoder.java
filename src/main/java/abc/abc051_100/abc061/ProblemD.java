@@ -24,7 +24,7 @@ public class ProblemD {
 
 	/**
 	 * https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/ を参考に作成
-	 * 
+	 *
 	 * @param paths     ノード間の連結パス一覧の配列
 	 * @param src       開始ノード
 	 * @param n         ノードの数
@@ -72,7 +72,6 @@ public class ProblemD {
 		long cost;
 
 		Path(int from, int to, long cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;
@@ -80,7 +79,7 @@ public class ProblemD {
 
 		@Override
 		public int compareTo(Path path) {
-			long costDiff = this.cost - path.cost;
+			long costDiff = cost - path.cost;
 			return (costDiff > 0) ? 1 : (costDiff < 0) ? -1 : 0;
 		}
 	}

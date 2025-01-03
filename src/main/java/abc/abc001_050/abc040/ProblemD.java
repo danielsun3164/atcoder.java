@@ -51,7 +51,6 @@ public class ProblemD {
 		int y;
 
 		Route(int a, int b, int y) {
-			super();
 			this.a = a;
 			this.b = b;
 			this.y = y;
@@ -59,7 +58,7 @@ public class ProblemD {
 
 		@Override
 		public int compareTo(Route o) {
-			return o.y - this.y;
+			return o.y - y;
 		}
 	}
 
@@ -75,7 +74,6 @@ public class ProblemD {
 		int no;
 
 		Question(int v, int w, int no) {
-			super();
 			this.v = v;
 			this.w = w;
 			this.no = no;
@@ -119,7 +117,7 @@ public class ProblemD {
 
 		/**
 		 * xとyを結合する
-		 * 
+		 *
 		 * @param x
 		 * @param y
 		 */

@@ -102,7 +102,6 @@ public class ProblemEx {
 		Point point;
 
 		Data(int num, Point point, int mid, int kei) {
-			super();
 			this.num = num;
 			this.mid = mid;
 			this.kei = kei;

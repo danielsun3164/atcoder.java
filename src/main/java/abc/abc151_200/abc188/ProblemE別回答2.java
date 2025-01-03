@@ -52,7 +52,6 @@ public class ProblemE別回答2 {
 		int i;
 
 		Data(int a, int i) {
-			super();
 			this.a = a;
 			this.i = i;
 		}

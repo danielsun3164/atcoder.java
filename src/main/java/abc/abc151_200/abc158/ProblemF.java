@@ -53,7 +53,6 @@ public class ProblemF {
 		long x, d;
 
 		Robot(long x, long d) {
-			super();
 			this.x = x;
 			this.d = d;
 		}

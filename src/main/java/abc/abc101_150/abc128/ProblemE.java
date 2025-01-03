@@ -51,7 +51,6 @@ public class ProblemE {
 		int x;
 
 		Data(int s, int t, int x) {
-			super();
 			this.s = s;
 			this.t = t;
 			this.x = x;

@@ -47,7 +47,6 @@ public class ProblemD {
 		int happiness;
 
 		Boy(int boy, int happiness) {
-			super();
 			this.boy = boy;
 			this.happiness = happiness;
 		}

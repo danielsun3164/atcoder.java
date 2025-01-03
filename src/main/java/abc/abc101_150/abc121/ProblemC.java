@@ -34,7 +34,6 @@ public class ProblemC {
 		int amount;
 
 		Store(int price, int amount) {
-			super();
 			this.price = price;
 			this.amount = amount;
 		}

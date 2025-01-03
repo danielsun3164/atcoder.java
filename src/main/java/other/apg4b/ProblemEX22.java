@@ -24,14 +24,13 @@ public class ProblemEX22 {
 		int b;
 
 		Data(int a, int b) {
-			super();
 			this.a = a;
 			this.b = b;
 		}
 
 		@Override
 		public int compareTo(Data o) {
-			return this.b - o.b;
+			return b - o.b;
 		}
 
 		@Override

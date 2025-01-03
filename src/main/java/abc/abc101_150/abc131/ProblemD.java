@@ -32,17 +32,16 @@ public class ProblemD {
 		int dueTo;
 
 		Job(int time, int dueTo) {
-			super();
 			this.time = time;
 			this.dueTo = dueTo;
 		}
 
 		@Override
 		public int compareTo(Job job) {
-			if (0 == (this.dueTo - job.dueTo)) {
-				return this.time - job.time;
+			if (0 == (dueTo - job.dueTo)) {
+				return time - job.time;
 			} else {
-				return this.dueTo - job.dueTo;
+				return dueTo - job.dueTo;
 			}
 		}
 	}

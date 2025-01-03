@@ -77,7 +77,6 @@ public class ProblemF {
 		int depth;
 
 		public Data(int x, int y, int depth) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.depth = depth;

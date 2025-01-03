@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc167/submissions/13128568 にも参照
  */
 public class ProblemF {
@@ -39,7 +39,7 @@ public class ProblemF {
 
 	/**
 	 * リストの実現可能性をチェックする
-	 * 
+	 *
 	 * @param list データのリスト
 	 * @return リストが実現可能かどうか
 	 */
@@ -62,14 +62,13 @@ public class ProblemF {
 		int min;
 
 		public Data(int total, int min) {
-			super();
 			this.total = total;
 			this.min = min;
 		}
 
 		@Override
 		public int compareTo(Data o) {
-			return Integer.compare(o.min, this.min);
+			return Integer.compare(o.min, min);
 		}
 	}
 }

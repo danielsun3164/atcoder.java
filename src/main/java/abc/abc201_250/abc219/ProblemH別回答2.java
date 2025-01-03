@@ -66,7 +66,6 @@ public class ProblemH別回答2 {
 		long x, a;
 
 		Data(long x, long a) {
-			super();
 			this.x = x;
 			this.a = a;
 		}

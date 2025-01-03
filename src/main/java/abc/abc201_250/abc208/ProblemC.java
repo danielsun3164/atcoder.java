@@ -31,7 +31,6 @@ public class ProblemC {
 		int a, index;
 
 		Data(int a, int index) {
-			super();
 			this.a = a;
 			this.index = index;
 		}

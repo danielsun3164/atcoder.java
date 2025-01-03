@@ -85,7 +85,6 @@ public class ProblemK {
 		int size;
 
 		SData(long a, int size) {
-			super();
 			this.a = a;
 			this.size = size;
 		}
@@ -95,7 +94,6 @@ public class ProblemK {
 		long a, b;
 
 		FData(long a, long b) {
-			super();
 			this.a = a;
 			this.b = b;
 		}

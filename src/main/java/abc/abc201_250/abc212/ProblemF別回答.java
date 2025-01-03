@@ -124,7 +124,6 @@ public class ProblemF別回答 {
 		int from, to, s, t;
 
 		Bus(int from, int to, int s, int t) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.s = s;

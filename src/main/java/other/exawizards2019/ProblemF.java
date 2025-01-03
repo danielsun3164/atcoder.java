@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/exawizards2019/submissions/10245730 にも参考
  */
 public class ProblemF {
@@ -112,7 +112,6 @@ public class ProblemF {
 		int x, y, d;
 
 		Node(int x, int y, int d) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.d = d;

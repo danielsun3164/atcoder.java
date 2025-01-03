@@ -54,7 +54,6 @@ public class ProblemD {
 		int w, v;
 
 		Data(int w, int v) {
-			super();
 			this.w = w;
 			this.v = v;
 		}

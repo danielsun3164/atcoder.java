@@ -51,7 +51,6 @@ public class ProblemF {
 		long x, h;
 
 		Data(long x, long h) {
-			super();
 			this.x = x;
 			this.h = h;
 		}

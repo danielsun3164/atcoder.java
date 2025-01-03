@@ -72,7 +72,6 @@ public class Problem043 {
 		int x, y, direction;
 
 		Node(int x, int y, int direction) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.direction = direction;

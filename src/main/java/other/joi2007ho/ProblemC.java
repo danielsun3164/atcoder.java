@@ -55,7 +55,7 @@ public class ProblemC {
 
 	/**
 	 * point1とpoint2の間の距離の平方を取得する
-	 * 
+	 *
 	 * @param point1
 	 * @param point2
 	 * @return point1とpoint2の間の距離の平方
@@ -67,7 +67,7 @@ public class ProblemC {
 
 	/**
 	 * ベースとなる座標とベースとなる座標との間の距離と座標の一覧で正方形が存在するかどうかをチェックする
-	 * 
+	 *
 	 * @param point ベースとなる座標
 	 * @param entry ベースとなる座標との間の距離と座標の一覧
 	 * @param set   座標一覧のセット(contains用)
@@ -89,7 +89,7 @@ public class ProblemC {
 
 	/**
 	 * pointとpoint1とpoint2で正方形を組合せとき、残りの頂点の座標を計算する
-	 * 
+	 *
 	 * @param point
 	 * @param point1
 	 * @param point2
@@ -106,7 +106,6 @@ public class ProblemC {
 		int x, y;
 
 		Point(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

@@ -40,7 +40,6 @@ public class ProblemC {
 		int y;
 
 		Data(int index, int y) {
-			super();
 			this.index = index;
 			this.y = y;
 		}

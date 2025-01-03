@@ -66,7 +66,6 @@ public class ProblemL {
 		static SData ONE = new SData(0L, 1L, 0L);
 
 		SData(long zero, long one, long inversion) {
-			super();
 			this.zero = zero;
 			this.one = one;
 			this.inversion = inversion;

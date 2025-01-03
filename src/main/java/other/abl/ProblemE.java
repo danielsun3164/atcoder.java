@@ -78,7 +78,6 @@ public class ProblemE {
 		static final SData ONE = new SData(1, 1L);
 
 		SData(int length, long value) {
-			super();
 			this.length = length;
 			this.value = value;
 		}

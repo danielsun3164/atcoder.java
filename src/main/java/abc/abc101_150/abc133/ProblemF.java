@@ -85,7 +85,6 @@ public class ProblemF {
 		int cost;
 
 		Edge(int to, int color, int cost) {
-			super();
 			this.to = to;
 			this.color = color;
 			this.cost = cost;

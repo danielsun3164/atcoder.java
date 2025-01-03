@@ -135,7 +135,6 @@ public class Problem021 {
 			int to;
 
 			LEdge(int from, int to) {
-				super();
 				this.from = from;
 				this.to = to;
 			}
@@ -149,7 +148,6 @@ public class Problem021 {
 			int[] edges;
 
 			LGraph(int nodes, int[] edges) {
-				super();
 				this.nodes = nodes;
 				this.edges = edges;
 			}

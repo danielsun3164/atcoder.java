@@ -35,7 +35,6 @@ public class ProblemB {
 		double t;
 
 		Data(int index, double t) {
-			super();
 			this.index = index;
 			this.t = t;
 		}

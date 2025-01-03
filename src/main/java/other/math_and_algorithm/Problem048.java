@@ -62,7 +62,6 @@ public class Problem048 {
 		int to, cost;
 
 		Path(int to, int cost) {
-			super();
 			this.to = to;
 			this.cost = cost;
 		}

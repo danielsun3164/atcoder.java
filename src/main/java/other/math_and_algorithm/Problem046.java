@@ -49,7 +49,6 @@ public class Problem046 {
 		int y, x;
 
 		Block(int y, int x) {
-			super();
 			this.y = y;
 			this.x = x;
 		}

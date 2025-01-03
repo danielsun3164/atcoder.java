@@ -95,7 +95,6 @@ public class ProblemD別回答 {
 		double r, theta;
 
 		Data(double r, double theta) {
-			super();
 			this.r = r;
 			this.theta = theta;
 		}

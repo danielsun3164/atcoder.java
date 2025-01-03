@@ -51,7 +51,6 @@ public class ProblemF {
 		int from, to;
 
 		Edge(double distance, int from, int to) {
-			super();
 			this.distance = distance;
 			this.from = from;
 			this.to = to;

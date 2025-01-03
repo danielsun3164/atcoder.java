@@ -58,9 +58,8 @@ public class ProblemE {
 		int cost;
 
 		Edge(int to, int minCost) {
-			super();
 			this.to = to;
-			this.cost = minCost;
+			cost = minCost;
 		}
 	}
 }

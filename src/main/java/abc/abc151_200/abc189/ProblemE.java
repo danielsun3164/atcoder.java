@@ -89,7 +89,6 @@ public class ProblemE {
 		int b, index;
 
 		Question(int b, int index) {
-			super();
 			this.b = b;
 			this.index = index;
 		}

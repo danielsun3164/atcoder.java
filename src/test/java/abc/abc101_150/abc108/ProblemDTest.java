@@ -106,7 +106,6 @@ class ProblemDTest extends TestBase {
 		int cost;
 
 		Path(int from, int to, int cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;

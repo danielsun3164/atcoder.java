@@ -67,7 +67,6 @@ public class ProblemD {
 		List<Edge> edges = new ArrayList<>();
 
 		Node(int id, int x, int y) {
-			super();
 			this.id = id;
 			this.x = x;
 			this.y = y;
@@ -87,7 +86,6 @@ public class ProblemD {
 		final int cost;
 
 		Edge(Node from, Node to, int cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;

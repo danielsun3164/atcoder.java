@@ -62,7 +62,6 @@ public class Problem054 {
 		int i, c;
 
 		Node(int i, int c) {
-			super();
 			this.i = i;
 			this.c = c;
 		}

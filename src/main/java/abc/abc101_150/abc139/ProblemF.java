@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc139/submissions/17852121 にも参考
  */
 public class ProblemF {
@@ -34,14 +34,13 @@ public class ProblemF {
 		long x, y;
 
 		Vector(long x, long y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}
 
 		/**
 		 * 現在のベクトルにvを加算する
-		 * 
+		 *
 		 * @param v
 		 */
 		void add(Vector v) {
@@ -51,7 +50,7 @@ public class ProblemF {
 
 		/**
 		 * 現在のベクトルの大きさの2乗を返す
-		 * 
+		 *
 		 * @return 現在のベクトルの大きさの2乗
 		 */
 		long magnitude2() {
@@ -60,7 +59,7 @@ public class ProblemF {
 
 		/**
 		 * 第何象限にいるかを計算する
-		 * 
+		 *
 		 * @return 第何象限にいるか
 		 */
 		private int quadrant() {
@@ -77,7 +76,7 @@ public class ProblemF {
 
 		/**
 		 * aの符号を返す
-		 * 
+		 *
 		 * @param a
 		 * @return aの符号
 		 */
@@ -87,7 +86,7 @@ public class ProblemF {
 
 		/**
 		 * 現在のベクトルとvの内積を計算する
-		 * 
+		 *
 		 * @param v
 		 * @return 現在のベクトルとvの内積
 		 */
@@ -98,7 +97,7 @@ public class ProblemF {
 
 		/**
 		 * 現在のベクトルとvの外積を計算する
-		 * 
+		 *
 		 * @param v
 		 * @return 現在のベクトルとvの外積
 		 */
@@ -108,7 +107,7 @@ public class ProblemF {
 
 		/**
 		 * 偏角ソート用の比較メソッド
-		 * 
+		 *
 		 * @param v
 		 */
 		@Override

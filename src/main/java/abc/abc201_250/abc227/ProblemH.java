@@ -157,7 +157,6 @@ public class ProblemH {
 		int from, to;
 
 		Edge(int from, int to) {
-			super();
 			this.from = from;
 			this.to = to;
 		}
@@ -316,7 +315,6 @@ public class ProblemH {
 		 */
 		@SuppressWarnings("unchecked")
 		MaxFlowGraph(int n) {
-			super();
 			this.n = n;
 			g = new List[n];
 			IntStream.range(0, n).forEach(i -> g[i] = new ArrayList<>());
@@ -514,7 +512,6 @@ public class ProblemH {
 			long cap;
 
 			InternalEdge(int to, int rev, long cap) {
-				super();
 				this.to = to;
 				this.rev = rev;
 				this.cap = cap;

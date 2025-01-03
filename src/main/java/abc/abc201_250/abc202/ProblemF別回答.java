@@ -73,7 +73,6 @@ public class ProblemF別回答 {
 		int x, y;
 
 		Point(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

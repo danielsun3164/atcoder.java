@@ -80,7 +80,6 @@ public class Problem037 {
 		long v;
 
 		Data(int l, int r, long v) {
-			super();
 			this.l = l;
 			this.r = r;
 			this.v = v;

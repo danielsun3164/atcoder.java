@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc139/submissions/7309570 にも参考
  */
 public class ProblemE {
@@ -26,7 +26,7 @@ public class ProblemE {
 
 	/**
 	 * 試合実施の最大日数を計算する
-	 * 
+	 *
 	 * @param n チーム数
 	 * @param a 試合相手の順番の配列
 	 * @return 試合実施の最大日数
@@ -76,7 +76,6 @@ public class ProblemE {
 		int a, b, day;
 
 		Game(int a, int b, int day) {
-			super();
 			this.a = a;
 			this.b = b;
 			this.day = day;

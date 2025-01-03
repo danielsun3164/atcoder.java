@@ -34,7 +34,6 @@ public class ProblemC {
 		int count;
 
 		Data(int number, int count) {
-			super();
 			this.number = number;
 			this.count = count;
 		}

@@ -60,7 +60,6 @@ public class ProblemF {
 		int x, y;
 
 		Data(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

@@ -33,7 +33,6 @@ public class ProblemE {
 		long cost;
 
 		Edge(int from, int to, long cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;

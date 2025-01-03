@@ -71,7 +71,6 @@ public class ProblemE {
 		int cost;
 
 		Masu(int x, int y, int cost) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.cost = cost;

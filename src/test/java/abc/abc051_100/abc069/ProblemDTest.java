@@ -116,7 +116,6 @@ class ProblemDTest extends TestBase {
 		int x, y;
 
 		Data(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

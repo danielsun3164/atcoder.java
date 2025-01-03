@@ -53,7 +53,6 @@ public class ProblemH別回答 {
 		int a, b, c;
 
 		Data(int a, int b, int c) {
-			super();
 			this.a = a;
 			this.b = b;
 			this.c = c;
@@ -75,7 +74,6 @@ public class ProblemH別回答 {
 		 * @param n ノード数
 		 */
 		MinCostFlowGraph(int n) {
-			super();
 			this.n = n;
 			edges = new ArrayList<>();
 		}
@@ -346,7 +344,6 @@ public class ProblemH別回答 {
 			 * @param cost
 			 */
 			InternalEdge(int to, int rev, long cap, long cost) {
-				super();
 				this.to = to;
 				this.rev = rev;
 				this.cap = cap;
@@ -359,7 +356,6 @@ public class ProblemH別回答 {
 			int to;
 
 			Q(long key, int to) {
-				super();
 				this.key = key;
 				this.to = to;
 			}
@@ -413,7 +409,6 @@ public class ProblemH別回答 {
 			 * @param cost
 			 */
 			Edge(int from, int to, long cap, long flow, long cost) {
-				super();
 				this.from = from;
 				this.to = to;
 				this.cap = cap;
@@ -439,7 +434,6 @@ public class ProblemH別回答 {
 		 * @param cost
 		 */
 		Result(long cap, long cost) {
-			super();
 			this.cap = cap;
 			this.cost = cost;
 		}

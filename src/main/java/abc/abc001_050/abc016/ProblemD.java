@@ -35,14 +35,13 @@ public class ProblemD {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param startX
 		 * @param startY
 		 * @param endX
 		 * @param endY
 		 */
 		Line(int startX, int startY, int endX, int endY) {
-			super();
 			this.startX = startX;
 			this.startY = startY;
 			this.endX = endX;

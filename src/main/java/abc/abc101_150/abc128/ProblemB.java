@@ -25,7 +25,6 @@ public class ProblemB {
 		int p, index;
 
 		Data(String s, int p, int index) {
-			super();
 			this.s = s;
 			this.p = p;
 			this.index = index;

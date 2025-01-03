@@ -75,7 +75,6 @@ public class ProblemD {
 		int color;
 
 		Path(int node1, int node2) {
-			super();
 			this.node1 = node1;
 			this.node2 = node2;
 			color = 0;

@@ -43,7 +43,6 @@ public class ProblemE {
 		int index;
 
 		Data(long value, int index) {
-			super();
 			this.value = value;
 			this.index = index;
 		}

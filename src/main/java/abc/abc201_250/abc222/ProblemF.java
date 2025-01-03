@@ -105,7 +105,6 @@ public class ProblemF {
 		long cost;
 
 		Edge(int to, long cost) {
-			super();
 			this.to = to;
 			this.cost = cost;
 		}

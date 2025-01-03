@@ -21,7 +21,6 @@ public class ProblemB {
 		int t;
 
 		Data(String s, int t) {
-			super();
 			this.s = s;
 			this.t = t;
 		}

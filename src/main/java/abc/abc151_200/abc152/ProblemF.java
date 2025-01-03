@@ -72,7 +72,6 @@ public class ProblemF {
 		int from, to, index;
 
 		Edge(int from, int to, int index) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.index = index;

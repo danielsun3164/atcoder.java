@@ -44,12 +44,11 @@ public class ProblemC {
 
 		/**
 		 * コンストラクタ
-		 * 
+		 *
 		 * @param x
 		 * @param y
 		 */
 		Point(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

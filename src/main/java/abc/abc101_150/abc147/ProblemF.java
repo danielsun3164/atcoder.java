@@ -59,7 +59,6 @@ public class ProblemF {
 		long md, l, r;
 
 		Data(long md, long l, long r) {
-			super();
 			this.md = md;
 			this.l = l;
 			this.r = r;

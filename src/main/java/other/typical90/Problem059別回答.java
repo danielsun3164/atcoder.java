@@ -71,7 +71,6 @@ public class Problem059別回答 {
 		int x, y;
 
 		Path(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}
@@ -179,7 +178,6 @@ public class Problem059別回答 {
 			int to;
 
 			LEdge(int from, int to) {
-				super();
 				this.from = from;
 				this.to = to;
 			}
@@ -193,7 +191,6 @@ public class Problem059別回答 {
 			int[] edges;
 
 			LGraph(int nodes, int[] edges) {
-				super();
 				this.nodes = nodes;
 				this.edges = edges;
 			}

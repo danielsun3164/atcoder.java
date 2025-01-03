@@ -34,7 +34,6 @@ public class Problem049 {
 		int l, r;
 
 		Path(long c, int l, int r) {
-			super();
 			this.c = c;
 			this.l = l;
 			this.r = r;

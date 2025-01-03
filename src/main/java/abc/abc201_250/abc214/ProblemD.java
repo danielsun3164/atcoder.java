@@ -32,7 +32,6 @@ public class ProblemD {
 		int from, to, cost;
 
 		Edge(int from, int to, int cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;

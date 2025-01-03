@@ -71,7 +71,6 @@ public class ProblemEx {
 		 */
 		@SuppressWarnings("unchecked")
 		MaxFlowGraph(int n) {
-			super();
 			this.n = n;
 			g = new List[n];
 			IntStream.range(0, n).forEach(i -> g[i] = new ArrayList<>());
@@ -269,7 +268,6 @@ public class ProblemEx {
 			long cap;
 
 			InternalEdge(int to, int rev, long cap) {
-				super();
 				this.to = to;
 				this.rev = rev;
 				this.cap = cap;
@@ -291,7 +289,6 @@ public class ProblemEx {
 			long flow;
 
 			Edge(int from, int to, long cap, long flow) {
-				super();
 				this.from = from;
 				this.to = to;
 				this.cap = cap;
