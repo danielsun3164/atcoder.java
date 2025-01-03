@@ -111,19 +111,19 @@ public class ProblemI {
 				ls[i] = (s[i] == s[i + 1]) ? ls[i + 1] : (s[i] < s[i + 1]);
 			}
 			int[] sumL = new int[upper + 1], sumS = new int[upper + 1];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				if (!ls[i]) {
 					sumS[s[i]]++;
 				} else {
 					sumL[s[i] + 1]++;
 				}
-			});
-			IntStream.rangeClosed(0, upper).forEach(i -> {
+			}
+			for (int i = 0; i <= upper; i++) {
 				sumS[i] += sumL[i];
 				if (i < upper) {
 					sumL[i + 1] += sumS[i];
 				}
-			});
+			}
 			int[] lmsMap = new int[n + 1];
 			Arrays.fill(lmsMap, -1);
 			int m = 0;
@@ -166,9 +166,9 @@ public class ProblemI {
 				}
 				int[] recSa = saIs(recS, recUpper);
 
-				IntStream.range(0, m).forEach(i -> {
+				for (int i = 0; i < m; i++) {
 					sortedLms[i] = lms[recSa[i]];
-				});
+				}
 				induce(n, s, upper, sa, ls, sumL, sumS, sortedLms);
 			}
 			return sa;
@@ -186,12 +186,12 @@ public class ProblemI {
 			}
 			System.arraycopy(sumL, 0, buf, 0, upper + 1);
 			sa[buf[s[n - 1]]++] = n - 1;
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				int v = sa[i];
 				if ((v >= 1) && !ls[v - 1]) {
 					sa[buf[s[v - 1]]++] = v - 1;
 				}
-			});
+			}
 			System.arraycopy(sumL, 0, buf, 0, upper + 1);
 			for (int i = n - 1; i >= 0; i--) {
 				int v = sa[i];
@@ -250,8 +250,7 @@ public class ProblemI {
 		 * @return 文字列sのSuffix Array
 		 */
 		static int[] suffixArray(String s) {
-			int[] s2 = IntStream.range(0, s.length()).map(i -> s.charAt(i)).toArray();
-			return saIs(s2, 255);
+			return saIs(IntStream.range(0, s.length()).map(i -> s.charAt(i)).toArray(), 255);
 		}
 
 		/**
@@ -267,9 +266,9 @@ public class ProblemI {
 				throw new IllegalArgumentException("n is " + n);
 			}
 			int[] rnk = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				rnk[sa[i]] = i;
-			});
+			}
 			int[] lcp = new int[n - 1];
 			int h = 0;
 			for (int i = 0; i < n; i++) {
@@ -304,9 +303,9 @@ public class ProblemI {
 				throw new IllegalArgumentException("n is " + n);
 			}
 			int[] rnk = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				rnk[sa[i]] = i;
-			});
+			}
 			int[] lcp = new int[n - 1];
 			int h = 0;
 			for (int i = 0; i < n; i++) {
@@ -335,15 +334,39 @@ public class ProblemI {
 		 * @return 文字列sのLCP Array，i番目の要素は s[sa[i]..n), s[sa[i+1]..n) の LCP(Longest Common Prefix) の長さ。
 		 */
 		static int[] lcpArray(String s, int[] sa) {
-			int[] s2 = IntStream.range(0, s.length()).map(i -> s.charAt(i)).toArray();
-			return lcpArray(s2, sa);
+			return lcpArray(IntStream.range(0, s.length()).map(i -> s.charAt(i)).toArray(), sa);
 		}
 
 		/**
 		 * @param s 配列
 		 * @return 長さnの配列。 i番目の要素は s[0..n)とs[i..n)のLCP(Longest Common Prefix)の長さ。
 		 */
+		@SuppressWarnings("unused")
 		static int[] zAlgorithm(int[] s) {
+			int n = s.length;
+			if (0 == n) {
+				return new int[] {};
+			}
+			int[] z = new int[n];
+			z[0] = 0;
+			for (int i = 1, j = 0; i < n; i++) {
+				z[i] = (j + z[j] <= i) ? 0 : Math.min(j + z[j] - i, z[i - j]);
+				while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {
+					z[i]++;
+				}
+				if (j + z[j] < i + z[i]) {
+					j = i;
+				}
+			}
+			z[0] = n;
+			return z;
+		}
+
+		/**
+		 * @param s 配列
+		 * @return 長さnの配列。 i番目の要素は s[0..n)とs[i..n)のLCP(Longest Common Prefix)の長さ。
+		 */
+		static int[] zAlgorithm(char[] s) {
 			int n = s.length;
 			if (0 == n) {
 				return new int[] {};
@@ -369,8 +392,7 @@ public class ProblemI {
 		 */
 		@SuppressWarnings("unused")
 		static int[] zAlgorithm(String s) {
-			int[] s2 = IntStream.range(0, s.length()).map(i -> s.charAt(i)).toArray();
-			return zAlgorithm(s2);
+			return zAlgorithm(s.toCharArray());
 		}
 	}
 }
