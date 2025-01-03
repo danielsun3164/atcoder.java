@@ -66,14 +66,6 @@ public class ProblemH {
 
 		/**
 		 * コンストラクター
-		 */
-		@SuppressWarnings("unused")
-		SccGraph() {
-			this(0);
-		}
-
-		/**
-		 * コンストラクター
 		 *
 		 * @param n ノード数
 		 */
@@ -151,8 +143,12 @@ public class ProblemH {
 			LGraph ids = sccIds();
 			@SuppressWarnings("unchecked")
 			List<Integer>[] groups = new List[ids.nodes];
-			IntStream.range(0, groupNum).forEach(i -> groups[i] = new ArrayList<>());
-			IntStream.range(0, n).forEach(i -> groups[ids.edges[i]].add(0, i));
+			for (int i = 0; i < groupNum; i++) {
+				groups[i] = new ArrayList<>();
+			}
+			for (int i = 0; i < n; i++) {
+				groups[ids.edges[i]].add(0, i);
+			}
 			return groups;
 		}
 
@@ -191,10 +187,16 @@ public class ProblemH {
 				Arrays.fill(start, 0);
 				elist = new int[edges.size()];
 
-				edges.forEach(edge -> start[edge.from + 1]++);
-				IntStream.rangeClosed(1, n).forEach(i -> start[i] += start[i - 1]);
+				for (LEdge edge : edges) {
+					start[edge.from + 1]++;
+				}
+				for (int i = 1; i <= n; i++) {
+					start[i] += start[i - 1];
+				}
 				int[] counter = Arrays.copyOf(start, start.length);
-				edges.forEach(edge -> elist[counter[edge.from]++] = edge.to);
+				for (LEdge edge : edges) {
+					elist[counter[edge.from]++] = edge.to;
+				}
 			}
 		}
 	}
