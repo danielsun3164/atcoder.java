@@ -172,10 +172,10 @@ public class ProblemH {
 
 			Csr<InternalEdge> g = calcCsr(edgeIndex);
 			List<Result> result = slope(g, s, t, flowLimit);
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				InternalEdge e = g.elist[edgeIndex[i]];
 				edges.get(i).flow = edges.get(i).cap - e.cap;
-			});
+			}
 			return result;
 		}
 
@@ -238,7 +238,7 @@ public class ProblemH {
 			Arrays.fill(redgeIndex, 0);
 			int[] indexes = new int[2 * m];
 			InternalEdge[] inEdges = new InternalEdge[m * 2];
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				Edge e = edges.get(i);
 				edgeIndex[i] = degree[e.from]++;
 				redgeIndex[i] = degree[e.to]++;
@@ -246,15 +246,15 @@ public class ProblemH {
 				inEdges[i * 2] = new InternalEdge(e.to, -1, e.cap - e.flow, e.cost);
 				indexes[i * 2 + 1] = e.to;
 				inEdges[i * 2 + 1] = new InternalEdge(e.from, -1, e.flow, -e.cost);
-			});
+			}
 			Csr<InternalEdge> g = new Csr<>(n, indexes, inEdges, InternalEdge.class);
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				Edge e = edges.get(i);
 				edgeIndex[i] += g.start[e.from];
 				redgeIndex[i] += g.start[e.to];
 				g.elist[edgeIndex[i]].rev = redgeIndex[i];
 				g.elist[redgeIndex[i]].rev = edgeIndex[i];
-			});
+			}
 			return g;
 		}
 
@@ -275,7 +275,7 @@ public class ProblemH {
 				if (v == t) {
 					break;
 				}
-				IntStream.range(g.start[v], g.start[v + 1]).forEach(i -> {
+				for (int i = g.start[v]; i < g.start[v + 1]; i++) {
 					InternalEdge e = g.elist[i];
 					if (e.cap != 0L) {
 						long cost = e.cost - dual[e.to] + dual[v];
@@ -290,16 +290,16 @@ public class ProblemH {
 							}
 						}
 					}
-				});
+				}
 			}
 			if (!vis[t]) {
 				return false;
 			}
-			IntStream.range(0, n).forEach(v -> {
+			for (int v = 0; v < n; v++) {
 				if (vis[v]) {
 					dual[v] -= dist[t] - dist[v];
 				}
-			});
+			}
 			return true;
 		}
 
