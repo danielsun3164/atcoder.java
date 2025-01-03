@@ -79,7 +79,9 @@ public class ProblemF別回答 {
 		MaxFlowGraph(int n) {
 			this.n = n;
 			g = new List[n];
-			IntStream.range(0, n).forEach(i -> g[i] = new ArrayList<>());
+			for (int i = 0; i < n; i++) {
+				g[i] = new ArrayList<>();
+			}
 			pos = new ArrayList<>();
 		}
 
@@ -168,9 +170,7 @@ public class ProblemF別回答 {
 				throw new IllegalArgumentException("s is " + s + ", t is " + t);
 			}
 
-			int[] level = new int[n], iter = new int[n];
-			int[] que = new int[n];
-
+			int[] level = new int[n], iter = new int[n], que = new int[n];
 			long flow = 0;
 			while (flow < flowLimit) {
 				bfs(s, t, level, que);
