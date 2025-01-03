@@ -11,4 +11,9 @@
     <Method name="main" />
     <Bug pattern="FE_FLOATING_POINT_EQUALITY" />
   </Match>
+  <Match>
+    <Class name="other.math_and_algorithm.Problem071" />
+    <Method name="lambda$2" />
+    <Bug pattern="FE_FLOATING_POINT_EQUALITY" />
+  </Match>
 </FindBugsFilter>
