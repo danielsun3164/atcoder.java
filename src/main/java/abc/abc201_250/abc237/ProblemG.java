@@ -2,7 +2,10 @@ package abc.abc201_250.abc237;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 /**
@@ -25,7 +28,14 @@ public class ProblemG {
 				a[i] = (p < x) ? S_ZERO : S_ONE;
 				b[i] = (p <= x) ? S_ZERO : S_ONE;
 			});
-			MyLazySegTree segA = new MyLazySegTree(a), segB = new MyLazySegTree(b);
+			BinaryOperator<MyS> op = (s1, s2) -> new MyS(s1.size + s2.size, s1.value + s2.value);
+			Supplier<MyS> e = () -> new MyS(0, 0);
+			BiFunction<Integer, MyS, MyS> mapping = (f, s) -> (f >= 0) ? new MyS(s.size, f * s.size)
+					: new MyS(s.size, s.value);
+			BinaryOperator<Integer> composition = (l, r) -> (l >= 0) ? l : r;
+			Supplier<Integer> id = () -> -1;
+			LazySegTree<MyS, Integer> segA = new LazySegTree<>(a, op, e, mapping, composition, id),
+					segB = new LazySegTree<>(b, op, e, mapping, composition, id);
 			while (q-- > 0) {
 				int c = scanner.nextInt(), l = scanner.nextInt() - 1, r = scanner.nextInt();
 				int s = segA.prod(l, r).value, t = segB.prod(l, r).value;
@@ -60,72 +70,44 @@ public class ProblemG {
 	}
 
 	/**
-	 * MySとIntegerを利用したLazySegTreeの実装
-	 */
-	private static class MyLazySegTree extends LazySegTree<MyS, Integer> {
-		MyLazySegTree(MyS[] s) {
-			super(s);
-		}
-
-		@Override
-		MyS op(MyS a, MyS b) {
-			return new MyS(a.size + b.size, a.value + b.value);
-		}
-
-		@Override
-		MyS e() {
-			return new MyS(0, 0);
-		}
-
-		@Override
-		MyS mapping(Integer f, MyS s) {
-			return (f >= 0) ? new MyS(s.size, f * s.size) : new MyS(s.size, s.value);
-		}
-
-		@Override
-		Integer composition(Integer l, Integer r) {
-			return (l >= 0) ? l : r;
-		}
-
-		@Override
-		Integer id() {
-			return -1;
-		}
-	}
-
-	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/lazysegtree.hpp を参考に作成
 	 */
-	private abstract static class LazySegTree<S, F> {
+	private static class LazySegTree<S, F> {
 
 		final int n, size, log;
 		final S[] d;
 		final F[] lz;
-
-		abstract S op(S a, S b);
-
-		abstract S e();
-
-		abstract S mapping(F f, S s);
-
-		abstract F composition(F a, F b);
-
-		abstract F id();
+		final BinaryOperator<S> op;
+		final Supplier<S> e;
+		final BiFunction<F, S, S> mapping;
+		final BinaryOperator<F> composition;
+		final Supplier<F> id;
 
 		/**
 		 * コンストラクター
 		 *
 		 * @param n
+		 * @param op
+		 * @param e
+		 * @param mapping
+		 * @param composition
+		 * @param id
 		 */
 		@SuppressWarnings({ "unchecked", "unused" })
-		public LazySegTree(int n) {
+		public LazySegTree(int n, BinaryOperator<S> op, Supplier<S> e, BiFunction<F, S, S> mapping,
+				BinaryOperator<F> composition, Supplier<F> id) {
 			this.n = n;
+			this.op = op;
+			this.e = e;
+			this.mapping = mapping;
+			this.composition = composition;
+			this.id = id;
 			size = bitCeil(n);
 			log = countrZero(size);
 			d = (S[]) new Object[size << 1];
-			Arrays.fill(d, e());
+			Arrays.fill(d, e.get());
 			lz = (F[]) new Object[size];
-			Arrays.fill(lz, id());
+			Arrays.fill(lz, id.get());
 			for (int i = size - 1; i >= 1; i--) {
 				update(i);
 			}
@@ -135,16 +117,27 @@ public class ProblemG {
 		 * コンストラクター
 		 *
 		 * @param v
+		 * @param op
+		 * @param e
+		 * @param mapping
+		 * @param composition
+		 * @param id
 		 */
 		@SuppressWarnings("unchecked")
-		public LazySegTree(S[] v) {
+		public LazySegTree(S[] v, BinaryOperator<S> op, Supplier<S> e, BiFunction<F, S, S> mapping,
+				BinaryOperator<F> composition, Supplier<F> id) {
 			n = v.length;
+			this.op = op;
+			this.e = e;
+			this.mapping = mapping;
+			this.composition = composition;
+			this.id = id;
 			size = bitCeil(n);
 			log = countrZero(size);
 			d = (S[]) new Object[size << 1];
-			Arrays.fill(d, e());
+			Arrays.fill(d, e.get());
 			lz = (F[]) new Object[size];
-			Arrays.fill(lz, id());
+			Arrays.fill(lz, id.get());
 			System.arraycopy(v, 0, d, size, n);
 			for (int i = size - 1; i >= 1; i--) {
 				update(i);
@@ -195,7 +188,7 @@ public class ProblemG {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
 			if (l == r) {
-				return e();
+				return e.get();
 			}
 
 			l += size;
@@ -209,18 +202,18 @@ public class ProblemG {
 				}
 			}
 
-			S sml = e(), smr = e();
+			S sml = e.get(), smr = e.get();
 			while (l < r) {
 				if ((l & 1) > 0) {
-					sml = op(sml, d[l++]);
+					sml = op.apply(sml, d[l++]);
 				}
 				if ((r & 1) > 0) {
-					smr = op(d[--r], smr);
+					smr = op.apply(d[--r], smr);
 				}
 				l >>= 1;
 				r >>= 1;
 			}
-			return op(sml, smr);
+			return op.apply(sml, smr);
 		}
 
 		/**
@@ -246,7 +239,7 @@ public class ProblemG {
 			}
 			p += size;
 			pushTo(p);
-			d[p] = mapping(f, d[p]);
+			d[p] = mapping.apply(f, d[p]);
 			updateFrom(p);
 		}
 
@@ -315,31 +308,31 @@ public class ProblemG {
 			if (!(0 <= l && l <= n)) {
 				throw new IllegalArgumentException("l is " + l);
 			}
-			if (!g.test(e())) {
-				throw new IllegalArgumentException("g.test(e()) is " + g.test(e()));
+			if (!g.test(e.get())) {
+				throw new IllegalArgumentException("g.test(e()) is " + g.test(e.get()));
 			}
 			if (l == n) {
 				return n;
 			}
 			l += size;
 			pushTo(l);
-			S sm = e();
+			S sm = e.get();
 			do {
 				while (0 == (l & 1)) {
 					l >>= 1;
 				}
-				if (!g.test(op(sm, d[l]))) {
+				if (!g.test(op.apply(sm, d[l]))) {
 					while (l < size) {
 						push(l);
 						l = (2 * l);
-						if (g.test(op(sm, d[l]))) {
-							sm = op(sm, d[l]);
+						if (g.test(op.apply(sm, d[l]))) {
+							sm = op.apply(sm, d[l]);
 							l++;
 						}
 					}
 					return l - size;
 				}
-				sm = op(sm, d[l]);
+				sm = op.apply(sm, d[l]);
 				l++;
 			} while ((l & -l) != l);
 			return n;
@@ -360,8 +353,8 @@ public class ProblemG {
 			if (!(0 <= r && r <= n)) {
 				throw new IllegalArgumentException("r is " + r);
 			}
-			if (!g.test(e())) {
-				throw new IllegalArgumentException("g.test(e()) is " + g.test(e()));
+			if (!g.test(e.get())) {
+				throw new IllegalArgumentException("g.test(e()) is " + g.test(e.get()));
 			}
 			if (0 == r) {
 				return 0;
@@ -370,43 +363,43 @@ public class ProblemG {
 			for (int i = log; i >= 1; i--) {
 				push((r - 1) >> i);
 			}
-			S sm = e();
+			S sm = e.get();
 			do {
 				r--;
 				while (r > 1 && (r & 1) > 0) {
 					r >>= 1;
 				}
-				if (!g.test(op(d[r], sm))) {
+				if (!g.test(op.apply(d[r], sm))) {
 					while (r < size) {
 						push(r);
 						r = (2 * r + 1);
-						if (g.test(op(d[r], sm))) {
-							sm = op(d[r], sm);
+						if (g.test(op.apply(d[r], sm))) {
+							sm = op.apply(d[r], sm);
 							r--;
 						}
 					}
 					return r + 1 - size;
 				}
-				sm = op(d[r], sm);
+				sm = op.apply(d[r], sm);
 			} while ((r & -r) != r);
 			return 0;
 		}
 
 		private void update(int k) {
-			d[k] = op(d[k << 1], d[k << 1 | 1]);
+			d[k] = op.apply(d[k << 1], d[k << 1 | 1]);
 		}
 
 		private void allApply(int k, F f) {
-			d[k] = mapping(f, d[k]);
+			d[k] = mapping.apply(f, d[k]);
 			if (k < size) {
-				lz[k] = composition(f, lz[k]);
+				lz[k] = composition.apply(f, lz[k]);
 			}
 		}
 
 		private void push(int k) {
 			allApply(k << 1, lz[k]);
 			allApply(k << 1 | 1, lz[k]);
-			lz[k] = id();
+			lz[k] = id.get();
 		}
 
 		private void pushTo(int p) {
