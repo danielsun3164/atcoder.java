@@ -24,7 +24,7 @@ public class ProblemF {
 			Data[] datas = IntStream.range(0, n).mapToObj(i -> new Data(-a[i], b[i]))
 					.sorted((x, y) -> (x.a == y.a) ? Integer.compare(x.b, y.b) : Integer.compare(x.a, y.a))
 					.toArray(Data[]::new);
-			SegTree<Long> seg = new SegTree<>(n, () -> 0L, (x, y) -> x + y);
+			SegTree<Long> seg = new SegTree<>(n, (x, y) -> x + y, () -> 0L);
 			long answer = 0L;
 			for (int i = 0; i < n; i++) {
 				int count = 1;
@@ -73,8 +73,8 @@ public class ProblemF {
 	private static class SegTree<S> {
 		final int n, size;
 		final S[] d;
-		final Supplier<S> e;
 		final BinaryOperator<S> op;
+		final Supplier<S> e;
 
 		/**
 		 * コンストラクター
@@ -82,10 +82,10 @@ public class ProblemF {
 		 * @param n
 		 */
 		@SuppressWarnings({ "unchecked" })
-		SegTree(int n, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(int n, BinaryOperator<S> op, Supplier<S> e) {
 			this.n = n;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());
@@ -100,10 +100,10 @@ public class ProblemF {
 		 * @param v
 		 */
 		@SuppressWarnings({ "unchecked", "unused" })
-		SegTree(S[] v, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(S[] v, BinaryOperator<S> op, Supplier<S> e) {
 			n = v.length;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());

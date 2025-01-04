@@ -2,9 +2,9 @@ package abc.abc151_200.abc158;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.function.BinaryOperator;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntPredicate;
+import java.util.function.IntSupplier;
 import java.util.stream.IntStream;
 
 /**
@@ -23,8 +23,8 @@ public class ProblemF {
 			Long[] xs = Arrays.stream(robots).mapToLong(robot -> robot.x).boxed().toArray(Long[]::new);
 			int[] r = new int[n];
 			r[n - 1] = n - 1;
-			Integer[] array = IntStream.range(0, n).boxed().toArray(Integer[]::new);
-			SegTree<Integer> seg = new SegTree<>(array, () -> 0, (a, b) -> Math.max(a, b));
+			int[] array = IntStream.range(0, n).toArray();
+			IntSegTree seg = new IntSegTree(array, (a, b) -> Math.max(a, b), () -> 0);
 			for (int i = n - 2; i >= 0; i--) {
 				// lower_bound
 				int j = ~Arrays.binarySearch(xs, robots[i].x + robots[i].d, (a, b) -> (a >= b) ? 1 : -1);
@@ -53,25 +53,25 @@ public class ProblemF {
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/segtree.hpp を参考に作成
 	 */
-	private static class SegTree<S> {
+	private static class IntSegTree {
 		final int n, size;
-		final S[] d;
-		final Supplier<S> e;
-		final BinaryOperator<S> op;
+		final int[] d;
+		final IntBinaryOperator op;
+		final IntSupplier e;
 
 		/**
 		 * コンストラクター
 		 *
 		 * @param n
 		 */
-		@SuppressWarnings({ "unchecked", "unused" })
-		SegTree(int n, Supplier<S> e, BinaryOperator<S> op) {
+		@SuppressWarnings("unused")
+		IntSegTree(int n, IntBinaryOperator op, IntSupplier e) {
 			this.n = n;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
-			d = (S[]) new Object[size << 1];
-			Arrays.fill(d, e.get());
+			d = new int[size << 1];
+			Arrays.fill(d, e.getAsInt());
 			for (int i = size - 1; i >= 1; i--) {
 				update(i);
 			}
@@ -82,14 +82,13 @@ public class ProblemF {
 		 *
 		 * @param v
 		 */
-		@SuppressWarnings("unchecked")
-		SegTree(S[] v, Supplier<S> e, BinaryOperator<S> op) {
+		IntSegTree(int[] v, IntBinaryOperator op, IntSupplier e) {
 			n = v.length;
 			this.e = e;
 			this.op = op;
 			size = bitCeil(n);
-			d = (S[]) new Object[size << 1];
-			Arrays.fill(d, e.get());
+			d = new int[size << 1];
+			Arrays.fill(d, e.getAsInt());
 			// https://atcoder.jp/contests/practice2/submissions/17594068 に参考
 			// そのまま代入の場合、REが発生する
 			System.arraycopy(v, 0, d, size, n);
@@ -104,7 +103,7 @@ public class ProblemF {
 		 * @param p
 		 * @param x
 		 */
-		void set(int p, S x) {
+		void set(int p, int x) {
 			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
@@ -123,7 +122,7 @@ public class ProblemF {
 		 * @return a[p]
 		 */
 		@SuppressWarnings("unused")
-		S get(int p) {
+		int get(int p) {
 			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
@@ -137,25 +136,25 @@ public class ProblemF {
 		 * @param r
 		 * @return op(a[l], ..., a[r - 1])、 l==r のときは e()。
 		 */
-		S prod(int l, int r) {
+		int prod(int l, int r) {
 			if (!(0 <= l && l <= r && r <= n)) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
-			S sml = e.get(), smr = e.get();
+			int sml = e.getAsInt(), smr = e.getAsInt();
 			l += size;
 			r += size;
 
 			while (l < r) {
 				if (0 != (l & 1)) {
-					sml = op.apply(sml, d[l++]);
+					sml = op.applyAsInt(sml, d[l++]);
 				}
 				if (0 != (r & 1)) {
-					smr = op.apply(d[--r], smr);
+					smr = op.applyAsInt(d[--r], smr);
 				}
 				l >>= 1;
 				r >>= 1;
 			}
-			return op.apply(sml, smr);
+			return op.applyAsInt(sml, smr);
 		}
 
 		/**
@@ -164,7 +163,7 @@ public class ProblemF {
 		 * @return op(a[0], ..., a[n - 1])、n==0 のときは e()。
 		 */
 		@SuppressWarnings("unused")
-		S allProd() {
+		int allProd() {
 			return d[1];
 		}
 
@@ -179,26 +178,26 @@ public class ProblemF {
 		 * @return 条件を両方満たす r を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
-		int maxRight(int l, Predicate<S> f) {
+		int maxRight(int l, IntPredicate f) {
 			if (!(0 <= l && l <= n)) {
 				throw new IllegalArgumentException("l is " + l);
 			}
-			if (!f.test(e.get())) {
-				throw new IllegalArgumentException("f.test(e()) is " + f.test(e.get()));
+			if (!f.test(e.getAsInt())) {
+				throw new IllegalArgumentException("f.test(e()) is " + f.test(e.getAsInt()));
 			}
 			if (l == n) {
 				return n;
 			}
 			l += size;
-			S sm = e.get();
+			int sm = e.getAsInt();
 			do {
 				while (0 == (l & 1)) {
 					l >>= 1;
 				}
-				if (!f.test(op.apply(sm, d[l]))) {
+				if (!f.test(op.applyAsInt(sm, d[l]))) {
 					while (l < size) {
 						l <<= 1;
-						S tmp = op.apply(sm, d[l]);
+						int tmp = op.applyAsInt(sm, d[l]);
 						if (f.test(tmp)) {
 							sm = tmp;
 							l++;
@@ -206,7 +205,7 @@ public class ProblemF {
 					}
 					return l - size;
 				}
-				sm = op.apply(sm, d[l]);
+				sm = op.applyAsInt(sm, d[l]);
 				l++;
 			} while ((l & -l) != l);
 			return n;
@@ -223,27 +222,27 @@ public class ProblemF {
 		 * @return 条件を両方満たす l を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
-		int minLeft(int r, Predicate<S> f) {
+		int minLeft(int r, IntPredicate f) {
 			if (!(0 <= r && r <= n)) {
 				throw new IllegalArgumentException("r is " + r);
 			}
-			if (!f.test(e.get())) {
-				throw new IllegalArgumentException("f.test(e()) is " + f.test(e.get()));
+			if (!f.test(e.getAsInt())) {
+				throw new IllegalArgumentException("f.test(e()) is " + f.test(e.getAsInt()));
 			}
 			if (0 == r) {
 				return 0;
 			}
 			r += size;
-			S sm = e.get();
+			int sm = e.getAsInt();
 			do {
 				r--;
 				while (r > 1 && 0 != (r & 1)) {
 					r >>= 1;
 				}
-				if (!f.test(op.apply(d[r], sm))) {
+				if (!f.test(op.applyAsInt(d[r], sm))) {
 					while (r < size) {
 						r = (2 * r + 1);
-						S tmp = op.apply(d[r], sm);
+						int tmp = op.applyAsInt(d[r], sm);
 						if (f.test(tmp)) {
 							sm = tmp;
 							r--;
@@ -251,13 +250,13 @@ public class ProblemF {
 					}
 					return r + 1 - size;
 				}
-				sm = op.apply(d[r], sm);
+				sm = op.applyAsInt(d[r], sm);
 			} while ((r & -r) != r);
 			return 0;
 		}
 
 		private void update(int k) {
-			d[k] = op.apply(d[k << 1], d[(k << 1) | 1]);
+			d[k] = op.applyAsInt(d[k << 1], d[(k << 1) | 1]);
 		}
 
 		/**

@@ -19,7 +19,7 @@ public class Problem006 {
 			char[] s = scanner.next().toCharArray();
 			// 各文字がsでの出現場所を保存するマップ
 			Map<Character, NavigableSet<Integer>> map = new HashMap<>();
-			SegTree<Character> st = new SegTree<>(n, () -> '{', (a, b) -> (a.compareTo(b) < 0) ? a : b);
+			SegTree<Character> st = new SegTree<>(n, (a, b) -> (a.compareTo(b) < 0) ? a : b, () -> '{');
 			IntStream.range(0, n).forEach(i -> {
 				add(map, s[i], i);
 				st.set(i, s[i]);
@@ -60,8 +60,8 @@ public class Problem006 {
 	private static class SegTree<S> {
 		final int n, size;
 		final S[] d;
-		final Supplier<S> e;
 		final BinaryOperator<S> op;
+		final Supplier<S> e;
 
 		/**
 		 * コンストラクター
@@ -69,10 +69,10 @@ public class Problem006 {
 		 * @param n
 		 */
 		@SuppressWarnings({ "unchecked" })
-		SegTree(int n, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(int n, BinaryOperator<S> op, Supplier<S> e) {
 			this.n = n;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());
@@ -87,10 +87,10 @@ public class Problem006 {
 		 * @param v
 		 */
 		@SuppressWarnings({ "unchecked", "unused" })
-		SegTree(S[] v, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(S[] v, BinaryOperator<S> op, Supplier<S> e) {
 			n = v.length;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());

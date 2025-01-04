@@ -47,7 +47,7 @@ public class ProblemE別回答3 {
 				index = 0;
 				euler(0, -1);
 			}
-			SegTree<Data> st = new SegTree<>(n + 1, () -> new Data(-1, -1), (a, b) -> max(a, b));
+			SegTree<Data> st = new SegTree<>(n + 1, (a, b) -> max(a, b), () -> new Data(-1, -1));
 			IntStream.range(0, n).forEach(i -> st.set(l[i], new Data(x[i], l[i])));
 			// TLE対応のため、出力はStringBuilderを使用
 			StringBuilder sb = new StringBuilder();
@@ -105,8 +105,8 @@ public class ProblemE別回答3 {
 	private static class SegTree<S> {
 		final int n, size;
 		final S[] d;
-		final Supplier<S> e;
 		final BinaryOperator<S> op;
+		final Supplier<S> e;
 
 		/**
 		 * コンストラクター
@@ -114,10 +114,10 @@ public class ProblemE別回答3 {
 		 * @param n
 		 */
 		@SuppressWarnings({ "unchecked" })
-		SegTree(int n, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(int n, BinaryOperator<S> op, Supplier<S> e) {
 			this.n = n;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());
@@ -132,10 +132,10 @@ public class ProblemE別回答3 {
 		 * @param v
 		 */
 		@SuppressWarnings({ "unchecked", "unused" })
-		SegTree(S[] v, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(S[] v, BinaryOperator<S> op, Supplier<S> e) {
 			n = v.length;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());

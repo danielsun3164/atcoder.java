@@ -30,7 +30,7 @@ public class ProblemF {
 			});
 			long[] dp = new long[n + 1];
 			Arrays.fill(dp, INF);
-			SegTree<Long> seg = new SegTree<>(n + 1, () -> INF, (a, b) -> Math.min(a, b));
+			SegTree<Long> seg = new SegTree<>(n + 1, (a, b) -> Math.min(a, b), () -> INF);
 			System.out.println(IntStream.rangeClosed(1, n).mapToLong(i -> {
 				dp[i] = Math.min(sumB[i - 1], seg.prod(0, pos[i]) + sumA[i - 1]);
 				long result = (dp[i] + sumC[n]) - sumC[i];
@@ -46,8 +46,8 @@ public class ProblemF {
 	private static class SegTree<S> {
 		final int n, size;
 		final S[] d;
-		final Supplier<S> e;
 		final BinaryOperator<S> op;
+		final Supplier<S> e;
 
 		/**
 		 * コンストラクター
@@ -55,10 +55,10 @@ public class ProblemF {
 		 * @param n
 		 */
 		@SuppressWarnings({ "unchecked" })
-		SegTree(int n, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(int n, BinaryOperator<S> op, Supplier<S> e) {
 			this.n = n;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());
@@ -73,10 +73,10 @@ public class ProblemF {
 		 * @param v
 		 */
 		@SuppressWarnings({ "unchecked", "unused" })
-		SegTree(S[] v, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(S[] v, BinaryOperator<S> op, Supplier<S> e) {
 			n = v.length;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());

@@ -23,8 +23,8 @@ public class ProblemF {
 			char[] s = scanner.next().toCharArray();
 			Data[] datas = IntStream.range(0, n).mapToObj(i -> (START == s[i]) ? new Data(0, 1) : new Data(-1, -1))
 					.toArray(Data[]::new);
-			SegTree<Data> segTree = new SegTree<>(datas, () -> new Data(0, 0),
-					(a, b) -> new Data(Math.min(a.x, a.y + b.x), a.y + b.y));
+			SegTree<Data> segTree = new SegTree<>(datas, (a, b) -> new Data(Math.min(a.x, a.y + b.x), a.y + b.y),
+					() -> new Data(0, 0));
 			// TLE対応のため、出力はStringBuilderを使用
 			StringBuilder sb = new StringBuilder();
 			while (q-- > 0) {
@@ -61,8 +61,8 @@ public class ProblemF {
 	private static class SegTree<S> {
 		final int n, size;
 		final S[] d;
-		final Supplier<S> e;
 		final BinaryOperator<S> op;
+		final Supplier<S> e;
 
 		/**
 		 * コンストラクター
@@ -70,10 +70,10 @@ public class ProblemF {
 		 * @param n
 		 */
 		@SuppressWarnings({ "unchecked", "unused" })
-		SegTree(int n, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(int n, BinaryOperator<S> op, Supplier<S> e) {
 			this.n = n;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());
@@ -88,10 +88,10 @@ public class ProblemF {
 		 * @param v
 		 */
 		@SuppressWarnings("unchecked")
-		SegTree(S[] v, Supplier<S> e, BinaryOperator<S> op) {
+		SegTree(S[] v, BinaryOperator<S> op, Supplier<S> e) {
 			n = v.length;
-			this.e = e;
 			this.op = op;
+			this.e = e;
 			size = bitCeil(n);
 			d = (S[]) new Object[size << 1];
 			Arrays.fill(d, e.get());
