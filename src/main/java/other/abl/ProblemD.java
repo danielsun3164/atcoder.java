@@ -42,6 +42,8 @@ public class ProblemD {
 		 * コンストラクター
 		 *
 		 * @param n
+		 * @param op
+		 * @param e
 		 */
 		IntSegTree(int n, IntBinaryOperator op, IntSupplier e) {
 			this.n = n;
@@ -59,6 +61,8 @@ public class ProblemD {
 		 * コンストラクター
 		 *
 		 * @param v
+		 * @param op
+		 * @param e
 		 */
 		@SuppressWarnings("unused")
 		IntSegTree(int[] v, IntBinaryOperator op, IntSupplier e) {

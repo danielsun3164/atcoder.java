@@ -67,6 +67,8 @@ public class Problem006 {
 		 * コンストラクター
 		 *
 		 * @param n
+		 * @param op
+		 * @param e
 		 */
 		@SuppressWarnings({ "unchecked" })
 		SegTree(int n, BinaryOperator<S> op, Supplier<S> e) {
@@ -85,6 +87,8 @@ public class Problem006 {
 		 * コンストラクター
 		 *
 		 * @param v
+		 * @param op
+		 * @param e
 		 */
 		@SuppressWarnings({ "unchecked", "unused" })
 		SegTree(S[] v, BinaryOperator<S> op, Supplier<S> e) {

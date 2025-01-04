@@ -56,6 +56,8 @@ public class ProblemE別回答 {
 		 * コンストラクター
 		 *
 		 * @param n
+		 * @param op
+		 * @param e
 		 */
 		@SuppressWarnings("unused")
 		IntSegTree(int n, IntBinaryOperator op, IntSupplier e) {
@@ -74,6 +76,8 @@ public class ProblemE別回答 {
 		 * コンストラクター
 		 *
 		 * @param v
+		 * @param op
+		 * @param e
 		 */
 		IntSegTree(int[] v, IntBinaryOperator op, IntSupplier e) {
 			n = v.length;
