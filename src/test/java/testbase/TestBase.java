@@ -333,8 +333,7 @@ public abstract class TestBase {
 	 * @param expected 予想される実行結果
 	 */
 	protected void check(InputStream inputIs, String expected) {
-		try (ByteArrayOutputStream inputBaos = new ByteArrayOutputStream();
-				ByteArrayOutputStream expectedBaos = new ByteArrayOutputStream()) {
+		try (ByteArrayOutputStream inputBaos = new ByteArrayOutputStream()) {
 			byte[] buffer = new byte[8192];
 			int length = 0;
 			while (-1 != (length = inputIs.read(buffer))) {
