@@ -6,7 +6,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -35,7 +38,14 @@ class ProblemETest extends TestBase {
 
 	void check(int n, int[] a, int[] b, int[] diff, int expectedMax) {
 		in.input(n);
-		IntStream.range(0, n - 1).forEach(i -> in.input(a[i] + " " + b[i]));
+		@SuppressWarnings("unchecked")
+		List<Integer>[] edges = new List[n];
+		IntStream.range(0, n).forEach(i -> edges[i] = new ArrayList<>());
+		IntStream.range(0, n - 1).forEach(i -> {
+			in.input(a[i] + " " + b[i]);
+			edges[a[i] - 1].add(b[i] - 1);
+			edges[b[i] - 1].add(a[i] - 1);
+		});
 		execute();
 		String[] lines = out.toString().split("\\R");
 		assertEquals(n, lines.length);
@@ -51,8 +61,34 @@ class ProblemETest extends TestBase {
 				return Math.max(l[i], r[i]);
 			}).max().getAsInt();
 			assertEquals(expectedMax, actualMax);
+			// S_i ⊆ S_j ならば、[L_i, R_i]⊆[L_j,R_j]のチェックを追加
+			boolean[] checked = new boolean[n];
+			Arrays.fill(checked, false);
+			IntStream.range(0, n).filter(i -> !checked[i]).forEach(i -> dfs(edges, checked, l, r, i, -1));
 		} catch (IOException e) {
 			fail(e);
+		}
+	}
+
+	/**
+	 * S_i ⊆ S_j ならば、[L_i, R_i]⊆[L_j,R_j]を再帰的にチェック
+	 *
+	 * @param edges   辺の一覧
+	 * @param checked 各ノードがチェックしたかどうかの配列
+	 * @param l
+	 * @param r
+	 * @param now     子ノード
+	 * @param prev    親ノード
+	 */
+	private void dfs(List<Integer>[] edges, boolean[] checked, int[] l, int[] r, int now, int prev) {
+		if (-1 != prev) {
+			assertTrue((l[prev] <= l[now]) && (r[now] <= r[prev]));
+		}
+		checked[now] = true;
+		for (int next : edges[now]) {
+			if (!checked[next]) {
+				dfs(edges, checked, l, r, next, now);
+			}
 		}
 	}
 
