@@ -98,6 +98,9 @@ abc.abc201_250.abc238.ProblemG別回答2Test=3000
 abc.abc201_250.abc238.ProblemG別回答3Test=3000
 abc.abc201_250.abc238.ProblemG別回答4Test=3000
 abc.abc201_250.abc238.ProblemExTest=3000
+abc.abc201_250.abc240.ProblemGTest=3000
+abc.abc201_250.abc240.ProblemExTest=5000
+abc.abc201_250.abc240.ProblemEx別回答Test=5000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
