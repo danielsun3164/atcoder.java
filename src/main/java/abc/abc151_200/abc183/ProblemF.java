@@ -48,7 +48,7 @@ public class ProblemF {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param n 項目数
 		 * @param c 各生徒の所属するクラスの配列
 		 */
@@ -65,7 +65,7 @@ public class ProblemF {
 
 		/**
 		 * aとbを同じグループにマージする
-		 * 
+		 *
 		 * @param a
 		 * @param b
 		 * @return マージ後のグループリーダー
@@ -94,7 +94,7 @@ public class ProblemF {
 
 		/**
 		 * aとbが同じグループに所属しているかを判定する
-		 * 
+		 *
 		 * @param a
 		 * @param b
 		 * @return aとbが同じグループに所属しているか
@@ -112,7 +112,7 @@ public class ProblemF {
 
 		/**
 		 * aのグループリーダーを取得する
-		 * 
+		 *
 		 * @param a
 		 * @return aのグループリーダー
 		 */
@@ -128,7 +128,7 @@ public class ProblemF {
 
 		/**
 		 * aの所属グループのメンバー数を取得する
-		 * 
+		 *
 		 * @param a
 		 * @return aの所属グループのメンバー数
 		 */
@@ -146,19 +146,19 @@ public class ProblemF {
 		@SuppressWarnings("unused")
 		List<List<Integer>> groups() {
 			int[] leaderBuf = new int[n], size = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				leaderBuf[i] = leader(i);
 				size[leaderBuf[i]]++;
-			});
+			}
 			Map<Integer, List<Integer>> map = new HashMap<>();
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				List<Integer> list = map.get(leaderBuf[i]);
 				if (null == list) {
 					list = new ArrayList<>();
 					map.put(leaderBuf[i], list);
 				}
 				list.add(i);
-			});
+			}
 			return map.values().stream().collect(Collectors.toList());
 		}
 	}

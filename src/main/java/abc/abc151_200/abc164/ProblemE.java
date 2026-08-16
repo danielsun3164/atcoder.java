@@ -84,7 +84,6 @@ public class ProblemE {
 		 * @param time 移動時間
 		 */
 		Path(int from, int to, int cost, long time) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;
@@ -111,7 +110,6 @@ public class ProblemE {
 		 * @param s    所持金
 		 */
 		State(int node, long time, long s) {
-			super();
 			this.node = node;
 			this.time = time;
 			this.s = s;

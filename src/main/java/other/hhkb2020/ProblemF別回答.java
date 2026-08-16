@@ -65,7 +65,7 @@ public class ProblemF別回答 {
 
 	/**
 	 * pで表す多項式を(x-l)にかける
-	 * 
+	 *
 	 * @param p 多項式
 	 * @param l
 	 * @return pで表す多項式を(x-l)にかけた結果
@@ -81,7 +81,7 @@ public class ProblemF別回答 {
 
 	/**
 	 * pで表す多項式の積分を計算する
-	 * 
+	 *
 	 * @param p
 	 * @param l
 	 * @param r
@@ -105,7 +105,6 @@ public class ProblemF別回答 {
 		int l, r;
 
 		Range(int l, int r) {
-			super();
 			this.l = l;
 			this.r = r;
 		}

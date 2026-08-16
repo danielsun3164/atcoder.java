@@ -108,7 +108,6 @@ public class ProblemF {
 		int omote;
 
 		Data(int index, int omote) {
-			super();
 			this.index = index;
 			this.omote = omote;
 		}

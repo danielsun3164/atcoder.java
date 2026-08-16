@@ -46,7 +46,6 @@ public class ProblemF別回答 {
 		int a, b;
 
 		Data(int a, int b) {
-			super();
 			this.a = a;
 			this.b = b;
 		}

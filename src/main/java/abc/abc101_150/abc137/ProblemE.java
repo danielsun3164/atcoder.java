@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc137/submissions/16983535 にも参考
  */
 public class ProblemE {
@@ -43,7 +43,7 @@ public class ProblemE {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param n ノード数
 		 */
 		@SuppressWarnings("unchecked")
@@ -62,7 +62,7 @@ public class ProblemE {
 
 		/**
 		 * 辺を追加する
-		 * 
+		 *
 		 * @param from 始点
 		 * @param to   終点
 		 * @param cost コスト
@@ -75,7 +75,7 @@ public class ProblemE {
 
 		/**
 		 * startからgoalへの移動中に負のサイクルが存在するかどうかを計算する
-		 * 
+		 *
 		 * @param start
 		 * @param goal
 		 * @return startからgoalへの移動中に負のサイクルが存在するかどうか
@@ -110,7 +110,7 @@ public class ProblemE {
 
 		/**
 		 * 距離の配列を取得する
-		 * 
+		 *
 		 * @return 距離の配列
 		 */
 		long[] distances() {
@@ -123,7 +123,7 @@ public class ProblemE {
 
 		/**
 		 * ノードvからの到着可能かどうかを計算する
-		 * 
+		 *
 		 * @param v
 		 * @param graph
 		 * @param reachable
@@ -142,7 +142,6 @@ public class ProblemE {
 		long cost;
 
 		public Edge(int from, int to, long cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;

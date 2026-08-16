@@ -71,7 +71,6 @@ public class Problem059別回答 {
 		int x, y;
 
 		Path(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}
@@ -166,8 +165,12 @@ public class Problem059別回答 {
 			LGraph ids = sccIds();
 			@SuppressWarnings("unchecked")
 			List<Integer>[] groups = new List[ids.nodes];
-			IntStream.range(0, groupNum).forEach(i -> groups[i] = new ArrayList<>());
-			IntStream.range(0, n).forEach(i -> groups[ids.edges[i]].add(0, i));
+			for (int i = 0; i < groupNum; i++) {
+				groups[i] = new ArrayList<>();
+			}
+			for (int i = 0; i < n; i++) {
+				groups[ids.edges[i]].add(0, i);
+			}
 			return groups;
 		}
 
@@ -179,7 +182,6 @@ public class Problem059別回答 {
 			int to;
 
 			LEdge(int from, int to) {
-				super();
 				this.from = from;
 				this.to = to;
 			}
@@ -193,7 +195,6 @@ public class Problem059別回答 {
 			int[] edges;
 
 			LGraph(int nodes, int[] edges) {
-				super();
 				this.nodes = nodes;
 				this.edges = edges;
 			}
@@ -208,10 +209,16 @@ public class Problem059別回答 {
 				Arrays.fill(start, 0);
 				elist = new int[edges.size()];
 
-				edges.forEach(edge -> start[edge.from + 1]++);
-				IntStream.rangeClosed(1, n).forEach(i -> start[i] += start[i - 1]);
+				for (LEdge edge : edges) {
+					start[edge.from + 1]++;
+				}
+				for (int i = 1; i <= n; i++) {
+					start[i] += start[i - 1];
+				}
 				int[] counter = Arrays.copyOf(start, start.length);
-				edges.forEach(edge -> elist[counter[edge.from]++] = edge.to);
+				for (LEdge edge : edges) {
+					elist[counter[edge.from]++] = edge.to;
+				}
 			}
 		}
 	}
@@ -322,10 +329,10 @@ public class Problem059別回答 {
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				leaderBuf[i] = leader(i);
 				groupSize[leaderBuf[i]]++;
-			});
+			}
 			Set<Integer> leaderSet = new HashSet<>();
 			int count = 0;
 			// groupNo[i]はiの所在グループの番号、groupLeader[i]はグループiのリーダー

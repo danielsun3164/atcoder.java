@@ -94,7 +94,6 @@ public class ProblemD {
 		int cost;
 
 		Path(int from, int to, int cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;
@@ -102,7 +101,7 @@ public class ProblemD {
 
 		@Override
 		public int compareTo(Path path) {
-			return this.cost - path.cost;
+			return cost - path.cost;
 		}
 	}
 }

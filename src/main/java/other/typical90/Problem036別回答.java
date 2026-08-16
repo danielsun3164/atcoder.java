@@ -52,7 +52,6 @@ public class Problem036別回答 {
 		long x, y;
 
 		Data(long x, long y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

@@ -68,7 +68,6 @@ public class ProblemH {
 		long x;
 
 		Query(int from, int index, long x) {
-			super();
 			this.from = from;
 			this.index = index;
 			this.x = x;
@@ -83,7 +82,6 @@ public class ProblemH {
 		int index;
 
 		Base(long x, int index) {
-			super();
 			this.x = x;
 			this.index = index;
 		}

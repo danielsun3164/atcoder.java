@@ -71,7 +71,6 @@ public class ProblemF {
 		int right;
 
 		Query(int index, int left, int right) {
-			super();
 			this.index = index;
 			this.left = left;
 			this.right = right;
@@ -91,7 +90,6 @@ public class ProblemF {
 		int[] data;
 
 		BinaryIndexedTree(int size) {
-			super();
 			this.size = size;
 			data = new int[size];
 			Arrays.fill(data, 0);

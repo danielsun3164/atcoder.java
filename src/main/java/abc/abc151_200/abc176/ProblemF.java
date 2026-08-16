@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc176/submissions/16164166 にも参考
  */
 public class ProblemF {
@@ -86,7 +86,6 @@ public class ProblemF {
 		int dp;
 
 		Data(int i, int j, int dp) {
-			super();
 			this.i = i;
 			this.j = j;
 			this.dp = dp;

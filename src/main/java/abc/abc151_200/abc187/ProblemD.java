@@ -38,7 +38,6 @@ public class ProblemD {
 		long a, b;
 
 		Data(long a, long b) {
-			super();
 			this.a = a;
 			this.b = b;
 		}

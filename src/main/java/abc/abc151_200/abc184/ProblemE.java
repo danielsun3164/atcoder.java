@@ -52,8 +52,8 @@ public class ProblemE {
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @param dp  計算結果を保存する配列
 	 * @param h   高さ
 	 * @param w   幅
@@ -114,7 +114,6 @@ public class ProblemE {
 		int x, y, v;
 
 		Data(int x, int y, int v) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.v = v;

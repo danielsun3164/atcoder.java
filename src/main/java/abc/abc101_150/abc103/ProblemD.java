@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに作成したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc103/submissions/15700130 にも参考
  */
 public class ProblemD {
@@ -37,14 +37,13 @@ public class ProblemD {
 		int b;
 
 		Pair(int a, int b) {
-			super();
 			this.a = a;
 			this.b = b;
 		}
 
 		@Override
 		public int compareTo(Pair pair) {
-			return Integer.compare(this.b, pair.b);
+			return Integer.compare(b, pair.b);
 		}
 	}
 }

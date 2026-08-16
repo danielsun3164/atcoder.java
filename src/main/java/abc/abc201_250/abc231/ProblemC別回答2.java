@@ -43,7 +43,6 @@ public class ProblemC別回答2 {
 		int value, index;
 
 		Data(int value, int index) {
-			super();
 			this.value = value;
 			this.index = index;
 		}

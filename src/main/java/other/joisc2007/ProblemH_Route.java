@@ -62,7 +62,7 @@ public class ProblemH_Route {
 
 	/**
 	 * from、toの間の距離の2乗を取得する
-	 * 
+	 *
 	 * @param from
 	 * @param to
 	 * @param x    X座標一覧の配列
@@ -85,7 +85,6 @@ public class ProblemH_Route {
 		int cost;
 
 		Edge(int from, int to, int cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;

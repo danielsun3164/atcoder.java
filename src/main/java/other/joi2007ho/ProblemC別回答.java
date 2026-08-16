@@ -48,7 +48,7 @@ public class ProblemC別回答 {
 
 	/**
 	 * point1とpoint2の間の距離の平方を取得する
-	 * 
+	 *
 	 * @param point1
 	 * @param point2
 	 * @return point1とpoint2の間の距離の平方
@@ -65,7 +65,6 @@ public class ProblemC別回答 {
 		int x, y;
 
 		Point(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

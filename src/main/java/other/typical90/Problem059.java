@@ -48,7 +48,6 @@ public class Problem059 {
 		int x, y;
 
 		Path(int x, int y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

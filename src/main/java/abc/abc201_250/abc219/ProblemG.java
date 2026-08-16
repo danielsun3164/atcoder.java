@@ -74,7 +74,6 @@ public class ProblemG {
 		int index, value;
 
 		Data(int index, int value) {
-			super();
 			this.index = index;
 			this.value = value;
 		}

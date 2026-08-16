@@ -157,7 +157,6 @@ public class ProblemH {
 		int from, to;
 
 		Edge(int from, int to) {
-			super();
 			this.from = from;
 			this.to = to;
 		}
@@ -269,10 +268,10 @@ public class ProblemH {
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				leaderBuf[i] = leader(i);
 				groupSize[leaderBuf[i]]++;
-			});
+			}
 			Set<Integer> leaderSet = new HashSet<>();
 			int count = 0;
 			// groupNo[i]はiの所在グループの番号、groupLeader[i]はグループiのリーダー
@@ -316,10 +315,11 @@ public class ProblemH {
 		 */
 		@SuppressWarnings("unchecked")
 		MaxFlowGraph(int n) {
-			super();
 			this.n = n;
 			g = new List[n];
-			IntStream.range(0, n).forEach(i -> g[i] = new ArrayList<>());
+			for (int i = 0; i < n; i++) {
+				g[i] = new ArrayList<>();
+			}
 			pos = new ArrayList<>();
 		}
 
@@ -409,9 +409,7 @@ public class ProblemH {
 				throw new IllegalArgumentException("s is " + s + ", t is " + t);
 			}
 
-			int[] level = new int[n], iter = new int[n];
-			int[] que = new int[n];
-
+			int[] level = new int[n], iter = new int[n], que = new int[n];
 			long flow = 0;
 			while (flow < flowLimit) {
 				bfs(s, t, level, que);
@@ -514,7 +512,6 @@ public class ProblemH {
 			long cap;
 
 			InternalEdge(int to, int rev, long cap) {
-				super();
 				this.to = to;
 				this.rev = rev;
 				this.cap = cap;

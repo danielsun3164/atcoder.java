@@ -2,6 +2,8 @@ package other.typical90;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
@@ -13,32 +15,8 @@ public class Problem029 {
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int w = scanner.nextInt(), n = scanner.nextInt();
-			LazySegTree<Integer, Integer> seg = new LazySegTree<>(w) {
-				@Override
-				Integer op(Integer a, Integer b) {
-					return Math.max(a, b);
-				}
-
-				@Override
-				Integer e() {
-					return 0;
-				}
-
-				@Override
-				Integer mapping(Integer f, Integer s) {
-					return Math.max(f, s);
-				}
-
-				@Override
-				Integer composition(Integer a, Integer b) {
-					return Math.max(a, b);
-				}
-
-				@Override
-				Integer id() {
-					return 0;
-				}
-			};
+			IntBinaryOperator op = (a, b) -> Math.max(a, b);
+			IntLazySegTree seg = new IntLazySegTree(w, op, () -> 0, op, op, () -> 0);
 			// TLE対策のため、結果をStringBuilderに入れる
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, n).forEach(i -> {
@@ -54,37 +32,41 @@ public class Problem029 {
 
 	/**
 	 * https://github.com/atcoder/ac-library/blob/master/atcoder/lazysegtree.hpp を参考に作成
+	 *
+	 * int,int を使用するLazySegTree
 	 */
-	private static abstract class LazySegTree<S, F> {
+	private static class IntLazySegTree {
 
 		final int n, size, log;
-		final S[] d;
-		final F[] lz;
-
-		abstract S op(S a, S b);
-
-		abstract S e();
-
-		abstract S mapping(F f, S s);
-
-		abstract F composition(F a, F b);
-
-		abstract F id();
+		final int[] d;
+		final int[] lz;
+		final IntBinaryOperator op, mapping, composition;
+		final IntSupplier e, id;
 
 		/**
 		 * コンストラクター
 		 *
 		 * @param n
+		 * @param op
+		 * @param e
+		 * @param mapping
+		 * @param composition
+		 * @param id
 		 */
-		@SuppressWarnings({ "unchecked" })
-		public LazySegTree(int n) {
+		public IntLazySegTree(int n, IntBinaryOperator op, IntSupplier e, IntBinaryOperator mapping,
+				IntBinaryOperator composition, IntSupplier id) {
 			this.n = n;
+			this.op = op;
+			this.e = e;
+			this.mapping = mapping;
+			this.composition = composition;
+			this.id = id;
 			size = bitCeil(n);
 			log = countrZero(size);
-			d = (S[]) new Object[size << 1];
-			Arrays.fill(d, e());
-			lz = (F[]) new Object[size];
-			Arrays.fill(lz, id());
+			d = new int[size << 1];
+			Arrays.fill(d, e.getAsInt());
+			lz = new int[size];
+			Arrays.fill(lz, id.getAsInt());
 			for (int i = size - 1; i >= 1; i--) {
 				update(i);
 			}
@@ -92,26 +74,29 @@ public class Problem029 {
 
 		/**
 		 * コンストラクター
-		 */
-		@SuppressWarnings("unused")
-		public LazySegTree() {
-			this(0);
-		}
-
-		/**
-		 * コンストラクター
 		 *
 		 * @param v
+		 * @param op
+		 * @param e
+		 * @param mapping
+		 * @param composition
+		 * @param id
 		 */
-		@SuppressWarnings({ "unchecked", "unused" })
-		public LazySegTree(S[] v) {
+		@SuppressWarnings("unused")
+		public IntLazySegTree(int[] v, IntBinaryOperator op, IntSupplier e, IntBinaryOperator mapping,
+				IntBinaryOperator composition, IntSupplier id) {
 			n = v.length;
+			this.op = op;
+			this.e = e;
+			this.mapping = mapping;
+			this.composition = composition;
+			this.id = id;
 			size = bitCeil(n);
 			log = countrZero(size);
-			d = (S[]) new Object[size << 1];
-			Arrays.fill(d, e());
-			lz = (F[]) new Object[size];
-			Arrays.fill(lz, id());
+			d = new int[size << 1];
+			Arrays.fill(d, e.getAsInt());
+			lz = new int[size];
+			Arrays.fill(lz, id.getAsInt());
 			System.arraycopy(v, 0, d, size, n);
 			for (int i = size - 1; i >= 1; i--) {
 				update(i);
@@ -125,7 +110,7 @@ public class Problem029 {
 		 * @param x
 		 */
 		@SuppressWarnings("unused")
-		void set(int p, S x) {
+		void set(int p, int x) {
 			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
@@ -142,7 +127,7 @@ public class Problem029 {
 		 * @return a[p]
 		 */
 		@SuppressWarnings("unused")
-		S get(int p) {
+		int get(int p) {
 			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
@@ -158,12 +143,12 @@ public class Problem029 {
 		 * @param r
 		 * @return op(a[l], ..., a[r - 1])
 		 */
-		S prod(int l, int r) {
+		int prod(int l, int r) {
 			if (!(0 <= l && l <= r && r <= n)) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
 			if (l == r) {
-				return e();
+				return e.getAsInt();
 			}
 
 			l += size;
@@ -177,18 +162,18 @@ public class Problem029 {
 				}
 			}
 
-			S sml = e(), smr = e();
+			int sml = e.getAsInt(), smr = e.getAsInt();
 			while (l < r) {
 				if ((l & 1) > 0) {
-					sml = op(sml, d[l++]);
+					sml = op.applyAsInt(sml, d[l++]);
 				}
 				if ((r & 1) > 0) {
-					smr = op(d[--r], smr);
+					smr = op.applyAsInt(d[--r], smr);
 				}
 				l >>= 1;
 				r >>= 1;
 			}
-			return op(sml, smr);
+			return op.applyAsInt(sml, smr);
 		}
 
 		/**
@@ -197,7 +182,7 @@ public class Problem029 {
 		 * @return op(a[0], ..., a[n-1])
 		 */
 		@SuppressWarnings("unused")
-		S allProd() {
+		int allProd() {
 			return d[1];
 		}
 
@@ -208,13 +193,13 @@ public class Problem029 {
 		 * @param f
 		 */
 		@SuppressWarnings("unused")
-		void apply(int p, F f) {
+		void apply(int p, int f) {
 			if (!(0 <= p && p < n)) {
 				throw new IllegalArgumentException("p is " + p);
 			}
 			p += size;
 			pushTo(p);
-			d[p] = mapping(f, d[p]);
+			d[p] = mapping.applyAsInt(f, d[p]);
 			updateFrom(p);
 		}
 
@@ -225,7 +210,7 @@ public class Problem029 {
 		 * @param r
 		 * @param f
 		 */
-		void apply(int l, int r, F f) {
+		void apply(int l, int r, int f) {
 			if (!(0 <= l && l <= r && r <= n)) {
 				throw new IllegalArgumentException("l is " + l + ", r is " + r);
 			}
@@ -279,35 +264,35 @@ public class Problem029 {
 		 * @return 条件を両方満たす r を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
-		int maxRight(int l, Predicate<S> g) {
+		int maxRight(int l, Predicate<Integer> g) {
 			if (!(0 <= l && l <= n)) {
 				throw new IllegalArgumentException("l is " + l);
 			}
-			if (!g.test(e())) {
-				throw new IllegalArgumentException("g.test(e()) is " + g.test(e()));
+			if (!g.test(e.getAsInt())) {
+				throw new IllegalArgumentException("g.test(e()) is " + g.test(e.getAsInt()));
 			}
 			if (l == n) {
 				return n;
 			}
 			l += size;
 			pushTo(l);
-			S sm = e();
+			int sm = e.getAsInt();
 			do {
 				while (0 == (l & 1)) {
 					l >>= 1;
 				}
-				if (!g.test(op(sm, d[l]))) {
+				if (!g.test(op.applyAsInt(sm, d[l]))) {
 					while (l < size) {
 						push(l);
 						l = (2 * l);
-						if (g.test(op(sm, d[l]))) {
-							sm = op(sm, d[l]);
+						if (g.test(op.applyAsInt(sm, d[l]))) {
+							sm = op.applyAsInt(sm, d[l]);
 							l++;
 						}
 					}
 					return l - size;
 				}
-				sm = op(sm, d[l]);
+				sm = op.applyAsInt(sm, d[l]);
 				l++;
 			} while ((l & -l) != l);
 			return n;
@@ -324,12 +309,12 @@ public class Problem029 {
 		 * @return 条件を両方満たす l を(いずれか一つ)
 		 */
 		@SuppressWarnings("unused")
-		int minLeft(int r, Predicate<S> g) {
+		int minLeft(int r, Predicate<Integer> g) {
 			if (!(0 <= r && r <= n)) {
 				throw new IllegalArgumentException("r is " + r);
 			}
-			if (!g.test(e())) {
-				throw new IllegalArgumentException("g.test(e()) is " + g.test(e()));
+			if (!g.test(e.getAsInt())) {
+				throw new IllegalArgumentException("g.test(e()) is " + g.test(e.getAsInt()));
 			}
 			if (0 == r) {
 				return 0;
@@ -338,43 +323,43 @@ public class Problem029 {
 			for (int i = log; i >= 1; i--) {
 				push((r - 1) >> i);
 			}
-			S sm = e();
+			int sm = e.getAsInt();
 			do {
 				r--;
 				while (r > 1 && (r & 1) > 0) {
 					r >>= 1;
 				}
-				if (!g.test(op(d[r], sm))) {
+				if (!g.test(op.applyAsInt(d[r], sm))) {
 					while (r < size) {
 						push(r);
 						r = (2 * r + 1);
-						if (g.test(op(d[r], sm))) {
-							sm = op(d[r], sm);
+						if (g.test(op.applyAsInt(d[r], sm))) {
+							sm = op.applyAsInt(d[r], sm);
 							r--;
 						}
 					}
 					return r + 1 - size;
 				}
-				sm = op(d[r], sm);
+				sm = op.applyAsInt(d[r], sm);
 			} while ((r & -r) != r);
 			return 0;
 		}
 
 		private void update(int k) {
-			d[k] = op(d[k << 1], d[k << 1 | 1]);
+			d[k] = op.applyAsInt(d[k << 1], d[k << 1 | 1]);
 		}
 
-		private void allApply(int k, F f) {
-			d[k] = mapping(f, d[k]);
+		private void allApply(int k, int f) {
+			d[k] = mapping.applyAsInt(f, d[k]);
 			if (k < size) {
-				lz[k] = composition(f, lz[k]);
+				lz[k] = composition.applyAsInt(f, lz[k]);
 			}
 		}
 
 		private void push(int k) {
 			allApply(k << 1, lz[k]);
 			allApply(k << 1 | 1, lz[k]);
-			lz[k] = id();
+			lz[k] = id.getAsInt();
 		}
 
 		private void pushTo(int p) {

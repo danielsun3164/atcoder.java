@@ -86,7 +86,6 @@ public class ProblemF {
 		double x, y;
 
 		Point(double x, double y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

@@ -26,14 +26,13 @@ public class ProblemC {
 		int height;
 
 		Student(int no, int height) {
-			super();
 			this.no = no;
 			this.height = height;
 		}
 
 		@Override
 		public int compareTo(Student o) {
-			return o.height - this.height;
+			return o.height - height;
 		}
 	}
 }

@@ -31,7 +31,6 @@ public class Problem011 {
 		int d, c, s;
 
 		public Data(int d, int c, int s) {
-			super();
 			this.d = d;
 			this.c = c;
 			this.s = s;

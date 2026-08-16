@@ -20,7 +20,6 @@ public class ProblemB {
 		int index, value;
 
 		Data(int index, int value) {
-			super();
 			this.index = index;
 			this.value = value;
 		}

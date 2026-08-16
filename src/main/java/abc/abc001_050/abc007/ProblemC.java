@@ -34,7 +34,7 @@ public class ProblemC {
 
 	/**
 	 * 計算結果の配列を記入
-	 * 
+	 *
 	 * @param R  迷路の行数
 	 * @param C  迷路の列数
 	 * @param r  計算結果の配列
@@ -67,7 +67,6 @@ public class ProblemC {
 		int x, y, r;
 
 		Data(int x, int y, int r) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.r = r;

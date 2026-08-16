@@ -64,17 +64,16 @@ public class ProblemD {
 
 		/**
 		 * コンストラクター
-		 * 
+		 *
 		 * @param no 番号
 		 */
 		Room(int no) {
-			super();
 			this.no = no;
 		}
 
 		@Override
 		public int compareTo(Room o) {
-			return this.depth - o.depth;
+			return depth - o.depth;
 		}
 	}
 }

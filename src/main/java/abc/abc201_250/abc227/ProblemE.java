@@ -83,7 +83,6 @@ public class ProblemE {
 		long value;
 
 		Data(String s, long value) {
-			super();
 			this.s = s;
 			this.value = value;
 		}

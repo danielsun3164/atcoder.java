@@ -132,7 +132,6 @@ public class Problem023 {
 		boolean b;
 
 		Data(int n, boolean b) {
-			super();
 			this.n = n;
 			this.b = b;
 		}

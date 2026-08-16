@@ -36,18 +36,17 @@ public class ProblemD {
 		int w;
 
 		Box(int h, int w) {
-			super();
 			this.h = h;
 			this.w = w;
 		}
 
 		@Override
 		public int compareTo(Box box) {
-			if (this.h == box.h) {
+			if (h == box.h) {
 				// hが同じの場合、wは大きいものを先にソート
-				return box.w - this.w;
+				return box.w - w;
 			}
-			return this.h - box.h;
+			return h - box.h;
 		}
 	}
 
@@ -62,7 +61,7 @@ public class ProblemD {
 
 		BinaryIndexedTree(int n) {
 			this.n = n;
-			this.bit = new int[n + 1];
+			bit = new int[n + 1];
 		}
 
 		void update(int i, int v) {

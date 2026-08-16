@@ -105,7 +105,6 @@ public class ProblemG {
 		long a, b, c;
 
 		Line(long a, long b, long c) {
-			super();
 			this.a = a;
 			this.b = b;
 			this.c = c;
@@ -143,7 +142,6 @@ public class ProblemG {
 		long x, y, c;
 
 		Point(long x, long y, long c) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.c = c;
@@ -158,7 +156,6 @@ public class ProblemG {
 		long x, y, sumc;
 
 		Data(Line line, long x, long y, long sumc) {
-			super();
 			this.line = line;
 			this.x = x;
 			this.y = y;

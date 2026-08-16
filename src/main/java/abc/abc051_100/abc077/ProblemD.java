@@ -44,19 +44,18 @@ public class ProblemD {
 
 		/**
 		 * コンストラクタ
-		 * 
+		 *
 		 * @param m 入力数字
 		 * @param c 計算結果
 		 */
 		Data(int m, long c) {
-			super();
 			this.m = m;
 			this.c = c;
 		}
 
 		/**
 		 * dataと比較した結果を返す
-		 * 
+		 *
 		 * @param data 比較対象データ
 		 * @return dataと比較した結果
 		 */

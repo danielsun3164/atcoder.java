@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc035/submissions/2509685 にも参考
  */
 public class ProblemD {
@@ -81,14 +81,13 @@ public class ProblemD {
 		int cost;
 
 		Edge(int to, int cost) {
-			super();
 			this.to = to;
 			this.cost = cost;
 		}
 
 		@Override
 		public int compareTo(Edge e) {
-			return this.cost - e.cost;
+			return cost - e.cost;
 		}
 	}
 }

@@ -61,7 +61,6 @@ public class ProblemH {
 		long value;
 
 		Data(int index, long value) {
-			super();
 			this.index = index;
 			this.value = value;
 		}

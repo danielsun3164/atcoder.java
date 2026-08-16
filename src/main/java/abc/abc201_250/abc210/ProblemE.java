@@ -45,7 +45,6 @@ public class ProblemE {
 		long c;
 
 		Data(int a, long c) {
-			super();
 			this.a = a;
 			this.c = c;
 		}

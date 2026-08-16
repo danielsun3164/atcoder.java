@@ -54,7 +54,6 @@ public class Problem080 {
 		long cost;
 
 		Path(int to, long cost) {
-			super();
 			this.to = to;
 			this.cost = cost;
 		}

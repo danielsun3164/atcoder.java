@@ -80,7 +80,6 @@ public class Problem041 {
 		long x, y;
 
 		Point(long x, long y) {
-			super();
 			this.x = x;
 			this.y = y;
 		}

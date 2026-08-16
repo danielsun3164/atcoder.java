@@ -77,7 +77,6 @@ public class ProblemE {
 		long cost;
 
 		Path(int f, int i, int j, long cost) {
-			super();
 			this.f = f;
 			this.i = i;
 			this.j = j;

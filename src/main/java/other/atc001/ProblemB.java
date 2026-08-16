@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.IntStream;
 
 public class ProblemB {
 
@@ -133,10 +132,10 @@ public class ProblemB {
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				leaderBuf[i] = leader(i);
 				groupSize[leaderBuf[i]]++;
-			});
+			}
 			Set<Integer> leaderSet = new HashSet<>();
 			int count = 0;
 			// groupNo[i]はiの所在グループの番号、groupLeader[i]はグループiのリーダー

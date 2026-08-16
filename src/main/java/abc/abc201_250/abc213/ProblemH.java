@@ -67,7 +67,6 @@ public class ProblemH {
 		int a, b;
 
 		Edge(int a, int b) {
-			super();
 			this.a = a;
 			this.b = b;
 		}

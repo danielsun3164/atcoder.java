@@ -46,7 +46,7 @@ public class ProblemD {
 
 	/**
 	 * 個々のマスに移動するための最小コストの配列の値をセットする
-	 * 
+	 *
 	 * @param dp   個々のマスに移動するための最小コストの配列
 	 * @param h    縦幅
 	 * @param w    横幅
@@ -100,13 +100,12 @@ public class ProblemD {
 
 		/**
 		 * コンストラクタ
-		 * 
+		 *
 		 * @param x
 		 * @param y
 		 * @param cost
 		 */
 		Masu(int x, int y, int cost) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.cost = cost;

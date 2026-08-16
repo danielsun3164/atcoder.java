@@ -86,7 +86,6 @@ public class ProblemH別回答1 {
 		Edge next;
 
 		Edge(int v, Edge next) {
-			super();
 			this.v = v;
 			this.next = next;
 		}

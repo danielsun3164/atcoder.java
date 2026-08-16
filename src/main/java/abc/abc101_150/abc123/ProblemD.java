@@ -65,7 +65,6 @@ public class ProblemD {
 		int ic;
 
 		Sum(long sum, int ia, int ib, int ic) {
-			super();
 			this.sum = sum;
 			this.ia = ia;
 			this.ib = ib;

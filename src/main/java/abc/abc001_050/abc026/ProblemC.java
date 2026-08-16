@@ -58,7 +58,6 @@ public class ProblemC {
 		int salary = 0;
 
 		Employee(int employeeNo) {
-			super();
 			this.employeeNo = employeeNo;
 		}
 	}

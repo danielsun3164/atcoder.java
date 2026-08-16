@@ -50,7 +50,6 @@ public class Problem017 {
 		int l, r;
 
 		Line(int l, int r) {
-			super();
 			this.l = l;
 			this.r = r;
 		}

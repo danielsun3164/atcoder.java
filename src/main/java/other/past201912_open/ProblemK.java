@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 /**
  * 行きがけ順での実装
- * 
+ *
  * https://atcoder.jp/contests/past201912-open/submissions/14683801 を参考に作成
  */
 public class ProblemK {
@@ -40,7 +40,7 @@ public class ProblemK {
 
 	/**
 	 * 現在の人の保存範囲を計算
-	 * 
+	 *
 	 * @param subordinates 部下の一覧
 	 * @param ranges       範囲の一覧
 	 * @param now          現在の人
@@ -62,8 +62,6 @@ public class ProblemK {
 		int start;
 		int end;
 
-		Range() {
-			super();
-		}
+		Range() {}
 	}
 }

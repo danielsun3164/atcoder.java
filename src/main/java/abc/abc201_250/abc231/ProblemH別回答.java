@@ -53,7 +53,6 @@ public class ProblemH別回答 {
 		int a, b, c;
 
 		Data(int a, int b, int c) {
-			super();
 			this.a = a;
 			this.b = b;
 			this.c = c;
@@ -75,7 +74,6 @@ public class ProblemH別回答 {
 		 * @param n ノード数
 		 */
 		MinCostFlowGraph(int n) {
-			super();
 			this.n = n;
 			edges = new ArrayList<>();
 		}
@@ -193,10 +191,10 @@ public class ProblemH別回答 {
 
 			Csr<InternalEdge> g = calcCsr(edgeIndex);
 			List<Result> result = slope(g, s, t, flowLimit);
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				InternalEdge e = g.elist[edgeIndex[i]];
 				edges.get(i).flow = edges.get(i).cap - e.cap;
-			});
+			}
 			return result;
 		}
 
@@ -259,7 +257,7 @@ public class ProblemH別回答 {
 			Arrays.fill(redgeIndex, 0);
 			int[] indexes = new int[2 * m];
 			InternalEdge[] inEdges = new InternalEdge[m * 2];
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				Edge e = edges.get(i);
 				edgeIndex[i] = degree[e.from]++;
 				redgeIndex[i] = degree[e.to]++;
@@ -267,15 +265,15 @@ public class ProblemH別回答 {
 				inEdges[i * 2] = new InternalEdge(e.to, -1, e.cap - e.flow, e.cost);
 				indexes[i * 2 + 1] = e.to;
 				inEdges[i * 2 + 1] = new InternalEdge(e.from, -1, e.flow, -e.cost);
-			});
+			}
 			Csr<InternalEdge> g = new Csr<>(n, indexes, inEdges, InternalEdge.class);
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				Edge e = edges.get(i);
 				edgeIndex[i] += g.start[e.from];
 				redgeIndex[i] += g.start[e.to];
 				g.elist[edgeIndex[i]].rev = redgeIndex[i];
 				g.elist[redgeIndex[i]].rev = edgeIndex[i];
-			});
+			}
 			return g;
 		}
 
@@ -296,7 +294,7 @@ public class ProblemH別回答 {
 				if (v == t) {
 					break;
 				}
-				IntStream.range(g.start[v], g.start[v + 1]).forEach(i -> {
+				for (int i = g.start[v]; i < g.start[v + 1]; i++) {
 					InternalEdge e = g.elist[i];
 					if (e.cap != 0L) {
 						long cost = e.cost - dual[e.to] + dual[v];
@@ -311,16 +309,16 @@ public class ProblemH別回答 {
 							}
 						}
 					}
-				});
+				}
 			}
 			if (!vis[t]) {
 				return false;
 			}
-			IntStream.range(0, n).forEach(v -> {
+			for (int v = 0; v < n; v++) {
 				if (vis[v]) {
 					dual[v] -= dist[t] - dist[v];
 				}
-			});
+			}
 			return true;
 		}
 
@@ -346,7 +344,6 @@ public class ProblemH別回答 {
 			 * @param cost
 			 */
 			InternalEdge(int to, int rev, long cap, long cost) {
-				super();
 				this.to = to;
 				this.rev = rev;
 				this.cap = cap;
@@ -359,7 +356,6 @@ public class ProblemH別回答 {
 			int to;
 
 			Q(long key, int to) {
-				super();
 				this.key = key;
 				this.to = to;
 			}
@@ -413,7 +409,6 @@ public class ProblemH別回答 {
 			 * @param cost
 			 */
 			Edge(int from, int to, long cap, long flow, long cost) {
-				super();
 				this.from = from;
 				this.to = to;
 				this.cap = cap;
@@ -439,7 +434,6 @@ public class ProblemH別回答 {
 		 * @param cost
 		 */
 		Result(long cap, long cost) {
-			super();
 			this.cap = cap;
 			this.cost = cost;
 		}

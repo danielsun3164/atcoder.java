@@ -66,14 +66,6 @@ public class ProblemH {
 
 		/**
 		 * コンストラクター
-		 */
-		@SuppressWarnings("unused")
-		SccGraph() {
-			this(0);
-		}
-
-		/**
-		 * コンストラクター
 		 *
 		 * @param n ノード数
 		 */
@@ -151,8 +143,12 @@ public class ProblemH {
 			LGraph ids = sccIds();
 			@SuppressWarnings("unchecked")
 			List<Integer>[] groups = new List[ids.nodes];
-			IntStream.range(0, groupNum).forEach(i -> groups[i] = new ArrayList<>());
-			IntStream.range(0, n).forEach(i -> groups[ids.edges[i]].add(0, i));
+			for (int i = 0; i < groupNum; i++) {
+				groups[i] = new ArrayList<>();
+			}
+			for (int i = 0; i < n; i++) {
+				groups[ids.edges[i]].add(0, i);
+			}
 			return groups;
 		}
 
@@ -164,7 +160,6 @@ public class ProblemH {
 			int to;
 
 			LEdge(int from, int to) {
-				super();
 				this.from = from;
 				this.to = to;
 			}
@@ -178,7 +173,6 @@ public class ProblemH {
 			int[] edges;
 
 			LGraph(int nodes, int[] edges) {
-				super();
 				this.nodes = nodes;
 				this.edges = edges;
 			}
@@ -193,10 +187,16 @@ public class ProblemH {
 				Arrays.fill(start, 0);
 				elist = new int[edges.size()];
 
-				edges.forEach(edge -> start[edge.from + 1]++);
-				IntStream.rangeClosed(1, n).forEach(i -> start[i] += start[i - 1]);
+				for (LEdge edge : edges) {
+					start[edge.from + 1]++;
+				}
+				for (int i = 1; i <= n; i++) {
+					start[i] += start[i - 1];
+				}
 				int[] counter = Arrays.copyOf(start, start.length);
-				edges.forEach(edge -> elist[counter[edge.from]++] = edge.to);
+				for (LEdge edge : edges) {
+					elist[counter[edge.from]++] = edge.to;
+				}
 			}
 		}
 	}
@@ -212,19 +212,10 @@ public class ProblemH {
 
 		/**
 		 * コンストラクター
-		 */
-		@SuppressWarnings("unused")
-		MinCostFlowGraph() {
-			this(0);
-		}
-
-		/**
-		 * コンストラクター
 		 *
 		 * @param n ノード数
 		 */
 		MinCostFlowGraph(int n) {
-			super();
 			this.n = n;
 			edges = new ArrayList<>();
 		}
@@ -342,10 +333,10 @@ public class ProblemH {
 
 			Csr<InternalEdge> g = calcCsr(edgeIndex);
 			List<Result> result = slope(g, s, t, flowLimit);
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				InternalEdge e = g.elist[edgeIndex[i]];
 				edges.get(i).flow = edges.get(i).cap - e.cap;
-			});
+			}
 			return result;
 		}
 
@@ -408,7 +399,7 @@ public class ProblemH {
 			Arrays.fill(redgeIndex, 0);
 			int[] indexes = new int[2 * m];
 			InternalEdge[] inEdges = new InternalEdge[m * 2];
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				Edge e = edges.get(i);
 				edgeIndex[i] = degree[e.from]++;
 				redgeIndex[i] = degree[e.to]++;
@@ -416,15 +407,15 @@ public class ProblemH {
 				inEdges[i * 2] = new InternalEdge(e.to, -1, e.cap - e.flow, e.cost);
 				indexes[i * 2 + 1] = e.to;
 				inEdges[i * 2 + 1] = new InternalEdge(e.from, -1, e.flow, -e.cost);
-			});
+			}
 			Csr<InternalEdge> g = new Csr<>(n, indexes, inEdges, InternalEdge.class);
-			IntStream.range(0, m).forEach(i -> {
+			for (int i = 0; i < m; i++) {
 				Edge e = edges.get(i);
 				edgeIndex[i] += g.start[e.from];
 				redgeIndex[i] += g.start[e.to];
 				g.elist[edgeIndex[i]].rev = redgeIndex[i];
 				g.elist[redgeIndex[i]].rev = edgeIndex[i];
-			});
+			}
 			return g;
 		}
 
@@ -445,7 +436,7 @@ public class ProblemH {
 				if (v == t) {
 					break;
 				}
-				IntStream.range(g.start[v], g.start[v + 1]).forEach(i -> {
+				for (int i = g.start[v]; i < g.start[v + 1]; i++) {
 					InternalEdge e = g.elist[i];
 					if (e.cap != 0L) {
 						long cost = e.cost - dual[e.to] + dual[v];
@@ -460,16 +451,16 @@ public class ProblemH {
 							}
 						}
 					}
-				});
+				}
 			}
 			if (!vis[t]) {
 				return false;
 			}
-			IntStream.range(0, n).forEach(v -> {
+			for (int v = 0; v < n; v++) {
 				if (vis[v]) {
 					dual[v] -= dist[t] - dist[v];
 				}
-			});
+			}
 			return true;
 		}
 
@@ -495,7 +486,6 @@ public class ProblemH {
 			 * @param cost
 			 */
 			InternalEdge(int to, int rev, long cap, long cost) {
-				super();
 				this.to = to;
 				this.rev = rev;
 				this.cap = cap;
@@ -508,7 +498,6 @@ public class ProblemH {
 			int to;
 
 			Q(long key, int to) {
-				super();
 				this.key = key;
 				this.to = to;
 			}
@@ -562,7 +551,6 @@ public class ProblemH {
 			 * @param cost
 			 */
 			Edge(int from, int to, long cap, long flow, long cost) {
-				super();
 				this.from = from;
 				this.to = to;
 				this.cap = cap;
@@ -588,7 +576,6 @@ public class ProblemH {
 			 * @param cost
 			 */
 			Result(long cap, long cost) {
-				super();
 				this.cap = cap;
 				this.cost = cost;
 			}

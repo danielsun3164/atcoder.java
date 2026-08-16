@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * 解説通りに実装したソースコード
- * 
+ *
  * https://atcoder.jp/contests/abc175/submissions/15991728 にも参考
  */
 public class ProblemF {
@@ -72,7 +72,7 @@ public class ProblemF {
 
 	/**
 	 * 文字列が回文かどうかを計算する
-	 * 
+	 *
 	 * @param string 文字列
 	 * @return 文字列が回文かどうか
 	 */
@@ -92,7 +92,6 @@ public class ProblemF {
 		long cost;
 
 		Node(int i, int j, int index, long cost) {
-			super();
 			this.i = i;
 			this.j = j;
 			this.index = index;

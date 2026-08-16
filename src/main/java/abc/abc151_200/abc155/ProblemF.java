@@ -105,7 +105,6 @@ public class ProblemF {
 		int a, b;
 
 		Data(int a, int b) {
-			super();
 			this.a = a;
 			this.b = b;
 		}
@@ -119,7 +118,6 @@ public class ProblemF {
 		int from, to, index;
 
 		Edge(int from, int to, int index) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.index = index;
@@ -232,10 +230,10 @@ public class ProblemF {
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				leaderBuf[i] = leader(i);
 				groupSize[leaderBuf[i]]++;
-			});
+			}
 			Set<Integer> leaderSet = new HashSet<>();
 			int count = 0;
 			// groupNo[i]はiの所在グループの番号、groupLeader[i]はグループiのリーダー

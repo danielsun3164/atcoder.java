@@ -67,7 +67,6 @@ public class ProblemD {
 		int count;
 
 		Block(int k, int start, int count) {
-			super();
 			this.k = k;
 			this.start = start;
 			this.count = count;

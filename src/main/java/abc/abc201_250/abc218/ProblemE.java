@@ -33,7 +33,6 @@ public class ProblemE {
 		long cost;
 
 		Edge(int from, int to, long cost) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.cost = cost;
@@ -146,10 +145,10 @@ public class ProblemE {
 		int[][] groups() {
 			// leaderBuf[i]はiのリーダー、groupSize[i]はiの所在groupのサイズ
 			int[] leaderBuf = new int[n], groupSize = new int[n];
-			IntStream.range(0, n).forEach(i -> {
+			for (int i = 0; i < n; i++) {
 				leaderBuf[i] = leader(i);
 				groupSize[leaderBuf[i]]++;
-			});
+			}
 			Set<Integer> leaderSet = new HashSet<>();
 			int count = 0;
 			// groupNo[i]はiの所在グループの番号、groupLeader[i]はグループiのリーダー
