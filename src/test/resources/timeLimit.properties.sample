@@ -107,6 +107,8 @@ abc.abc201_250.abc241.ProblemEx別回答Test=3000
 abc.abc201_250.abc242.ProblemGTest=5000
 abc.abc201_250.abc242.ProblemExTest=3000
 abc.abc201_250.abc242.ProblemEx別回答Test=3000
+abc.abc201_250.abc243.ProblemExTest=4000
+abc.abc201_250.abc243.ProblemEx別回答Test=4000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
