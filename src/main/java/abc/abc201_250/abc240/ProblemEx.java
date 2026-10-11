@@ -28,7 +28,7 @@ public class ProblemEx {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			char[] s = ("#" + scanner.next()).toCharArray();
-			int[] emp = new int[] { -1, -1, 0 };
+			int[] emp = { -1, -1, 0 };
 			trie.add(emp.clone());
 
 			for (int i = 1; i <= n; i++) {

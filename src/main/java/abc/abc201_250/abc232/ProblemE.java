@@ -24,7 +24,7 @@ public class ProblemE {
 			Arrays.fill(dp[0], 0L);
 			Arrays.fill(dp[1], 0L);
 			dp[(x1 != x2) ? 1 : 0][(y1 != y2) ? 1 : 0] = 1L;
-			long[] row = new long[] { 1L, h - 1 }, col = new long[] { 1L, w - 1 };
+			long[] row = { 1L, h - 1 }, col = { 1L, w - 1 };
 			while (k-- > 0) {
 				long[][] next = new long[N][N];
 				IntStream.range(0, N).forEach(i -> Arrays.fill(next[i], 0L));

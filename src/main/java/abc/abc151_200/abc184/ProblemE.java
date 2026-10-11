@@ -14,9 +14,9 @@ public class ProblemE {
 	/** 最大値 */
 	private static final int INF = Integer.MAX_VALUE >> 1;
 	/** X座標の差分一覧 */
-	private static final int[] XS = new int[] { 0, 0, -1, 1 };
+	private static final int[] XS = { 0, 0, -1, 1 };
 	/** Y座標の差分一覧 */
-	private static final int[] YS = new int[] { -1, 1, 0, 0 };
+	private static final int[] YS = { -1, 1, 0, 0 };
 	/** 始点を表す文字 */
 	private static final char SOURCE = 'S';
 	/** 終点を表す文字 */

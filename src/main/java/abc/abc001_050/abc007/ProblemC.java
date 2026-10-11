@@ -10,9 +10,9 @@ public class ProblemC {
 	/** 空きマスを表す文字 */
 	private static final char EMPTY = '.';
 	/** 移動の際のX座標の差分の配列 */
-	private static final int[] XS = new int[] { -1, 1, 0, 0 };
+	private static final int[] XS = { -1, 1, 0, 0 };
 	/** 移動の際のY座標の差分の配列 */
-	private static final int[] YS = new int[] { 0, 0, -1, 1 };
+	private static final int[] YS = { 0, 0, -1, 1 };
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

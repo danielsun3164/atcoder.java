@@ -27,7 +27,7 @@ public class ProblemF {
 			long[] masks = new long[m];
 			IntStream.range(0, m).forEach(i -> {
 				int from = scanner.nextInt() - 1, to = scanner.nextInt() - 1;
-				long[] result = new long[] { 0L };
+				long[] result = { 0L };
 				dfs(from, -1, -1, to, result, edges);
 				masks[i] = result[0];
 			});

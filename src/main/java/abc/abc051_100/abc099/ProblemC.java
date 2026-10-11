@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class ProblemC {
 
 	/** 引き出しのできる数字 */
-	private static final int[] NUMBERS = new int[] { 1, 6, 9 };
+	private static final int[] NUMBERS = { 1, 6, 9 };
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

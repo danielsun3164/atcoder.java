@@ -22,7 +22,7 @@ public class ProblemC {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int n = scanner.nextInt();
 			// 順番に上、東、南、西、北、下の数字を表す
-			int[] saikoro = new int[] { 1, 3, 2, 4, 5, 6 };
+			int[] saikoro = { 1, 3, 2, 4, 5, 6 };
 			System.out.println(IntStream.range(0, n).map(i -> process(saikoro, scanner.next())).sum() + 1);
 		}
 	}

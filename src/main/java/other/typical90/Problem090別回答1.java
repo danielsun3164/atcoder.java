@@ -95,7 +95,7 @@ public class Problem090別回答1 {
 	 */
 	private static int[] polynomialInverse(int[] c, int l) {
 		int n = c.length, level = 0;
-		int[] a = new int[] { 1, 0 };
+		int[] a = { 1, 0 };
 		while ((1 << level) < l) {
 			int cs = Math.min(2 << level, n);
 			int[] p = Convolution.convolution(a, Arrays.copyOf(c, cs), MOD);

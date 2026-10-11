@@ -181,7 +181,7 @@ public class Problem090 {
 	 */
 	private static long[] polynomialInverse(long[] c, int l) {
 		int n = c.length, level = 0;
-		long[] a = new long[] { 1L, 0L };
+		long[] a = { 1L, 0L };
 		while ((1 << level) < l) {
 			int cs = Math.min(2 << level, n);
 			long[] p = convolution(a, Arrays.copyOf(c, cs));

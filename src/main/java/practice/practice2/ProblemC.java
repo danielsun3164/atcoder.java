@@ -216,7 +216,7 @@ public class ProblemC {
 			while (0L == (d & 1L)) {
 				d >>= 1;
 			}
-			long[] bases = new long[] { 2L, 7L, 61L };
+			long[] bases = { 2L, 7L, 61L };
 			for (long a : bases) {
 				long t = d;
 				long y = powMod(a, t, n);

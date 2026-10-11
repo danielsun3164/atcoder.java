@@ -19,7 +19,7 @@ public class ProblemF {
 	/** 最大値 */
 	private static final int INF = Integer.MAX_VALUE >> 1;
 	/** 方向を表す配列 */
-	private static final int[] DIRS = new int[] { -1, 1 };
+	private static final int[] DIRS = { -1, 1 };
 	private static List<Node> R1 = new ArrayList<>(), R2 = new ArrayList<>();
 	private static List<Node> C1 = new ArrayList<>(), C2 = new ArrayList<>();
 

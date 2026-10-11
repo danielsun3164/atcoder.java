@@ -21,7 +21,7 @@ public class ProblemE別回答2 {
 		try (Scanner scanner = new Scanner(System.in)) {
 			int h = scanner.nextInt(), w = scanner.nextInt(), k = scanner.nextInt(), x1 = scanner.nextInt(),
 					y1 = scanner.nextInt(), x2 = scanner.nextInt(), y2 = scanner.nextInt();
-			long[] row = new long[] { h - 1, 1L }, col = new long[] { w - 1, 1L };
+			long[] row = { h - 1, 1L }, col = { w - 1, 1L };
 			long[][] a = new long[N * N][N * N];
 			IntStream.range(0, N * N).forEach(i -> Arrays.fill(a[i], 0L));
 			IntStream.range(0, N).forEach(x -> IntStream.range(0, N).forEach(y -> {

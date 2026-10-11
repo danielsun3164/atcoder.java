@@ -65,7 +65,7 @@ public class ProblemEx {
 					}
 				}
 			}
-			long[] dp = new long[] { 1L };
+			long[] dp = { 1L };
 			for (int i = 0; i < root.size(); i++) {
 				if (root.get(i)) {
 					dp = merge(dp, dfs(k, i, to), k);
@@ -89,7 +89,7 @@ public class ProblemEx {
 	}
 
 	private static long[] dfs(int k, int v, List<List<Integer>> to) {
-		long[] dp = new long[] { 1L, 0L };
+		long[] dp = { 1L, 0L };
 		for (int u : to.get(v)) {
 			dp = merge(dfs(k, u, to), dp, k);
 		}

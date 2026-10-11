@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 public class ProblemD {
 
 	/** 100までの素数 */
-	private static final int[] PRIMES = new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
-			67, 71, 73, 79, 83, 89, 97 };
+	private static final int[] PRIMES = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+			73, 79, 83, 89, 97 };
 
 	public static void main(String[] args) {
 		try (Scanner scanner = new Scanner(System.in)) {

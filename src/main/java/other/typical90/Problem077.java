@@ -20,9 +20,9 @@ import java.util.stream.IntStream;
 public class Problem077 {
 
 	/** X座標の差分の一覧 */
-	private static final int[] DX = new int[] { 1, 1, 0, -1, -1, -1, 0, 1 };
+	private static final int[] DX = { 1, 1, 0, -1, -1, -1, 0, 1 };
 	/** Y座標の差分の一覧 */
-	private static final int[] DY = new int[] { 0, 1, 1, 1, 0, -1, -1, -1 };
+	private static final int[] DY = { 0, 1, 1, 1, 0, -1, -1, -1 };
 
 	public static void main(String[] args) {
 		InputReader scanner = new InputReader(System.in);

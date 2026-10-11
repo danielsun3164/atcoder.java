@@ -15,15 +15,13 @@ public class ProblemD {
 	private static final char ROAD = '.';
 
 	/** 移動のX座標差分配列 */
-	private static final int[] MOVE_XS = new int[] { 1, -1, 0, 0 };
+	private static final int[] MOVE_XS = { 1, -1, 0, 0 };
 	/** 移動のY座標差分配列 */
-	private static final int[] MOVE_YS = new int[] { 0, 0, 1, -1 };
+	private static final int[] MOVE_YS = { 0, 0, 1, -1 };
 	/** ワープのX座標差分配列 */
-	private static final int[] WARP_XS = new int[] { 1, 1, 1, 1, -1, -1, -1, -1, 2, 2, 2, 2, 2, -2, -2, -2, -2, -2, 0,
-			0 };
+	private static final int[] WARP_XS = { 1, 1, 1, 1, -1, -1, -1, -1, 2, 2, 2, 2, 2, -2, -2, -2, -2, -2, 0, 0 };
 	/** ワープのY座標差分配列 */
-	private static final int[] WARP_YS = new int[] { 1, -1, 2, -2, 1, -1, 2, -2, 0, 1, -1, 2, -2, 0, 1, -1, 2, -2, 2,
-			-2 };
+	private static final int[] WARP_YS = { 1, -1, 2, -2, 1, -1, 2, -2, 0, 1, -1, 2, -2, 0, 1, -1, 2, -2, 2, -2 };
 
 	private static final int INF = Integer.MAX_VALUE >> 1;
 

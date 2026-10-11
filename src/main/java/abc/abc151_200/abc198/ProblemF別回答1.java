@@ -20,7 +20,7 @@ public class ProblemF別回答1 {
 		try (Scanner scanner = new Scanner(System.in)) {
 			long s = scanner.nextLong();
 			s -= 6;
-			long[] p = new long[] { 1 };
+			long[] p = { 1 };
 			// 1/(1-x)^6
 			long answer = bostanMori(p, new long[] { 1, -6, 15, -20, 15, -6, 1 }, s);
 			// 1/((1-x)^2(1-x^2)^2)
