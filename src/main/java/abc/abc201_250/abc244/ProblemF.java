@@ -33,6 +33,7 @@ public class ProblemF {
 			IntStream.range(0, q).forEach(i -> Arrays.fill(dist[i], INF));
 			Queue<Path> que = new ArrayDeque<>();
 			IntStream.range(0, n).forEach(i -> {
+				dist[0][i] = 0;
 				dist[1 << i][i] = 1;
 				que.add(new Path(1 << i, i));
 			});
@@ -46,7 +47,7 @@ public class ProblemF {
 					}
 				});
 			}
-			System.out.println(IntStream.range(1, q).mapToLong(i -> Arrays.stream(dist[i]).min().getAsInt()).sum());
+			System.out.println(IntStream.range(0, q).mapToLong(i -> Arrays.stream(dist[i]).min().getAsInt()).sum());
 		}
 	}
 
