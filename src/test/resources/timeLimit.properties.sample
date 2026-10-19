@@ -113,6 +113,8 @@ abc.abc201_250.abc244.ProblemFTest=4000
 abc.abc201_250.abc244.ProblemExTest=5000
 abc.abc201_250.abc244.ProblemEx別回答1Test=5000
 abc.abc201_250.abc244.ProblemEx別回答2Test=5000
+abc.abc201_250.abc245.ProblemETest=4000
+abc.abc201_250.abc245.ProblemE別回答Test=4000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
