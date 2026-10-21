@@ -115,6 +115,12 @@ abc.abc201_250.abc244.ProblemEx別回答1Test=5000
 abc.abc201_250.abc244.ProblemEx別回答2Test=5000
 abc.abc201_250.abc245.ProblemETest=4000
 abc.abc201_250.abc245.ProblemE別回答Test=4000
+abc.abc201_250.abc246.ProblemETest=6000
+abc.abc201_250.abc246.ProblemE別回答1Test=6000
+abc.abc201_250.abc246.ProblemE別回答2Test=6000
+abc.abc201_250.abc246.ProblemGTest=6000
+abc.abc201_250.abc246.ProblemG別回答Test=6000
+abc.abc201_250.abc246.ProblemExTest=6000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
