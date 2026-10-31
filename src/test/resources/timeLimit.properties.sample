@@ -122,6 +122,10 @@ abc.abc201_250.abc246.ProblemGTest=6000
 abc.abc201_250.abc246.ProblemG別回答Test=6000
 abc.abc201_250.abc246.ProblemExTest=6000
 abc.abc201_250.abc247.ProblemExTest=4000
+abc.abc201_250.abc248.ProblemGTest=8000
+abc.abc201_250.abc248.ProblemG別回答Test=8000
+abc.abc201_250.abc248.ProblemExTest=6000
+abc.abc201_250.abc248.ProblemEx別回答Test=6000
 
 other.atc001.ProblemBTest=5000
 other.atc001.ProblemCTest=5000
